@@ -230,19 +230,19 @@ OMP_CAPI(TextDraw_GetPos, bool(objectPtr textdraw, float* x, float* y))
 
 OMP_CAPI(TextDraw_GetColor, int(objectPtr textdraw))
 {
-	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, 0);
 	return textdraw_->getLetterColour().RGBA();
 }
 
 OMP_CAPI(TextDraw_GetBoxColor, int(objectPtr textdraw))
 {
-	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, 0);
 	return textdraw_->getBoxColour().RGBA();
 }
 
 OMP_CAPI(TextDraw_GetBackgroundColor, int(objectPtr textdraw))
 {
-	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, 0);
 	return textdraw_->getBackgroundColour().RGBA();
 }
 
@@ -260,7 +260,7 @@ OMP_CAPI(TextDraw_GetOutline, int(objectPtr textdraw))
 
 OMP_CAPI(TextDraw_GetFont, int(objectPtr textdraw))
 {
-	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, -1);
 	return static_cast<int>(textdraw_->getStyle());
 }
 
@@ -323,7 +323,338 @@ OMP_CAPI(TextDraw_SetStringForPlayer, bool(objectPtr textdraw, objectPtr player,
 }
 
 /*
-	Per-Player GangZones
+	Per-Player TextDraws
 */
 
+OMP_CAPI(PlayerTextDraw_Create, objectPtr(objectPtr player, float x, float y, StringCharPtr text))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	IPlayerTextDrawData* playerTextDraws = GetPlayerData<IPlayerTextDrawData>(player_);
+	if (playerTextDraws)
+	{
+		IPlayerTextDraw* textdraw = playerTextDraws->create({ x, y }, text);
+		if (textdraw)
+		{
+			return textdraw;
+		}
+	}
+	return nullptr;
+}
 
+OMP_CAPI(PlayerTextDraw_Destroy, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	if (playerData)
+	{
+		playerData->release(td->getID());
+		return true;
+	}
+	return false;
+}
+
+OMP_CAPI(PlayerTextDraw_IsValid, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_IsVisible, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	return td->isShown();
+}
+
+OMP_CAPI(PlayerTextDraw_LetterSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setLetterSize({ x, y });
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_TextSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setTextSize({ x, y });
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_Alignment, bool(objectPtr player, objectPtr textdraw, int alignment))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setAlignment(TextDrawAlignmentTypes(alignment));
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_Color, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setColour(Colour::FromRGBA(color));
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_UseBox, bool(objectPtr player, objectPtr textdraw, bool use))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->useBox(use);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_BoxColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setBoxColour(Colour::FromRGBA(color));
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetShadow, bool(objectPtr player, objectPtr textdraw, int size))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setShadow(size);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetOutline, bool(objectPtr player, objectPtr textdraw, int size))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setOutline(size);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_BackgroundColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setBackgroundColour(Colour::FromRGBA(color));
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_Font, bool(objectPtr player, objectPtr textdraw, int font))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setStyle(TextDrawStyle(font));
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetProportional, bool(objectPtr player, objectPtr textdraw, bool set))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setProportional(set);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetSelectable, bool(objectPtr player, objectPtr textdraw, bool set))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setSelectable(set);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_Show, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->show();
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_Hide, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->hide();
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetString, bool(objectPtr player, objectPtr textdraw, StringCharPtr text))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setText(text);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetPreviewModel, bool(objectPtr player, objectPtr textdraw, int model))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setPreviewModel(model);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetPreviewRot, bool(objectPtr player, objectPtr textdraw, float rx, float ry, float rz, float zoom))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setPreviewRotation({ rx, ry, rz });
+	td->setPreviewZoom(zoom);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetPreviewVehCol, bool(objectPtr player, objectPtr textdraw, int color1, int color2))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setPreviewVehicleColour(color1, color2);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_SetPos, bool(objectPtr player, objectPtr textdraw, Vector2 pos))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	td->setPosition(pos);
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_GetString, int(objectPtr player, objectPtr textdraw, ModifyableStringCharPtr text))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	auto result = td->getText();
+	text = UNCONST_STRING(result.data());
+	return result.length();
+}
+
+OMP_CAPI(PlayerTextDraw_GetLetterSize, bool(objectPtr player, objectPtr textdraw, float* x, float* y))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	auto size = td->getLetterSize();
+	*x = size.x;
+	*y = size.y;
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_GetTextSize, bool(objectPtr player, objectPtr textdraw, float* x, float* y))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	auto size = td->getTextSize();
+	*x = size.x;
+	*y = size.y;
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_GetPos, bool(objectPtr player, objectPtr textdraw, float* x, float* y))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	auto pos = td->getPosition();
+	*x = pos.x;
+	*y = pos.y;
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_GetColor, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getLetterColour().RGBA();
+}
+
+OMP_CAPI(PlayerTextDraw_GetBoxColor, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getBoxColour().RGBA();
+}
+
+OMP_CAPI(PlayerTextDraw_GetBackgroundColor, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getBackgroundColour().RGBA();
+}
+
+OMP_CAPI(PlayerTextDraw_GetShadow, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getShadow();
+}
+
+OMP_CAPI(PlayerTextDraw_GetOutline, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getOutline();
+}
+
+OMP_CAPI(PlayerTextDraw_GetFont, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, -1);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, -1);
+	return td->getStyle();
+}
+
+OMP_CAPI(PlayerTextDraw_IsBox, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	return td->hasBox();
+}
+
+OMP_CAPI(PlayerTextDraw_IsProportional, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	return td->isProportional();
+}
+
+OMP_CAPI(PlayerTextDraw_IsSelectable, bool(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	return td->isSelectable();
+}
+
+OMP_CAPI(PlayerTextDraw_GetAlignment, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return static_cast<uint8_t>(td->getAlignment());
+}
+
+OMP_CAPI(PlayerTextDraw_GetPreviewModel, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, 0);
+	return td->getPreviewModel();
+}
+
+OMP_CAPI(PlayerTextDraw_GetPreviewRot, bool(objectPtr player, objectPtr textdraw, float* rx, float* ry, float* rz, float* zoom))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	auto rotation = td->getPreviewRotation();
+
+	*rx = rotation.x;
+	*ry = rotation.y;
+	*rz = rotation.z;
+	*zoom = td->getPreviewZoom();
+	return true;
+}
+
+OMP_CAPI(PlayerTextDraw_GetPreviewVehColor, bool(objectPtr player, objectPtr textdraw, int* color1, int* color2))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	Pair<int, int> colours = td->getPreviewVehicleColour();
+	*color1 = colours.first;
+	*color2 = colours.second;
+	return true;
+}

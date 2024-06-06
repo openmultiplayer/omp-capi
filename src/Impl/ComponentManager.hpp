@@ -105,8 +105,8 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	ENTITY_CAST(entity_type, entity, output);
 
 #define PLAYER_POOL_ENTITY_RET(player, pool_type, entity_type, entity, entity_output, failret) \
-	auto pool_instance = GetPlayerData<pool_type>(player);                                     \
-	if (pool_instance == nullptr)                                                              \
+	auto playerData = GetPlayerData<pool_type>(player);                                     \
+	if (playerData == nullptr)                                                              \
 		return failret;                                                                        \
 	entity_type* entity_output = reinterpret_cast<entity_type*>(entity);                       \
 	if (entity_output == nullptr)                                                              \
