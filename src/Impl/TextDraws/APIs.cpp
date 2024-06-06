@@ -24,6 +24,7 @@ OMP_CAPI(TextDraw_Destroy, bool(objectPtr textdraw))
 OMP_CAPI(TextDraw_IsValid, bool(objectPtr textdraw))
 {
 	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
+	if(!textdraws->get(textdraw_->getID())) return false;
 	return true;
 }
 
@@ -357,6 +358,7 @@ OMP_CAPI(PlayerTextDraw_IsValid, bool(objectPtr player, objectPtr textdraw))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
+	if(!playerData->get(td->getID())) return false;
 	return true;
 }
 

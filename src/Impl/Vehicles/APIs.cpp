@@ -392,6 +392,7 @@ OMP_CAPI(Vehicle_GetLandingGearState, int(objectPtr vehicle))
 OMP_CAPI(Vehicle_IsValid, bool(objectPtr vehicle))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
+	if(!vehicles->get(vehicle_->getID())) return false;
 	return true;
 }
 

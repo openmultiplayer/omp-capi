@@ -121,6 +121,7 @@ OMP_CAPI(GangZone_StopFlashForAll, bool(objectPtr gangzone))
 OMP_CAPI(GangZone_IsValid, bool(objectPtr gangzone))
 {
 	POOL_ENTITY_RET(gangzones, IGangZone, gangzone, gz, false);
+	if(!gangzones->get(gz->getID())) return false;
 	return true;
 }
 

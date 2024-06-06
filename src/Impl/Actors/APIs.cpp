@@ -108,6 +108,7 @@ OMP_CAPI(Actor_IsInvulnerable, bool(objectPtr actor))
 OMP_CAPI(Actor_IsValid, bool(objectPtr actor))
 {
 	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
+	if(!actors->get(actor_->getID())) return false;
 	return true;
 }
 

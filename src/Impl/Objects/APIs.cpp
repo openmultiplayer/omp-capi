@@ -116,6 +116,7 @@ OMP_CAPI(Object_SetNoCameraCollision, bool(objectPtr object))
 OMP_CAPI(Object_IsValid, bool(objectPtr object))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);
+	if(!objects->get(object_->getID())) return false;
 	return true;
 }
 
@@ -528,6 +529,7 @@ OMP_CAPI(PlayerObject_IsValid, bool(objectPtr player, objectPtr object))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
+	if(!playerData->get(object_->getID())) return false;
 	return true;
 }
 

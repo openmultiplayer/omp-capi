@@ -46,12 +46,9 @@ OMP_CAPI(TextLabel3D_UpdateText, bool(objectPtr textlabel, uint32_t color, Strin
 
 OMP_CAPI(TextLabel3D_IsValid, bool(objectPtr textlabel))
 {
-	if (ComponentManager::Get()->textlabels == nullptr)
-		return false;
-
-	ITextLabel* textlabel_ = reinterpret_cast<ITextLabel*>(textlabel);
-	auto valid = textlabel_ != nullptr;
-	return valid;
+	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
+	if(!textlabels->get(textlabel_->getID())) return false;
+	return true;
 }
 
 OMP_CAPI(TextLabel3D_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
@@ -198,12 +195,8 @@ OMP_CAPI(PlayerTextLabel3D_UpdateText, bool(objectPtr player, objectPtr textlabe
 OMP_CAPI(PlayerTextLabel3D_IsValid, bool(objectPtr player, objectPtr textlabel, bool* valid))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	auto pool_instance = GetPlayerData<IPlayerTextLabelData>(player_);
-	if (pool_instance == nullptr)
-		return false;
-
-	IPlayerTextLabel* textlabel_ = reinterpret_cast<IPlayerTextLabel*>(textlabel);
-	*valid = textlabel_ != nullptr;
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
+	if(!playerData->get(textlabel_->getID())) return false;
 	return true;
 }
 

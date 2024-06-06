@@ -79,14 +79,9 @@ OMP_CAPI(Player_GetMenu, int(objectPtr player))
 
 OMP_CAPI(Menu_IsValid, bool(objectPtr menu))
 {
-	if (ComponentManager::Get()->menus == nullptr)
-	{
-		return false;
-	}
-
-	IMenu* menu_ = reinterpret_cast<IMenu*>(menu);
-	auto valid = menu_ != nullptr;
-	return valid;
+	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
+	if(!menus->get(menu_->getID())) return false;
+	return true;
 }
 
 OMP_CAPI(Menu_IsDisabled, bool(objectPtr menu))
