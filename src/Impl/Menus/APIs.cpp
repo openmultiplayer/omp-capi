@@ -1,6 +1,6 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Menu_Create, bool(StringCharPtr title, uint32_t columns, float x, float y, float column1Width, float column2Width))
+OMP_CAPI(Menu_Create, objectPtr(StringCharPtr title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id))
 {
 	IMenusComponent* component = ComponentManager::Get()->menus;
 	if (component)
@@ -8,6 +8,7 @@ OMP_CAPI(Menu_Create, bool(StringCharPtr title, uint32_t columns, float x, float
 		IMenu* menu = component->create(title, { x, y }, columns, column1Width, column2Width);
 		if (menu)
 		{
+			*id = menu->getID();
 			return menu;
 		}
 	}

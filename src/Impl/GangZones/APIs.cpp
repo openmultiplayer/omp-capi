@@ -1,6 +1,6 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(GangZone_Create, objectPtr(float minx, float miny, float maxx, float maxy))
+OMP_CAPI(GangZone_Create, objectPtr(float minx, float miny, float maxx, float maxy, int* id))
 {
 	IGangZonesComponent* component = ComponentManager::Get()->gangzones;
 	if (component)
@@ -8,8 +8,8 @@ OMP_CAPI(GangZone_Create, objectPtr(float minx, float miny, float maxx, float ma
 		Vector2 min = { minx, miny };
 		Vector2 max = { maxx, maxy };
 
-		int id = component->reserveLegacyID();
-		if (id == INVALID_GANG_ZONE_ID)
+		int id_ = component->reserveLegacyID();
+		if (id_ == INVALID_GANG_ZONE_ID)
 		{
 			return nullptr;
 		}
@@ -23,12 +23,13 @@ OMP_CAPI(GangZone_Create, objectPtr(float minx, float miny, float maxx, float ma
 		IGangZone* gz = component->create(pos);
 		if (gz)
 		{
-			component->setLegacyID(id, gz->getID());
+			component->setLegacyID(id_, gz->getID());
+			*id = id_;
 			return gz;
 		}
 		else
 		{
-			component->releaseLegacyID(id);
+			component->releaseLegacyID(id_);
 		}
 	}
 	return nullptr;

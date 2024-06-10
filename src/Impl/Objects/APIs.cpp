@@ -1,6 +1,6 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Object_Create, objectPtr(int modelid, float x, float y, float z, float rotationX, float rotationY, float rotationZ, float drawDistance))
+OMP_CAPI(Object_Create, objectPtr(int modelid, float x, float y, float z, float rotationX, float rotationY, float rotationZ, float drawDistance, int* id))
 {
 	IObjectsComponent* component = ComponentManager::Get()->objects;
 	if (component)
@@ -8,6 +8,7 @@ OMP_CAPI(Object_Create, objectPtr(int modelid, float x, float y, float z, float 
 		IObject* object = component->create(modelid, { x, y, z }, { rotationX, rotationY, rotationZ }, drawDistance);
 		if (object)
 		{
+			*id = object->getID();
 			return object;
 		}
 	}
@@ -379,7 +380,7 @@ OMP_CAPI(Object_GetType, uint8_t(objectPtr player, int objectid))
 	Per-Player Objects
 */
 
-OMP_CAPI(PlayerObject_Create, objectPtr(objectPtr player, int modelid, float x, float y, float z, float rotationX, float rotationY, float rotationZ, float drawDistance))
+OMP_CAPI(PlayerObject_Create, objectPtr(objectPtr player, int modelid, float x, float y, float z, float rotationX, float rotationY, float rotationZ, float drawDistance, int* id))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	IPlayerObjectData* data = queryExtension<IPlayerObjectData>(player_);
@@ -391,6 +392,7 @@ OMP_CAPI(PlayerObject_Create, objectPtr(objectPtr player, int modelid, float x, 
 	IPlayerObject* object = data->create(modelid, { x, y, z }, { rotationX, rotationY, rotationZ }, drawDistance);
 	if (object)
 	{
+		*id = object->getID();
 		return object;
 	}
 	return nullptr;

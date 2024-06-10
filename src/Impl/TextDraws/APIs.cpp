@@ -1,6 +1,6 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(TextDraw_Create, objectPtr(float x, float y, StringCharPtr text))
+OMP_CAPI(TextDraw_Create, objectPtr(float x, float y, StringCharPtr text, int* id))
 {
 	ITextDrawsComponent* component = ComponentManager::Get()->textdraws;
 	if (component)
@@ -8,6 +8,7 @@ OMP_CAPI(TextDraw_Create, objectPtr(float x, float y, StringCharPtr text))
 		ITextDraw* textdraw = component->create({ x, y }, text);
 		if (textdraw)
 		{
+			*id = textdraw->getID();
 			return textdraw;
 		}
 	}
@@ -327,7 +328,7 @@ OMP_CAPI(TextDraw_SetStringForPlayer, bool(objectPtr textdraw, objectPtr player,
 	Per-Player TextDraws
 */
 
-OMP_CAPI(PlayerTextDraw_Create, objectPtr(objectPtr player, float x, float y, StringCharPtr text))
+OMP_CAPI(PlayerTextDraw_Create, objectPtr(objectPtr player, float x, float y, StringCharPtr text, int* id))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	IPlayerTextDrawData* playerTextDraws = GetPlayerData<IPlayerTextDrawData>(player_);
@@ -336,6 +337,7 @@ OMP_CAPI(PlayerTextDraw_Create, objectPtr(objectPtr player, float x, float y, St
 		IPlayerTextDraw* textdraw = playerTextDraws->create({ x, y }, text);
 		if (textdraw)
 		{
+			*id = textdraw->getID();
 			return textdraw;
 		}
 	}

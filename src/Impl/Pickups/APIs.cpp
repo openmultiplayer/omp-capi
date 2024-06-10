@@ -1,12 +1,12 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z, int virtualWorld))
+OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z, int virtualWorld, int* id))
 {
 	IPickupsComponent* component = ComponentManager::Get()->pickups;
 	if (component)
 	{
-		int id = component->reserveLegacyID();
-		if (id == INVALID_PICKUP_ID)
+		int id_ = component->reserveLegacyID();
+		if (id_ == INVALID_PICKUP_ID)
 		{
 			return nullptr;
 		}
@@ -14,12 +14,13 @@ OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z
 		IPickup* pickup = component->create(model, type, { x, y, z }, virtualWorld, false);
 		if (pickup)
 		{
-			component->setLegacyID(id, pickup->getID());
+			component->setLegacyID(id_, pickup->getID());
+			*id = id_;
 			return pickup;
 		}
 		else
 		{
-			component->releaseLegacyID(id);
+			component->releaseLegacyID(id_);
 		}
 	}
 	return nullptr;
@@ -30,21 +31,21 @@ OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, 
 	IPickupsComponent* component = ComponentManager::Get()->pickups;
 	if (component)
 	{
-		int id = component->reserveLegacyID();
-		if (id == INVALID_PICKUP_ID)
+		int id_ = component->reserveLegacyID();
+		if (id_ == INVALID_PICKUP_ID)
 		{
-			return nullptr;
+			return false;
 		}
 
 		IPickup* pickup = component->create(model, type, { x, y, z }, virtualWorld, true);
 		if (pickup)
 		{
-			component->setLegacyID(id, pickup->getID());
-			return pickup;
+			component->setLegacyID(id_, pickup->getID());
+			return true;
 		}
 		else
 		{
-			component->releaseLegacyID(id);
+			component->releaseLegacyID(id_);
 		}
 	}
 	return false;

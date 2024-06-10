@@ -1,6 +1,6 @@
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(TextLabel3D_Create, bool(StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los))
+OMP_CAPI(TextLabel3D_Create, objectPtr(StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id))
 {
 	ITextLabelsComponent* component = ComponentManager::Get()->textlabels;
 	if (component)
@@ -8,6 +8,7 @@ OMP_CAPI(TextLabel3D_Create, bool(StringCharPtr text, uint32_t color, float x, f
 		ITextLabel* textlabel = component->create(text, Colour::FromRGBA(color), { x, y, z }, drawDistance, virtualWorld, los);
 		if (textlabel)
 		{
+			*id = textlabel->getID();
 			return textlabel;
 		}
 	}
@@ -142,7 +143,7 @@ OMP_CAPI(TextLabel3D_GetAttachedData, bool(objectPtr textlabel, int* attached_pl
 	Per-Player TextLabel
 */
 
-OMP_CAPI(PlayerTextLabel3D_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los))
+OMP_CAPI(PlayerTextLabel3D_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los, int* id))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	IPlayerTextLabelData* labelData = queryExtension<IPlayerTextLabelData>(player_);
@@ -165,6 +166,7 @@ OMP_CAPI(PlayerTextLabel3D_Create, objectPtr(objectPtr player, StringCharPtr tex
 
 		if (textlabel)
 		{
+			*id = textlabel->getID();
 			return textlabel;
 		}
 	}

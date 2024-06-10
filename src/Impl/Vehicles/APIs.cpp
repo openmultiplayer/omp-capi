@@ -4,7 +4,7 @@
 #include <Server/Components/Vehicles/vehicle_colours.hpp>
 #include <Server/Components/Vehicles/vehicle_seats.hpp>
 
-OMP_CAPI(Vehicle_Create, objectPtr(int modelid, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, bool addSiren))
+OMP_CAPI(Vehicle_Create, objectPtr(int modelid, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, bool addSiren, int* id))
 {
 	IVehiclesComponent* vehicles = ComponentManager().Get()->vehicles;
 	if (vehicles)
@@ -12,6 +12,7 @@ OMP_CAPI(Vehicle_Create, objectPtr(int modelid, float x, float y, float z, float
 		IVehicle* vehicle = vehicles->create(false, modelid, { x, y, z }, rotation, color1, color2, Seconds(respawnDelay), addSiren);
 		if (vehicle)
 		{
+			*id = vehicle->getID();
 			return vehicle;
 		}
 	}
@@ -396,7 +397,7 @@ OMP_CAPI(Vehicle_IsValid, bool(objectPtr vehicle))
 	return true;
 }
 
-OMP_CAPI(Vehicle_AddStatic, objectPtr(int modelid, float x, float y, float z, float angle, int color1, int color2))
+OMP_CAPI(Vehicle_AddStatic, objectPtr(int modelid, float x, float y, float z, float angle, int color1, int color2, int* id))
 {
 	IVehiclesComponent* vehicles = ComponentManager().Get()->vehicles;
 	if (vehicles)
@@ -404,13 +405,14 @@ OMP_CAPI(Vehicle_AddStatic, objectPtr(int modelid, float x, float y, float z, fl
 		IVehicle* vehicle = vehicles->create(true, modelid, { x, y, z }, angle, color1, color2, Seconds(120), false);
 		if (vehicle)
 		{
+			*id = vehicle->getID();
 			return vehicle;
 		}
 	}
 	return nullptr;
 }
 
-OMP_CAPI(Vehicle_AddStaticEx, objectPtr(int modelid, float x, float y, float z, float angle, int color1, int color2, int respawnDelay, bool addSiren))
+OMP_CAPI(Vehicle_AddStaticEx, objectPtr(int modelid, float x, float y, float z, float angle, int color1, int color2, int respawnDelay, bool addSiren, int* id))
 {
 	IVehiclesComponent* vehicles = ComponentManager().Get()->vehicles;
 	if (vehicles)
@@ -418,6 +420,7 @@ OMP_CAPI(Vehicle_AddStaticEx, objectPtr(int modelid, float x, float y, float z, 
 		IVehicle* vehicle = vehicles->create(true, modelid, { x, y, z }, angle, color1, color2, Seconds(respawnDelay), addSiren);
 		if (vehicle)
 		{
+			*id = vehicle->getID();
 			return vehicle;
 		}
 	}
@@ -594,11 +597,18 @@ OMP_CAPI(Vehicle_IsSirenEnabled, bool(objectPtr vehicle))
 	return enabled;
 }
 
-OMP_CAPI(Vehicle_GetLastDriver, int(objectPtr vehicle))
+OMP_CAPI(Vehicle_GetLastDriver, objectPtr(objectPtr vehicle))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, 0);
 	int lastDriver = vehicle_->getLastDriverPoolID();
-	return lastDriver;
+
+	auto players = ComponentManager::Get()->players;
+	if (players)
+	{
+		return players->get(lastDriver);
+	}
+
+	return nullptr;
 }
 
 OMP_CAPI(Vehicle_GetDriver, objectPtr(objectPtr vehicle))
