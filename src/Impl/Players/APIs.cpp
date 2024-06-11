@@ -278,7 +278,7 @@ OMP_CAPI(Player_GetName, int(objectPtr player, ModifyableStringCharPtr name))
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto result = player_->getName();
 	int len = result.length();
-	COPY_STRING(name, result.data(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), len);
 	return len;
 }
 
@@ -675,8 +675,8 @@ OMP_CAPI(Player_ApplyAnimation, bool(objectPtr player, StringCharPtr animlib, St
 OMP_CAPI(Player_GetAnimationName, bool(int index, ModifyableStringCharPtr lib, ModifyableStringCharPtr name))
 {
 	Pair<StringView, StringView> anim = splitAnimationNames(index);
-	lib = UNCONST_STRING(anim.first.data());
-	name = UNCONST_STRING(anim.second.data());
+	SET_CAPI_STRING_VIEW(lib, anim.first);
+	SET_CAPI_STRING_VIEW(name, anim.second);
 	return true;
 }
 
@@ -739,7 +739,7 @@ OMP_CAPI(Player_GetIp, int(objectPtr player, ModifyableStringCharPtr ip))
 		if (PeerAddress::ToString(data.networkID.address, addressString))
 		{
 			auto len = addressString.length();
-			COPY_STRING(ip, addressString.data(), len);
+			COPY_STRING_TO_CAPI_STRING_VIEW(ip, addressString.data(), len);
 			return len;
 		}
 	}
@@ -1077,13 +1077,12 @@ OMP_CAPI(Player_Spawn, bool(objectPtr player))
 	return true;
 }
 
-OMP_CAPI(Player_GPCI, int(objectPtr player, ModifyableStringCharPtr gpci))
+OMP_CAPI(Player_GPCI, bool(objectPtr player, ModifyableStringCharPtr gpci))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto result = player_->getSerial();
-	int len = result.length();
-	gpci = UNCONST_STRING(result.data());
-	return len;
+	SET_CAPI_STRING_VIEW(gpci, result);
+	return true;
 }
 
 OMP_CAPI(Player_IsAdmin, bool(objectPtr player))
@@ -1134,7 +1133,7 @@ OMP_CAPI(Player_GetGameText, bool(objectPtr player, int style, ModifyableStringC
 	StringView ms;
 	if (player_->getGameText(style, ms, mt, mr))
 	{
-		COPY_STRING(message, ms.data(), ms.size());
+		COPY_STRING_TO_CAPI_STRING_VIEW(message, ms.data(), ms.size());
 		*time = int(mt.count());
 		*remaining = int(mr.count());
 		return true;
@@ -1185,7 +1184,7 @@ OMP_CAPI(Player_GetVersion, int(objectPtr player, ModifyableStringCharPtr versio
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto versionStr = player_->getClientVersionName();
 	auto len = versionStr.length();
-	COPY_STRING(version, versionStr.data(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), len);
 	return len;
 }
 

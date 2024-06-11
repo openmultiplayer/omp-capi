@@ -3,7 +3,13 @@
 
 #define EXPORT_OMP_API extern "C" SDK_EXPORT
 
-using ModifyableStringCharPtr = char*;
+struct CAPIStringView
+{
+	unsigned int len;
+	char* data;
+};
+
+using ModifyableStringCharPtr = CAPIStringView*;
 using StringCharPtr = const char*;
 using objectPtr = void*;
 

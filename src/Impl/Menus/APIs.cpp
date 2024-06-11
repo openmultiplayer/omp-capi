@@ -131,18 +131,18 @@ OMP_CAPI(Menu_GetColumnWidth, bool(objectPtr menu, float* column1Width, float* c
 	return true;
 }
 
-OMP_CAPI(Menu_GetColumnHeader, int(objectPtr menu, int column, ModifyableStringCharPtr header))
+OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, ModifyableStringCharPtr header))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
 	auto result = menu_->getColumnHeader(column);
-	header = UNCONST_STRING(result.data());
-	return result.length();
+	SET_CAPI_STRING_VIEW(header, result);
+	return true;
 }
 
-OMP_CAPI(Menu_GetItem, int(objectPtr menu, int column, int row, ModifyableStringCharPtr cell))
+OMP_CAPI(Menu_GetItem, bool(objectPtr menu, int column, int row, ModifyableStringCharPtr item))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
 	auto result = menu_->getCell(column, row);
-	cell = UNCONST_STRING(result.data());
-	return result.length();
+	SET_CAPI_STRING_VIEW(item, result);
+	return true;
 }

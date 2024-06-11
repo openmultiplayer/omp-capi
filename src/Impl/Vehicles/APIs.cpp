@@ -275,7 +275,7 @@ OMP_CAPI(Vehicle_GetTrailer, objectPtr(objectPtr vehicle))
 	return nullptr;
 }
 
-OMP_CAPI(Vehicle_SetNumberPlate, bool(objectPtr vehicle, ModifyableStringCharPtr numberPlate))
+OMP_CAPI(Vehicle_SetNumberPlate, bool(objectPtr vehicle, StringCharPtr numberPlate))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
 	vehicle_->setPlate(numberPlate);
@@ -499,12 +499,12 @@ OMP_CAPI(Vehicle_GetInterior, int(objectPtr vehicle))
 	return vehicle_->getInterior();
 }
 
-OMP_CAPI(Vehicle_GetNumberPlate, int(objectPtr vehicle, ModifyableStringCharPtr numberPlate))
+OMP_CAPI(Vehicle_GetNumberPlate, bool(objectPtr vehicle, ModifyableStringCharPtr numberPlate))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, 0);
 	StringView plate = vehicle_->getPlate();
-	numberPlate = UNCONST_STRING(plate.data());
-	return plate.length();
+	SET_CAPI_STRING_VIEW(numberPlate, plate);
+	return true;
 }
 
 OMP_CAPI(Vehicle_SetRespawnDelay, bool(objectPtr vehicle, int respawn_delay))

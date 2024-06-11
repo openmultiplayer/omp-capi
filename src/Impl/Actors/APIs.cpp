@@ -130,8 +130,8 @@ OMP_CAPI(Actor_GetAnimation, void(objectPtr actor, ModifyableStringCharPtr libra
 	POOL_ENTITY(actors, IActor, actor, actor_);
 	const AnimationData& anim = actor_->getAnimation();
 
-	library = UNCONST_STRING(anim.lib.data());
-	name = UNCONST_STRING(anim.name.data());
+	SET_CAPI_STRING_VIEW(library, anim.lib);
+	SET_CAPI_STRING_VIEW(name, anim.name);
 	*delta = anim.delta;
 	*loop = anim.loop;
 	*lockX = anim.lockX;

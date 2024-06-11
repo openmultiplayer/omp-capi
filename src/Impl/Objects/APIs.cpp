@@ -117,7 +117,8 @@ OMP_CAPI(Object_SetNoCameraCollision, bool(objectPtr object))
 OMP_CAPI(Object_IsValid, bool(objectPtr object))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);
-	if(!objects->get(object_->getID())) return false;
+	if (!objects->get(object_->getID()))
+		return false;
 	return true;
 }
 
@@ -313,8 +314,8 @@ OMP_CAPI(Object_GetMaterial, bool(objectPtr object, int materialIndex, int* mode
 	if (result)
 	{
 		*modelid = data->model;
-		textureLibrary = UNCONST_STRING(data->textOrTXD.data());
-		textureName = UNCONST_STRING(data->fontOrTexture.data());
+		SET_CAPI_STRING_VIEW(textureLibrary, data->textOrTXD);
+		SET_CAPI_STRING_VIEW(textureName, data->fontOrTexture);
 		*materialColor = data->materialColour.ARGB();
 		return true;
 	}
@@ -328,9 +329,9 @@ OMP_CAPI(Object_GetMaterialText, bool(objectPtr object, int materialIndex, Modif
 	bool result = object_->getMaterialData(materialIndex, data);
 	if (result)
 	{
-		text = UNCONST_STRING(data->textOrTXD.data());
+		SET_CAPI_STRING_VIEW(text, data->textOrTXD);
+		SET_CAPI_STRING_VIEW(fontFace, data->fontOrTexture);
 		*materialSize = data->materialSize;
-		fontFace = UNCONST_STRING(data->fontOrTexture.data());
 		*fontSize = data->fontSize;
 		*bold = data->bold;
 		*fontColor = data->fontColour.ARGB();
@@ -531,7 +532,8 @@ OMP_CAPI(PlayerObject_IsValid, bool(objectPtr player, objectPtr object))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
-	if(!playerData->get(object_->getID())) return false;
+	if (!playerData->get(object_->getID()))
+		return false;
 	return true;
 }
 
@@ -584,7 +586,7 @@ OMP_CAPI(PlayerObject_BeginEditing, bool(objectPtr player, objectPtr object))
 	return true;
 }
 
-OMP_CAPI(PlayerObject_SetMaterial, bool(objectPtr player, objectPtr object, int materialIndex, int modelId, ModifyableStringCharPtr textureLibrary, ModifyableStringCharPtr textureName, uint32_t materialColor))
+OMP_CAPI(PlayerObject_SetMaterial, bool(objectPtr player, objectPtr object, int materialIndex, int modelId, StringCharPtr textureLibrary, StringCharPtr textureName, uint32_t materialColor))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
@@ -593,7 +595,7 @@ OMP_CAPI(PlayerObject_SetMaterial, bool(objectPtr player, objectPtr object, int 
 	return true;
 }
 
-OMP_CAPI(PlayerObject_SetMaterialText, bool(objectPtr player, objectPtr object, ModifyableStringCharPtr text, int materialIndex, int materialSize, ModifyableStringCharPtr fontface, int fontsize, bool bold, uint32_t fontColor, uint32_t backgroundColor, int textalignment))
+OMP_CAPI(PlayerObject_SetMaterialText, bool(objectPtr player, objectPtr object, StringCharPtr text, int materialIndex, int materialSize, StringCharPtr fontface, int fontsize, bool bold, uint32_t fontColor, uint32_t backgroundColor, int textalignment))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
@@ -717,9 +719,9 @@ OMP_CAPI(PlayerObject_GetMaterial, bool(objectPtr player, objectPtr object, int 
 	bool result = object_->getMaterialData(materialIndex, data);
 	if (result)
 	{
+		SET_CAPI_STRING_VIEW(textureLibrary, data->textOrTXD);
+		SET_CAPI_STRING_VIEW(textureName, data->fontOrTexture);
 		*modelid = data->model;
-		textureLibrary = UNCONST_STRING(data->textOrTXD.data());
-		textureName = UNCONST_STRING(data->fontOrTexture.data());
 		*materialColor = data->materialColour.ARGB();
 		return true;
 	}
@@ -735,9 +737,9 @@ OMP_CAPI(PlayerObject_GetMaterialText, bool(objectPtr player, objectPtr object, 
 	bool result = object_->getMaterialData(materialIndex, data);
 	if (result)
 	{
-		text = UNCONST_STRING(data->textOrTXD.data());
+		SET_CAPI_STRING_VIEW(text, data->textOrTXD);
+		SET_CAPI_STRING_VIEW(fontFace, data->fontOrTexture);
 		*materialSize = data->materialSize;
-		fontFace = UNCONST_STRING(data->fontOrTexture.data());
 		*fontSize = data->fontSize;
 		*bold = data->bold;
 		*fontColor = data->fontColour.ARGB();

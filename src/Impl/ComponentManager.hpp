@@ -105,8 +105,8 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	ENTITY_CAST(entity_type, entity, output);
 
 #define PLAYER_POOL_ENTITY_RET(player, pool_type, entity_type, entity, entity_output, failret) \
-	auto playerData = GetPlayerData<pool_type>(player);                                     \
-	if (playerData == nullptr)                                                              \
+	auto playerData = GetPlayerData<pool_type>(player);                                        \
+	if (playerData == nullptr)                                                                 \
 		return failret;                                                                        \
 	entity_type* entity_output = reinterpret_cast<entity_type*>(entity);                       \
 	if (entity_output == nullptr)                                                              \
@@ -117,9 +117,16 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	if (entity_output == nullptr)                                    \
 	return failret
 
-#define COPY_STRING(dest, src, len) \
-	memcpy(dest, src, len);         \
-	dest[len - 1] = '\0'
+#define COPY_STRING_TO_CAPI_STRING_VIEW(output, src, len_) \
+	if (output)                                            \
+	{                                                      \
+		output->len = len_;                                \
+		memcpy(output->data, src, len_);                   \
+	}
 
-#define UNCONST_STRING(str) \
-	const_cast<char*>(str)
+#define SET_CAPI_STRING_VIEW(output, str_view)             \
+	if (output)                                            \
+	{                                                      \
+		output->len = str_view.length();                   \
+		output->data = const_cast<char*>(str_view.data()); \
+	}

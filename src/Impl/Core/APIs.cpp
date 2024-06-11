@@ -297,7 +297,7 @@ OMP_CAPI(ConsoleVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr
 	Impl::String value = Impl::String();
 	int len = getConfigOptionAsString(cvar, value);
 
-	COPY_STRING(output, value.data(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(output, value.data(), len);
 	return len;
 }
 
@@ -334,7 +334,7 @@ OMP_CAPI(Core_NetworkStats, int(ModifyableStringCharPtr output))
 		<< "KBits per second received: " << std::setprecision(1) << (stats.bpsReceived / 1000.0) << std::endl;
 
 	int len = stream.str().size();
-	COPY_STRING(output, stream.str().c_str(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(output, stream.str().c_str(), len);
 	return len;
 }
 
@@ -365,7 +365,7 @@ OMP_CAPI(Player_GetNetworkStats, int(objectPtr player, ModifyableStringCharPtr o
 		<< "KBits per second received: " << std::setprecision(1) << (stats.bpsReceived / 1000.0) << std::endl;
 
 	int len = stream.str().size();
-	COPY_STRING(output, stream.str().c_str(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(output, stream.str().c_str(), len);
 	return len;
 }
 
@@ -397,13 +397,13 @@ OMP_CAPI(ServerVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr 
 {
 	Impl::String value;
 	int len = getConfigOptionAsString(cvar, value);
-	COPY_STRING(output, value.c_str(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(output, value.c_str(), len);
 	return len;
 }
 
 OMP_CAPI(Core_GetWeaponName, bool(int weaponid, ModifyableStringCharPtr output))
 {
-	output = UNCONST_STRING(ComponentManager::Get()->core->getWeaponName(PlayerWeapon(weaponid)).data());
+	SET_CAPI_STRING_VIEW(output, ComponentManager::Get()->core->getWeaponName(PlayerWeapon(weaponid)));
 	return true;
 }
 
@@ -462,7 +462,7 @@ OMP_CAPI(Player_NetStatsGetIpPort, bool(objectPtr player, ModifyableStringCharPt
 		ip_port += ":";
 		ip_port += std::to_string(data.networkID.port);
 		int len = ip_port.length();
-		COPY_STRING(output, ip_port.c_str(), len);
+		COPY_STRING_TO_CAPI_STRING_VIEW(output, ip_port.c_str(), len);
 		return len;
 	}
 	return 0;

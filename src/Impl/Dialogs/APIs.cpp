@@ -45,10 +45,10 @@ OMP_CAPI(Player_GetDialogData, bool(objectPtr player, int* dialogid, int* style,
 	StringView button2Var {};
 	data->get(*dialogid, styleVar, titleVar, bodyVar, button1Var, button2Var);
 	*style = int(styleVar);
-	title = UNCONST_STRING(titleVar.data());
-	body = UNCONST_STRING(bodyVar.data());
-	button1 = UNCONST_STRING(button1Var.data());
-	button2 = UNCONST_STRING(button2Var.data());
+	SET_CAPI_STRING_VIEW(title, titleVar);
+	SET_CAPI_STRING_VIEW(body, bodyVar);
+	SET_CAPI_STRING_VIEW(button1, button1Var);
+	SET_CAPI_STRING_VIEW(button2, button2Var);
 	return true;
 }
 

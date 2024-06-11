@@ -64,9 +64,8 @@ OMP_CAPI(TextLabel3D_GetText, bool(objectPtr textlabel, ModifyableStringCharPtr 
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	auto result = textlabel_->getText();
-	auto len = result.length();
-	output = UNCONST_STRING(result.data());
-	return len;
+	SET_CAPI_STRING_VIEW(output, result);
+	return true;
 }
 
 OMP_CAPI(TextLabel3D_GetColor, uint32_t(objectPtr textlabel))
@@ -207,9 +206,8 @@ OMP_CAPI(PlayerTextLabel3D_GetText, bool(objectPtr player, objectPtr textlabel, 
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
 	auto result = textlabel_->getText();
-	int len = result.length();
-	output = UNCONST_STRING(result.data());
-	return len;
+	SET_CAPI_STRING_VIEW(output, result);
+	return true;
 }
 
 OMP_CAPI(PlayerTextLabel3D_GetColor, bool(objectPtr player, objectPtr textlabel, uint32_t* color))

@@ -194,13 +194,12 @@ OMP_CAPI(TextDraw_SetPos, bool(objectPtr textdraw, float x, float y))
 	return true;
 }
 
-OMP_CAPI(TextDraw_GetString, int(objectPtr textdraw, ModifyableStringCharPtr text))
+OMP_CAPI(TextDraw_GetString, bool(objectPtr textdraw, ModifyableStringCharPtr text))
 {
 	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, 0);
 	auto textStr = textdraw_->getText();
-	int len = textStr.length();
-	text = UNCONST_STRING(textStr.data());
-	return len;
+	SET_CAPI_STRING_VIEW(text, textStr);
+	return true;
 }
 
 OMP_CAPI(TextDraw_GetLetterSize, bool(objectPtr textdraw, float* sizeX, float* sizeY))
@@ -524,13 +523,13 @@ OMP_CAPI(PlayerTextDraw_SetPos, bool(objectPtr player, objectPtr textdraw, Vecto
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_GetString, int(objectPtr player, objectPtr textdraw, ModifyableStringCharPtr text))
+OMP_CAPI(PlayerTextDraw_GetString, bool(objectPtr player, objectPtr textdraw, ModifyableStringCharPtr text))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
 	auto result = td->getText();
-	text = UNCONST_STRING(result.data());
-	return result.length();
+	SET_CAPI_STRING_VIEW(text, result);
+	return true;
 }
 
 OMP_CAPI(PlayerTextDraw_GetLetterSize, bool(objectPtr player, objectPtr textdraw, float* x, float* y))

@@ -74,7 +74,7 @@ OMP_CAPI(CustomModel_FindModelFileNameFromCRC, int(int crc, ModifyableStringChar
 
 	auto result = models->getModelNameFromChecksum(crc);
 	auto len = result.length();
-	COPY_STRING(output, result.data(), len);
+	COPY_STRING_TO_CAPI_STRING_VIEW(output, result.data(), len);
 	return true;
 }
 
@@ -103,8 +103,8 @@ OMP_CAPI(CustomModel_GetPath, bool(int modelId, ModifyableStringCharPtr dffPath,
 
 	auto status = models->getCustomModelPath(modelId, dffPathSV, txdPathSV);
 
-	COPY_STRING(dffPath, dffPathSV.data(), dffPathSV.length());
-	COPY_STRING(txdPath, txdPathSV.data(), txdPathSV.length());
+	COPY_STRING_TO_CAPI_STRING_VIEW(dffPath, dffPathSV.data(), dffPathSV.length());
+	COPY_STRING_TO_CAPI_STRING_VIEW(txdPath, txdPathSV.data(), txdPathSV.length());
 
 	return status;
 }
