@@ -19,7 +19,7 @@ public:
 
 	~CAPIComponent()
 	{
-		ComponentManager::Get()->RemoveEvents();
+		ComponentManager::Get()->FreeEvents();
 	}
 
 	StringView componentName() const override
@@ -42,7 +42,7 @@ public:
 	{
 		ComponentManager::Get()->Init(core_, components);
 
-		ComponentManager::Get()->AddEvents();
+		ComponentManager::Get()->InitializeEvents();
 	}
 
 	void onReady() override
