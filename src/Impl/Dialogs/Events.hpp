@@ -11,10 +11,10 @@
 #include "../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
-struct ClassEvents : public ClassEventHandler, public Singleton<ClassEvents>
+struct DialogEvents : public PlayerDialogEventHandler, public Singleton<DialogEvents>
 {
-	bool onPlayerRequestClass(IPlayer& player, unsigned int classId) override
+	void onDialogResponse(IPlayer& player, int dialogId, DialogResponse response, int listItem, StringView inputText) override
 	{
-		return ComponentManager::Get()->CallEvent("Class_OnPlayerRequest", player.getID(), classId);
+		ComponentManager::Get()->CallEvent("Dialog_OnPlayerResponse", player.getID(), dialogId, int(response), listItem, CREATE_CAPI_STRING_VIEW(inputText));
 	}
 };

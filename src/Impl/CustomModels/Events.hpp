@@ -15,11 +15,11 @@ struct CustomModelsEvents : public PlayerModelsEventHandler, public Singleton<Cu
 {
 	virtual void onPlayerFinishedDownloading(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("Player_OnFinishedDownloading", player.getID(), player.getVirtualWorld());
+		ComponentManager::Get()->CallEvent("Model_OnPlayerFinishedDownloading", player.getID(), player.getVirtualWorld());
 	}
 
 	virtual bool onPlayerRequestDownload(IPlayer& player, ModelDownloadType type, uint32_t checksum) override
 	{
-		return ComponentManager::Get()->CallEvent("Player_OnRequestDownload", player.getID(), static_cast<uint8_t>(type), checksum);
+		return ComponentManager::Get()->CallEvent("Model_OnPlayerRequestDownload", player.getID(), static_cast<int>(type), checksum);
 	}
 };
