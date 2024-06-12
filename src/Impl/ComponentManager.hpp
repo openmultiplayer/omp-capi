@@ -86,9 +86,9 @@ public:
 	bool CallEvent(const Impl::String& name, Args...)
 	{
 		auto highest = highestPriorityEvents.find(name);
-		auto high = highPriorityEvents.find(name);
+		auto high = fairlyHighPriorityEvents.find(name);
 		auto default = defaultPriorityEvents.find(name);
-		auto low = lowPriorityEvents.find(name);
+		auto low = fairlyLowPriorityEvents.find(name);
 		auto lowest = lowestPriorityEvents.find(name);
 
 		bool result = true;
@@ -102,7 +102,7 @@ public:
 			}
 		}
 
-		if (high != highPriorityEvents.end())
+		if (high != fairlyHighPriorityEvents.end())
 		{
 			auto ret = CallEventOfPriority(highest);
 			if (!ret)
@@ -120,7 +120,7 @@ public:
 			}
 		}
 
-		if (low != lowPriorityEvents.end())
+		if (low != fairlyLowPriorityEvents.end())
 		{
 			auto ret = CallEventOfPriority(highest);
 			if (!ret)
