@@ -15,4 +15,4 @@ struct EventArgs
 	void** data;
 };
 
-typedef bool (*EventCallback)(EventArgs args);
+typedef bool (*EventCallback)(EventArgs* args);
