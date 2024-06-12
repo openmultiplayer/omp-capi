@@ -1,3 +1,11 @@
+/*
+ *  This Source Code Form is subject to the terms of the Mozilla Public License,
+ *  v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ *  obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ *  The original code is copyright (c) 2024, open.mp team and contributors.
+ */
+
 #include "../ComponentManager.hpp"
 
 OMP_CAPI(TextLabel3D_Create, objectPtr(StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id))
