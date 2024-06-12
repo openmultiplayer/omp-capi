@@ -162,18 +162,21 @@ private:
 		bool result = true;
 		for (auto cb : container->second)
 		{
-			int i = 0;
-			([&]
-				{
-					eventArgs.data[i] = &inputs;
-					i++;
-				}(),
-				...);
-
-			auto ret = cb(&eventArgs);
-			if (!ret)
+			if (cb)
 			{
-				result = false;
+				int i = 0;
+				([&]
+					{
+						eventArgs.data[i] = &inputs;
+						i++;
+					}(),
+					...);
+
+				auto ret = cb(&eventArgs);
+				if (!ret)
+				{
+					result = false;
+				}
 			}
 		}
 
