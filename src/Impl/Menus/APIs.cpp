@@ -139,7 +139,7 @@ OMP_CAPI(Menu_GetColumnWidth, bool(objectPtr menu, float* column1Width, float* c
 	return true;
 }
 
-OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, ModifyableStringCharPtr header))
+OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, OutputStringViewPtr header))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
 	auto result = menu_->getColumnHeader(column);
@@ -147,7 +147,7 @@ OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, ModifyableString
 	return true;
 }
 
-OMP_CAPI(Menu_GetItem, bool(objectPtr menu, int column, int row, ModifyableStringCharPtr item))
+OMP_CAPI(Menu_GetItem, bool(objectPtr menu, int column, int row, OutputStringViewPtr item))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
 	auto result = menu_->getCell(column, row);

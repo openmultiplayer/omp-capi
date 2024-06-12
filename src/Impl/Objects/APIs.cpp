@@ -314,7 +314,7 @@ OMP_CAPI(Object_IsMaterialSlotUsed, bool(objectPtr object, int materialIndex))
 	return false;
 }
 
-OMP_CAPI(Object_GetMaterial, bool(objectPtr object, int materialIndex, int* modelid, ModifyableStringCharPtr textureLibrary, ModifyableStringCharPtr textureName, int* materialColor))
+OMP_CAPI(Object_GetMaterial, bool(objectPtr object, int materialIndex, int* modelid, OutputStringViewPtr textureLibrary, OutputStringViewPtr textureName, int* materialColor))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);
 	const ObjectMaterialData* data = nullptr;
@@ -330,7 +330,7 @@ OMP_CAPI(Object_GetMaterial, bool(objectPtr object, int materialIndex, int* mode
 	return false;
 }
 
-OMP_CAPI(Object_GetMaterialText, bool(objectPtr object, int materialIndex, ModifyableStringCharPtr text, int* materialSize, ModifyableStringCharPtr fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment))
+OMP_CAPI(Object_GetMaterialText, bool(objectPtr object, int materialIndex, OutputStringViewPtr text, int* materialSize, OutputStringViewPtr fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);
 	const ObjectMaterialData* data = nullptr;
@@ -718,7 +718,7 @@ OMP_CAPI(PlayerObject_IsMaterialSlotUsed, bool(objectPtr player, objectPtr objec
 	return false;
 }
 
-OMP_CAPI(PlayerObject_GetMaterial, bool(objectPtr player, objectPtr object, int materialIndex, int* modelid, ModifyableStringCharPtr textureLibrary, ModifyableStringCharPtr textureName, int* materialColor))
+OMP_CAPI(PlayerObject_GetMaterial, bool(objectPtr player, objectPtr object, int materialIndex, int* modelid, OutputStringViewPtr textureLibrary, OutputStringViewPtr textureName, int* materialColor))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
@@ -736,7 +736,7 @@ OMP_CAPI(PlayerObject_GetMaterial, bool(objectPtr player, objectPtr object, int 
 	return false;
 }
 
-OMP_CAPI(PlayerObject_GetMaterialText, bool(objectPtr player, objectPtr object, int materialIndex, ModifyableStringCharPtr text, int* materialSize, ModifyableStringCharPtr fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment))
+OMP_CAPI(PlayerObject_GetMaterialText, bool(objectPtr player, objectPtr object, int materialIndex, OutputStringViewPtr text, int* materialSize, OutputStringViewPtr fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);

@@ -68,7 +68,7 @@ OMP_CAPI(TextLabel3D_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
 	return streamed;
 }
 
-OMP_CAPI(TextLabel3D_GetText, bool(objectPtr textlabel, ModifyableStringCharPtr output))
+OMP_CAPI(TextLabel3D_GetText, bool(objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	auto result = textlabel_->getText();
@@ -209,7 +209,7 @@ OMP_CAPI(PlayerTextLabel3D_IsValid, bool(objectPtr player, objectPtr textlabel, 
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetText, bool(objectPtr player, objectPtr textlabel, ModifyableStringCharPtr output))
+OMP_CAPI(PlayerTextLabel3D_GetText, bool(objectPtr player, objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);

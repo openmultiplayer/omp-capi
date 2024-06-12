@@ -45,12 +45,10 @@ public:
 
 	void onReady() override
 	{
-
 	}
 
 	void onFree(IComponent* component) override
 	{
-
 	}
 
 	void free() override

@@ -30,11 +30,6 @@
 #include "Server/Components/TextLabels/textlabels.hpp"
 #include "Server/Components/GangZones/gangzones.hpp"
 
-#define STRINGIFY2(X) #X
-#define STRINGIFY(X) STRINGIFY2(X)
-
-using OutputOnlyString = std::variant<bool, StringView, Impl::String>;
-
 class ComponentManager : public Singleton<ComponentManager>
 {
 public:

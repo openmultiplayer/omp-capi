@@ -507,7 +507,7 @@ OMP_CAPI(Vehicle_GetInterior, int(objectPtr vehicle))
 	return vehicle_->getInterior();
 }
 
-OMP_CAPI(Vehicle_GetNumberPlate, bool(objectPtr vehicle, ModifyableStringCharPtr numberPlate))
+OMP_CAPI(Vehicle_GetNumberPlate, bool(objectPtr vehicle, OutputStringViewPtr numberPlate))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, 0);
 	StringView plate = vehicle_->getPlate();

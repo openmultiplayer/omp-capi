@@ -300,7 +300,7 @@ OMP_CAPI(ConsoleVar_GetAsFloat, float(StringCharPtr cvar))
 	return value;
 }
 
-OMP_CAPI(ConsoleVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr output))
+OMP_CAPI(ConsoleVar_GetAsString, int(StringCharPtr cvar, OutputStringViewPtr output))
 {
 	Impl::String value = Impl::String();
 	int len = getConfigOptionAsString(cvar, value);
@@ -309,7 +309,7 @@ OMP_CAPI(ConsoleVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr
 	return len;
 }
 
-OMP_CAPI(Core_NetworkStats, int(ModifyableStringCharPtr output))
+OMP_CAPI(Core_NetworkStats, int(OutputStringViewPtr output))
 {
 	std::stringstream stream;
 	NetworkStats stats;
@@ -346,7 +346,7 @@ OMP_CAPI(Core_NetworkStats, int(ModifyableStringCharPtr output))
 	return len;
 }
 
-OMP_CAPI(Player_GetNetworkStats, int(objectPtr player, ModifyableStringCharPtr output))
+OMP_CAPI(Player_GetNetworkStats, int(objectPtr player, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	std::stringstream stream;
@@ -401,7 +401,7 @@ OMP_CAPI(ServerVar_GetAsFloat, float(StringCharPtr cvar))
 	return value;
 }
 
-OMP_CAPI(ServerVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr output))
+OMP_CAPI(ServerVar_GetAsString, int(StringCharPtr cvar, OutputStringViewPtr output))
 {
 	Impl::String value;
 	int len = getConfigOptionAsString(cvar, value);
@@ -409,7 +409,7 @@ OMP_CAPI(ServerVar_GetAsString, int(StringCharPtr cvar, ModifyableStringCharPtr 
 	return len;
 }
 
-OMP_CAPI(Core_GetWeaponName, bool(int weaponid, ModifyableStringCharPtr output))
+OMP_CAPI(Core_GetWeaponName, bool(int weaponid, OutputStringViewPtr output))
 {
 	SET_CAPI_STRING_VIEW(output, ComponentManager::Get()->core->getWeaponName(PlayerWeapon(weaponid)));
 	return true;
@@ -459,7 +459,7 @@ OMP_CAPI(Player_NetStatsGetConnectedTime, int(objectPtr player))
 	return ms;
 }
 
-OMP_CAPI(Player_NetStatsGetIpPort, bool(objectPtr player, ModifyableStringCharPtr output))
+OMP_CAPI(Player_NetStatsGetIpPort, bool(objectPtr player, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PeerNetworkData data = player_->getNetworkData();

@@ -17,7 +17,7 @@ struct CAPIStringView
 	char* data;
 };
 
-using ModifyableStringCharPtr = CAPIStringView*;
+using OutputStringViewPtr = CAPIStringView*;
 using StringCharPtr = const char*;
 using objectPtr = void*;
 

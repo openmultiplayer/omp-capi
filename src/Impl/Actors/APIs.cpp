@@ -133,7 +133,7 @@ OMP_CAPI(Actor_GetSkin, int(objectPtr actor))
 	return actor_->getSkin();
 }
 
-OMP_CAPI(Actor_GetAnimation, void(objectPtr actor, ModifyableStringCharPtr library, ModifyableStringCharPtr name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time))
+OMP_CAPI(Actor_GetAnimation, void(objectPtr actor, OutputStringViewPtr library, OutputStringViewPtr name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time))
 {
 	POOL_ENTITY(actors, IActor, actor, actor_);
 	const AnimationData& anim = actor_->getAnimation();

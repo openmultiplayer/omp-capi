@@ -72,7 +72,7 @@ OMP_CAPI(CustomModel_RedirectDownload, bool(objectPtr player, StringCharPtr url)
 	return true;
 }
 
-OMP_CAPI(CustomModel_FindModelFileNameFromCRC, int(int crc, ModifyableStringCharPtr output))
+OMP_CAPI(CustomModel_FindModelFileNameFromCRC, int(int crc, OutputStringViewPtr output))
 {
 	auto models = ComponentManager::Get()->models;
 	if (!models)
@@ -98,7 +98,7 @@ OMP_CAPI(CustomModel_IsValid, bool(int modelId))
 	return valid;
 }
 
-OMP_CAPI(CustomModel_GetPath, bool(int modelId, ModifyableStringCharPtr dffPath, ModifyableStringCharPtr txdPath))
+OMP_CAPI(CustomModel_GetPath, bool(int modelId, OutputStringViewPtr dffPath, OutputStringViewPtr txdPath))
 {
 	auto models = ComponentManager::Get()->models;
 	if (!models)

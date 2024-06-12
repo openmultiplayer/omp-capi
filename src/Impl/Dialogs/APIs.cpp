@@ -42,7 +42,7 @@ OMP_CAPI(Player_GetDialog, int(objectPtr player))
 	return dialog;
 }
 
-OMP_CAPI(Player_GetDialogData, bool(objectPtr player, int* dialogid, int* style, ModifyableStringCharPtr title, ModifyableStringCharPtr body, ModifyableStringCharPtr button1, ModifyableStringCharPtr button2))
+OMP_CAPI(Player_GetDialogData, bool(objectPtr player, int* dialogid, int* style, OutputStringViewPtr title, OutputStringViewPtr body, OutputStringViewPtr button1, OutputStringViewPtr button2))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	IPlayerDialogData* data = queryExtension<IPlayerDialogData>(player_);
