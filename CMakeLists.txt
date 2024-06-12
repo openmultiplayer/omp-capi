@@ -31,8 +31,9 @@ endfunction()
 add_subdirectory(sdk)
 
 file(GLOB_RECURSE CAPI_FILES
-    src/*.hpp
-    src/*.cpp
+    "include/*.h"
+    "src/*.hpp"
+    "src/*.cpp"
 )
 
 add_library(${PROJECT_NAME} SHARED ${CAPI_FILES})

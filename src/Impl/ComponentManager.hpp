@@ -11,6 +11,7 @@
 
 #include "../Utils/Singleton.hpp"
 #include "../Utils/MacroMagic.hpp"
+#include "../../include/types.h"
 
 #include "sdk.hpp"
 #include "Server/Components/Pickups/pickups.hpp"
@@ -46,15 +47,26 @@ public:
 	IMenusComponent* menus = nullptr;
 	ITextDrawsComponent* textdraws = nullptr;
 	IGangZonesComponent* gangzones = nullptr;
+	ICheckpointsComponent* checkpoints = nullptr;
+	IDialogsComponent* dialogs = nullptr;
 
 	/// Store open.mp components
 	void Init(ICore* c, IComponentList* clist);
 
 	// Add event handlers to components' event dispatchers
-	void AddEvents();
+	void InitializeEvents();
 
 	// Remove event handlers from components' event dispatchers
-	void RemoveEvents();
+	void FreeEvents();
+
+	// Add an event callback of an event to omp capi handler maps
+	void AddEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+
+	// Remove an event callback of an event from omp capi handler maps
+	void RemoveEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+
+	// Remove all event callbacks of an event
+	void RemoveAll(const Impl::String& name, EventPriorityType priority);
 
 	/// Get open.mp core instance
 	ICore* GetCore()
@@ -69,8 +81,104 @@ public:
 		return componentList->queryComponent<ComponentType>();
 	}
 
+	// Call event
+	template <typename... Args>
+	bool CallEvent(const Impl::String& name, Args...)
+	{
+		auto highest = highestPriorityEvents.find(name);
+		auto high = highPriorityEvents.find(name);
+		auto default = defaultPriorityEvents.find(name);
+		auto low = lowPriorityEvents.find(name);
+		auto lowest = lowestPriorityEvents.find(name);
+
+		bool result = true;
+
+		if (highest != highestPriorityEvents.end())
+		{
+			auto ret = CallEventOfPriority(highest);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		if (high != highPriorityEvents.end())
+		{
+			auto ret = CallEventOfPriority(highest);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		if (default != defaultPriorityEvents.end())
+		{
+			auto ret = CallEventOfPriority(highest);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		if (low != lowPriorityEvents.end())
+		{
+			auto ret = CallEventOfPriority(highest);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		if (lowest != lowestPriorityEvents.end())
+		{
+			auto ret = CallEventOfPriority(highest);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		return result;
+	}
+
 private:
 	IComponentList* componentList = nullptr;
+
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> highestPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> fairlyHighPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> defaultPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> fairlyLowPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> lowestPriorityEvents;
+
+	template <typename Con, typename... Args>
+	bool CallEventOfPriority(Con container, Args...)
+	{
+		EventArgs eventArgs;
+		constexpr std::size_t size = sizeof...(Args);
+		void* args[size] = {... 0 };
+
+		eventArgs.data = &args;
+		eventArgs.size = size;
+		bool result = true;
+		for (auto cb : container->second)
+		{
+			int i = 0;
+			([&]
+				{
+					eventArgs.data[i] = &inputs;
+					i++;
+				}(),
+				...);
+
+			auto ret = cb(&eventArgs);
+			if (!ret)
+			{
+				result = false;
+			}
+		}
+
+		return result;
+	}
 };
 
 /// Get player from players pool
@@ -133,3 +241,6 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 		output->len = str_view.length();                   \
 		output->data = const_cast<char*>(str_view.data()); \
 	}
+
+#define CREATE_CAPI_STRING_VIEW(str) \
+	CAPIStringView { static_cast<unsigned int>(str.length()), const_cast<char*>(str.data()) }
