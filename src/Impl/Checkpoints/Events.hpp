@@ -15,22 +15,22 @@ struct CheckpointEvents : public PlayerCheckpointEventHandler, public Singleton<
 {
 	void onPlayerEnterCheckpoint(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("Checkpoint_OnPlayerEnter", player.getID());
+		ComponentManager::Get()->CallEvent("onPlayerEnterCheckpoint", &player);
 	}
 
 	void onPlayerLeaveCheckpoint(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("Checkpoint_OnPlayerLeave", player.getID());
+		ComponentManager::Get()->CallEvent("onPlayerLeaveCheckpoint", &player);
 	}
 
 	void onPlayerEnterRaceCheckpoint(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("Checkpoint_OnPlayerEnterRace", player.getID());
+		ComponentManager::Get()->CallEvent("onPlayerEnterRaceCheckpoint", &player);
 	}
 
 	void onPlayerLeaveRaceCheckpoint(IPlayer& player) override
 	{
 
-		ComponentManager::Get()->CallEvent("Checkpoint_OnPlayerLeaveRace", player.getID());
+		ComponentManager::Get()->CallEvent("onPlayerLeaveRaceCheckpoint", &player);
 	}
 };

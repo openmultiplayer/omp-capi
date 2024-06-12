@@ -15,6 +15,6 @@ struct DialogEvents : public PlayerDialogEventHandler, public Singleton<DialogEv
 {
 	void onDialogResponse(IPlayer& player, int dialogId, DialogResponse response, int listItem, StringView inputText) override
 	{
-		ComponentManager::Get()->CallEvent("Dialog_OnPlayerResponse", player.getID(), dialogId, int(response), listItem, CREATE_CAPI_STRING_VIEW(inputText));
+		ComponentManager::Get()->CallEvent("onDialogResponse", &player, dialogId, int(response), listItem, CREATE_CAPI_STRING_VIEW(inputText));
 	}
 };

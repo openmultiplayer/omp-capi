@@ -15,14 +15,7 @@ struct ConsoleEvents : public ConsoleEventHandler, public Singleton<ConsoleEvent
 {
 	bool onConsoleText(StringView command, StringView parameters, const ConsoleCommandSenderData& sender) override
 	{
-		std::string fullCommand = std::string(command.data(), command.length());
-		if (!parameters.empty())
-		{
-			fullCommand.append(" ");
-			fullCommand.append(parameters.data());
-		}
-
-		return ComponentManager::Get()->CallEvent("Rcon_OnCommand", CREATE_CAPI_STRING_VIEW(fullCommand));
+		return ComponentManager::Get()->CallEvent("onConsoleText", CREATE_CAPI_STRING_VIEW(command), CREATE_CAPI_STRING_VIEW(parameters));
 	}
 
 	void onRconLoginAttempt(IPlayer& player, StringView password, bool success) override
@@ -32,6 +25,6 @@ struct ConsoleEvents : public ConsoleEventHandler, public Singleton<ConsoleEvent
 		PeerAddress::ToString(data.networkID.address, addressString);
 		StringView addressStringView = StringView(addressString.data(), addressString.length());
 
-		ComponentManager::Get()->CallEvent("Rcon_OnLoginAttempt", CREATE_CAPI_STRING_VIEW(addressStringView), CREATE_CAPI_STRING_VIEW(password), success);
+		ComponentManager::Get()->CallEvent("onRconLoginAttempt", CREATE_CAPI_STRING_VIEW(addressStringView), CREATE_CAPI_STRING_VIEW(password), success);
 	}
 };
