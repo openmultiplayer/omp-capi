@@ -142,7 +142,7 @@ void ComponentManager::FreeEvents()
 	REMOVE_PLAYER_EVENT_HANDLER(players, Update, PlayerEvents::Get());
 }
 
-void ComponentManager::AddEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback)
+bool ComponentManager::AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback)
 {
 	if (name.length())
 	{
@@ -156,11 +156,13 @@ void ComponentManager::AddEvent(const Impl::String& name, EventPriorityType prio
 			}
 
 			it->second.insert(callback);
+			return true;
 		}
 	}
+	return false;
 }
 
-void ComponentManager::RemoveEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback)
+bool ComponentManager::RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback)
 {
 	if (name.length())
 	{
@@ -171,12 +173,14 @@ void ComponentManager::RemoveEvent(const Impl::String& name, EventPriorityType p
 			if (it != container->end())
 			{
 				it->second.erase(callback);
+				return true;
 			}
 		}
 	}
+	return false;
 }
 
-void ComponentManager::RemoveAll(const Impl::String& name, EventPriorityType priority)
+void ComponentManager::RemoveAllHandlers(const Impl::String& name, EventPriorityType priority)
 {
 	if (name.length())
 	{

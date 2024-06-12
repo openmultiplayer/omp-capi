@@ -60,13 +60,13 @@ public:
 	void FreeEvents();
 
 	// Add an event callback of an event to omp capi handler maps
-	void AddEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+	bool AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback);
 
 	// Remove an event callback of an event from omp capi handler maps
-	void RemoveEvent(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+	bool RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback);
 
 	// Remove all event callbacks of an event
-	void RemoveAll(const Impl::String& name, EventPriorityType priority);
+	void RemoveAllHandlers(const Impl::String& name, EventPriorityType priority);
 
 	/// Get open.mp core instance
 	ICore* GetCore()
