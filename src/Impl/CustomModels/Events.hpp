@@ -1,0 +1,25 @@
+/*
+ *  This Source Code Form is subject to the terms of the Mozilla Public License,
+ *  v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ *  obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ *  The original code is copyright (c) 2024, open.mp team and contributors.
+ */
+
+#pragma once
+#include "../ComponentManager.hpp"
+#include "../Utils/Singleton.hpp"
+#include "sdk.hpp"
+
+struct CustomModelsEvents : public PlayerModelsEventHandler, public Singleton<CustomModelsEvents>
+{
+	virtual void onPlayerFinishedDownloading(IPlayer& player) override
+	{
+		ComponentManager::Get()->CallEvent("Player_OnFinishedDownloading", player.getID(), player.getVirtualWorld());
+	}
+
+	virtual bool onPlayerRequestDownload(IPlayer& player, ModelDownloadType type, uint32_t checksum) override
+	{
+		return ComponentManager::Get()->CallEvent("Player_OnRequestDownload", player.getID(), static_cast<uint8_t>(type), checksum);
+	}
+};
