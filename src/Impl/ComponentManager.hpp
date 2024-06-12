@@ -151,13 +151,16 @@ private:
 	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> lowestPriorityEvents;
 
 	template <typename Con, typename... Args>
-	bool CallEventOfPriority(Con container, Args...)
+	bool CallEventOfPriority(Con container, Args... args)
 	{
 		EventArgs eventArgs;
 		constexpr std::size_t size = sizeof...(Args);
-		void* args[size] = {... 0 };
 
-		eventArgs.data = &args;
+		if (size > 0)
+		{
+			eventArgs.data = new void*[size];
+		}
+
 		eventArgs.size = size;
 		bool result = true;
 		for (auto cb : container->second)
@@ -167,7 +170,7 @@ private:
 				int i = 0;
 				([&]
 					{
-						eventArgs.data[i] = &inputs;
+						eventArgs.data[i] = &args;
 						i++;
 					}(),
 					...);
@@ -180,6 +183,7 @@ private:
 			}
 		}
 
+		delete[] eventArgs.data;
 		return result;
 	}
 };
