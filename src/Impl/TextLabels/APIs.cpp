@@ -8,7 +8,7 @@
 
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(TextLabel3D_Create, objectPtr(StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id))
+OMP_CAPI(TextLabel_Create, objectPtr(StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id))
 {
 	ITextLabelsComponent* component = ComponentManager::Get()->textlabels;
 	if (component)
@@ -23,14 +23,14 @@ OMP_CAPI(TextLabel3D_Create, objectPtr(StringCharPtr text, uint32_t color, float
 	return nullptr;
 }
 
-OMP_CAPI(TextLabel3D_Delete, bool(objectPtr textlabel))
+OMP_CAPI(TextLabel_Delete, bool(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	ComponentManager::Get()->textlabels->release(textlabel_->getID());
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_AttachToPlayer, bool(objectPtr textlabel, objectPtr player, float offsetX, float offsetY, float offsetZ))
+OMP_CAPI(TextLabel_AttachToPlayer, bool(objectPtr textlabel, objectPtr player, float offsetX, float offsetY, float offsetZ))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
@@ -38,7 +38,7 @@ OMP_CAPI(TextLabel3D_AttachToPlayer, bool(objectPtr textlabel, objectPtr player,
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_AttachToVehicle, bool(objectPtr textlabel, objectPtr vehicle, float offsetX, float offsetY, float offsetZ))
+OMP_CAPI(TextLabel_AttachToVehicle, bool(objectPtr textlabel, objectPtr vehicle, float offsetX, float offsetY, float offsetZ))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
@@ -46,21 +46,21 @@ OMP_CAPI(TextLabel3D_AttachToVehicle, bool(objectPtr textlabel, objectPtr vehicl
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_UpdateText, bool(objectPtr textlabel, uint32_t color, StringCharPtr text))
+OMP_CAPI(TextLabel_UpdateText, bool(objectPtr textlabel, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	textlabel_->setColourAndText(Colour::FromRGBA(color), text);
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_IsValid, bool(objectPtr textlabel))
+OMP_CAPI(TextLabel_IsValid, bool(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	if(!textlabels->get(textlabel_->getID())) return false;
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
+OMP_CAPI(TextLabel_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
@@ -68,7 +68,7 @@ OMP_CAPI(TextLabel3D_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
 	return streamed;
 }
 
-OMP_CAPI(TextLabel3D_GetText, bool(objectPtr textlabel, OutputStringViewPtr output))
+OMP_CAPI(TextLabel_GetText, bool(objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	auto result = textlabel_->getText();
@@ -76,13 +76,13 @@ OMP_CAPI(TextLabel3D_GetText, bool(objectPtr textlabel, OutputStringViewPtr outp
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_GetColor, uint32_t(objectPtr textlabel))
+OMP_CAPI(TextLabel_GetColor, uint32_t(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, 0);
 	return textlabel_->getColour().RGBA();
 }
 
-OMP_CAPI(TextLabel3D_GetPos, bool(objectPtr textlabel, float* x, float* y, float* z))
+OMP_CAPI(TextLabel_GetPos, bool(objectPtr textlabel, float* x, float* y, float* z))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	const Vector3& pos = textlabel_->getPosition();
@@ -93,49 +93,49 @@ OMP_CAPI(TextLabel3D_GetPos, bool(objectPtr textlabel, float* x, float* y, float
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_SetDrawDistance, bool(objectPtr textlabel, float distance))
+OMP_CAPI(TextLabel_SetDrawDistance, bool(objectPtr textlabel, float distance))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	textlabel_->setDrawDistance(distance);
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_GetDrawDistance, float(objectPtr textlabel))
+OMP_CAPI(TextLabel_GetDrawDistance, float(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, 0.0f);
 	auto distance = textlabel_->getDrawDistance();
 	return distance;
 }
 
-OMP_CAPI(TextLabel3D_GetLOS, bool(objectPtr textlabel))
+OMP_CAPI(TextLabel_GetLOS, bool(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	auto los = textlabel_->getTestLOS();
 	return los;
 }
 
-OMP_CAPI(TextLabel3D_SetLOS, bool(objectPtr textlabel, bool status))
+OMP_CAPI(TextLabel_SetLOS, bool(objectPtr textlabel, bool status))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	textlabel_->setTestLOS(status);
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_GetVirtualWorld, int(objectPtr textlabel))
+OMP_CAPI(TextLabel_GetVirtualWorld, int(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, 0);
 	auto virtualWorld = textlabel_->getVirtualWorld();
 	return virtualWorld;
 }
 
-OMP_CAPI(TextLabel3D_SetVirtualWorld, bool(objectPtr textlabel, int world))
+OMP_CAPI(TextLabel_SetVirtualWorld, bool(objectPtr textlabel, int world))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	textlabel_->setVirtualWorld(world);
 	return true;
 }
 
-OMP_CAPI(TextLabel3D_GetAttachedData, bool(objectPtr textlabel, int* attached_player, int* attached_vehicle))
+OMP_CAPI(TextLabel_GetAttachedData, bool(objectPtr textlabel, int* attached_player, int* attached_vehicle))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	const TextLabelAttachmentData& data = textlabel_->getAttachmentData();
@@ -150,7 +150,7 @@ OMP_CAPI(TextLabel3D_GetAttachedData, bool(objectPtr textlabel, int* attached_pl
 	Per-Player TextLabel
 */
 
-OMP_CAPI(PlayerTextLabel3D_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los, int* id))
+OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los, int* id))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	IPlayerTextLabelData* labelData = queryExtension<IPlayerTextLabelData>(player_);
@@ -180,7 +180,7 @@ OMP_CAPI(PlayerTextLabel3D_Create, objectPtr(objectPtr player, StringCharPtr tex
 	return nullptr;
 }
 
-OMP_CAPI(PlayerTextLabel3D_Delete, bool(objectPtr player, objectPtr textlabel))
+OMP_CAPI(PlayerTextLabel_Delete, bool(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -193,7 +193,7 @@ OMP_CAPI(PlayerTextLabel3D_Delete, bool(objectPtr player, objectPtr textlabel))
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_UpdateText, bool(objectPtr player, objectPtr textlabel, uint32_t color, StringCharPtr text))
+OMP_CAPI(PlayerTextLabel_UpdateText, bool(objectPtr player, objectPtr textlabel, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -201,7 +201,7 @@ OMP_CAPI(PlayerTextLabel3D_UpdateText, bool(objectPtr player, objectPtr textlabe
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_IsValid, bool(objectPtr player, objectPtr textlabel, bool* valid))
+OMP_CAPI(PlayerTextLabel_IsValid, bool(objectPtr player, objectPtr textlabel, bool* valid))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -209,7 +209,7 @@ OMP_CAPI(PlayerTextLabel3D_IsValid, bool(objectPtr player, objectPtr textlabel, 
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetText, bool(objectPtr player, objectPtr textlabel, OutputStringViewPtr output))
+OMP_CAPI(PlayerTextLabel_GetText, bool(objectPtr player, objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -218,7 +218,7 @@ OMP_CAPI(PlayerTextLabel3D_GetText, bool(objectPtr player, objectPtr textlabel, 
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetColor, bool(objectPtr player, objectPtr textlabel, uint32_t* color))
+OMP_CAPI(PlayerTextLabel_GetColor, bool(objectPtr player, objectPtr textlabel, uint32_t* color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -226,7 +226,7 @@ OMP_CAPI(PlayerTextLabel3D_GetColor, bool(objectPtr player, objectPtr textlabel,
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetPos, bool(objectPtr player, objectPtr textlabel, float* x, float* y, float* z))
+OMP_CAPI(PlayerTextLabel_GetPos, bool(objectPtr player, objectPtr textlabel, float* x, float* y, float* z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -238,7 +238,7 @@ OMP_CAPI(PlayerTextLabel3D_GetPos, bool(objectPtr player, objectPtr textlabel, f
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_SetDrawDistance, bool(objectPtr player, objectPtr textlabel, float distance))
+OMP_CAPI(PlayerTextLabel_SetDrawDistance, bool(objectPtr player, objectPtr textlabel, float distance))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -246,7 +246,7 @@ OMP_CAPI(PlayerTextLabel3D_SetDrawDistance, bool(objectPtr player, objectPtr tex
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetDrawDistance, float(objectPtr player, objectPtr textlabel))
+OMP_CAPI(PlayerTextLabel_GetDrawDistance, float(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, 0.0f);
@@ -254,7 +254,7 @@ OMP_CAPI(PlayerTextLabel3D_GetDrawDistance, float(objectPtr player, objectPtr te
 	return distance;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetLOS, bool(objectPtr player, objectPtr textlabel))
+OMP_CAPI(PlayerTextLabel_GetLOS, bool(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -262,7 +262,7 @@ OMP_CAPI(PlayerTextLabel3D_GetLOS, bool(objectPtr player, objectPtr textlabel))
 	return los;
 }
 
-OMP_CAPI(PlayerTextLabel3D_SetLOS, bool(objectPtr player, objectPtr textlabel, bool status))
+OMP_CAPI(PlayerTextLabel_SetLOS, bool(objectPtr player, objectPtr textlabel, bool status))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -270,13 +270,13 @@ OMP_CAPI(PlayerTextLabel3D_SetLOS, bool(objectPtr player, objectPtr textlabel, b
 	return true;
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetVirtualWorld, int(objectPtr player))
+OMP_CAPI(PlayerTextLabel_GetVirtualWorld, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	return player_->getVirtualWorld();
 }
 
-OMP_CAPI(PlayerTextLabel3D_GetAttachedData, bool(objectPtr player, objectPtr textlabel, int* attached_player, int* attached_vehicle))
+OMP_CAPI(PlayerTextLabel_GetAttachedData, bool(objectPtr player, objectPtr textlabel, int* attached_player, int* attached_vehicle))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
