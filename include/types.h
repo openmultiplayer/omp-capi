@@ -1,5 +1,7 @@
 #include <stdint.h>
 
+// Events
+
 enum EventPriorityType
 {
 	EventPriorityType_Highest,
@@ -16,3 +18,19 @@ struct EventArgs
 };
 
 typedef bool (*EventCallback)(EventArgs* args);
+
+// Components
+
+struct ComponentVersion
+{
+	uint8_t major; ///< MAJOR version when you make incompatible API changes
+	uint8_t minor; ///< MINOR version when you add functionality in a backwards compatible manner
+	uint8_t patch; ///< PATCH version when you make backwards compatible bug fixes
+	uint16_t prerel; ///< PRE-RELEASE version
+};
+
+typedef void (*ComponentOnInitCallback)();
+typedef void (*ComponentOnReadyCallback)();
+typedef void (*ComponentOnResetCallback)();
+typedef void (*ComponentOnFreeCallback)();
+typedef void (*ComponentOnLoadCallback)(void* core);

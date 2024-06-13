@@ -20,6 +20,7 @@ struct CAPIStringView
 using OutputStringViewPtr = CAPIStringView*;
 using StringCharPtr = const char*;
 using objectPtr = void*;
+using voidPtr = void*;
 
 #define CAT(a, ...) PRIMITIVE_CAT(a, __VA_ARGS__)
 #define PRIMITIVE_CAT(a, ...) a##__VA_ARGS__
@@ -46,6 +47,7 @@ using objectPtr = void*;
 #define OMP_CAPI__WITHOUT_PARAMS_uint32_t(...) uint32_t
 #define OMP_CAPI__WITHOUT_PARAMS_uint64_t(...) uint64_t
 #define OMP_CAPI__WITHOUT_PARAMS_objectPtr(...) objectPtr
+#define OMP_CAPI__WITHOUT_PARAMS_voidPtr(...) voidPtr
 
 #define OMP_CAPI__WITHOUT_RETURN_size_t(...) __VA_ARGS__
 #define OMP_CAPI__WITHOUT_RETURN_unsigned(...) __VA_ARGS__
@@ -64,6 +66,7 @@ using objectPtr = void*;
 #define OMP_CAPI__WITHOUT_RETURN_uint32_t(...) __VA_ARGS__
 #define OMP_CAPI__WITHOUT_RETURN_uint64_t(...) __VA_ARGS__
 #define OMP_CAPI__WITHOUT_RETURN_objectPtr(...) __VA_ARGS__
+#define OMP_CAPI__WITHOUT_RETURN_voidPtr(...) __VA_ARGS__
 
 #define OMP_CAPI__RETURN(params) OMP_CAPI__WITHOUT_PARAMS_##params
 #define OMP_CAPI__PARAMETERS(params) CAT(OMP_CAPI__WITHOUT_RETURN_, params)
