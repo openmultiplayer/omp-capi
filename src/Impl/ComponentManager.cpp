@@ -10,6 +10,7 @@
 #include "Checkpoints/Events.hpp"
 #include "Classes/Events.hpp"
 #include "Core/Events.hpp"
+#include "Console/Events.hpp"
 #include "Dialogs/Events.hpp"
 #include "Menus/Events.hpp"
 #include "Objects/Events.hpp"
@@ -90,6 +91,7 @@ void ComponentManager::Init(ICore* c, IComponentList* clist)
 
 void ComponentManager::InitializeEvents()
 {
+	ADD_EVENT_HANDLER(core, CoreEvents::Get());
 	ADD_EVENT_HANDLER(actors, ActorEvents::Get());
 	ADD_EVENT_HANDLER(checkpoints, CheckpointEvents::Get());
 	ADD_EVENT_HANDLER(classes, ClassEvents::Get());
@@ -117,6 +119,7 @@ void ComponentManager::InitializeEvents()
 
 void ComponentManager::FreeEvents()
 {
+	REMOVE_EVENT_HANDLER(core, CoreEvents::Get());
 	REMOVE_EVENT_HANDLER(actors, ActorEvents::Get());
 	REMOVE_EVENT_HANDLER(checkpoints, CheckpointEvents::Get());
 	REMOVE_EVENT_HANDLER(classes, ClassEvents::Get());

@@ -11,20 +11,10 @@
 #include "../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
-struct ConsoleEvents : public ConsoleEventHandler, public Singleton<ConsoleEvents>
+struct CoreEvents : public CoreEventHandler, public Singleton<CoreEvents>
 {
-	bool onConsoleText(StringView command, StringView parameters, const ConsoleCommandSenderData& sender) override
+	void onTick(Microseconds elapsed, TimePoint now) override
 	{
-		return ComponentManager::Get()->CallEvent("onConsoleText", EventReturnHandler::StopAtTrue, CREATE_CAPI_STRING_VIEW(command), CREATE_CAPI_STRING_VIEW(parameters));
-	}
-
-	void onRconLoginAttempt(IPlayer& player, StringView password, bool success) override
-	{
-		PeerNetworkData data = player.getNetworkData();
-		PeerAddress::AddressString addressString;
-		PeerAddress::ToString(data.networkID.address, addressString);
-		StringView addressStringView = StringView(addressString.data(), addressString.length());
-
-		ComponentManager::Get()->CallEvent("onRconLoginAttempt", EventReturnHandler::StopAtTrue, CREATE_CAPI_STRING_VIEW(addressStringView), CREATE_CAPI_STRING_VIEW(password), success);
+		ComponentManager::Get()->CallEvent("onTick", EventReturnHandler::None, int(elapsed.count()));
 	}
 };
