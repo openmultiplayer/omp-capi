@@ -15,16 +15,16 @@ struct ActorEvents : public ActorEventHandler, public Singleton<ActorEvents>
 {
 	void onPlayerGiveDamageActor(IPlayer& player, IActor& actor, float amount, unsigned weapon, BodyPart part) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerGiveDamageActor", &player, &actor, amount, int(weapon), int(part));
+		ComponentManager::Get()->CallEvent("onPlayerGiveDamageActor", EventReturnHandler::None, &player, &actor, amount, int(weapon), int(part));
 	}
 
 	void onActorStreamIn(IActor& actor, IPlayer& forPlayer) override
 	{
-		ComponentManager::Get()->CallEvent("onActorStreamIn", &actor, &forPlayer);
+		ComponentManager::Get()->CallEvent("onActorStreamIn", EventReturnHandler::None, &actor, &forPlayer);
 	}
 
 	void onActorStreamOut(IActor& actor, IPlayer& forPlayer) override
 	{
-		ComponentManager::Get()->CallEvent("onActorStreamOut", &actor, &forPlayer);
+		ComponentManager::Get()->CallEvent("onActorStreamOut", EventReturnHandler::None, &actor, &forPlayer);
 	}
 };

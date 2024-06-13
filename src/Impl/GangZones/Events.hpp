@@ -18,7 +18,7 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
-			ComponentManager::Get()->CallEvent("onPlayerEnterGangZone", &player, &zone);
+			ComponentManager::Get()->CallEvent("onPlayerEnterGangZone", EventReturnHandler::None, &player, &zone);
 		}
 		else if (auto data = queryExtension<IPlayerGangZoneData>(player))
 		{
@@ -30,7 +30,7 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
-			ComponentManager::Get()->CallEvent("onPlayerLeaveGangZone", &player, &zone);
+			ComponentManager::Get()->CallEvent("onPlayerLeaveGangZone", EventReturnHandler::None, &player, &zone);
 		}
 		else if (auto data = queryExtension<IPlayerGangZoneData>(player))
 		{
@@ -42,7 +42,7 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
-			ComponentManager::Get()->CallEvent("onPlayerClickGangZone", &player, &zone);
+			ComponentManager::Get()->CallEvent("onPlayerClickGangZone", EventReturnHandler::None, &player, &zone);
 		}
 		else if (auto data = queryExtension<IPlayerGangZoneData>(player))
 		{

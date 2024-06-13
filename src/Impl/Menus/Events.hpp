@@ -15,11 +15,11 @@ struct MenuEvents : public MenuEventHandler, public Singleton<MenuEvents>
 {
 	void onPlayerSelectedMenuRow(IPlayer& player, MenuRow row) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerSelectedMenuRow", &player, int(row));
+		ComponentManager::Get()->CallEvent("onPlayerSelectedMenuRow", EventReturnHandler::None, &player, int(row));
 	}
 
 	void onPlayerExitedMenu(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerExitedMenu", &player);
+		ComponentManager::Get()->CallEvent("onPlayerExitedMenu", EventReturnHandler::None, &player);
 	}
 };

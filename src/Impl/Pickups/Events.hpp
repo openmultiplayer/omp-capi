@@ -18,7 +18,7 @@ struct PickupEvents : public PickupEventHandler, public Singleton<PickupEvents>
 		auto pickups = ComponentManager::Get()->pickups;
 		if (pickup.getLegacyPlayer() == nullptr)
 		{
-			ComponentManager::Get()->CallEvent("onPlayerPickUpPickup", &player, &pickup);
+			ComponentManager::Get()->CallEvent("onPlayerPickUpPickup", EventReturnHandler::None, &player, &pickup);
 		}
 		else if (auto data = queryExtension<IPlayerPickupData>(player))
 		{

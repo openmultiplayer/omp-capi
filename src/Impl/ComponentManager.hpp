@@ -31,6 +31,13 @@
 #include "Server/Components/TextLabels/textlabels.hpp"
 #include "Server/Components/GangZones/gangzones.hpp"
 
+enum class EventReturnHandler
+{
+	None,
+	StopAtFalse,
+	StopAtTrue
+};
+
 class ComponentManager : public Singleton<ComponentManager>
 {
 public:
@@ -83,7 +90,7 @@ public:
 
 	// Call event
 	template <typename... Args>
-	bool CallEvent(const Impl::String& name, Args...)
+	bool CallEvent(const Impl::String& name, EventReturnHandler returnHandler, Args... args)
 	{
 		auto highest = highestPriorityEvents.find(name);
 		auto high = fairlyHighPriorityEvents.find(name);
@@ -95,7 +102,7 @@ public:
 
 		if (highest != highestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest);
+			auto ret = CallEventOfPriority(highest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -104,7 +111,7 @@ public:
 
 		if (high != fairlyHighPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest);
+			auto ret = CallEventOfPriority(highest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -113,7 +120,7 @@ public:
 
 		if (default != defaultPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest);
+			auto ret = CallEventOfPriority(highest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -122,7 +129,7 @@ public:
 
 		if (low != fairlyLowPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest);
+			auto ret = CallEventOfPriority(highest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -131,7 +138,7 @@ public:
 
 		if (lowest != lowestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest);
+			auto ret = CallEventOfPriority(highest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -151,7 +158,7 @@ private:
 	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> lowestPriorityEvents;
 
 	template <typename Con, typename... Args>
-	bool CallEventOfPriority(Con container, Args... args)
+	bool CallEventOfPriority(Con container, EventReturnHandler returnHandler, Args... args)
 	{
 		EventArgs eventArgs;
 		constexpr std::size_t size = sizeof...(Args);
@@ -176,9 +183,26 @@ private:
 					...);
 
 				auto ret = cb(&eventArgs);
-				if (!ret)
+				switch (returnHandler)
 				{
-					result = false;
+				case EventReturnHandler::StopAtFalse:
+					if (!ret)
+					{
+						delete[] eventArgs.data;
+						return false;
+					}
+					break;
+				case EventReturnHandler::StopAtTrue:
+					if (ret)
+					{
+						delete[] eventArgs.data;
+						return false;
+					}
+					break;
+				case EventReturnHandler::None:
+				default:
+					result = ret;
+					break;
 				}
 			}
 		}

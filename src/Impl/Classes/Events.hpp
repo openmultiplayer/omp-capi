@@ -15,6 +15,6 @@ struct ClassEvents : public ClassEventHandler, public Singleton<ClassEvents>
 {
 	bool onPlayerRequestClass(IPlayer& player, unsigned int classId) override
 	{
-		return ComponentManager::Get()->CallEvent("onPlayerRequestClass", &player, int(classId));
+		return ComponentManager::Get()->CallEvent("onPlayerRequestClass", EventReturnHandler::StopAtFalse, &player, int(classId));
 	}
 };
