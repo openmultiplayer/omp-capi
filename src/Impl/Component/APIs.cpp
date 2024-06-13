@@ -36,6 +36,7 @@ public:
 		onReadyCB_ = nullptr;
 		onResetCB_ = nullptr;
 		onLoadCB_ = nullptr;
+		onFreeCB_ = nullptr;
 	}
 
 	~Component()
