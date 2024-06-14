@@ -197,7 +197,7 @@ const generateFunctions = (apis) => {
   fs.appendFileSync(
     filePath,
     `\n// All APIs
-struct OMPAPI {
+struct OMPAPI_t {
 `
   );
 
@@ -210,14 +210,12 @@ struct OMPAPI {
   fs.appendFileSync(
     filePath,
     `
-static OMPAPI* omp_initialize_capi() {
+static void omp_initialize_capi(OMPAPI_t* ompapi) {
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
     void* capi_lib = LIBRARY_OPEN("./components/$CAPI.dll");
 #else
     void* capi_lib = LIBRARY_OPEN("./components/$CAPI.so");
 #endif
-
-    OMPAPI* ompapi = (OMPAPI*)malloc(sizeof(OMPAPI));
 `
   );
 
@@ -230,7 +228,7 @@ static OMPAPI* omp_initialize_capi() {
       );
     });
   });
-  fs.appendFileSync(filePath, `\n    return ompapi;\n};\n`);
+  fs.appendFileSync(filePath, `\n    return;\n};\n`);
 };
 
 /*
