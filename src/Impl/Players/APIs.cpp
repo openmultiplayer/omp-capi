@@ -8,14 +8,14 @@
 
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Player_SendMessage, bool(objectPtr player, uint32_t color, StringCharPtr text))
+OMP_CAPI(Player_SendClientMessage, bool(objectPtr player, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->sendClientMessage(Colour::FromRGBA(color), text);
 	return true;
 }
 
-OMP_CAPI(All_SendMessage, void(uint32_t color, StringCharPtr text))
+OMP_CAPI(All_SendClientMessage, void(uint32_t color, StringCharPtr text))
 {
 	ComponentManager::Get()->players->sendClientMessageToAll(Colour::FromRGBA(color), text);
 }
@@ -450,7 +450,7 @@ OMP_CAPI(Player_IsStreamedIn, bool(objectPtr player, objectPtr other))
 	return streamed;
 }
 
-OMP_CAPI(Player_PlaySound, bool(objectPtr player, int sound, float x, float y, float z))
+OMP_CAPI(Player_PlayGameSound, bool(objectPtr player, int sound, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->playSound(sound, { x, y, z });

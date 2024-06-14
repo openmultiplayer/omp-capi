@@ -523,11 +523,11 @@ OMP_CAPI(PlayerTextDraw_SetPreviewVehCol, bool(objectPtr player, objectPtr textd
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_SetPos, bool(objectPtr player, objectPtr textdraw, Vector2 pos))
+OMP_CAPI(PlayerTextDraw_SetPos, bool(objectPtr player, objectPtr textdraw, float x, float y))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
-	td->setPosition(pos);
+	td->setPosition({ x, y });
 	return true;
 }
 
