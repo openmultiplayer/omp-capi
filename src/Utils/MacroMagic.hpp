@@ -8,14 +8,9 @@
 
 #pragma once
 #include <string>
+#include "../../include/ompcapi.h"
 
 #define EXPORT_OMP_API extern "C" SDK_EXPORT
-
-struct CAPIStringView
-{
-	unsigned int len;
-	char* data;
-};
 
 using OutputStringViewPtr = CAPIStringView*;
 using StringCharPtr = const char*;

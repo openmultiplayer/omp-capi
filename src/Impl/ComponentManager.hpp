@@ -11,7 +11,6 @@
 
 #include "../Utils/Singleton.hpp"
 #include "../Utils/MacroMagic.hpp"
-#include "../../include/types.h"
 
 #include "sdk.hpp"
 #include "Server/Components/Pickups/pickups.hpp"

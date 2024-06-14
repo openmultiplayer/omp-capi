@@ -51,6 +51,25 @@ public:
 
 	void onFree(IComponent* component) override
 	{
+#define COMPONENT_UNLOADED(var) \
+	if (component == var)       \
+		var = nullptr;
+
+		auto mgr = ComponentManager::Get();
+
+		COMPONENT_UNLOADED(mgr->actors)
+		COMPONENT_UNLOADED(mgr->console)
+		COMPONENT_UNLOADED(mgr->checkpoints)
+		COMPONENT_UNLOADED(mgr->classes)
+		COMPONENT_UNLOADED(mgr->dialogs)
+		COMPONENT_UNLOADED(mgr->gangzones)
+		COMPONENT_UNLOADED(mgr->menus)
+		COMPONENT_UNLOADED(mgr->objects)
+		COMPONENT_UNLOADED(mgr->pickups)
+		COMPONENT_UNLOADED(mgr->textdraws)
+		COMPONENT_UNLOADED(mgr->textlabels)
+		COMPONENT_UNLOADED(mgr->vehicles)
+		COMPONENT_UNLOADED(mgr->models)
 	}
 
 	void free() override
