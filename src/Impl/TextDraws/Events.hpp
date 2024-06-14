@@ -15,13 +15,13 @@ struct TextDrawEvents : public TextDrawEventHandler, public Singleton<TextDrawEv
 {
 	virtual bool onPlayerCancelTextDrawSelection(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerCancelTextDrawSelection", EventReturnHandler::None, &player, 0);
+		ComponentManager::Get()->CallEvent("onPlayerCancelTextDrawSelection", EventReturnHandler::None, &player);
 		return true;
 	}
 
 	virtual bool onPlayerCancelPlayerTextDrawSelection(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerCancelPlayerTextDrawSelection", EventReturnHandler::None, &player, 0);
+		ComponentManager::Get()->CallEvent("onPlayerCancelPlayerTextDrawSelection", EventReturnHandler::None, &player);
 		return true;
 	}
 

@@ -20,7 +20,7 @@ struct VehicleEvents : public VehicleEventHandler, public Singleton<VehicleEvent
 
 	void onVehicleStreamOut(IVehicle& vehicle, IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("OnVehicleStreamOut", EventReturnHandler::None, &vehicle, &player);
+		ComponentManager::Get()->CallEvent("onVehicleStreamOut", EventReturnHandler::None, &vehicle, &player);
 	}
 
 	void onVehicleDeath(IVehicle& vehicle, IPlayer& player) override
@@ -50,7 +50,7 @@ struct VehicleEvents : public VehicleEventHandler, public Singleton<VehicleEvent
 
 	bool onVehicleMod(IPlayer& player, IVehicle& vehicle, int component) override
 	{
-		return ComponentManager::Get()->CallEvent("onVehiclePaintJob", EventReturnHandler::StopAtFalse, &player, &vehicle, component);
+		return ComponentManager::Get()->CallEvent("onVehicleMod", EventReturnHandler::StopAtFalse, &player, &vehicle, component);
 	}
 
 	bool onVehicleRespray(IPlayer& player, IVehicle& vehicle, int colour1, int colour2) override
@@ -77,7 +77,7 @@ struct VehicleEvents : public VehicleEventHandler, public Singleton<VehicleEvent
 
 	bool onTrailerUpdate(IPlayer& player, IVehicle& trailer) override
 	{
-		return ComponentManager::Get()->CallEvent("OnTrailerUpdate", EventReturnHandler::StopAtFalse, &player, &trailer);
+		return ComponentManager::Get()->CallEvent("onTrailerUpdate", EventReturnHandler::StopAtFalse, &player, &trailer);
 	}
 
 	bool onVehicleSirenStateChange(IPlayer& player, IVehicle& vehicle, uint8_t sirenState) override
