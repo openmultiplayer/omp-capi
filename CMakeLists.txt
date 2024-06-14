@@ -36,6 +36,7 @@ file(GLOB_RECURSE CAPI_FILES
     "src/*.cpp"
 )
 
+add_definitions(-DCAPI_COMPONENT_BUILD)
 add_library(${PROJECT_NAME} SHARED ${CAPI_FILES})
 
 GroupSourcesByFolder(${PROJECT_NAME})
