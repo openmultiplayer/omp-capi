@@ -274,7 +274,7 @@
   ],
   "Object": [
     {
-      "name": "onObjectMoved",
+      "name": "onObjectMove",
       "args": [
         {
           "name": "object",
@@ -283,7 +283,7 @@
       ]
     },
     {
-      "name": "onPlayerObjectMoved",
+      "name": "onPlayerObjectMove",
       "args": [
         {
           "name": "player",
