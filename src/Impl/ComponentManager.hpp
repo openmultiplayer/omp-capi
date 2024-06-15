@@ -110,7 +110,7 @@ public:
 
 		if (high != fairlyHighPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest, returnHandler, args...);
+			auto ret = CallEventOfPriority(high, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -119,7 +119,7 @@ public:
 
 		if (default != defaultPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest, returnHandler, args...);
+			auto ret = CallEventOfPriority(default, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -128,7 +128,7 @@ public:
 
 		if (low != fairlyLowPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest, returnHandler, args...);
+			auto ret = CallEventOfPriority(low, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
@@ -137,7 +137,7 @@ public:
 
 		if (lowest != lowestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest, returnHandler, args...);
+			auto ret = CallEventOfPriority(lowest, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
