@@ -533,42 +533,6 @@ typedef bool (*Recording_Start_t)(void* player, int type, const char* file);
 typedef bool (*Recording_Stop_t)(void* player);
 
 
-// TextLabel function type definitions
-typedef void* (*TextLabel_Create_t)(const char* text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id);
-typedef bool (*TextLabel_Delete_t)(void* textlabel);
-typedef bool (*TextLabel_AttachToPlayer_t)(void* textlabel, void* player, float offsetX, float offsetY, float offsetZ);
-typedef bool (*TextLabel_AttachToVehicle_t)(void* textlabel, void* vehicle, float offsetX, float offsetY, float offsetZ);
-typedef bool (*TextLabel_UpdateText_t)(void* textlabel, uint32_t color, const char* text);
-typedef bool (*TextLabel_IsValid_t)(void* textlabel);
-typedef bool (*TextLabel_IsStreamedIn_t)(void* player, void* textlabel);
-typedef bool (*TextLabel_GetText_t)(void* textlabel, CAPIStringView* output);
-typedef uint32_t (*TextLabel_GetColor_t)(void* textlabel);
-typedef bool (*TextLabel_GetPos_t)(void* textlabel, float* x, float* y, float* z);
-typedef bool (*TextLabel_SetDrawDistance_t)(void* textlabel, float distance);
-typedef float (*TextLabel_GetDrawDistance_t)(void* textlabel);
-typedef bool (*TextLabel_GetLOS_t)(void* textlabel);
-typedef bool (*TextLabel_SetLOS_t)(void* textlabel, bool status);
-typedef int (*TextLabel_GetVirtualWorld_t)(void* textlabel);
-typedef bool (*TextLabel_SetVirtualWorld_t)(void* textlabel, int world);
-typedef bool (*TextLabel_GetAttachedData_t)(void* textlabel, int* attached_player, int* attached_vehicle);
-
-
-// PlayerTextLabel function type definitions
-typedef void* (*PlayerTextLabel_Create_t)(void* player, const char* text, uint32_t color, float x, float y, float z, float drawDistance, void* attachedPlayer, void* attachedVehicle, bool los, int* id);
-typedef bool (*PlayerTextLabel_Delete_t)(void* player, void* textlabel);
-typedef bool (*PlayerTextLabel_UpdateText_t)(void* player, void* textlabel, uint32_t color, const char* text);
-typedef bool (*PlayerTextLabel_IsValid_t)(void* player, void* textlabel, bool* valid);
-typedef bool (*PlayerTextLabel_GetText_t)(void* player, void* textlabel, CAPIStringView* output);
-typedef bool (*PlayerTextLabel_GetColor_t)(void* player, void* textlabel, uint32_t* color);
-typedef bool (*PlayerTextLabel_GetPos_t)(void* player, void* textlabel, float* x, float* y, float* z);
-typedef bool (*PlayerTextLabel_SetDrawDistance_t)(void* player, void* textlabel, float distance);
-typedef float (*PlayerTextLabel_GetDrawDistance_t)(void* player, void* textlabel);
-typedef bool (*PlayerTextLabel_GetLOS_t)(void* player, void* textlabel);
-typedef bool (*PlayerTextLabel_SetLOS_t)(void* player, void* textlabel, bool status);
-typedef int (*PlayerTextLabel_GetVirtualWorld_t)(void* player);
-typedef bool (*PlayerTextLabel_GetAttachedData_t)(void* player, void* textlabel, int* attached_player, int* attached_vehicle);
-
-
 // TextDraw function type definitions
 typedef void* (*TextDraw_Create_t)(float x, float y, const char* text, int* id);
 typedef bool (*TextDraw_Destroy_t)(void* textdraw);
@@ -656,6 +620,42 @@ typedef int (*PlayerTextDraw_GetAlignment_t)(void* player, void* textdraw);
 typedef int (*PlayerTextDraw_GetPreviewModel_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_GetPreviewRot_t)(void* player, void* textdraw, float* rx, float* ry, float* rz, float* zoom);
 typedef bool (*PlayerTextDraw_GetPreviewVehColor_t)(void* player, void* textdraw, int* color1, int* color2);
+
+
+// TextLabel function type definitions
+typedef void* (*TextLabel_Create_t)(const char* text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id);
+typedef bool (*TextLabel_Delete_t)(void* textlabel);
+typedef bool (*TextLabel_AttachToPlayer_t)(void* textlabel, void* player, float offsetX, float offsetY, float offsetZ);
+typedef bool (*TextLabel_AttachToVehicle_t)(void* textlabel, void* vehicle, float offsetX, float offsetY, float offsetZ);
+typedef bool (*TextLabel_UpdateText_t)(void* textlabel, uint32_t color, const char* text);
+typedef bool (*TextLabel_IsValid_t)(void* textlabel);
+typedef bool (*TextLabel_IsStreamedIn_t)(void* player, void* textlabel);
+typedef bool (*TextLabel_GetText_t)(void* textlabel, CAPIStringView* output);
+typedef uint32_t (*TextLabel_GetColor_t)(void* textlabel);
+typedef bool (*TextLabel_GetPos_t)(void* textlabel, float* x, float* y, float* z);
+typedef bool (*TextLabel_SetDrawDistance_t)(void* textlabel, float distance);
+typedef float (*TextLabel_GetDrawDistance_t)(void* textlabel);
+typedef bool (*TextLabel_GetLOS_t)(void* textlabel);
+typedef bool (*TextLabel_SetLOS_t)(void* textlabel, bool status);
+typedef int (*TextLabel_GetVirtualWorld_t)(void* textlabel);
+typedef bool (*TextLabel_SetVirtualWorld_t)(void* textlabel, int world);
+typedef bool (*TextLabel_GetAttachedData_t)(void* textlabel, int* attached_player, int* attached_vehicle);
+
+
+// PlayerTextLabel function type definitions
+typedef void* (*PlayerTextLabel_Create_t)(void* player, const char* text, uint32_t color, float x, float y, float z, float drawDistance, void* attachedPlayer, void* attachedVehicle, bool los, int* id);
+typedef bool (*PlayerTextLabel_Delete_t)(void* player, void* textlabel);
+typedef bool (*PlayerTextLabel_UpdateText_t)(void* player, void* textlabel, uint32_t color, const char* text);
+typedef bool (*PlayerTextLabel_IsValid_t)(void* player, void* textlabel, bool* valid);
+typedef bool (*PlayerTextLabel_GetText_t)(void* player, void* textlabel, CAPIStringView* output);
+typedef bool (*PlayerTextLabel_GetColor_t)(void* player, void* textlabel, uint32_t* color);
+typedef bool (*PlayerTextLabel_GetPos_t)(void* player, void* textlabel, float* x, float* y, float* z);
+typedef bool (*PlayerTextLabel_SetDrawDistance_t)(void* player, void* textlabel, float distance);
+typedef float (*PlayerTextLabel_GetDrawDistance_t)(void* player, void* textlabel);
+typedef bool (*PlayerTextLabel_GetLOS_t)(void* player, void* textlabel);
+typedef bool (*PlayerTextLabel_SetLOS_t)(void* player, void* textlabel, bool status);
+typedef int (*PlayerTextLabel_GetVirtualWorld_t)(void* player);
+typedef bool (*PlayerTextLabel_GetAttachedData_t)(void* player, void* textlabel, int* attached_player, int* attached_vehicle);
 
 
 // Vehicle function type definitions
@@ -750,7 +750,7 @@ struct EventArgs_onPlayerGiveDamageActor {
         float* amount;
         int* weapon;
         int* part;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerGiveDamageActor)(EventArgs_onPlayerGiveDamageActor args);
 
@@ -759,7 +759,7 @@ struct EventArgs_onActorStreamIn {
     struct {
         void** actor;
         void** forPlayer;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onActorStreamIn)(EventArgs_onActorStreamIn args);
 
@@ -768,7 +768,7 @@ struct EventArgs_onActorStreamOut {
     struct {
         void** actor;
         void** forPlayer;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onActorStreamOut)(EventArgs_onActorStreamOut args);
 
@@ -778,7 +778,7 @@ struct EventArgs_onPlayerEnterCheckpoint {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEnterCheckpoint)(EventArgs_onPlayerEnterCheckpoint args);
 
@@ -786,7 +786,7 @@ struct EventArgs_onPlayerLeaveCheckpoint {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerLeaveCheckpoint)(EventArgs_onPlayerLeaveCheckpoint args);
 
@@ -794,7 +794,7 @@ struct EventArgs_onPlayerEnterRaceCheckpoint {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEnterRaceCheckpoint)(EventArgs_onPlayerEnterRaceCheckpoint args);
 
@@ -802,7 +802,7 @@ struct EventArgs_onPlayerLeaveRaceCheckpoint {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerLeaveRaceCheckpoint)(EventArgs_onPlayerLeaveRaceCheckpoint args);
 
@@ -813,7 +813,7 @@ struct EventArgs_onPlayerRequestClass {
     struct {
         void** player;
         int* classId;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerRequestClass)(EventArgs_onPlayerRequestClass args);
 
@@ -824,7 +824,7 @@ struct EventArgs_onConsoleText {
     struct {
         CAPIStringView* command;
         CAPIStringView* parameters;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onConsoleText)(EventArgs_onConsoleText args);
 
@@ -834,7 +834,7 @@ struct EventArgs_onRconLoginAttempt {
         CAPIStringView* address;
         CAPIStringView* password;
         bool* success;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onRconLoginAttempt)(EventArgs_onRconLoginAttempt args);
 
@@ -844,7 +844,7 @@ struct EventArgs_onTick {
     uint8_t size;
     struct {
         int* elapsed;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onTick)(EventArgs_onTick args);
 
@@ -855,7 +855,7 @@ struct EventArgs_onPlayerFinishedDownloading {
     struct {
         void** player;
         int* vw;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerFinishedDownloading)(EventArgs_onPlayerFinishedDownloading args);
 
@@ -865,7 +865,7 @@ struct EventArgs_onPlayerRequestDownload {
         void** player;
         int* type;
         int* checksum;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerRequestDownload)(EventArgs_onPlayerRequestDownload args);
 
@@ -879,7 +879,7 @@ struct EventArgs_onDialogResponse {
         int* response;
         int* listItem;
         CAPIStringView* inputText;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onDialogResponse)(EventArgs_onDialogResponse args);
 
@@ -890,7 +890,7 @@ struct EventArgs_onPlayerEnterGangZone {
     struct {
         void** player;
         void** zone;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEnterGangZone)(EventArgs_onPlayerEnterGangZone args);
 
@@ -899,7 +899,7 @@ struct EventArgs_onPlayerLeaveGangZone {
     struct {
         void** player;
         void** zone;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerLeaveGangZone)(EventArgs_onPlayerLeaveGangZone args);
 
@@ -908,7 +908,7 @@ struct EventArgs_onPlayerClickGangZone {
     struct {
         void** player;
         void** zone;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerClickGangZone)(EventArgs_onPlayerClickGangZone args);
 
@@ -919,7 +919,7 @@ struct EventArgs_onPlayerSelectedMenuRow {
     struct {
         void** player;
         int* row;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerSelectedMenuRow)(EventArgs_onPlayerSelectedMenuRow args);
 
@@ -927,7 +927,7 @@ struct EventArgs_onPlayerExitedMenu {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerExitedMenu)(EventArgs_onPlayerExitedMenu args);
 
@@ -937,7 +937,7 @@ struct EventArgs_onObjectMove {
     uint8_t size;
     struct {
         void** object;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onObjectMove)(EventArgs_onObjectMove args);
 
@@ -946,7 +946,7 @@ struct EventArgs_onPlayerObjectMove {
     struct {
         void** player;
         void** object;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerObjectMove)(EventArgs_onPlayerObjectMove args);
 
@@ -962,7 +962,7 @@ struct EventArgs_onPlayerEditObject {
         float* rotationX;
         float* rotationY;
         float* rotationZ;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEditObject)(EventArgs_onPlayerEditObject args);
 
@@ -978,7 +978,7 @@ struct EventArgs_onPlayerEditPlayerObject {
         float* rotationX;
         float* rotationY;
         float* rotationZ;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEditPlayerObject)(EventArgs_onPlayerEditPlayerObject args);
 
@@ -999,7 +999,7 @@ struct EventArgs_onPlayerEditAttachedObject {
         float* scaleX;
         float* scaleY;
         float* scaleZ;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEditAttachedObject)(EventArgs_onPlayerEditAttachedObject args);
 
@@ -1012,7 +1012,7 @@ struct EventArgs_onPlayerSelectObject {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerSelectObject)(EventArgs_onPlayerSelectObject args);
 
@@ -1025,7 +1025,7 @@ struct EventArgs_onPlayerSelectPlayerObject {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerSelectPlayerObject)(EventArgs_onPlayerSelectPlayerObject args);
 
@@ -1036,7 +1036,7 @@ struct EventArgs_onPlayerPickUpPickup {
     struct {
         void** player;
         void** pickup;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerPickUpPickup)(EventArgs_onPlayerPickUpPickup args);
 
@@ -1046,7 +1046,7 @@ struct EventArgs_onPlayerCancelTextDrawSelection {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerCancelTextDrawSelection)(EventArgs_onPlayerCancelTextDrawSelection args);
 
@@ -1054,7 +1054,7 @@ struct EventArgs_onPlayerCancelPlayerTextDrawSelection {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerCancelPlayerTextDrawSelection)(EventArgs_onPlayerCancelPlayerTextDrawSelection args);
 
@@ -1063,7 +1063,7 @@ struct EventArgs_onPlayerClickTextDraw {
     struct {
         void** player;
         void** textdraw;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerClickTextDraw)(EventArgs_onPlayerClickTextDraw args);
 
@@ -1072,7 +1072,7 @@ struct EventArgs_onPlayerClickPlayerTextDraw {
     struct {
         void** player;
         void** textdraw;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerClickPlayerTextDraw)(EventArgs_onPlayerClickPlayerTextDraw args);
 
@@ -1082,7 +1082,7 @@ struct EventArgs_onPlayerConnect {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerConnect)(EventArgs_onPlayerConnect args);
 
@@ -1090,7 +1090,7 @@ struct EventArgs_onPlayerSpawn {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerSpawn)(EventArgs_onPlayerSpawn args);
 
@@ -1099,7 +1099,7 @@ struct EventArgs_onPlayerCommandText {
     struct {
         void** player;
         CAPIStringView* command;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerCommandText)(EventArgs_onPlayerCommandText args);
 
@@ -1109,7 +1109,7 @@ struct EventArgs_onPlayerKeyStateChange {
         void** player;
         int* newKeys;
         int* oldKeys;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerKeyStateChange)(EventArgs_onPlayerKeyStateChange args);
 
@@ -1119,7 +1119,7 @@ struct EventArgs_onIncomingConnection {
         void** player;
         CAPIStringView* ipAddress;
         int* port;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onIncomingConnection)(EventArgs_onIncomingConnection args);
 
@@ -1128,7 +1128,7 @@ struct EventArgs_onPlayerDisconnect {
     struct {
         void** player;
         int* reason;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerDisconnect)(EventArgs_onPlayerDisconnect args);
 
@@ -1136,7 +1136,7 @@ struct EventArgs_onPlayerRequestSpawn {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerRequestSpawn)(EventArgs_onPlayerRequestSpawn args);
 
@@ -1145,7 +1145,7 @@ struct EventArgs_onPlayerStreamIn {
     struct {
         void** player;
         void** forPlayer;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerStreamIn)(EventArgs_onPlayerStreamIn args);
 
@@ -1154,7 +1154,7 @@ struct EventArgs_onPlayerStreamOut {
     struct {
         void** player;
         void** forPlayer;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerStreamOut)(EventArgs_onPlayerStreamOut args);
 
@@ -1163,7 +1163,7 @@ struct EventArgs_onPlayerText {
     struct {
         void** player;
         CAPIStringView* text;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerText)(EventArgs_onPlayerText args);
 
@@ -1175,7 +1175,7 @@ struct EventArgs_onPlayerShotMissed {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerShotMissed)(EventArgs_onPlayerShotMissed args);
 
@@ -1188,7 +1188,7 @@ struct EventArgs_onPlayerShotPlayer {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerShotPlayer)(EventArgs_onPlayerShotPlayer args);
 
@@ -1201,7 +1201,7 @@ struct EventArgs_onPlayerShotVehicle {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerShotVehicle)(EventArgs_onPlayerShotVehicle args);
 
@@ -1214,7 +1214,7 @@ struct EventArgs_onPlayerShotObject {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerShotObject)(EventArgs_onPlayerShotObject args);
 
@@ -1227,7 +1227,7 @@ struct EventArgs_onPlayerShotPlayerObject {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerShotPlayerObject)(EventArgs_onPlayerShotPlayerObject args);
 
@@ -1237,7 +1237,7 @@ struct EventArgs_onPlayerDeath {
         void** player;
         void** killer;
         int* reason;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerDeath)(EventArgs_onPlayerDeath args);
 
@@ -1249,7 +1249,7 @@ struct EventArgs_onPlayerTakeDamage {
         float* amount;
         int* weapon;
         int* bodypart;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerTakeDamage)(EventArgs_onPlayerTakeDamage args);
 
@@ -1261,7 +1261,7 @@ struct EventArgs_onPlayerGiveDamage {
         float* amount;
         int* weapon;
         int* bodypart;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerGiveDamage)(EventArgs_onPlayerGiveDamage args);
 
@@ -1271,7 +1271,7 @@ struct EventArgs_onPlayerInteriorChange {
         void** player;
         int* newInterior;
         int* oldInterior;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerInteriorChange)(EventArgs_onPlayerInteriorChange args);
 
@@ -1281,7 +1281,7 @@ struct EventArgs_onPlayerStateChange {
         void** player;
         int* newState;
         int* oldState;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerStateChange)(EventArgs_onPlayerStateChange args);
 
@@ -1292,7 +1292,7 @@ struct EventArgs_onPlayerClickMap {
         float* x;
         float* y;
         float* z;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerClickMap)(EventArgs_onPlayerClickMap args);
 
@@ -1302,7 +1302,7 @@ struct EventArgs_onPlayerClickPlayer {
         void** player;
         void** clicked;
         int* source;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerClickPlayer)(EventArgs_onPlayerClickPlayer args);
 
@@ -1313,7 +1313,7 @@ struct EventArgs_onClientCheckResponse {
         int* actionType;
         int* address;
         int* result;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onClientCheckResponse)(EventArgs_onClientCheckResponse args);
 
@@ -1321,7 +1321,7 @@ struct EventArgs_onPlayerUpdate {
     uint8_t size;
     struct {
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerUpdate)(EventArgs_onPlayerUpdate args);
 
@@ -1332,7 +1332,7 @@ struct EventArgs_onVehicleStreamIn {
     struct {
         void** vehicle;
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleStreamIn)(EventArgs_onVehicleStreamIn args);
 
@@ -1341,7 +1341,7 @@ struct EventArgs_onVehicleStreamOut {
     struct {
         void** vehicle;
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleStreamOut)(EventArgs_onVehicleStreamOut args);
 
@@ -1350,7 +1350,7 @@ struct EventArgs_onVehicleDeath {
     struct {
         void** vehicle;
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleDeath)(EventArgs_onVehicleDeath args);
 
@@ -1360,7 +1360,7 @@ struct EventArgs_onPlayerEnterVehicle {
         void** player;
         void** vehicle;
         bool* passenger;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerEnterVehicle)(EventArgs_onPlayerEnterVehicle args);
 
@@ -1369,7 +1369,7 @@ struct EventArgs_onPlayerExitVehicle {
     struct {
         void** player;
         void** vehicle;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onPlayerExitVehicle)(EventArgs_onPlayerExitVehicle args);
 
@@ -1378,7 +1378,7 @@ struct EventArgs_onVehicleDamageStatusUpdate {
     struct {
         void** vehicle;
         void** player;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleDamageStatusUpdate)(EventArgs_onVehicleDamageStatusUpdate args);
 
@@ -1388,7 +1388,7 @@ struct EventArgs_onVehiclePaintJob {
         void** player;
         void** vehicle;
         int* paintJob;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehiclePaintJob)(EventArgs_onVehiclePaintJob args);
 
@@ -1398,7 +1398,7 @@ struct EventArgs_onVehicleMod {
         void** player;
         void** vehicle;
         int* component;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleMod)(EventArgs_onVehicleMod args);
 
@@ -1409,7 +1409,7 @@ struct EventArgs_onVehicleRespray {
         void** vehicle;
         int* color1;
         int* color2;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleRespray)(EventArgs_onVehicleRespray args);
 
@@ -1419,7 +1419,7 @@ struct EventArgs_onEnterExitModShop {
         void** player;
         int* enterexit;
         int* interiorId;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onEnterExitModShop)(EventArgs_onEnterExitModShop args);
 
@@ -1427,7 +1427,7 @@ struct EventArgs_onVehicleSpawn {
     uint8_t size;
     struct {
         void** vehicle;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleSpawn)(EventArgs_onVehicleSpawn args);
 
@@ -1443,7 +1443,7 @@ struct EventArgs_onUnoccupiedVehicleUpdate {
         float* velocityX;
         float* velocityY;
         float* velocityZ;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onUnoccupiedVehicleUpdate)(EventArgs_onUnoccupiedVehicleUpdate args);
 
@@ -1452,7 +1452,7 @@ struct EventArgs_onTrailerUpdate {
     struct {
         void** player;
         void** trailer;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onTrailerUpdate)(EventArgs_onTrailerUpdate args);
 
@@ -1462,7 +1462,7 @@ struct EventArgs_onVehicleSirenStateChange {
         void** player;
         void** vehicle;
         int* sirenState;
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_onVehicleSirenStateChange)(EventArgs_onVehicleSirenStateChange args);
 
@@ -1947,44 +1947,6 @@ struct Recording_t {
     Recording_Stop_t Stop;
 };
 
-// TextLabel functions
-struct TextLabel_t {
-    TextLabel_Create_t Create;
-    TextLabel_Delete_t Delete;
-    TextLabel_AttachToPlayer_t AttachToPlayer;
-    TextLabel_AttachToVehicle_t AttachToVehicle;
-    TextLabel_UpdateText_t UpdateText;
-    TextLabel_IsValid_t IsValid;
-    TextLabel_IsStreamedIn_t IsStreamedIn;
-    TextLabel_GetText_t GetText;
-    TextLabel_GetColor_t GetColor;
-    TextLabel_GetPos_t GetPos;
-    TextLabel_SetDrawDistance_t SetDrawDistance;
-    TextLabel_GetDrawDistance_t GetDrawDistance;
-    TextLabel_GetLOS_t GetLOS;
-    TextLabel_SetLOS_t SetLOS;
-    TextLabel_GetVirtualWorld_t GetVirtualWorld;
-    TextLabel_SetVirtualWorld_t SetVirtualWorld;
-    TextLabel_GetAttachedData_t GetAttachedData;
-};
-
-// PlayerTextLabel functions
-struct PlayerTextLabel_t {
-    PlayerTextLabel_Create_t Create;
-    PlayerTextLabel_Delete_t Delete;
-    PlayerTextLabel_UpdateText_t UpdateText;
-    PlayerTextLabel_IsValid_t IsValid;
-    PlayerTextLabel_GetText_t GetText;
-    PlayerTextLabel_GetColor_t GetColor;
-    PlayerTextLabel_GetPos_t GetPos;
-    PlayerTextLabel_SetDrawDistance_t SetDrawDistance;
-    PlayerTextLabel_GetDrawDistance_t GetDrawDistance;
-    PlayerTextLabel_GetLOS_t GetLOS;
-    PlayerTextLabel_SetLOS_t SetLOS;
-    PlayerTextLabel_GetVirtualWorld_t GetVirtualWorld;
-    PlayerTextLabel_GetAttachedData_t GetAttachedData;
-};
-
 // TextDraw functions
 struct TextDraw_t {
     TextDraw_Create_t Create;
@@ -2074,6 +2036,44 @@ struct PlayerTextDraw_t {
     PlayerTextDraw_GetPreviewModel_t GetPreviewModel;
     PlayerTextDraw_GetPreviewRot_t GetPreviewRot;
     PlayerTextDraw_GetPreviewVehColor_t GetPreviewVehColor;
+};
+
+// TextLabel functions
+struct TextLabel_t {
+    TextLabel_Create_t Create;
+    TextLabel_Delete_t Delete;
+    TextLabel_AttachToPlayer_t AttachToPlayer;
+    TextLabel_AttachToVehicle_t AttachToVehicle;
+    TextLabel_UpdateText_t UpdateText;
+    TextLabel_IsValid_t IsValid;
+    TextLabel_IsStreamedIn_t IsStreamedIn;
+    TextLabel_GetText_t GetText;
+    TextLabel_GetColor_t GetColor;
+    TextLabel_GetPos_t GetPos;
+    TextLabel_SetDrawDistance_t SetDrawDistance;
+    TextLabel_GetDrawDistance_t GetDrawDistance;
+    TextLabel_GetLOS_t GetLOS;
+    TextLabel_SetLOS_t SetLOS;
+    TextLabel_GetVirtualWorld_t GetVirtualWorld;
+    TextLabel_SetVirtualWorld_t SetVirtualWorld;
+    TextLabel_GetAttachedData_t GetAttachedData;
+};
+
+// PlayerTextLabel functions
+struct PlayerTextLabel_t {
+    PlayerTextLabel_Create_t Create;
+    PlayerTextLabel_Delete_t Delete;
+    PlayerTextLabel_UpdateText_t UpdateText;
+    PlayerTextLabel_IsValid_t IsValid;
+    PlayerTextLabel_GetText_t GetText;
+    PlayerTextLabel_GetColor_t GetColor;
+    PlayerTextLabel_GetPos_t GetPos;
+    PlayerTextLabel_SetDrawDistance_t SetDrawDistance;
+    PlayerTextLabel_GetDrawDistance_t GetDrawDistance;
+    PlayerTextLabel_GetLOS_t GetLOS;
+    PlayerTextLabel_SetLOS_t SetLOS;
+    PlayerTextLabel_GetVirtualWorld_t GetVirtualWorld;
+    PlayerTextLabel_GetAttachedData_t GetAttachedData;
 };
 
 // Vehicle functions
@@ -2181,10 +2181,10 @@ struct OMPAPI_t {
     Pickup_t Pickup;
     All_t All;
     Recording_t Recording;
-    TextLabel_t TextLabel;
-    PlayerTextLabel_t PlayerTextLabel;
     TextDraw_t TextDraw;
     PlayerTextDraw_t PlayerTextDraw;
+    TextLabel_t TextLabel;
+    PlayerTextLabel_t PlayerTextLabel;
     Vehicle_t Vehicle;
 };
 
@@ -2637,40 +2637,6 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Recording.Start = (Recording_Start_t)LIBRARY_GET_ADDR(capi_lib, "Recording_Start");
     ompapi->Recording.Stop = (Recording_Stop_t)LIBRARY_GET_ADDR(capi_lib, "Recording_Stop");
 
-    // Retrieve TextLabel functions
-    ompapi->TextLabel.Create = (TextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Create");
-    ompapi->TextLabel.Delete = (TextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Delete");
-    ompapi->TextLabel.AttachToPlayer = (TextLabel_AttachToPlayer_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToPlayer");
-    ompapi->TextLabel.AttachToVehicle = (TextLabel_AttachToVehicle_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToVehicle");
-    ompapi->TextLabel.UpdateText = (TextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_UpdateText");
-    ompapi->TextLabel.IsValid = (TextLabel_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_IsValid");
-    ompapi->TextLabel.IsStreamedIn = (TextLabel_IsStreamedIn_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_IsStreamedIn");
-    ompapi->TextLabel.GetText = (TextLabel_GetText_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetText");
-    ompapi->TextLabel.GetColor = (TextLabel_GetColor_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetColor");
-    ompapi->TextLabel.GetPos = (TextLabel_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetPos");
-    ompapi->TextLabel.SetDrawDistance = (TextLabel_SetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetDrawDistance");
-    ompapi->TextLabel.GetDrawDistance = (TextLabel_GetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetDrawDistance");
-    ompapi->TextLabel.GetLOS = (TextLabel_GetLOS_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetLOS");
-    ompapi->TextLabel.SetLOS = (TextLabel_SetLOS_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetLOS");
-    ompapi->TextLabel.GetVirtualWorld = (TextLabel_GetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetVirtualWorld");
-    ompapi->TextLabel.SetVirtualWorld = (TextLabel_SetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetVirtualWorld");
-    ompapi->TextLabel.GetAttachedData = (TextLabel_GetAttachedData_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetAttachedData");
-
-    // Retrieve PlayerTextLabel functions
-    ompapi->PlayerTextLabel.Create = (PlayerTextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Create");
-    ompapi->PlayerTextLabel.Delete = (PlayerTextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Delete");
-    ompapi->PlayerTextLabel.UpdateText = (PlayerTextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_UpdateText");
-    ompapi->PlayerTextLabel.IsValid = (PlayerTextLabel_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_IsValid");
-    ompapi->PlayerTextLabel.GetText = (PlayerTextLabel_GetText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetText");
-    ompapi->PlayerTextLabel.GetColor = (PlayerTextLabel_GetColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetColor");
-    ompapi->PlayerTextLabel.GetPos = (PlayerTextLabel_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetPos");
-    ompapi->PlayerTextLabel.SetDrawDistance = (PlayerTextLabel_SetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_SetDrawDistance");
-    ompapi->PlayerTextLabel.GetDrawDistance = (PlayerTextLabel_GetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetDrawDistance");
-    ompapi->PlayerTextLabel.GetLOS = (PlayerTextLabel_GetLOS_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetLOS");
-    ompapi->PlayerTextLabel.SetLOS = (PlayerTextLabel_SetLOS_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_SetLOS");
-    ompapi->PlayerTextLabel.GetVirtualWorld = (PlayerTextLabel_GetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetVirtualWorld");
-    ompapi->PlayerTextLabel.GetAttachedData = (PlayerTextLabel_GetAttachedData_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetAttachedData");
-
     // Retrieve TextDraw functions
     ompapi->TextDraw.Create = (TextDraw_Create_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_Create");
     ompapi->TextDraw.Destroy = (TextDraw_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_Destroy");
@@ -2757,6 +2723,40 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->PlayerTextDraw.GetPreviewModel = (PlayerTextDraw_GetPreviewModel_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_GetPreviewModel");
     ompapi->PlayerTextDraw.GetPreviewRot = (PlayerTextDraw_GetPreviewRot_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_GetPreviewRot");
     ompapi->PlayerTextDraw.GetPreviewVehColor = (PlayerTextDraw_GetPreviewVehColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_GetPreviewVehColor");
+
+    // Retrieve TextLabel functions
+    ompapi->TextLabel.Create = (TextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Create");
+    ompapi->TextLabel.Delete = (TextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Delete");
+    ompapi->TextLabel.AttachToPlayer = (TextLabel_AttachToPlayer_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToPlayer");
+    ompapi->TextLabel.AttachToVehicle = (TextLabel_AttachToVehicle_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToVehicle");
+    ompapi->TextLabel.UpdateText = (TextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_UpdateText");
+    ompapi->TextLabel.IsValid = (TextLabel_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_IsValid");
+    ompapi->TextLabel.IsStreamedIn = (TextLabel_IsStreamedIn_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_IsStreamedIn");
+    ompapi->TextLabel.GetText = (TextLabel_GetText_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetText");
+    ompapi->TextLabel.GetColor = (TextLabel_GetColor_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetColor");
+    ompapi->TextLabel.GetPos = (TextLabel_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetPos");
+    ompapi->TextLabel.SetDrawDistance = (TextLabel_SetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetDrawDistance");
+    ompapi->TextLabel.GetDrawDistance = (TextLabel_GetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetDrawDistance");
+    ompapi->TextLabel.GetLOS = (TextLabel_GetLOS_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetLOS");
+    ompapi->TextLabel.SetLOS = (TextLabel_SetLOS_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetLOS");
+    ompapi->TextLabel.GetVirtualWorld = (TextLabel_GetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetVirtualWorld");
+    ompapi->TextLabel.SetVirtualWorld = (TextLabel_SetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_SetVirtualWorld");
+    ompapi->TextLabel.GetAttachedData = (TextLabel_GetAttachedData_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetAttachedData");
+
+    // Retrieve PlayerTextLabel functions
+    ompapi->PlayerTextLabel.Create = (PlayerTextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Create");
+    ompapi->PlayerTextLabel.Delete = (PlayerTextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Delete");
+    ompapi->PlayerTextLabel.UpdateText = (PlayerTextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_UpdateText");
+    ompapi->PlayerTextLabel.IsValid = (PlayerTextLabel_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_IsValid");
+    ompapi->PlayerTextLabel.GetText = (PlayerTextLabel_GetText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetText");
+    ompapi->PlayerTextLabel.GetColor = (PlayerTextLabel_GetColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetColor");
+    ompapi->PlayerTextLabel.GetPos = (PlayerTextLabel_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetPos");
+    ompapi->PlayerTextLabel.SetDrawDistance = (PlayerTextLabel_SetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_SetDrawDistance");
+    ompapi->PlayerTextLabel.GetDrawDistance = (PlayerTextLabel_GetDrawDistance_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetDrawDistance");
+    ompapi->PlayerTextLabel.GetLOS = (PlayerTextLabel_GetLOS_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetLOS");
+    ompapi->PlayerTextLabel.SetLOS = (PlayerTextLabel_SetLOS_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_SetLOS");
+    ompapi->PlayerTextLabel.GetVirtualWorld = (PlayerTextLabel_GetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetVirtualWorld");
+    ompapi->PlayerTextLabel.GetAttachedData = (PlayerTextLabel_GetAttachedData_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetAttachedData");
 
     // Retrieve Vehicle functions
     ompapi->Vehicle.Create = (Vehicle_Create_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_Create");

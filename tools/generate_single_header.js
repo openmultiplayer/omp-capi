@@ -250,7 +250,7 @@ struct EventArgs_${event.name} {
     uint8_t size;
     struct {
 ${event.args.map((param) => `        ${param.type}* ${param.name};`).join("\n")}
-    } list;
+    } *list;
 };
 typedef bool (*EventCallback_${event.name})(EventArgs_${event.name} args);\n`
       );
