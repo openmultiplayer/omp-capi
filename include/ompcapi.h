@@ -76,23 +76,23 @@ typedef void* Pickup;
 typedef void* (*Actor_Create_t)(int model, float x, float y, float z, float rot, int* id);
 typedef bool (*Actor_Destroy_t)(void* actor);
 typedef bool (*Actor_IsStreamedInFor_t)(void* actor, void* player);
-typedef void (*Actor_SetVirtualWorld_t)(void* actor, int vw);
+typedef bool (*Actor_SetVirtualWorld_t)(void* actor, int vw);
 typedef int (*Actor_GetVirtualWorld_t)(void* actor);
-typedef void (*Actor_ApplyAnimation_t)(void* actor, const char* name, const char* library, float delta, bool loop, bool lockX, bool lockY, bool freeze, int time);
-typedef void (*Actor_ClearAnimations_t)(void* actor);
-typedef void (*Actor_SetPos_t)(void* actor, float x, float y, float z);
-typedef void (*Actor_GetPos_t)(void* actor, float* x, float* y, float* z);
-typedef void (*Actor_SetFacingAngle_t)(void* actor, float angle);
+typedef bool (*Actor_ApplyAnimation_t)(void* actor, const char* name, const char* library, float delta, bool loop, bool lockX, bool lockY, bool freeze, int time);
+typedef bool (*Actor_ClearAnimations_t)(void* actor);
+typedef bool (*Actor_SetPos_t)(void* actor, float x, float y, float z);
+typedef bool (*Actor_GetPos_t)(void* actor, float* x, float* y, float* z);
+typedef bool (*Actor_SetFacingAngle_t)(void* actor, float angle);
 typedef float (*Actor_GetFacingAngle_t)(void* actor);
-typedef void (*Actor_SetHealth_t)(void* actor, float hp);
+typedef bool (*Actor_SetHealth_t)(void* actor, float hp);
 typedef float (*Actor_GetHealth_t)(void* actor);
-typedef void (*Actor_SetInvulnerable_t)(void* actor, bool toggle);
+typedef bool (*Actor_SetInvulnerable_t)(void* actor, bool toggle);
 typedef bool (*Actor_IsInvulnerable_t)(void* actor);
 typedef bool (*Actor_IsValid_t)(void* actor);
-typedef void (*Actor_SetSkin_t)(void* actor, int skin);
+typedef bool (*Actor_SetSkin_t)(void* actor, int skin);
 typedef int (*Actor_GetSkin_t)(void* actor);
-typedef void (*Actor_GetAnimation_t)(void* actor, CAPIStringView* library, CAPIStringView* name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time);
-typedef void (*Actor_GetSpawnInfo_t)(void* actor, float* x, float* y, float* z, float* angle, float* skin);
+typedef bool (*Actor_GetAnimation_t)(void* actor, CAPIStringView* library, CAPIStringView* name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time);
+typedef bool (*Actor_GetSpawnInfo_t)(void* actor, float* x, float* y, float* z, float* angle, float* skin);
 
 
 // Checkpoint function type definitions
@@ -322,45 +322,45 @@ typedef int (*Config_GetAsString_t)(const char* cvar, CAPIStringView* output);
 // Core function type definitions
 typedef int (*Core_TickCount_t)();
 typedef int (*Core_MaxPlayers_t)();
-typedef void (*Core_Log_t)(const char* text);
+typedef bool (*Core_Log_t)(const char* text);
 typedef bool (*Core_IsAdminTeleportAllowed_t)();
-typedef void (*Core_AllowAdminTeleport_t)(bool allow);
+typedef bool (*Core_AllowAdminTeleport_t)(bool allow);
 typedef bool (*Core_AreAllAnimationsEnabled_t)();
-typedef void (*Core_EnableAllAnimations_t)(bool allow);
+typedef bool (*Core_EnableAllAnimations_t)(bool allow);
 typedef bool (*Core_IsAnimationLibraryValid_t)(const char* name);
 typedef bool (*Core_AreInteriorWeaponsAllowed_t)();
-typedef void (*Core_AllowInteriorWeapons_t)(bool allow);
+typedef bool (*Core_AllowInteriorWeapons_t)(bool allow);
 typedef bool (*Core_BlockIpAddress_t)(const char* ipAddress, int timeMS);
-typedef void (*Core_UnBlockIpAddress_t)(const char* ipAddress);
-typedef void (*Core_DisableEntryExitMarkers_t)();
-typedef void (*Core_DisableNameTagsLOS_t)();
-typedef void (*Core_EnableZoneNames_t)(bool enable);
+typedef bool (*Core_UnBlockIpAddress_t)(const char* ipAddress);
+typedef bool (*Core_DisableEntryExitMarkers_t)();
+typedef bool (*Core_DisableNameTagsLOS_t)();
+typedef bool (*Core_EnableZoneNames_t)(bool enable);
 typedef bool (*Core_ShowGameTextForAll_t)(const char* msg, int time, int style);
-typedef void (*Core_HideGameTextForAll_t)(int style);
+typedef bool (*Core_HideGameTextForAll_t)(int style);
 typedef int (*Core_NetworkStats_t)(CAPIStringView* output);
 typedef int (*Core_ServerTickRate_t)();
 typedef bool (*Core_GetWeaponName_t)(int weaponid, CAPIStringView* output);
-typedef void (*Core_SetChatRadius_t)(float globalChatRadius);
-typedef void (*Core_SetMarkerRadius_t)(float playerMarkerRadius);
-typedef void (*Core_SendRconCommand_t)(const char* command);
-typedef void (*Core_SetDeathDropAmount_t)(int amount);
-typedef void (*Core_GameMode_t)(const char* string);
-typedef void (*Core_SetGravity_t)(float gravity);
+typedef bool (*Core_SetChatRadius_t)(float globalChatRadius);
+typedef bool (*Core_SetMarkerRadius_t)(float playerMarkerRadius);
+typedef bool (*Core_SendRconCommand_t)(const char* command);
+typedef bool (*Core_SetDeathDropAmount_t)(int amount);
+typedef bool (*Core_GameMode_t)(const char* string);
+typedef bool (*Core_SetGravity_t)(float gravity);
 typedef float (*Core_GetGravity_t)();
-typedef void (*Core_SetNameTagsDrawDistance_t)(float distance);
-typedef void (*Core_SetWeather_t)(int weatherid);
-typedef void (*Core_SetWorldTime_t)(int hour);
-typedef void (*Core_ShowNameTags_t)(bool show);
-typedef void (*Core_ShowPlayerMarkers_t)(int mode);
-typedef void (*Core_UsePedAnims_t)();
+typedef bool (*Core_SetNameTagsDrawDistance_t)(float distance);
+typedef bool (*Core_SetWeather_t)(int weatherid);
+typedef bool (*Core_SetWorldTime_t)(int hour);
+typedef bool (*Core_ShowNameTags_t)(bool show);
+typedef bool (*Core_ShowPlayerMarkers_t)(int mode);
+typedef bool (*Core_UsePedAnims_t)();
 typedef int (*Core_GetWeather_t)();
 typedef int (*Core_GetWorldTime_t)();
-typedef void (*Core_ToggleChatTextReplacement_t)(bool enable);
+typedef bool (*Core_ToggleChatTextReplacement_t)(bool enable);
 typedef bool (*Core_IsChatTextReplacementToggled_t)();
 typedef bool (*Core_IsNickNameValid_t)(const char* name);
-typedef void (*Core_AllowNickNameCharacter_t)(int character, bool allow);
+typedef bool (*Core_AllowNickNameCharacter_t)(int character, bool allow);
 typedef bool (*Core_IsNickNameCharacterAllowed_t)(int character);
-typedef void (*Core_ClearBanList_t)();
+typedef bool (*Core_ClearBanList_t)();
 typedef bool (*Core_IsIpAddressBanned_t)(const char* ip);
 typedef int (*Core_GetWeaponSlot_t)(uint8_t weapon);
 typedef bool (*Core_AddRule_t)(const char* name, const char* value);
@@ -369,7 +369,7 @@ typedef bool (*Core_RemoveRule_t)(const char* name);
 
 
 // NPC function type definitions
-typedef void (*NPC_Connect_t)(const char* name, const char* script);
+typedef bool (*NPC_Connect_t)(const char* name, const char* script);
 
 
 // CustomModel function type definitions
@@ -441,7 +441,7 @@ typedef bool (*Object_AttachToVehicle_t)(void* object, void* vehicle, float offs
 typedef bool (*Object_AttachToObject_t)(void* object, void* objAttachedTo, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ, bool syncRotation);
 typedef bool (*Object_AttachToPlayer_t)(void* object, void* player, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ);
 typedef bool (*Object_SetPos_t)(void* object, float x, float y, float z);
-typedef void (*Object_GetPos_t)(void* object, float* x, float* y, float* z);
+typedef bool (*Object_GetPos_t)(void* object, float* x, float* y, float* z);
 typedef bool (*Object_SetRot_t)(void* object, float rotationX, float rotationY, float rotationZ);
 typedef bool (*Object_GetRot_t)(void* object, float* rotationX, float* rotationY, float* rotationZ);
 typedef int (*Object_GetModel_t)(void* object);
@@ -522,10 +522,10 @@ typedef bool (*Pickup_IsHiddenForPlayer_t)(void* player, void* pickup);
 
 
 // All function type definitions
-typedef void (*All_SendClientMessage_t)(uint32_t color, const char* text);
-typedef void (*All_CreateExplosion_t)(float x, float y, float z, int type, float radius);
-typedef void (*All_SendDeathMessage_t)(void* killer, void* killee, int weapon);
-typedef void (*All_EnableStuntBonus_t)(bool enable);
+typedef bool (*All_SendClientMessage_t)(uint32_t color, const char* text);
+typedef bool (*All_CreateExplosion_t)(float x, float y, float z, int type, float radius);
+typedef bool (*All_SendDeathMessage_t)(void* killer, void* killee, int weapon);
+typedef bool (*All_EnableStuntBonus_t)(bool enable);
 
 
 // Recording function type definitions

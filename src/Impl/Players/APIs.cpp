@@ -15,9 +15,10 @@ OMP_CAPI(Player_SendClientMessage, bool(objectPtr player, uint32_t color, String
 	return true;
 }
 
-OMP_CAPI(All_SendClientMessage, void(uint32_t color, StringCharPtr text))
+OMP_CAPI(All_SendClientMessage, bool(uint32_t color, StringCharPtr text))
 {
 	ComponentManager::Get()->players->sendClientMessageToAll(Colour::FromRGBA(color), text);
+	return true;
 }
 
 OMP_CAPI(Player_SetCameraPos, bool(objectPtr player, float x, float y, float z))
@@ -104,9 +105,10 @@ OMP_CAPI(Player_CreateExplosion, bool(objectPtr player, float x, float y, float 
 	return true;
 }
 
-OMP_CAPI(All_CreateExplosion, void(float x, float y, float z, int type, float radius))
+OMP_CAPI(All_CreateExplosion, bool(float x, float y, float z, int type, float radius))
 {
 	ComponentManager::Get()->players->createExplosionForAll({ x, y, z }, type, radius);
+	return true;
 }
 
 OMP_CAPI(Player_PlayAudioStream, bool(objectPtr player, StringCharPtr url, float x, float y, float z, float distance, bool usePos))
@@ -123,18 +125,19 @@ OMP_CAPI(Player_StopAudioStream, bool(objectPtr player))
 	return true;
 }
 
-OMP_CAPI(All_SendDeathMessage, void(objectPtr killer, objectPtr killee, int weapon))
+OMP_CAPI(All_SendDeathMessage, bool(objectPtr killer, objectPtr killee, int weapon))
 {
 	if (killee)
 	{
-		POOL_ENTITY(players, IPlayer, killer, killer_);
-		ENTITY_CAST(IPlayer, killee, killee_);
+		POOL_ENTITY_RET(players, IPlayer, killer, killer_, false);
+		ENTITY_CAST_RET(IPlayer, killee, killee_, false);
 		ComponentManager::Get()->players->sendDeathMessageToAll(killer_, *killee_, weapon);
 	}
 	else
 	{
 		ComponentManager::Get()->players->sendEmptyDeathMessageToAll();
 	}
+	return true;
 }
 
 OMP_CAPI(Player_ToggleWidescreen, bool(objectPtr player, bool enable))
@@ -710,9 +713,10 @@ OMP_CAPI(Player_EnableStuntBonus, bool(objectPtr player, bool enable))
 	return true;
 }
 
-OMP_CAPI(All_EnableStuntBonus, void(bool enable))
+OMP_CAPI(All_EnableStuntBonus, bool(bool enable))
 {
 	ComponentManager::Get()->core->useStuntBonuses(enable);
+	return true;
 }
 
 OMP_CAPI(Player_GetPlayerAmmo, int(objectPtr player))

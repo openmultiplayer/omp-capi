@@ -37,10 +37,11 @@ OMP_CAPI(Actor_IsStreamedInFor, bool(objectPtr actor, objectPtr player))
 	return actor_->isStreamedInForPlayer(*player_);
 }
 
-OMP_CAPI(Actor_SetVirtualWorld, void(objectPtr actor, int vw))
+OMP_CAPI(Actor_SetVirtualWorld, bool(objectPtr actor, int vw))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setVirtualWorld(vw);
+	return true;
 }
 
 OMP_CAPI(Actor_GetVirtualWorld, int(objectPtr actor))
@@ -49,39 +50,44 @@ OMP_CAPI(Actor_GetVirtualWorld, int(objectPtr actor))
 	return actor_->getVirtualWorld();
 }
 
-OMP_CAPI(Actor_ApplyAnimation, void(objectPtr actor, StringCharPtr name, StringCharPtr library, float delta, bool loop, bool lockX, bool lockY, bool freeze, int time))
+OMP_CAPI(Actor_ApplyAnimation, bool(objectPtr actor, StringCharPtr name, StringCharPtr library, float delta, bool loop, bool lockX, bool lockY, bool freeze, int time))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	const AnimationData animationData(delta, loop, lockX, lockY, freeze, time, library, name);
 	actor_->applyAnimation(animationData);
+	return true;
 }
 
-OMP_CAPI(Actor_ClearAnimations, void(objectPtr actor))
+OMP_CAPI(Actor_ClearAnimations, bool(objectPtr actor))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->clearAnimations();
+	return true;
 }
 
-OMP_CAPI(Actor_SetPos, void(objectPtr actor, float x, float y, float z))
+OMP_CAPI(Actor_SetPos, bool(objectPtr actor, float x, float y, float z))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setPosition({ x, y, z });
+	return true;
 }
 
-OMP_CAPI(Actor_GetPos, void(objectPtr actor, float* x, float* y, float* z))
+OMP_CAPI(Actor_GetPos, bool(objectPtr actor, float* x, float* y, float* z))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	const Vector3& pos = actor_->getPosition();
 
 	*x = pos.x;
 	*y = pos.y;
 	*z = pos.z;
+	return true;
 }
 
-OMP_CAPI(Actor_SetFacingAngle, void(objectPtr actor, float angle))
+OMP_CAPI(Actor_SetFacingAngle, bool(objectPtr actor, float angle))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setRotation(Vector3(0.0f, 0.0f, angle));
+	return true;
 }
 
 OMP_CAPI(Actor_GetFacingAngle, float(objectPtr actor))
@@ -90,10 +96,11 @@ OMP_CAPI(Actor_GetFacingAngle, float(objectPtr actor))
 	return actor_->getRotation().ToEuler().z;
 }
 
-OMP_CAPI(Actor_SetHealth, void(objectPtr actor, float hp))
+OMP_CAPI(Actor_SetHealth, bool(objectPtr actor, float hp))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setHealth(hp);
+	return true;
 }
 
 OMP_CAPI(Actor_GetHealth, float(objectPtr actor))
@@ -102,10 +109,11 @@ OMP_CAPI(Actor_GetHealth, float(objectPtr actor))
 	return actor_->getHealth();
 }
 
-OMP_CAPI(Actor_SetInvulnerable, void(objectPtr actor, bool toggle))
+OMP_CAPI(Actor_SetInvulnerable, bool(objectPtr actor, bool toggle))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setInvulnerable(toggle);
+	return true;
 }
 
 OMP_CAPI(Actor_IsInvulnerable, bool(objectPtr actor))
@@ -121,10 +129,11 @@ OMP_CAPI(Actor_IsValid, bool(objectPtr actor))
 	return true;
 }
 
-OMP_CAPI(Actor_SetSkin, void(objectPtr actor, int skin))
+OMP_CAPI(Actor_SetSkin, bool(objectPtr actor, int skin))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	actor_->setSkin(skin);
+	return true;
 }
 
 OMP_CAPI(Actor_GetSkin, int(objectPtr actor))
@@ -133,9 +142,9 @@ OMP_CAPI(Actor_GetSkin, int(objectPtr actor))
 	return actor_->getSkin();
 }
 
-OMP_CAPI(Actor_GetAnimation, void(objectPtr actor, OutputStringViewPtr library, OutputStringViewPtr name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time))
+OMP_CAPI(Actor_GetAnimation, bool(objectPtr actor, OutputStringViewPtr library, OutputStringViewPtr name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	const AnimationData& anim = actor_->getAnimation();
 
 	SET_CAPI_STRING_VIEW(library, anim.lib);
@@ -146,11 +155,12 @@ OMP_CAPI(Actor_GetAnimation, void(objectPtr actor, OutputStringViewPtr library, 
 	*lockY = anim.lockY;
 	*freeze = anim.freeze;
 	*time = anim.time;
+	return true;
 }
 
-OMP_CAPI(Actor_GetSpawnInfo, void(objectPtr actor, float* x, float* y, float* z, float* angle, float* skin))
+OMP_CAPI(Actor_GetSpawnInfo, bool(objectPtr actor, float* x, float* y, float* z, float* angle, float* skin))
 {
-	POOL_ENTITY(actors, IActor, actor, actor_);
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	const ActorSpawnData& spawnData = actor_->getSpawnData();
 
 	*x = spawnData.position.x;
@@ -158,4 +168,5 @@ OMP_CAPI(Actor_GetSpawnInfo, void(objectPtr actor, float* x, float* y, float* z,
 	*z = spawnData.position.z;
 	*angle = spawnData.facingAngle;
 	*skin = spawnData.skin;
+	return true;
 }

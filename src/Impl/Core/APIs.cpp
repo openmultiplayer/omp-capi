@@ -22,9 +22,10 @@ OMP_CAPI(Core_MaxPlayers, int())
 	return max;
 }
 
-OMP_CAPI(Core_Log, void(StringCharPtr text))
+OMP_CAPI(Core_Log, bool(StringCharPtr text))
 {
 	ComponentManager::Get()->core->printLn("%s", text);
+	return true;
 }
 
 OMP_CAPI(Core_IsAdminTeleportAllowed, bool())
@@ -33,9 +34,10 @@ OMP_CAPI(Core_IsAdminTeleportAllowed, bool())
 	return allowed;
 }
 
-OMP_CAPI(Core_AllowAdminTeleport, void(bool allow))
+OMP_CAPI(Core_AllowAdminTeleport, bool(bool allow))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("rcon.allow_teleport") = allow;
+	return true;
 }
 
 OMP_CAPI(Core_AreAllAnimationsEnabled, bool())
@@ -44,9 +46,10 @@ OMP_CAPI(Core_AreAllAnimationsEnabled, bool())
 	return allowed;
 }
 
-OMP_CAPI(Core_EnableAllAnimations, void(bool allow))
+OMP_CAPI(Core_EnableAllAnimations, bool(bool allow))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_all_animations") = allow;
+	return true;
 }
 
 OMP_CAPI(Core_IsAnimationLibraryValid, bool(StringCharPtr name))
@@ -61,7 +64,7 @@ OMP_CAPI(Core_AreInteriorWeaponsAllowed, bool())
 	return allowed;
 }
 
-OMP_CAPI(Core_AllowInteriorWeapons, void(bool allow))
+OMP_CAPI(Core_AllowInteriorWeapons, bool(bool allow))
 {
 	if (allow)
 	{
@@ -82,6 +85,7 @@ OMP_CAPI(Core_AllowInteriorWeapons, void(bool allow))
 		// ones still.
 		*ComponentManager::Get()->core->getConfig().getBool("game.allow_interior_weapons") = false;
 	}
+	return true;
 }
 
 OMP_CAPI(Core_BlockIpAddress, bool(StringCharPtr ipAddress, int timeMS))
@@ -98,33 +102,38 @@ OMP_CAPI(Core_BlockIpAddress, bool(StringCharPtr ipAddress, int timeMS))
 	return true;
 }
 
-OMP_CAPI(Core_UnBlockIpAddress, void(StringCharPtr ipAddress))
+OMP_CAPI(Core_UnBlockIpAddress, bool(StringCharPtr ipAddress))
 {
 	BanEntry entry(ipAddress);
 	for (INetwork* network : ComponentManager::Get()->core->getNetworks())
 	{
 		network->unban(entry);
 	}
+	return true;
 }
 
-OMP_CAPI(NPC_Connect, void(StringCharPtr name, StringCharPtr script))
+OMP_CAPI(NPC_Connect, bool(StringCharPtr name, StringCharPtr script))
 {
 	ComponentManager::Get()->core->connectBot(name, script);
+	return true;
 }
 
-OMP_CAPI(Core_DisableEntryExitMarkers, void())
+OMP_CAPI(Core_DisableEntryExitMarkers, bool())
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_entry_exit_markers") = false;
+	return true;
 }
 
-OMP_CAPI(Core_DisableNameTagsLOS, void())
+OMP_CAPI(Core_DisableNameTagsLOS, bool())
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_nametag_los") = false;
+	return true;
 }
 
-OMP_CAPI(Core_EnableZoneNames, void(bool enable))
+OMP_CAPI(Core_EnableZoneNames, bool(bool enable))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_zone_names") = enable;
+	return true;
 }
 
 OMP_CAPI(Core_ShowGameTextForAll, bool(StringCharPtr msg, int time, int style))
@@ -137,9 +146,10 @@ OMP_CAPI(Core_ShowGameTextForAll, bool(StringCharPtr msg, int time, int style))
 	return true;
 }
 
-OMP_CAPI(Core_HideGameTextForAll, void(int style))
+OMP_CAPI(Core_HideGameTextForAll, bool(int style))
 {
 	ComponentManager::Get()->players->hideGameTextForAll(style);
+	return true;
 }
 
 OMP_CAPI(Core_NetworkStats, int(OutputStringViewPtr output))
@@ -222,16 +232,18 @@ OMP_CAPI(Core_GetWeaponName, bool(int weaponid, OutputStringViewPtr output))
 	return true;
 }
 
-OMP_CAPI(Core_SetChatRadius, void(float globalChatRadius))
+OMP_CAPI(Core_SetChatRadius, bool(float globalChatRadius))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_chat_radius") = true;
 	*ComponentManager::Get()->core->getConfig().getFloat("game.chat_radius") = globalChatRadius;
+	return true;
 }
 
-OMP_CAPI(Core_SetMarkerRadius, void(float playerMarkerRadius))
+OMP_CAPI(Core_SetMarkerRadius, bool(float playerMarkerRadius))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_player_marker_draw_radius") = true;
 	*ComponentManager::Get()->core->getConfig().getFloat("game.player_marker_draw_radius") = playerMarkerRadius;
+	return true;
 }
 
 OMP_CAPI(Player_NetStatsBytesReceived, int(objectPtr player))
@@ -315,28 +327,33 @@ OMP_CAPI(Player_NetStatsPacketLossPercent, float(objectPtr player))
 	return packetLoss;
 }
 
-OMP_CAPI(Core_SendRconCommand, void(StringCharPtr command))
+OMP_CAPI(Core_SendRconCommand, bool(StringCharPtr command))
 {
 	IConsoleComponent* console = ComponentManager::Get()->console;
 	if (console)
 	{
 		console->send(command);
+		return true;
 	}
+	return false;
 }
 
-OMP_CAPI(Core_SetDeathDropAmount, void(int amount))
+OMP_CAPI(Core_SetDeathDropAmount, bool(int amount))
 {
 	*ComponentManager::Get()->core->getConfig().getInt("game.death_drop_amount") = amount;
+	return true;
 }
 
-OMP_CAPI(Core_GameMode_SetText, void(StringCharPtr string))
+OMP_CAPI(Core_GameMode_SetText, bool(StringCharPtr string))
 {
 	ComponentManager::Get()->core->setData(SettableCoreDataType::ModeText, string);
+	return true;
 }
 
-OMP_CAPI(Core_SetGravity, void(float gravity))
+OMP_CAPI(Core_SetGravity, bool(float gravity))
 {
 	ComponentManager::Get()->core->setGravity(gravity);
+	return true;
 }
 
 OMP_CAPI(Core_GetGravity, float())
@@ -345,34 +362,40 @@ OMP_CAPI(Core_GetGravity, float())
 	return gravity;
 }
 
-OMP_CAPI(Core_SetNameTagsDrawDistance, void(float distance))
+OMP_CAPI(Core_SetNameTagsDrawDistance, bool(float distance))
 {
 	*ComponentManager::Get()->core->getConfig().getFloat("game.nametag_draw_radius") = distance;
+	return true;
 }
 
-OMP_CAPI(Core_SetWeather, void(int weatherid))
+OMP_CAPI(Core_SetWeather, bool(int weatherid))
 {
 	ComponentManager::Get()->core->setWeather(weatherid);
+	return true;
 }
 
-OMP_CAPI(Core_SetWorldTime, void(int hour))
+OMP_CAPI(Core_SetWorldTime, bool(int hour))
 {
 	ComponentManager::Get()->core->setWorldTime(Hours(hour));
+	return true;
 }
 
-OMP_CAPI(Core_ShowNameTags, void(bool show))
+OMP_CAPI(Core_ShowNameTags, bool(bool show))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_nametags") = show;
+	return true;
 }
 
-OMP_CAPI(Core_ShowPlayerMarkers, void(int mode))
+OMP_CAPI(Core_ShowPlayerMarkers, bool(int mode))
 {
 	*ComponentManager::Get()->core->getConfig().getInt("game.player_marker_mode") = mode;
+	return true;
 }
 
-OMP_CAPI(Core_UsePedAnims, void())
+OMP_CAPI(Core_UsePedAnims, bool())
 {
 	*ComponentManager::Get()->core->getConfig().getBool("game.use_player_ped_anims") = true;
+	return true;
 }
 
 OMP_CAPI(Core_GetWeather, int())
@@ -387,9 +410,10 @@ OMP_CAPI(Core_GetWorldTime, int())
 	return hour;
 }
 
-OMP_CAPI(Core_ToggleChatTextReplacement, void(bool enable))
+OMP_CAPI(Core_ToggleChatTextReplacement, bool(bool enable))
 {
 	*ComponentManager::Get()->core->getConfig().getBool("chat_input_filter") = enable;
+	return true;
 }
 
 OMP_CAPI(Core_IsChatTextReplacementToggled, bool())
@@ -404,9 +428,10 @@ OMP_CAPI(Core_IsNickNameValid, bool(StringCharPtr name))
 	return valid;
 }
 
-OMP_CAPI(Core_AllowNickNameCharacter, void(int character, bool allow))
+OMP_CAPI(Core_AllowNickNameCharacter, bool(int character, bool allow))
 {
 	ComponentManager::Get()->players->allowNickNameCharacter(character, allow);
+	return true;
 }
 
 OMP_CAPI(Core_IsNickNameCharacterAllowed, bool(int character))
@@ -415,15 +440,16 @@ OMP_CAPI(Core_IsNickNameCharacterAllowed, bool(int character))
 	return allowed;
 }
 
-OMP_CAPI(Core_ClearBanList, void())
+OMP_CAPI(Core_ClearBanList, bool())
 {
 	ICore* core = ComponentManager::Get()->core;
 	if (!core)
 	{
-		return;
+		return false;
 	}
 
 	core->getConfig().clearBans();
+	return true;
 }
 
 OMP_CAPI(Core_IsIpAddressBanned, bool(StringCharPtr ip))

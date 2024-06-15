@@ -82,13 +82,14 @@ OMP_CAPI(Object_SetPos, bool(objectPtr object, float x, float y, float z))
 	return true;
 }
 
-OMP_CAPI(Object_GetPos, void(objectPtr object, float* x, float* y, float* z))
+OMP_CAPI(Object_GetPos, bool(objectPtr object, float* x, float* y, float* z))
 {
-	POOL_ENTITY_RET(objects, IObject, object, object_, );
+	POOL_ENTITY_RET(objects, IObject, object, object_, false);
 	const Vector3& position = object_->getPosition();
 	*x = position.x;
 	*y = position.y;
 	*z = position.z;
+	return true;
 }
 
 OMP_CAPI(Object_SetRot, bool(objectPtr object, float rotationX, float rotationY, float rotationZ))
