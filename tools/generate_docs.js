@@ -11,7 +11,7 @@ const APIs = {};
 
 const convertTypeNames = (type) => {
   if (type === "StringCharPtr") {
-    return "char*";
+    return "const char*";
   } else if (type === "objectPtr") {
     return "void*";
   } else if (type === "voidPtr") {

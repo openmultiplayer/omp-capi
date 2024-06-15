@@ -88,11 +88,11 @@
         },
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "library",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "delta",
@@ -1041,7 +1041,7 @@
     },
     {
       "ret": "bool",
-      "name": "Player_SendMessage",
+      "name": "Player_SendClientMessage",
       "params": [
         {
           "name": "player",
@@ -1053,7 +1053,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -1169,7 +1169,7 @@
         },
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -1263,7 +1263,7 @@
         },
         {
           "name": "url",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "x",
@@ -1533,7 +1533,7 @@
         },
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -1863,7 +1863,7 @@
     },
     {
       "ret": "bool",
-      "name": "Player_PlaySound",
+      "name": "Player_PlayGameSound",
       "params": [
         {
           "name": "player",
@@ -2259,7 +2259,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "color",
@@ -2385,11 +2385,11 @@
         },
         {
           "name": "animlib",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "animname",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "delta",
@@ -3229,7 +3229,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "time",
@@ -3315,7 +3315,7 @@
         },
         {
           "name": "reason",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3355,7 +3355,7 @@
         },
         {
           "name": "message",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3693,7 +3693,7 @@
         },
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "version",
@@ -3729,7 +3729,7 @@
       "params": [
         {
           "name": "cvar",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3739,7 +3739,7 @@
       "params": [
         {
           "name": "cvar",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3749,7 +3749,7 @@
       "params": [
         {
           "name": "cvar",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3759,7 +3759,7 @@
       "params": [
         {
           "name": "cvar",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "output",
@@ -3785,7 +3785,7 @@
       "params": [
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3825,7 +3825,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3850,7 +3850,7 @@
       "params": [
         {
           "name": "ipAddress",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "timeMS",
@@ -3864,7 +3864,7 @@
       "params": [
         {
           "name": "ipAddress",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3894,7 +3894,7 @@
       "params": [
         {
           "name": "msg",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "time",
@@ -3971,7 +3971,7 @@
       "params": [
         {
           "name": "command",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -3991,7 +3991,7 @@
       "params": [
         {
           "name": "string",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4096,7 +4096,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4135,7 +4135,7 @@
       "params": [
         {
           "name": "ip",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4155,11 +4155,11 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "value",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4169,7 +4169,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4179,7 +4179,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     }
@@ -4191,11 +4191,11 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "script",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     }
@@ -4215,11 +4215,11 @@
         },
         {
           "name": "dff",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "textureLibrary",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4241,11 +4241,11 @@
         },
         {
           "name": "dff",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "textureLibrary",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4267,11 +4267,11 @@
         },
         {
           "name": "dff",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "textureLibrary",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "timeOn",
@@ -4293,7 +4293,7 @@
         },
         {
           "name": "url",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4359,19 +4359,19 @@
         },
         {
           "name": "title",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "body",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "button1",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "button2",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4393,7 +4393,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "priority",
@@ -4411,7 +4411,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "priority",
@@ -4429,7 +4429,7 @@
       "params": [
         {
           "name": "name",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "priority",
@@ -4715,7 +4715,7 @@
       "params": [
         {
           "name": "title",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "columns",
@@ -4767,7 +4767,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -4785,7 +4785,7 @@
         },
         {
           "name": "headerTitle",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -5375,11 +5375,11 @@
         },
         {
           "name": "textureLibrary",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "textureName",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "materialColor",
@@ -5397,7 +5397,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "materialIndex",
@@ -5409,7 +5409,7 @@
         },
         {
           "name": "fontface",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "fontsize",
@@ -6127,11 +6127,11 @@
         },
         {
           "name": "textureLibrary",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "textureName",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "materialColor",
@@ -6153,7 +6153,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "materialIndex",
@@ -6165,7 +6165,7 @@
         },
         {
           "name": "fontface",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "fontsize",
@@ -6737,7 +6737,7 @@
   "All": [
     {
       "ret": "void",
-      "name": "All_SendMessage",
+      "name": "All_SendClientMessage",
       "params": [
         {
           "name": "color",
@@ -6745,7 +6745,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -6819,7 +6819,7 @@
         },
         {
           "name": "file",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -6849,7 +6849,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "id",
@@ -7125,7 +7125,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -7441,7 +7441,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     }
@@ -7465,7 +7465,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "id",
@@ -7781,7 +7781,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -7868,8 +7868,12 @@
           "type": "void*"
         },
         {
-          "name": "pos",
-          "type": "Vector2"
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
         }
       ]
     },
@@ -8171,7 +8175,7 @@
       "params": [
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "color",
@@ -8283,7 +8287,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -8459,7 +8463,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         },
         {
           "name": "color",
@@ -8531,7 +8535,7 @@
         },
         {
           "name": "text",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
@@ -9288,7 +9292,7 @@
         },
         {
           "name": "numberPlate",
-          "type": "char*"
+          "type": "const char*"
         }
       ]
     },
