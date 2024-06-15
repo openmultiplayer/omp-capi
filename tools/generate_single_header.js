@@ -3,6 +3,8 @@ const readline = require("node:readline");
 
 const filePath = "../include/ompcapi.h";
 
+const events = require("../apidocs/events.json");
+
 const files = fs
   .readdirSync("../src/Impl", { recursive: true })
   .filter((file) => {
@@ -52,13 +54,13 @@ enum EventPriorityType
 	EventPriorityType_Lowest,
 };
 
-struct EventArgs
+struct EventArgs_Common
 {
 	uint8_t size;
-	void** data;
+	void** list;
 };
 
-typedef bool (*EventCallback)(EventArgs* args);
+typedef bool (*EventCallback_Common)(EventArgs_Common* args);
 
 // Components
 
@@ -180,6 +182,8 @@ const generateFunctions = (apis) => {
     });
   });
 
+  generateEvents(events);
+
   entries.forEach(([group, funcs], index) => {
     fs.appendFileSync(
       filePath,
@@ -230,6 +234,32 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
   });
   fs.appendFileSync(filePath, `\n    return;\n};\n`);
 };
+
+const generateEvents = (events_) => {
+  const entries = Object.entries(events_);
+  entries.forEach(([group, events], index) => {
+    fs.appendFileSync(
+      filePath,
+      `\n\n// ${group} event type and arguments definitions`
+    );
+    events.forEach((event) => {
+      fs.appendFileSync(
+        filePath,
+        `
+struct EventArgs_${event.name} {
+    uint8_t size;
+    struct {
+${event.args.map((param) => `        ${param.type}* ${param.name};`).join("\n")}
+    } list;
+};
+typedef bool (*EventCallback_${event.name})(EventArgs_${event.name} args);\n`
+      );
+    });
+  });
+  fs.appendFileSync(filePath, `\n`);
+};
+
+// generateEvents(events);
 
 /*
  const structBegin = `struct ${group} {\n`;
