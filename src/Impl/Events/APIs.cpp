@@ -10,12 +10,12 @@
 
 OMP_CAPI(Event_AddHandler, bool(StringCharPtr name, int priority, void* callback))
 {
-	return ComponentManager::Get()->AddEventHandler(name, EventPriorityType(priority), EventCallback(callback));
+	return ComponentManager::Get()->AddEventHandler(name, EventPriorityType(priority), EventCallback_Common(callback));
 }
 
 OMP_CAPI(Event_RemoveHandler, bool(StringCharPtr name, int priority, void* callback))
 {
-	return ComponentManager::Get()->RemoveEventHandler(name, EventPriorityType(priority), EventCallback(callback));
+	return ComponentManager::Get()->RemoveEventHandler(name, EventPriorityType(priority), EventCallback_Common(callback));
 }
 
 OMP_CAPI(Event_RemoveAllHandlers, bool(StringCharPtr name, int priority))

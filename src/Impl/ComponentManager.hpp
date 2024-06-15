@@ -66,10 +66,10 @@ public:
 	void FreeEvents();
 
 	// Add an event callback of an event to omp capi handler maps
-	bool AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+	bool AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback_Common callback);
 
 	// Remove an event callback of an event from omp capi handler maps
-	bool RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback);
+	bool RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback_Common callback);
 
 	// Remove all event callbacks of an event
 	void RemoveAllHandlers(const Impl::String& name, EventPriorityType priority);
@@ -150,21 +150,21 @@ public:
 private:
 	IComponentList* componentList = nullptr;
 
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> highestPriorityEvents;
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> fairlyHighPriorityEvents;
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> defaultPriorityEvents;
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> fairlyLowPriorityEvents;
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>> lowestPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>> highestPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>> fairlyHighPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>> defaultPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>> fairlyLowPriorityEvents;
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>> lowestPriorityEvents;
 
 	template <typename Con, typename... Args>
 	bool CallEventOfPriority(Con container, EventReturnHandler returnHandler, Args... args)
 	{
-		EventArgs eventArgs;
+		EventArgs_Common eventArgs;
 		constexpr std::size_t size = sizeof...(Args);
 
 		if (size > 0)
 		{
-			eventArgs.data = new void*[size];
+			eventArgs.list = new void*[size];
 		}
 
 		eventArgs.size = size;
@@ -176,7 +176,7 @@ private:
 				int i = 0;
 				([&]
 					{
-						eventArgs.data[i] = &args;
+						eventArgs.list[i] = &args;
 						i++;
 					}(),
 					...);
@@ -187,14 +187,14 @@ private:
 				case EventReturnHandler::StopAtFalse:
 					if (!ret)
 					{
-						delete[] eventArgs.data;
+						delete[] eventArgs.list;
 						return false;
 					}
 					break;
 				case EventReturnHandler::StopAtTrue:
 					if (ret)
 					{
-						delete[] eventArgs.data;
+						delete[] eventArgs.list;
 						return false;
 					}
 					break;
@@ -206,7 +206,7 @@ private:
 			}
 		}
 
-		delete[] eventArgs.data;
+		delete[] eventArgs.list;
 		return result;
 	}
 };

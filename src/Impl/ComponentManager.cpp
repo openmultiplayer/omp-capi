@@ -46,28 +46,28 @@
 		component->getPlayer##event_name##Dispatcher().removeEventHandler(event_instance); \
 	}
 
-#define RETRIEVE_RELEVANT_EVENT_MAP(container, priority)                        \
-	FlatHashMap<Impl::String, FlatHashSet<EventCallback>>* container = nullptr; \
-	switch (priority)                                                           \
-	{                                                                           \
-	case EventPriorityType_Highest:                                             \
-		container = &highestPriorityEvents;                                     \
-		break;                                                                  \
-	case EventPriorityType_FairlyHigh:                                          \
-		container = &fairlyHighPriorityEvents;                                  \
-		break;                                                                  \
-	case EventPriorityType_Default:                                             \
-		container = &defaultPriorityEvents;                                     \
-		break;                                                                  \
-	case EventPriorityType_FairlyLow:                                           \
-		container = &fairlyLowPriorityEvents;                                   \
-		break;                                                                  \
-	case EventPriorityType_Lowest:                                              \
-		container = &lowestPriorityEvents;                                      \
-		break;                                                                  \
-	default:                                                                    \
-		container = &defaultPriorityEvents;                                     \
-		break;                                                                  \
+#define RETRIEVE_RELEVANT_EVENT_MAP(container, priority)                               \
+	FlatHashMap<Impl::String, FlatHashSet<EventCallback_Common>>* container = nullptr; \
+	switch (priority)                                                                  \
+	{                                                                                  \
+	case EventPriorityType_Highest:                                                    \
+		container = &highestPriorityEvents;                                            \
+		break;                                                                         \
+	case EventPriorityType_FairlyHigh:                                                 \
+		container = &fairlyHighPriorityEvents;                                         \
+		break;                                                                         \
+	case EventPriorityType_Default:                                                    \
+		container = &defaultPriorityEvents;                                            \
+		break;                                                                         \
+	case EventPriorityType_FairlyLow:                                                  \
+		container = &fairlyLowPriorityEvents;                                          \
+		break;                                                                         \
+	case EventPriorityType_Lowest:                                                     \
+		container = &lowestPriorityEvents;                                             \
+		break;                                                                         \
+	default:                                                                           \
+		container = &defaultPriorityEvents;                                            \
+		break;                                                                         \
 	}
 
 void ComponentManager::Init(ICore* c, IComponentList* clist)
@@ -145,7 +145,7 @@ void ComponentManager::FreeEvents()
 	REMOVE_PLAYER_EVENT_HANDLER(players, Update, PlayerEvents::Get());
 }
 
-bool ComponentManager::AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback)
+bool ComponentManager::AddEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback_Common callback)
 {
 	if (name.length())
 	{
@@ -155,7 +155,7 @@ bool ComponentManager::AddEventHandler(const Impl::String& name, EventPriorityTy
 			auto it = container->find(name);
 			if (it == container->end())
 			{
-				it = container->insert({ name, FlatHashSet<EventCallback>() }).first;
+				it = container->insert({ name, FlatHashSet<EventCallback_Common>() }).first;
 			}
 
 			it->second.insert(callback);
@@ -165,7 +165,7 @@ bool ComponentManager::AddEventHandler(const Impl::String& name, EventPriorityTy
 	return false;
 }
 
-bool ComponentManager::RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback callback)
+bool ComponentManager::RemoveEventHandler(const Impl::String& name, EventPriorityType priority, EventCallback_Common callback)
 {
 	if (name.length())
 	{
