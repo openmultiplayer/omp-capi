@@ -2,6 +2,7 @@
   "Actor": [
     {
       "name": "onPlayerGiveDamageActor",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -27,6 +28,7 @@
     },
     {
       "name": "onActorStreamIn",
+      "badret": "none",
       "args": [
         {
           "name": "actor",
@@ -40,6 +42,7 @@
     },
     {
       "name": "onActorStreamOut",
+      "badret": "none",
       "args": [
         {
           "name": "actor",
@@ -55,6 +58,7 @@
   "Checkpoint": [
     {
       "name": "onPlayerEnterCheckpoint",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -64,6 +68,7 @@
     },
     {
       "name": "onPlayerLeaveCheckpoint",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -73,6 +78,7 @@
     },
     {
       "name": "onPlayerEnterRaceCheckpoint",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -82,6 +88,7 @@
     },
     {
       "name": "onPlayerLeaveRaceCheckpoint",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -93,6 +100,7 @@
   "Class": [
     {
       "name": "onPlayerRequestClass",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -108,6 +116,7 @@
   "Console": [
     {
       "name": "onConsoleText",
+      "badret": "true",
       "args": [
         {
           "name": "command",
@@ -121,6 +130,7 @@
     },
     {
       "name": "onRconLoginAttempt",
+      "badret": "true",
       "args": [
         {
           "name": "address",
@@ -140,6 +150,7 @@
   "Core": [
     {
       "name": "onTick",
+      "badret": "none",
       "args": [
         {
           "name": "elapsed",
@@ -151,6 +162,7 @@
   "CustomModel": [
     {
       "name": "onPlayerFinishedDownloading",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -164,6 +176,7 @@
     },
     {
       "name": "onPlayerRequestDownload",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -183,6 +196,7 @@
   "Dialog": [
     {
       "name": "onDialogResponse",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -210,6 +224,7 @@
   "GangZone": [
     {
       "name": "onPlayerEnterGangZone",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -223,6 +238,7 @@
     },
     {
       "name": "onPlayerLeaveGangZone",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -236,6 +252,7 @@
     },
     {
       "name": "onPlayerClickGangZone",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -251,6 +268,7 @@
   "Menu": [
     {
       "name": "onPlayerSelectedMenuRow",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -264,6 +282,7 @@
     },
     {
       "name": "onPlayerExitedMenu",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -275,6 +294,7 @@
   "Object": [
     {
       "name": "onObjectMove",
+      "badret": "none",
       "args": [
         {
           "name": "object",
@@ -284,6 +304,7 @@
     },
     {
       "name": "onPlayerObjectMove",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -297,6 +318,7 @@
     },
     {
       "name": "onPlayerEditObject",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -338,6 +360,7 @@
     },
     {
       "name": "onPlayerEditPlayerObject",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -379,6 +402,7 @@
     },
     {
       "name": "onPlayerEditAttachedObject",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -440,6 +464,7 @@
     },
     {
       "name": "onPlayerSelectObject",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -469,6 +494,7 @@
     },
     {
       "name": "onPlayerSelectPlayerObject",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -500,6 +526,7 @@
   "Pickup": [
     {
       "name": "onPlayerPickUpPickup",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -515,6 +542,7 @@
   "TextDraw": [
     {
       "name": "onPlayerCancelTextDrawSelection",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -524,6 +552,7 @@
     },
     {
       "name": "onPlayerCancelPlayerTextDrawSelection",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -533,6 +562,7 @@
     },
     {
       "name": "onPlayerClickTextDraw",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -546,6 +576,7 @@
     },
     {
       "name": "onPlayerClickPlayerTextDraw",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -561,6 +592,7 @@
   "Player": [
     {
       "name": "onPlayerConnect",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -570,6 +602,7 @@
     },
     {
       "name": "onPlayerSpawn",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -579,6 +612,7 @@
     },
     {
       "name": "onPlayerCommandText",
+      "badret": "true",
       "args": [
         {
           "name": "player",
@@ -592,6 +626,7 @@
     },
     {
       "name": "onPlayerKeyStateChange",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -609,6 +644,7 @@
     },
     {
       "name": "onIncomingConnection",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -626,6 +662,7 @@
     },
     {
       "name": "onPlayerDisconnect",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -639,6 +676,7 @@
     },
     {
       "name": "onPlayerRequestSpawn",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -648,6 +686,7 @@
     },
     {
       "name": "onPlayerStreamIn",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -661,6 +700,7 @@
     },
     {
       "name": "onPlayerStreamOut",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -674,6 +714,7 @@
     },
     {
       "name": "onPlayerText",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -687,6 +728,7 @@
     },
     {
       "name": "onPlayerShotMissed",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -712,6 +754,7 @@
     },
     {
       "name": "onPlayerShotPlayer",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -741,6 +784,7 @@
     },
     {
       "name": "onPlayerShotVehicle",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -770,6 +814,7 @@
     },
     {
       "name": "onPlayerShotObject",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -799,6 +844,7 @@
     },
     {
       "name": "onPlayerShotPlayerObject",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -828,6 +874,7 @@
     },
     {
       "name": "onPlayerDeath",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -845,6 +892,7 @@
     },
     {
       "name": "onPlayerTakeDamage",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -870,6 +918,7 @@
     },
     {
       "name": "onPlayerGiveDamage",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -895,6 +944,7 @@
     },
     {
       "name": "onPlayerInteriorChange",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -912,6 +962,7 @@
     },
     {
       "name": "onPlayerStateChange",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -929,6 +980,7 @@
     },
     {
       "name": "onPlayerClickMap",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -950,6 +1002,7 @@
     },
     {
       "name": "onPlayerClickPlayer",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -967,6 +1020,7 @@
     },
     {
       "name": "onClientCheckResponse",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -988,6 +1042,7 @@
     },
     {
       "name": "onPlayerUpdate",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -999,6 +1054,7 @@
   "Vehicle": [
     {
       "name": "onVehicleStreamIn",
+      "badret": "none",
       "args": [
         {
           "name": "vehicle",
@@ -1012,6 +1068,7 @@
     },
     {
       "name": "onVehicleStreamOut",
+      "badret": "none",
       "args": [
         {
           "name": "vehicle",
@@ -1025,6 +1082,7 @@
     },
     {
       "name": "onVehicleDeath",
+      "badret": "none",
       "args": [
         {
           "name": "vehicle",
@@ -1038,6 +1096,7 @@
     },
     {
       "name": "onPlayerEnterVehicle",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -1055,6 +1114,7 @@
     },
     {
       "name": "onPlayerExitVehicle",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -1068,6 +1128,7 @@
     },
     {
       "name": "onVehicleDamageStatusUpdate",
+      "badret": "none",
       "args": [
         {
           "name": "vehicle",
@@ -1081,6 +1142,7 @@
     },
     {
       "name": "onVehiclePaintJob",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -1098,6 +1160,7 @@
     },
     {
       "name": "onVehicleMod",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -1115,6 +1178,7 @@
     },
     {
       "name": "onVehicleRespray",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -1136,6 +1200,7 @@
     },
     {
       "name": "onEnterExitModShop",
+      "badret": "none",
       "args": [
         {
           "name": "player",
@@ -1153,6 +1218,7 @@
     },
     {
       "name": "onVehicleSpawn",
+      "badret": "none",
       "args": [
         {
           "name": "vehicle",
@@ -1162,6 +1228,7 @@
     },
     {
       "name": "onUnoccupiedVehicleUpdate",
+      "badret": "false",
       "args": [
         {
           "name": "vehicle",
@@ -1203,6 +1270,7 @@
     },
     {
       "name": "onTrailerUpdate",
+      "badret": "false",
       "args": [
         {
           "name": "player",
@@ -1216,6 +1284,7 @@
     },
     {
       "name": "onVehicleSirenStateChange",
+      "badret": "false",
       "args": [
         {
           "name": "player",
