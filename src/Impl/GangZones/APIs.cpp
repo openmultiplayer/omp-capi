@@ -51,6 +51,22 @@ OMP_CAPI(GangZone_Destroy, bool(objectPtr gangzone))
 	return true;
 }
 
+OMP_CAPI(GangZone_FromID, objectPtr(int gangzoneid))
+{
+	IGangZonesComponent* component = ComponentManager::Get()->gangzones;
+	if (component)
+	{
+		return component->get(gangzoneid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(GangZone_GetID, int(objectPtr gangzone))
+{
+	POOL_ENTITY_RET(gangzones, IGangZone, gangzone, gangzone_, INVALID_GANG_ZONE_ID);
+	return gangzone_->getID();
+}
+
 OMP_CAPI(GangZone_ShowForPlayer, bool(objectPtr player, objectPtr gangzone, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);

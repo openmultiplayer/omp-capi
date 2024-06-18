@@ -67,6 +67,22 @@ OMP_CAPI(Pickup_Destroy, bool(objectPtr pickup))
 	return true;
 }
 
+OMP_CAPI(Pickup_FromID, objectPtr(int pickupid))
+{
+	IPickupsComponent* component = ComponentManager::Get()->pickups;
+	if (component)
+	{
+		return component->get(pickupid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Pickup_GetID, int(objectPtr pickup))
+{
+	POOL_ENTITY_RET(pickups, IPickup, pickup, pickup_, INVALID_PICKUP_ID);
+	return pickup_->getID();
+}
+
 OMP_CAPI(Pickup_IsValid, bool(objectPtr pickup))
 {
 	POOL_ENTITY_RET(pickups, IPickup, pickup, p, false);

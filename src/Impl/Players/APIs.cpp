@@ -8,6 +8,22 @@
 
 #include "../ComponentManager.hpp"
 
+OMP_CAPI(Player_FromID, objectPtr(int playerid))
+{
+	IPlayerPool* component = ComponentManager::Get()->players;
+	if (component)
+	{
+		return component->get(playerid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Player_GetID, int(objectPtr player))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, INVALID_PLAYER_ID);
+	return player_->getID();
+}
+
 OMP_CAPI(Player_SendClientMessage, bool(objectPtr player, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);

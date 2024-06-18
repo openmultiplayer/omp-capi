@@ -31,8 +31,18 @@
       ]
     },
     {
-      "ret": "bool",
-      "name": "Actor_Destroy",
+      "ret": "void*",
+      "name": "Actor_FromID",
+      "params": [
+        {
+          "name": "actorid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Actor_GetID",
       "params": [
         {
           "name": "actor",
@@ -353,242 +363,6 @@
       ]
     }
   ],
-  "Checkpoint": [
-    {
-      "ret": "bool",
-      "name": "Checkpoint_Set",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "x",
-          "type": "float"
-        },
-        {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
-        },
-        {
-          "name": "radius",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Checkpoint_Disable",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Checkpoint_IsPlayerIn",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Checkpoint_IsActive",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Checkpoint_Get",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "x",
-          "type": "float*"
-        },
-        {
-          "name": "y",
-          "type": "float*"
-        },
-        {
-          "name": "z",
-          "type": "float*"
-        },
-        {
-          "name": "radius",
-          "type": "float*"
-        }
-      ]
-    }
-  ],
-  "RaceCheckpoint": [
-    {
-      "ret": "bool",
-      "name": "RaceCheckpoint_Set",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "type",
-          "type": "int"
-        },
-        {
-          "name": "x",
-          "type": "float"
-        },
-        {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
-        },
-        {
-          "name": "nextX",
-          "type": "float"
-        },
-        {
-          "name": "nextY",
-          "type": "float"
-        },
-        {
-          "name": "nextZ",
-          "type": "float"
-        },
-        {
-          "name": "radius",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "RaceCheckpoint_Disable",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "RaceCheckpoint_IsPlayerIn",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "RaceCheckpoint_IsActive",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "RaceCheckpoint_Get",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "x",
-          "type": "float*"
-        },
-        {
-          "name": "y",
-          "type": "float*"
-        },
-        {
-          "name": "z",
-          "type": "float*"
-        },
-        {
-          "name": "nextX",
-          "type": "float*"
-        },
-        {
-          "name": "nextY",
-          "type": "float*"
-        },
-        {
-          "name": "nextZ",
-          "type": "float*"
-        },
-        {
-          "name": "radius",
-          "type": "float*"
-        }
-      ]
-    }
-  ],
-  "Component": [
-    {
-      "ret": "void*",
-      "name": "Component_Create",
-      "params": [
-        {
-          "name": "uid",
-          "type": "int"
-        },
-        {
-          "name": "name",
-          "type": "const char*"
-        },
-        {
-          "name": "version",
-          "type": "ComponentVersion"
-        },
-        {
-          "name": "onLoadCB",
-          "type": "void*"
-        },
-        {
-          "name": "onInitCB",
-          "type": "void*"
-        },
-        {
-          "name": "onReadyCB",
-          "type": "void*"
-        },
-        {
-          "name": "onResetCB",
-          "type": "void*"
-        },
-        {
-          "name": "onFreeCB",
-          "type": "void*"
-        }
-      ]
-    }
-  ],
   "Class": [
     {
       "ret": "void*",
@@ -645,6 +419,26 @@
         {
           "name": "id",
           "type": "int*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "Class_FromID",
+      "params": [
+        {
+          "name": "classid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Class_GetID",
+      "params": [
+        {
+          "name": "cls",
+          "type": "void*"
         }
       ]
     },
@@ -889,163 +683,11 @@
     },
     {
       "ret": "int",
-      "name": "Player_GetNetworkStats",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "output",
-          "type": "CAPIStringView*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsBytesReceived",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsBytesSent",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsConnectionStatus",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsGetConnectedTime",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Player_NetStatsGetIpPort",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "output",
-          "type": "CAPIStringView*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsMessagesReceived",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsMessagesRecvPerSecond",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_NetStatsMessagesSent",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "float",
-      "name": "Player_NetStatsPacketLossPercent",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
       "name": "Player_GetCustomSkin",
       "params": [
         {
           "name": "player",
           "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Player_GetDialog",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Player_GetDialogData",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "dialogid",
-          "type": "int*"
-        },
-        {
-          "name": "style",
-          "type": "int*"
-        },
-        {
-          "name": "title",
-          "type": "CAPIStringView*"
-        },
-        {
-          "name": "body",
-          "type": "CAPIStringView*"
-        },
-        {
-          "name": "button1",
-          "type": "CAPIStringView*"
-        },
-        {
-          "name": "button2",
-          "type": "CAPIStringView*"
         }
       ]
     },
@@ -1072,6 +714,26 @@
     {
       "ret": "void*",
       "name": "Player_GetCameraTargetPlayerObject",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "Player_FromID",
+      "params": [
+        {
+          "name": "playerid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_GetID",
       "params": [
         {
           "name": "player",
@@ -3672,6 +3334,50 @@
       ]
     },
     {
+      "ret": "int",
+      "name": "Player_GetDialog",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Player_GetDialogData",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "dialogid",
+          "type": "int*"
+        },
+        {
+          "name": "style",
+          "type": "int*"
+        },
+        {
+          "name": "title",
+          "type": "CAPIStringView*"
+        },
+        {
+          "name": "body",
+          "type": "CAPIStringView*"
+        },
+        {
+          "name": "button1",
+          "type": "CAPIStringView*"
+        },
+        {
+          "name": "button2",
+          "type": "CAPIStringView*"
+        }
+      ]
+    },
+    {
       "ret": "bool",
       "name": "Player_IsInModShop",
       "params": [
@@ -3718,6 +3424,310 @@
         {
           "name": "player",
           "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_GetNetworkStats",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "output",
+          "type": "CAPIStringView*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsBytesReceived",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsBytesSent",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsConnectionStatus",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsGetConnectedTime",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Player_NetStatsGetIpPort",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "output",
+          "type": "CAPIStringView*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsMessagesReceived",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsMessagesRecvPerSecond",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Player_NetStatsMessagesSent",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "float",
+      "name": "Player_NetStatsPacketLossPercent",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    }
+  ],
+  "Checkpoint": [
+    {
+      "ret": "bool",
+      "name": "Checkpoint_Set",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "name": "z",
+          "type": "float"
+        },
+        {
+          "name": "radius",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Checkpoint_Disable",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Checkpoint_IsPlayerIn",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Checkpoint_IsActive",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Checkpoint_Get",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "x",
+          "type": "float*"
+        },
+        {
+          "name": "y",
+          "type": "float*"
+        },
+        {
+          "name": "z",
+          "type": "float*"
+        },
+        {
+          "name": "radius",
+          "type": "float*"
+        }
+      ]
+    }
+  ],
+  "RaceCheckpoint": [
+    {
+      "ret": "bool",
+      "name": "RaceCheckpoint_Set",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "type",
+          "type": "int"
+        },
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "name": "z",
+          "type": "float"
+        },
+        {
+          "name": "nextX",
+          "type": "float"
+        },
+        {
+          "name": "nextY",
+          "type": "float"
+        },
+        {
+          "name": "nextZ",
+          "type": "float"
+        },
+        {
+          "name": "radius",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "RaceCheckpoint_Disable",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "RaceCheckpoint_IsPlayerIn",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "RaceCheckpoint_IsActive",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "RaceCheckpoint_Get",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "x",
+          "type": "float*"
+        },
+        {
+          "name": "y",
+          "type": "float*"
+        },
+        {
+          "name": "z",
+          "type": "float*"
+        },
+        {
+          "name": "nextX",
+          "type": "float*"
+        },
+        {
+          "name": "nextY",
+          "type": "float*"
+        },
+        {
+          "name": "nextZ",
+          "type": "float*"
+        },
+        {
+          "name": "radius",
+          "type": "float*"
         }
       ]
     }
@@ -3768,434 +3778,42 @@
       ]
     }
   ],
-  "Core": [
+  "Component": [
     {
-      "ret": "int",
-      "name": "Core_TickCount",
-      "params": []
-    },
-    {
-      "ret": "int",
-      "name": "Core_MaxPlayers",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_Log",
+      "ret": "void*",
+      "name": "Component_Create",
       "params": [
         {
-          "name": "text",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsAdminTeleportAllowed",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AllowAdminTeleport",
-      "params": [
-        {
-          "name": "allow",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AreAllAnimationsEnabled",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_EnableAllAnimations",
-      "params": [
-        {
-          "name": "allow",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsAnimationLibraryValid",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AreInteriorWeaponsAllowed",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AllowInteriorWeapons",
-      "params": [
-        {
-          "name": "allow",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_BlockIpAddress",
-      "params": [
-        {
-          "name": "ipAddress",
-          "type": "const char*"
-        },
-        {
-          "name": "timeMS",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_UnBlockIpAddress",
-      "params": [
-        {
-          "name": "ipAddress",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_DisableEntryExitMarkers",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_DisableNameTagsLOS",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_EnableZoneNames",
-      "params": [
-        {
-          "name": "enable",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_ShowGameTextForAll",
-      "params": [
-        {
-          "name": "msg",
-          "type": "const char*"
-        },
-        {
-          "name": "time",
+          "name": "uid",
           "type": "int"
         },
-        {
-          "name": "style",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_HideGameTextForAll",
-      "params": [
-        {
-          "name": "style",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Core_NetworkStats",
-      "params": [
-        {
-          "name": "output",
-          "type": "CAPIStringView*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Core_ServerTickRate",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_GetWeaponName",
-      "params": [
-        {
-          "name": "weaponid",
-          "type": "int"
-        },
-        {
-          "name": "output",
-          "type": "CAPIStringView*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetChatRadius",
-      "params": [
-        {
-          "name": "globalChatRadius",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetMarkerRadius",
-      "params": [
-        {
-          "name": "playerMarkerRadius",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SendRconCommand",
-      "params": [
-        {
-          "name": "command",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetDeathDropAmount",
-      "params": [
-        {
-          "name": "amount",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_GameMode_SetText",
-      "params": [
-        {
-          "name": "string",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetGravity",
-      "params": [
-        {
-          "name": "gravity",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "float",
-      "name": "Core_GetGravity",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetNameTagsDrawDistance",
-      "params": [
-        {
-          "name": "distance",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetWeather",
-      "params": [
-        {
-          "name": "weatherid",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_SetWorldTime",
-      "params": [
-        {
-          "name": "hour",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_ShowNameTags",
-      "params": [
-        {
-          "name": "show",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_ShowPlayerMarkers",
-      "params": [
-        {
-          "name": "mode",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_UsePedAnims",
-      "params": []
-    },
-    {
-      "ret": "int",
-      "name": "Core_GetWeather",
-      "params": []
-    },
-    {
-      "ret": "int",
-      "name": "Core_GetWorldTime",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_ToggleChatTextReplacement",
-      "params": [
-        {
-          "name": "enable",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsChatTextReplacementToggled",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsNickNameValid",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AllowNickNameCharacter",
-      "params": [
-        {
-          "name": "character",
-          "type": "int"
-        },
-        {
-          "name": "allow",
-          "type": "bool"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsNickNameCharacterAllowed",
-      "params": [
-        {
-          "name": "character",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_ClearBanList",
-      "params": []
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsIpAddressBanned",
-      "params": [
-        {
-          "name": "ip",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "int",
-      "name": "Core_GetWeaponSlot",
-      "params": [
-        {
-          "name": "weapon",
-          "type": "uint8_t"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_AddRule",
-      "params": [
         {
           "name": "name",
           "type": "const char*"
         },
         {
-          "name": "value",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_IsValidRule",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Core_RemoveRule",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        }
-      ]
-    }
-  ],
-  "NPC": [
-    {
-      "ret": "bool",
-      "name": "NPC_Connect",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
+          "name": "version",
+          "type": "ComponentVersion"
         },
         {
-          "name": "script",
-          "type": "const char*"
+          "name": "onLoadCB",
+          "type": "void*"
+        },
+        {
+          "name": "onInitCB",
+          "type": "void*"
+        },
+        {
+          "name": "onReadyCB",
+          "type": "void*"
+        },
+        {
+          "name": "onResetCB",
+          "type": "void*"
+        },
+        {
+          "name": "onFreeCB",
+          "type": "void*"
         }
       ]
     }
@@ -4340,104 +3958,6 @@
       ]
     }
   ],
-  "Dialog": [
-    {
-      "ret": "bool",
-      "name": "Dialog_Show",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "dialog",
-          "type": "int"
-        },
-        {
-          "name": "style",
-          "type": "int"
-        },
-        {
-          "name": "title",
-          "type": "const char*"
-        },
-        {
-          "name": "body",
-          "type": "const char*"
-        },
-        {
-          "name": "button1",
-          "type": "const char*"
-        },
-        {
-          "name": "button2",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Dialog_Hide",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    }
-  ],
-  "Event": [
-    {
-      "ret": "bool",
-      "name": "Event_AddHandler",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        },
-        {
-          "name": "priority",
-          "type": "int"
-        },
-        {
-          "name": "callback",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Event_RemoveHandler",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        },
-        {
-          "name": "priority",
-          "type": "int"
-        },
-        {
-          "name": "callback",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Event_RemoveAllHandlers",
-      "params": [
-        {
-          "name": "name",
-          "type": "const char*"
-        },
-        {
-          "name": "priority",
-          "type": "int"
-        }
-      ]
-    }
-  ],
   "GangZone": [
     {
       "ret": "void*",
@@ -4468,6 +3988,26 @@
     {
       "ret": "bool",
       "name": "GangZone_Destroy",
+      "params": [
+        {
+          "name": "gangzone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "GangZone_FromID",
+      "params": [
+        {
+          "name": "gangzoneid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "GangZone_GetID",
       "params": [
         {
           "name": "gangzone",
@@ -4754,6 +4294,26 @@
       ]
     },
     {
+      "ret": "void*",
+      "name": "Menu_FromID",
+      "params": [
+        {
+          "name": "menuid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Menu_GetID",
+      "params": [
+        {
+          "name": "menu",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "ret": "int",
       "name": "Menu_AddItem",
       "params": [
@@ -5022,6 +4582,26 @@
     {
       "ret": "bool",
       "name": "Object_Destroy",
+      "params": [
+        {
+          "name": "object",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "Object_FromID",
+      "params": [
+        {
+          "name": "objectid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Object_GetID",
       "params": [
         {
           "name": "object",
@@ -6464,76 +6044,6 @@
       ]
     }
   ],
-  "All": [
-    {
-      "ret": "bool",
-      "name": "All_SendClientMessage",
-      "params": [
-        {
-          "name": "color",
-          "type": "uint32_t"
-        },
-        {
-          "name": "text",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "All_CreateExplosion",
-      "params": [
-        {
-          "name": "x",
-          "type": "float"
-        },
-        {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
-        },
-        {
-          "name": "type",
-          "type": "int"
-        },
-        {
-          "name": "radius",
-          "type": "float"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "All_SendDeathMessage",
-      "params": [
-        {
-          "name": "killer",
-          "type": "void*"
-        },
-        {
-          "name": "killee",
-          "type": "void*"
-        },
-        {
-          "name": "weapon",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "All_EnableStuntBonus",
-      "params": [
-        {
-          "name": "enable",
-          "type": "bool"
-        }
-      ]
-    }
-  ],
   "Pickup": [
     {
       "ret": "void*",
@@ -6602,6 +6112,26 @@
     {
       "ret": "bool",
       "name": "Pickup_Destroy",
+      "params": [
+        {
+          "name": "pickup",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "Pickup_FromID",
+      "params": [
+        {
+          "name": "pickupid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Pickup_GetID",
       "params": [
         {
           "name": "pickup",
@@ -6804,6 +6334,174 @@
       ]
     }
   ],
+  "All": [
+    {
+      "ret": "bool",
+      "name": "All_SendClientMessage",
+      "params": [
+        {
+          "name": "color",
+          "type": "uint32_t"
+        },
+        {
+          "name": "text",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "All_CreateExplosion",
+      "params": [
+        {
+          "name": "x",
+          "type": "float"
+        },
+        {
+          "name": "y",
+          "type": "float"
+        },
+        {
+          "name": "z",
+          "type": "float"
+        },
+        {
+          "name": "type",
+          "type": "int"
+        },
+        {
+          "name": "radius",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "All_SendDeathMessage",
+      "params": [
+        {
+          "name": "killer",
+          "type": "void*"
+        },
+        {
+          "name": "killee",
+          "type": "void*"
+        },
+        {
+          "name": "weapon",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "All_EnableStuntBonus",
+      "params": [
+        {
+          "name": "enable",
+          "type": "bool"
+        }
+      ]
+    }
+  ],
+  "Event": [
+    {
+      "ret": "bool",
+      "name": "Event_AddHandler",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        },
+        {
+          "name": "priority",
+          "type": "int"
+        },
+        {
+          "name": "callback",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Event_RemoveHandler",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        },
+        {
+          "name": "priority",
+          "type": "int"
+        },
+        {
+          "name": "callback",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Event_RemoveAllHandlers",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        },
+        {
+          "name": "priority",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "Dialog": [
+    {
+      "ret": "bool",
+      "name": "Dialog_Show",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "dialog",
+          "type": "int"
+        },
+        {
+          "name": "style",
+          "type": "int"
+        },
+        {
+          "name": "title",
+          "type": "const char*"
+        },
+        {
+          "name": "body",
+          "type": "const char*"
+        },
+        {
+          "name": "button1",
+          "type": "const char*"
+        },
+        {
+          "name": "button2",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Dialog_Hide",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    }
+  ],
   "TextDraw": [
     {
       "ret": "void*",
@@ -6830,6 +6528,26 @@
     {
       "ret": "bool",
       "name": "TextDraw_Destroy",
+      "params": [
+        {
+          "name": "textdraw",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "TextDraw_FromID",
+      "params": [
+        {
+          "name": "textdrawid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "TextDraw_GetID",
       "params": [
         {
           "name": "textdraw",
@@ -7446,6 +7164,34 @@
     {
       "ret": "bool",
       "name": "PlayerTextDraw_Destroy",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "textdraw",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "PlayerTextDraw_FromID",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "textdrawid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "PlayerTextDraw_GetID",
       "params": [
         {
           "name": "player",
@@ -8138,36 +7884,6 @@
       ]
     }
   ],
-  "Recording": [
-    {
-      "ret": "bool",
-      "name": "Recording_Start",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "type",
-          "type": "int"
-        },
-        {
-          "name": "file",
-          "type": "const char*"
-        }
-      ]
-    },
-    {
-      "ret": "bool",
-      "name": "Recording_Stop",
-      "params": [
-        {
-          "name": "player",
-          "type": "void*"
-        }
-      ]
-    }
-  ],
   "TextLabel": [
     {
       "ret": "void*",
@@ -8213,7 +7929,27 @@
     },
     {
       "ret": "bool",
-      "name": "TextLabel_Delete",
+      "name": "TextLabel_Destroy",
+      "params": [
+        {
+          "name": "textlabel",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "TextLabel_FromID",
+      "params": [
+        {
+          "name": "textlabelid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "TextLabel_GetID",
       "params": [
         {
           "name": "textlabel",
@@ -8505,7 +8241,35 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextLabel_Delete",
+      "name": "PlayerTextLabel_Destroy",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "textlabel",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "PlayerTextLabel_FromID",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "textlabelid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "PlayerTextLabel_GetID",
       "params": [
         {
           "name": "player",
@@ -8764,22 +8528,42 @@
       ]
     },
     {
-      "ret": "int",
-      "name": "Vehicle_GetMaxPassengerSeats",
-      "params": [
-        {
-          "name": "modelid",
-          "type": "int"
-        }
-      ]
-    },
-    {
       "ret": "bool",
       "name": "Vehicle_Destroy",
       "params": [
         {
           "name": "vehicle",
           "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "void*",
+      "name": "Vehicle_FromID",
+      "params": [
+        {
+          "name": "vehicleid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Vehicle_GetID",
+      "params": [
+        {
+          "name": "vehicle",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Vehicle_GetMaxPassengerSeats",
+      "params": [
+        {
+          "name": "modelid",
+          "type": "int"
         }
       ]
     },
@@ -10066,6 +9850,468 @@
       "params": [
         {
           "name": "vehicle",
+          "type": "void*"
+        }
+      ]
+    }
+  ],
+  "Core": [
+    {
+      "ret": "int",
+      "name": "Core_TickCount",
+      "params": []
+    },
+    {
+      "ret": "int",
+      "name": "Core_MaxPlayers",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_Log",
+      "params": [
+        {
+          "name": "text",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsAdminTeleportAllowed",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AllowAdminTeleport",
+      "params": [
+        {
+          "name": "allow",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AreAllAnimationsEnabled",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_EnableAllAnimations",
+      "params": [
+        {
+          "name": "allow",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsAnimationLibraryValid",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AreInteriorWeaponsAllowed",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AllowInteriorWeapons",
+      "params": [
+        {
+          "name": "allow",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_BlockIpAddress",
+      "params": [
+        {
+          "name": "ipAddress",
+          "type": "const char*"
+        },
+        {
+          "name": "timeMS",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_UnBlockIpAddress",
+      "params": [
+        {
+          "name": "ipAddress",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_DisableEntryExitMarkers",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_DisableNameTagsLOS",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_EnableZoneNames",
+      "params": [
+        {
+          "name": "enable",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_ShowGameTextForAll",
+      "params": [
+        {
+          "name": "msg",
+          "type": "const char*"
+        },
+        {
+          "name": "time",
+          "type": "int"
+        },
+        {
+          "name": "style",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_HideGameTextForAll",
+      "params": [
+        {
+          "name": "style",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Core_NetworkStats",
+      "params": [
+        {
+          "name": "output",
+          "type": "CAPIStringView*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Core_ServerTickRate",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_GetWeaponName",
+      "params": [
+        {
+          "name": "weaponid",
+          "type": "int"
+        },
+        {
+          "name": "output",
+          "type": "CAPIStringView*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetChatRadius",
+      "params": [
+        {
+          "name": "globalChatRadius",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetMarkerRadius",
+      "params": [
+        {
+          "name": "playerMarkerRadius",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SendRconCommand",
+      "params": [
+        {
+          "name": "command",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetDeathDropAmount",
+      "params": [
+        {
+          "name": "amount",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_GameMode_SetText",
+      "params": [
+        {
+          "name": "string",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetGravity",
+      "params": [
+        {
+          "name": "gravity",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "float",
+      "name": "Core_GetGravity",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetNameTagsDrawDistance",
+      "params": [
+        {
+          "name": "distance",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetWeather",
+      "params": [
+        {
+          "name": "weatherid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_SetWorldTime",
+      "params": [
+        {
+          "name": "hour",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_ShowNameTags",
+      "params": [
+        {
+          "name": "show",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_ShowPlayerMarkers",
+      "params": [
+        {
+          "name": "mode",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_UsePedAnims",
+      "params": []
+    },
+    {
+      "ret": "int",
+      "name": "Core_GetWeather",
+      "params": []
+    },
+    {
+      "ret": "int",
+      "name": "Core_GetWorldTime",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_ToggleChatTextReplacement",
+      "params": [
+        {
+          "name": "enable",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsChatTextReplacementToggled",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsNickNameValid",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AllowNickNameCharacter",
+      "params": [
+        {
+          "name": "character",
+          "type": "int"
+        },
+        {
+          "name": "allow",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsNickNameCharacterAllowed",
+      "params": [
+        {
+          "name": "character",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_ClearBanList",
+      "params": []
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsIpAddressBanned",
+      "params": [
+        {
+          "name": "ip",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "Core_GetWeaponSlot",
+      "params": [
+        {
+          "name": "weapon",
+          "type": "uint8_t"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_AddRule",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        },
+        {
+          "name": "value",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_IsValidRule",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Core_RemoveRule",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        }
+      ]
+    }
+  ],
+  "NPC": [
+    {
+      "ret": "bool",
+      "name": "NPC_Connect",
+      "params": [
+        {
+          "name": "name",
+          "type": "const char*"
+        },
+        {
+          "name": "script",
+          "type": "const char*"
+        }
+      ]
+    }
+  ],
+  "Recording": [
+    {
+      "ret": "bool",
+      "name": "Recording_Start",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "type",
+          "type": "int"
+        },
+        {
+          "name": "file",
+          "type": "const char*"
+        }
+      ]
+    },
+    {
+      "ret": "bool",
+      "name": "Recording_Stop",
+      "params": [
+        {
+          "name": "player",
           "type": "void*"
         }
       ]

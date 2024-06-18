@@ -23,11 +23,27 @@ OMP_CAPI(TextLabel_Create, objectPtr(StringCharPtr text, uint32_t color, float x
 	return nullptr;
 }
 
-OMP_CAPI(TextLabel_Delete, bool(objectPtr textlabel))
+OMP_CAPI(TextLabel_Destroy, bool(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
 	ComponentManager::Get()->textlabels->release(textlabel_->getID());
 	return true;
+}
+
+OMP_CAPI(TextLabel_FromID, objectPtr(int textlabelid))
+{
+	ITextLabelsComponent* component = ComponentManager::Get()->textlabels;
+	if (component)
+	{
+		return component->get(textlabelid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(TextLabel_GetID, int(objectPtr textlabel))
+{
+	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
+	return textlabel_->getID();
 }
 
 OMP_CAPI(TextLabel_AttachToPlayer, bool(objectPtr textlabel, objectPtr player, float offsetX, float offsetY, float offsetZ))
@@ -180,7 +196,7 @@ OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text,
 	return nullptr;
 }
 
-OMP_CAPI(PlayerTextLabel_Delete, bool(objectPtr player, objectPtr textlabel))
+OMP_CAPI(PlayerTextLabel_Destroy, bool(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
@@ -191,6 +207,24 @@ OMP_CAPI(PlayerTextLabel_Delete, bool(objectPtr player, objectPtr textlabel))
 	}
 	data->release(textlabel_->getID());
 	return true;
+}
+
+OMP_CAPI(PlayerTextLabel_FromID, objectPtr(objectPtr player, int textlabelid))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	IPlayerTextLabelData* labelData = queryExtension<IPlayerTextLabelData>(player_);
+	if (labelData)
+	{
+		return labelData->get(textlabelid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(PlayerTextLabel_GetID, int(objectPtr player, objectPtr textlabel))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
+	return textlabel_->getID();
 }
 
 OMP_CAPI(PlayerTextLabel_UpdateText, bool(objectPtr player, objectPtr textlabel, uint32_t color, StringCharPtr text))

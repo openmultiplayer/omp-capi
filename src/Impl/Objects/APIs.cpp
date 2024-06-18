@@ -30,6 +30,22 @@ OMP_CAPI(Object_Destroy, bool(objectPtr object))
 	return true;
 }
 
+OMP_CAPI(Object_FromID, objectPtr(int objectid))
+{
+	IObjectsComponent* component = ComponentManager::Get()->objects;
+	if (component)
+	{
+		return component->get(objectid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Object_GetID, int(objectPtr object))
+{
+	POOL_ENTITY_RET(menus, IObject, object, object_, INVALID_OBJECT_ID);
+	return object_->getID();
+}
+
 OMP_CAPI(Object_AttachToVehicle, bool(objectPtr object, objectPtr vehicle, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);

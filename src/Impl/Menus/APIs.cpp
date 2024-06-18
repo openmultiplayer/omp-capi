@@ -30,6 +30,22 @@ OMP_CAPI(Menu_Destroy, bool(objectPtr menu))
 	return true;
 }
 
+OMP_CAPI(Menu_FromID, objectPtr(int menuid))
+{
+	IMenusComponent* component = ComponentManager::Get()->menus;
+	if (component)
+	{
+		return component->get(menuid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Menu_GetID, int(objectPtr menu))
+{
+	POOL_ENTITY_RET(menus, IMenu, menu, menu_, INVALID_MENU_ID);
+	return menu_->getID();
+}
+
 OMP_CAPI(Menu_AddItem, int(objectPtr menu, uint8_t column, StringCharPtr text))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, INVALID_MENU_ID);

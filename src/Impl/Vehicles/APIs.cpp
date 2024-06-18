@@ -27,17 +27,33 @@ OMP_CAPI(Vehicle_Create, objectPtr(int modelid, float x, float y, float z, float
 	return nullptr;
 }
 
-OMP_CAPI(Vehicle_GetMaxPassengerSeats, int(int modelid))
-{
-	int seats = Impl::getVehiclePassengerSeats(modelid);
-	return seats;
-}
-
 OMP_CAPI(Vehicle_Destroy, bool(objectPtr vehicle))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
 	vehicles->release(vehicle_->getID());
 	return true;
+}
+
+OMP_CAPI(Vehicle_FromID, objectPtr(int vehicleid))
+{
+	IVehiclesComponent* component = ComponentManager::Get()->vehicles;
+	if (component)
+	{
+		return component->get(vehicleid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Vehicle_GetID, int(objectPtr vehicle))
+{
+	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
+	return vehicle_->getID();
+}
+
+OMP_CAPI(Vehicle_GetMaxPassengerSeats, int(int modelid))
+{
+	int seats = Impl::getVehiclePassengerSeats(modelid);
+	return seats;
 }
 
 OMP_CAPI(Vehicle_IsStreamedIn, bool(objectPtr vehicle, objectPtr player))
@@ -401,7 +417,8 @@ OMP_CAPI(Vehicle_GetLandingGearState, int(objectPtr vehicle))
 OMP_CAPI(Vehicle_IsValid, bool(objectPtr vehicle))
 {
 	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
-	if(!vehicles->get(vehicle_->getID())) return false;
+	if (!vehicles->get(vehicle_->getID()))
+		return false;
 	return true;
 }
 

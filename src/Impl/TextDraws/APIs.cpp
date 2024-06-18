@@ -30,10 +30,27 @@ OMP_CAPI(TextDraw_Destroy, bool(objectPtr textdraw))
 	return true;
 }
 
+OMP_CAPI(TextDraw_FromID, objectPtr(int textdrawid))
+{
+	ITextDrawsComponent* component = ComponentManager::Get()->textdraws;
+	if (component)
+	{
+		return component->get(textdrawid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(TextDraw_GetID, int(objectPtr textdraw))
+{
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, INVALID_TEXTDRAW);
+	return textdraw_->getID();
+}
+
 OMP_CAPI(TextDraw_IsValid, bool(objectPtr textdraw))
 {
 	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, false);
-	if(!textdraws->get(textdraw_->getID())) return false;
+	if (!textdraws->get(textdraw_->getID()))
+		return false;
 	return true;
 }
 
@@ -363,11 +380,30 @@ OMP_CAPI(PlayerTextDraw_Destroy, bool(objectPtr player, objectPtr textdraw))
 	return false;
 }
 
+OMP_CAPI(PlayerTextDraw_FromID, objectPtr(objectPtr player, int textdrawid))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	IPlayerTextDrawData* playerTextDraws = GetPlayerData<IPlayerTextDrawData>(player_);
+	if (playerTextDraws)
+	{
+		return playerTextDraws->get(textdrawid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(PlayerTextDraw_GetID, int(objectPtr player, objectPtr textdraw))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, INVALID_TEXTDRAW);
+	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, INVALID_TEXTDRAW);
+	return textdraw_->getID();
+}
+
 OMP_CAPI(PlayerTextDraw_IsValid, bool(objectPtr player, objectPtr textdraw))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
-	if(!playerData->get(td->getID())) return false;
+	if (!playerData->get(td->getID()))
+		return false;
 	return true;
 }
 

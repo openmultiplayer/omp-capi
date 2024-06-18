@@ -74,7 +74,8 @@ typedef void* Pickup;
 
 // Actor function type definitions
 typedef void* (*Actor_Create_t)(int model, float x, float y, float z, float rot, int* id);
-typedef bool (*Actor_Destroy_t)(void* actor);
+typedef void* (*Actor_FromID_t)(int actorid);
+typedef int (*Actor_GetID_t)(void* actor);
 typedef bool (*Actor_IsStreamedInFor_t)(void* actor, void* player);
 typedef bool (*Actor_SetVirtualWorld_t)(void* actor, int vw);
 typedef int (*Actor_GetVirtualWorld_t)(void* actor);
@@ -113,6 +114,8 @@ typedef bool (*RaceCheckpoint_Get_t)(void* player, float* x, float* y, float* z,
 
 // Class function type definitions
 typedef void* (*Class_Add_t)(uint8_t team, int skin, float x, float y, float z, float angle, uint8_t weapon1, uint32_t ammo1, uint8_t weapon2, uint32_t ammo2, uint8_t weapon3, uint32_t ammo3, int* id);
+typedef void* (*Class_FromID_t)(int classid);
+typedef int (*Class_GetID_t)(void* cls);
 typedef int (*Class_Count_t)();
 typedef bool (*Class_GetData_t)(void* classptr, uint8_t* teamid, int* skin, float* x, float* y, float* z, float* angle, uint8_t* weapon1, uint32_t* weapon1_ammo, uint8_t* weapon2, uint32_t* weapon2_ammo, uint8_t* weapon3, uint32_t* weapon3_ammo);
 typedef bool (*Class_Edit_t)(void* classptr, uint8_t teamid, int skin, float x, float y, float z, float angle, uint8_t weapon1, uint32_t ammo1, uint8_t weapon2, uint32_t ammo2, uint8_t weapon3, uint32_t ammo3);
@@ -137,6 +140,8 @@ typedef bool (*Player_GetDialogData_t)(void* player, int* dialogid, int* style, 
 typedef int (*Player_GetMenu_t)(void* player);
 typedef void* (*Player_GetSurfingPlayerObject_t)(void* player);
 typedef void* (*Player_GetCameraTargetPlayerObject_t)(void* player);
+typedef void* (*Player_FromID_t)(int playerid);
+typedef int (*Player_GetID_t)(void* player);
 typedef bool (*Player_SendClientMessage_t)(void* player, uint32_t color, const char* text);
 typedef bool (*Player_SetCameraPos_t)(void* player, float x, float y, float z);
 typedef bool (*Player_SetDrunkLevel_t)(void* player, int level);
@@ -396,6 +401,8 @@ typedef bool (*Event_RemoveAllHandlers_t)(const char* name, int priority);
 // GangZone function type definitions
 typedef void* (*GangZone_Create_t)(float minx, float miny, float maxx, float maxy, int* id);
 typedef bool (*GangZone_Destroy_t)(void* gangzone);
+typedef void* (*GangZone_FromID_t)(int gangzoneid);
+typedef int (*GangZone_GetID_t)(void* gangzone);
 typedef bool (*GangZone_ShowForPlayer_t)(void* player, void* gangzone, uint32_t color);
 typedef bool (*GangZone_ShowForAll_t)(void* gangzone, uint32_t color);
 typedef bool (*GangZone_HideForPlayer_t)(void* player, void* gangzone);
@@ -417,6 +424,8 @@ typedef bool (*GangZone_UseCheck_t)(void* gangzone, bool enable);
 // Menu function type definitions
 typedef void* (*Menu_Create_t)(const char* title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id);
 typedef bool (*Menu_Destroy_t)(void* menu);
+typedef void* (*Menu_FromID_t)(int menuid);
+typedef int (*Menu_GetID_t)(void* menu);
 typedef int (*Menu_AddItem_t)(void* menu, uint8_t column, const char* text);
 typedef bool (*Menu_SetColumnHeader_t)(void* menu, uint8_t column, const char* headerTitle);
 typedef bool (*Menu_ShowForPlayer_t)(void* menu, void* player);
@@ -437,6 +446,8 @@ typedef bool (*Menu_GetItem_t)(void* menu, int column, int row, CAPIStringView* 
 // Object function type definitions
 typedef void* (*Object_Create_t)(int modelid, float x, float y, float z, float rotationX, float rotationY, float rotationZ, float drawDistance, int* id);
 typedef bool (*Object_Destroy_t)(void* object);
+typedef void* (*Object_FromID_t)(int objectid);
+typedef int (*Object_GetID_t)(void* object);
 typedef bool (*Object_AttachToVehicle_t)(void* object, void* vehicle, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ);
 typedef bool (*Object_AttachToObject_t)(void* object, void* objAttachedTo, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ, bool syncRotation);
 typedef bool (*Object_AttachToPlayer_t)(void* object, void* player, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ);
@@ -506,6 +517,8 @@ typedef bool (*PlayerObject_IsNoCameraCollision_t)(void* player, void* object);
 typedef void* (*Pickup_Create_t)(int model, int type, float x, float y, float z, int virtualWorld, int* id);
 typedef bool (*Pickup_AddStatic_t)(int model, int type, float x, float y, float z, int virtualWorld);
 typedef bool (*Pickup_Destroy_t)(void* pickup);
+typedef void* (*Pickup_FromID_t)(int pickupid);
+typedef int (*Pickup_GetID_t)(void* pickup);
 typedef bool (*Pickup_IsValid_t)(void* pickup);
 typedef bool (*Pickup_IsStreamedIn_t)(void* player, void* pickup);
 typedef bool (*Pickup_GetPos_t)(void* pickup, float* x, float* y, float* z);
@@ -536,6 +549,8 @@ typedef bool (*Recording_Stop_t)(void* player);
 // TextDraw function type definitions
 typedef void* (*TextDraw_Create_t)(float x, float y, const char* text, int* id);
 typedef bool (*TextDraw_Destroy_t)(void* textdraw);
+typedef void* (*TextDraw_FromID_t)(int textdrawid);
+typedef int (*TextDraw_GetID_t)(void* textdraw);
 typedef bool (*TextDraw_IsValid_t)(void* textdraw);
 typedef bool (*TextDraw_IsVisibleForPlayer_t)(void* player, void* textdraw);
 typedef bool (*TextDraw_SetLetterSize_t)(void* textdraw, float sizeX, float sizeY);
@@ -582,6 +597,8 @@ typedef bool (*TextDraw_SetStringForPlayer_t)(void* textdraw, void* player, cons
 // PlayerTextDraw function type definitions
 typedef void* (*PlayerTextDraw_Create_t)(void* player, float x, float y, const char* text, int* id);
 typedef bool (*PlayerTextDraw_Destroy_t)(void* player, void* textdraw);
+typedef void* (*PlayerTextDraw_FromID_t)(void* player, int textdrawid);
+typedef int (*PlayerTextDraw_GetID_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_IsValid_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_IsVisible_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_LetterSize_t)(void* player, void* textdraw, float x, float y);
@@ -624,7 +641,9 @@ typedef bool (*PlayerTextDraw_GetPreviewVehColor_t)(void* player, void* textdraw
 
 // TextLabel function type definitions
 typedef void* (*TextLabel_Create_t)(const char* text, uint32_t color, float x, float y, float z, float drawDistance, int virtualWorld, bool los, int* id);
-typedef bool (*TextLabel_Delete_t)(void* textlabel);
+typedef bool (*TextLabel_Destroy_t)(void* textlabel);
+typedef void* (*TextLabel_FromID_t)(int textlabelid);
+typedef int (*TextLabel_GetID_t)(void* textlabel);
 typedef bool (*TextLabel_AttachToPlayer_t)(void* textlabel, void* player, float offsetX, float offsetY, float offsetZ);
 typedef bool (*TextLabel_AttachToVehicle_t)(void* textlabel, void* vehicle, float offsetX, float offsetY, float offsetZ);
 typedef bool (*TextLabel_UpdateText_t)(void* textlabel, uint32_t color, const char* text);
@@ -644,7 +663,9 @@ typedef bool (*TextLabel_GetAttachedData_t)(void* textlabel, int* attached_playe
 
 // PlayerTextLabel function type definitions
 typedef void* (*PlayerTextLabel_Create_t)(void* player, const char* text, uint32_t color, float x, float y, float z, float drawDistance, void* attachedPlayer, void* attachedVehicle, bool los, int* id);
-typedef bool (*PlayerTextLabel_Delete_t)(void* player, void* textlabel);
+typedef bool (*PlayerTextLabel_Destroy_t)(void* player, void* textlabel);
+typedef void* (*PlayerTextLabel_FromID_t)(void* player, int textlabelid);
+typedef int (*PlayerTextLabel_GetID_t)(void* player, void* textlabel);
 typedef bool (*PlayerTextLabel_UpdateText_t)(void* player, void* textlabel, uint32_t color, const char* text);
 typedef bool (*PlayerTextLabel_IsValid_t)(void* player, void* textlabel, bool* valid);
 typedef bool (*PlayerTextLabel_GetText_t)(void* player, void* textlabel, CAPIStringView* output);
@@ -660,8 +681,10 @@ typedef bool (*PlayerTextLabel_GetAttachedData_t)(void* player, void* textlabel,
 
 // Vehicle function type definitions
 typedef void* (*Vehicle_Create_t)(int modelid, float x, float y, float z, float rotation, int color1, int color2, int respawnDelay, bool addSiren, int* id);
-typedef int (*Vehicle_GetMaxPassengerSeats_t)(int modelid);
 typedef bool (*Vehicle_Destroy_t)(void* vehicle);
+typedef void* (*Vehicle_FromID_t)(int vehicleid);
+typedef int (*Vehicle_GetID_t)(void* vehicle);
+typedef int (*Vehicle_GetMaxPassengerSeats_t)(int modelid);
 typedef bool (*Vehicle_IsStreamedIn_t)(void* vehicle, void* player);
 typedef bool (*Vehicle_GetPos_t)(void* vehicle, float* x, float* y, float* z);
 typedef bool (*Vehicle_SetPos_t)(void* vehicle, float x, float y, float z);
@@ -1470,7 +1493,8 @@ typedef bool (*EventCallback_onVehicleSirenStateChange)(EventArgs_onVehicleSiren
 // Actor functions
 struct Actor_t {
     Actor_Create_t Create;
-    Actor_Destroy_t Destroy;
+    Actor_FromID_t FromID;
+    Actor_GetID_t GetID;
     Actor_IsStreamedInFor_t IsStreamedInFor;
     Actor_SetVirtualWorld_t SetVirtualWorld;
     Actor_GetVirtualWorld_t GetVirtualWorld;
@@ -1512,6 +1536,8 @@ struct RaceCheckpoint_t {
 // Class functions
 struct Class_t {
     Class_Add_t Add;
+    Class_FromID_t FromID;
+    Class_GetID_t GetID;
     Class_Count_t Count;
     Class_GetData_t GetData;
     Class_Edit_t Edit;
@@ -1537,6 +1563,8 @@ struct Player_t {
     Player_GetMenu_t GetMenu;
     Player_GetSurfingPlayerObject_t GetSurfingPlayerObject;
     Player_GetCameraTargetPlayerObject_t GetCameraTargetPlayerObject;
+    Player_FromID_t FromID;
+    Player_GetID_t GetID;
     Player_SendClientMessage_t SendClientMessage;
     Player_SetCameraPos_t SetCameraPos;
     Player_SetDrunkLevel_t SetDrunkLevel;
@@ -1804,6 +1832,8 @@ struct Event_t {
 struct GangZone_t {
     GangZone_Create_t Create;
     GangZone_Destroy_t Destroy;
+    GangZone_FromID_t FromID;
+    GangZone_GetID_t GetID;
     GangZone_ShowForPlayer_t ShowForPlayer;
     GangZone_ShowForAll_t ShowForAll;
     GangZone_HideForPlayer_t HideForPlayer;
@@ -1826,6 +1856,8 @@ struct GangZone_t {
 struct Menu_t {
     Menu_Create_t Create;
     Menu_Destroy_t Destroy;
+    Menu_FromID_t FromID;
+    Menu_GetID_t GetID;
     Menu_AddItem_t AddItem;
     Menu_SetColumnHeader_t SetColumnHeader;
     Menu_ShowForPlayer_t ShowForPlayer;
@@ -1847,6 +1879,8 @@ struct Menu_t {
 struct Object_t {
     Object_Create_t Create;
     Object_Destroy_t Destroy;
+    Object_FromID_t FromID;
+    Object_GetID_t GetID;
     Object_AttachToVehicle_t AttachToVehicle;
     Object_AttachToObject_t AttachToObject;
     Object_AttachToPlayer_t AttachToPlayer;
@@ -1918,6 +1952,8 @@ struct Pickup_t {
     Pickup_Create_t Create;
     Pickup_AddStatic_t AddStatic;
     Pickup_Destroy_t Destroy;
+    Pickup_FromID_t FromID;
+    Pickup_GetID_t GetID;
     Pickup_IsValid_t IsValid;
     Pickup_IsStreamedIn_t IsStreamedIn;
     Pickup_GetPos_t GetPos;
@@ -1951,6 +1987,8 @@ struct Recording_t {
 struct TextDraw_t {
     TextDraw_Create_t Create;
     TextDraw_Destroy_t Destroy;
+    TextDraw_FromID_t FromID;
+    TextDraw_GetID_t GetID;
     TextDraw_IsValid_t IsValid;
     TextDraw_IsVisibleForPlayer_t IsVisibleForPlayer;
     TextDraw_SetLetterSize_t SetLetterSize;
@@ -1998,6 +2036,8 @@ struct TextDraw_t {
 struct PlayerTextDraw_t {
     PlayerTextDraw_Create_t Create;
     PlayerTextDraw_Destroy_t Destroy;
+    PlayerTextDraw_FromID_t FromID;
+    PlayerTextDraw_GetID_t GetID;
     PlayerTextDraw_IsValid_t IsValid;
     PlayerTextDraw_IsVisible_t IsVisible;
     PlayerTextDraw_LetterSize_t LetterSize;
@@ -2041,7 +2081,9 @@ struct PlayerTextDraw_t {
 // TextLabel functions
 struct TextLabel_t {
     TextLabel_Create_t Create;
-    TextLabel_Delete_t Delete;
+    TextLabel_Destroy_t Destroy;
+    TextLabel_FromID_t FromID;
+    TextLabel_GetID_t GetID;
     TextLabel_AttachToPlayer_t AttachToPlayer;
     TextLabel_AttachToVehicle_t AttachToVehicle;
     TextLabel_UpdateText_t UpdateText;
@@ -2062,7 +2104,9 @@ struct TextLabel_t {
 // PlayerTextLabel functions
 struct PlayerTextLabel_t {
     PlayerTextLabel_Create_t Create;
-    PlayerTextLabel_Delete_t Delete;
+    PlayerTextLabel_Destroy_t Destroy;
+    PlayerTextLabel_FromID_t FromID;
+    PlayerTextLabel_GetID_t GetID;
     PlayerTextLabel_UpdateText_t UpdateText;
     PlayerTextLabel_IsValid_t IsValid;
     PlayerTextLabel_GetText_t GetText;
@@ -2079,8 +2123,10 @@ struct PlayerTextLabel_t {
 // Vehicle functions
 struct Vehicle_t {
     Vehicle_Create_t Create;
-    Vehicle_GetMaxPassengerSeats_t GetMaxPassengerSeats;
     Vehicle_Destroy_t Destroy;
+    Vehicle_FromID_t FromID;
+    Vehicle_GetID_t GetID;
+    Vehicle_GetMaxPassengerSeats_t GetMaxPassengerSeats;
     Vehicle_IsStreamedIn_t IsStreamedIn;
     Vehicle_GetPos_t GetPos;
     Vehicle_SetPos_t SetPos;
@@ -2197,7 +2243,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve Actor functions
     ompapi->Actor.Create = (Actor_Create_t)LIBRARY_GET_ADDR(capi_lib, "Actor_Create");
-    ompapi->Actor.Destroy = (Actor_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Actor_Destroy");
+    ompapi->Actor.FromID = (Actor_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Actor_FromID");
+    ompapi->Actor.GetID = (Actor_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Actor_GetID");
     ompapi->Actor.IsStreamedInFor = (Actor_IsStreamedInFor_t)LIBRARY_GET_ADDR(capi_lib, "Actor_IsStreamedInFor");
     ompapi->Actor.SetVirtualWorld = (Actor_SetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "Actor_SetVirtualWorld");
     ompapi->Actor.GetVirtualWorld = (Actor_GetVirtualWorld_t)LIBRARY_GET_ADDR(capi_lib, "Actor_GetVirtualWorld");
@@ -2233,6 +2280,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve Class functions
     ompapi->Class.Add = (Class_Add_t)LIBRARY_GET_ADDR(capi_lib, "Class_Add");
+    ompapi->Class.FromID = (Class_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Class_FromID");
+    ompapi->Class.GetID = (Class_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Class_GetID");
     ompapi->Class.Count = (Class_Count_t)LIBRARY_GET_ADDR(capi_lib, "Class_Count");
     ompapi->Class.GetData = (Class_GetData_t)LIBRARY_GET_ADDR(capi_lib, "Class_GetData");
     ompapi->Class.Edit = (Class_Edit_t)LIBRARY_GET_ADDR(capi_lib, "Class_Edit");
@@ -2256,6 +2305,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Player.GetMenu = (Player_GetMenu_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetMenu");
     ompapi->Player.GetSurfingPlayerObject = (Player_GetSurfingPlayerObject_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetSurfingPlayerObject");
     ompapi->Player.GetCameraTargetPlayerObject = (Player_GetCameraTargetPlayerObject_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetCameraTargetPlayerObject");
+    ompapi->Player.FromID = (Player_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Player_FromID");
+    ompapi->Player.GetID = (Player_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetID");
     ompapi->Player.SendClientMessage = (Player_SendClientMessage_t)LIBRARY_GET_ADDR(capi_lib, "Player_SendClientMessage");
     ompapi->Player.SetCameraPos = (Player_SetCameraPos_t)LIBRARY_GET_ADDR(capi_lib, "Player_SetCameraPos");
     ompapi->Player.SetDrunkLevel = (Player_SetDrunkLevel_t)LIBRARY_GET_ADDR(capi_lib, "Player_SetDrunkLevel");
@@ -2507,6 +2558,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     // Retrieve GangZone functions
     ompapi->GangZone.Create = (GangZone_Create_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Create");
     ompapi->GangZone.Destroy = (GangZone_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Destroy");
+    ompapi->GangZone.FromID = (GangZone_FromID_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_FromID");
+    ompapi->GangZone.GetID = (GangZone_GetID_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_GetID");
     ompapi->GangZone.ShowForPlayer = (GangZone_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_ShowForPlayer");
     ompapi->GangZone.ShowForAll = (GangZone_ShowForAll_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_ShowForAll");
     ompapi->GangZone.HideForPlayer = (GangZone_HideForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_HideForPlayer");
@@ -2527,6 +2580,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     // Retrieve Menu functions
     ompapi->Menu.Create = (Menu_Create_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Create");
     ompapi->Menu.Destroy = (Menu_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Destroy");
+    ompapi->Menu.FromID = (Menu_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_FromID");
+    ompapi->Menu.GetID = (Menu_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetID");
     ompapi->Menu.AddItem = (Menu_AddItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_AddItem");
     ompapi->Menu.SetColumnHeader = (Menu_SetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_SetColumnHeader");
     ompapi->Menu.ShowForPlayer = (Menu_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_ShowForPlayer");
@@ -2546,6 +2601,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     // Retrieve Object functions
     ompapi->Object.Create = (Object_Create_t)LIBRARY_GET_ADDR(capi_lib, "Object_Create");
     ompapi->Object.Destroy = (Object_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Object_Destroy");
+    ompapi->Object.FromID = (Object_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Object_FromID");
+    ompapi->Object.GetID = (Object_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Object_GetID");
     ompapi->Object.AttachToVehicle = (Object_AttachToVehicle_t)LIBRARY_GET_ADDR(capi_lib, "Object_AttachToVehicle");
     ompapi->Object.AttachToObject = (Object_AttachToObject_t)LIBRARY_GET_ADDR(capi_lib, "Object_AttachToObject");
     ompapi->Object.AttachToPlayer = (Object_AttachToPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Object_AttachToPlayer");
@@ -2613,6 +2670,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Pickup.Create = (Pickup_Create_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_Create");
     ompapi->Pickup.AddStatic = (Pickup_AddStatic_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_AddStatic");
     ompapi->Pickup.Destroy = (Pickup_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_Destroy");
+    ompapi->Pickup.FromID = (Pickup_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_FromID");
+    ompapi->Pickup.GetID = (Pickup_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_GetID");
     ompapi->Pickup.IsValid = (Pickup_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_IsValid");
     ompapi->Pickup.IsStreamedIn = (Pickup_IsStreamedIn_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_IsStreamedIn");
     ompapi->Pickup.GetPos = (Pickup_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Pickup_GetPos");
@@ -2640,6 +2699,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     // Retrieve TextDraw functions
     ompapi->TextDraw.Create = (TextDraw_Create_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_Create");
     ompapi->TextDraw.Destroy = (TextDraw_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_Destroy");
+    ompapi->TextDraw.FromID = (TextDraw_FromID_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_FromID");
+    ompapi->TextDraw.GetID = (TextDraw_GetID_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_GetID");
     ompapi->TextDraw.IsValid = (TextDraw_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_IsValid");
     ompapi->TextDraw.IsVisibleForPlayer = (TextDraw_IsVisibleForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_IsVisibleForPlayer");
     ompapi->TextDraw.SetLetterSize = (TextDraw_SetLetterSize_t)LIBRARY_GET_ADDR(capi_lib, "TextDraw_SetLetterSize");
@@ -2685,6 +2746,8 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     // Retrieve PlayerTextDraw functions
     ompapi->PlayerTextDraw.Create = (PlayerTextDraw_Create_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Create");
     ompapi->PlayerTextDraw.Destroy = (PlayerTextDraw_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Destroy");
+    ompapi->PlayerTextDraw.FromID = (PlayerTextDraw_FromID_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_FromID");
+    ompapi->PlayerTextDraw.GetID = (PlayerTextDraw_GetID_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_GetID");
     ompapi->PlayerTextDraw.IsValid = (PlayerTextDraw_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_IsValid");
     ompapi->PlayerTextDraw.IsVisible = (PlayerTextDraw_IsVisible_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_IsVisible");
     ompapi->PlayerTextDraw.LetterSize = (PlayerTextDraw_LetterSize_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_LetterSize");
@@ -2726,7 +2789,9 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve TextLabel functions
     ompapi->TextLabel.Create = (TextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Create");
-    ompapi->TextLabel.Delete = (TextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Delete");
+    ompapi->TextLabel.Destroy = (TextLabel_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_Destroy");
+    ompapi->TextLabel.FromID = (TextLabel_FromID_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_FromID");
+    ompapi->TextLabel.GetID = (TextLabel_GetID_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_GetID");
     ompapi->TextLabel.AttachToPlayer = (TextLabel_AttachToPlayer_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToPlayer");
     ompapi->TextLabel.AttachToVehicle = (TextLabel_AttachToVehicle_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_AttachToVehicle");
     ompapi->TextLabel.UpdateText = (TextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "TextLabel_UpdateText");
@@ -2745,7 +2810,9 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve PlayerTextLabel functions
     ompapi->PlayerTextLabel.Create = (PlayerTextLabel_Create_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Create");
-    ompapi->PlayerTextLabel.Delete = (PlayerTextLabel_Delete_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Delete");
+    ompapi->PlayerTextLabel.Destroy = (PlayerTextLabel_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_Destroy");
+    ompapi->PlayerTextLabel.FromID = (PlayerTextLabel_FromID_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_FromID");
+    ompapi->PlayerTextLabel.GetID = (PlayerTextLabel_GetID_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetID");
     ompapi->PlayerTextLabel.UpdateText = (PlayerTextLabel_UpdateText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_UpdateText");
     ompapi->PlayerTextLabel.IsValid = (PlayerTextLabel_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_IsValid");
     ompapi->PlayerTextLabel.GetText = (PlayerTextLabel_GetText_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextLabel_GetText");
@@ -2760,8 +2827,10 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve Vehicle functions
     ompapi->Vehicle.Create = (Vehicle_Create_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_Create");
-    ompapi->Vehicle.GetMaxPassengerSeats = (Vehicle_GetMaxPassengerSeats_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_GetMaxPassengerSeats");
     ompapi->Vehicle.Destroy = (Vehicle_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_Destroy");
+    ompapi->Vehicle.FromID = (Vehicle_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_FromID");
+    ompapi->Vehicle.GetID = (Vehicle_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_GetID");
+    ompapi->Vehicle.GetMaxPassengerSeats = (Vehicle_GetMaxPassengerSeats_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_GetMaxPassengerSeats");
     ompapi->Vehicle.IsStreamedIn = (Vehicle_IsStreamedIn_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_IsStreamedIn");
     ompapi->Vehicle.GetPos = (Vehicle_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_GetPos");
     ompapi->Vehicle.SetPos = (Vehicle_SetPos_t)LIBRARY_GET_ADDR(capi_lib, "Vehicle_SetPos");

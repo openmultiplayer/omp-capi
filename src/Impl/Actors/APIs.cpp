@@ -23,11 +23,20 @@ OMP_CAPI(Actor_Create, objectPtr(int model, float x, float y, float z, float rot
 	return nullptr;
 }
 
-OMP_CAPI(Actor_Destroy, bool(objectPtr actor))
+OMP_CAPI(Actor_FromID, objectPtr(int actorid))
 {
-	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
-	actors->release(actor_->getID());
-	return true;
+	IActorsComponent* component = ComponentManager::Get()->actors;
+	if (component)
+	{
+		return component->get(actorid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Actor_GetID, int(objectPtr actor))
+{
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, INVALID_ACTOR_ID);
+	return actor_->getID();
 }
 
 OMP_CAPI(Actor_IsStreamedInFor, bool(objectPtr actor, objectPtr player))
@@ -125,7 +134,8 @@ OMP_CAPI(Actor_IsInvulnerable, bool(objectPtr actor))
 OMP_CAPI(Actor_IsValid, bool(objectPtr actor))
 {
 	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
-	if(!actors->get(actor_->getID())) return false;
+	if (!actors->get(actor_->getID()))
+		return false;
 	return true;
 }
 
