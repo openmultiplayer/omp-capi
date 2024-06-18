@@ -195,7 +195,7 @@ private:
 					if (ret)
 					{
 						delete[] eventArgs.list;
-						return false;
+						return true;
 					}
 					break;
 				case EventReturnHandler::None:
