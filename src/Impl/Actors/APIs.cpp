@@ -23,6 +23,13 @@ OMP_CAPI(Actor_Create, objectPtr(int model, float x, float y, float z, float rot
 	return nullptr;
 }
 
+OMP_CAPI(Actor_Destroy, bool(objectPtr actor))
+{
+	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
+	actors->release(actor_->getID());
+	return true;
+}
+
 OMP_CAPI(Actor_FromID, objectPtr(int actorid))
 {
 	IActorsComponent* component = ComponentManager::Get()->actors;

@@ -74,6 +74,7 @@ typedef void* Pickup;
 
 // Actor function type definitions
 typedef void* (*Actor_Create_t)(int model, float x, float y, float z, float rot, int* id);
+typedef bool (*Actor_Destroy_t)(void* actor);
 typedef void* (*Actor_FromID_t)(int actorid);
 typedef int (*Actor_GetID_t)(void* actor);
 typedef bool (*Actor_IsStreamedInFor_t)(void* actor, void* player);
@@ -1493,6 +1494,7 @@ typedef bool (*EventCallback_onVehicleSirenStateChange)(EventArgs_onVehicleSiren
 // Actor functions
 struct Actor_t {
     Actor_Create_t Create;
+    Actor_Destroy_t Destroy;
     Actor_FromID_t FromID;
     Actor_GetID_t GetID;
     Actor_IsStreamedInFor_t IsStreamedInFor;
@@ -2243,6 +2245,7 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
 
     // Retrieve Actor functions
     ompapi->Actor.Create = (Actor_Create_t)LIBRARY_GET_ADDR(capi_lib, "Actor_Create");
+    ompapi->Actor.Destroy = (Actor_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Actor_Destroy");
     ompapi->Actor.FromID = (Actor_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Actor_FromID");
     ompapi->Actor.GetID = (Actor_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Actor_GetID");
     ompapi->Actor.IsStreamedInFor = (Actor_IsStreamedInFor_t)LIBRARY_GET_ADDR(capi_lib, "Actor_IsStreamedInFor");
