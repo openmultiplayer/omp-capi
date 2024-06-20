@@ -175,7 +175,7 @@ OMP_CAPI(Actor_GetAnimation, bool(objectPtr actor, OutputStringViewPtr library, 
 	return true;
 }
 
-OMP_CAPI(Actor_GetSpawnInfo, bool(objectPtr actor, float* x, float* y, float* z, float* angle, float* skin))
+OMP_CAPI(Actor_GetSpawnInfo, bool(objectPtr actor, float* x, float* y, float* z, float* angle, int* skin))
 {
 	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
 	const ActorSpawnData& spawnData = actor_->getSpawnData();
