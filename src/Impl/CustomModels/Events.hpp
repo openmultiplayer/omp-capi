@@ -8,7 +8,7 @@
 
 #pragma once
 #include "../ComponentManager.hpp"
-#include "../Utils/Singleton.hpp"
+#include "../../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
 struct CustomModelsEvents : public PlayerModelsEventHandler, public Singleton<CustomModelsEvents>

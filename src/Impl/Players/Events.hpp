@@ -8,7 +8,7 @@
 
 #pragma once
 #include "../ComponentManager.hpp"
-#include "../Utils/Singleton.hpp"
+#include "../../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
 class PlayerEvents : public PlayerSpawnEventHandler, public PlayerConnectEventHandler, public PlayerStreamEventHandler, public PlayerTextEventHandler, public PlayerShotEventHandler, public PlayerChangeEventHandler, public PlayerDamageEventHandler, public PlayerClickEventHandler, public PlayerCheckEventHandler, public PlayerUpdateEventHandler, public Singleton<PlayerEvents>

@@ -8,7 +8,7 @@
 
 #pragma once
 #include "../ComponentManager.hpp"
-#include "../Utils/Singleton.hpp"
+#include "../../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
 struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEvents>

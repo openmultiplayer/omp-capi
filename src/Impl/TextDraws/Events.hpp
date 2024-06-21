@@ -8,7 +8,7 @@
 
 #pragma once
 #include "../ComponentManager.hpp"
-#include "../Utils/Singleton.hpp"
+#include "../../Utils/Singleton.hpp"
 #include "sdk.hpp"
 
 struct TextDrawEvents : public TextDrawEventHandler, public Singleton<TextDrawEvents>
