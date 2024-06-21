@@ -91,53 +91,53 @@ public:
 	template <typename... Args>
 	bool CallEvent(const Impl::String& name, EventReturnHandler returnHandler, Args... args)
 	{
-		auto highest = highestPriorityEvents.find(name);
-		auto high = fairlyHighPriorityEvents.find(name);
-		auto default = defaultPriorityEvents.find(name);
-		auto low = fairlyLowPriorityEvents.find(name);
-		auto lowest = lowestPriorityEvents.find(name);
+		auto highest_ = highestPriorityEvents.find(name);
+		auto high_ = fairlyHighPriorityEvents.find(name);
+		auto default_ = defaultPriorityEvents.find(name);
+		auto low_ = fairlyLowPriorityEvents.find(name);
+		auto lowest_ = lowestPriorityEvents.find(name);
 
 		bool result = true;
 
-		if (highest != highestPriorityEvents.end())
+		if (highest_ != highestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest, returnHandler, args...);
+			auto ret = CallEventOfPriority(highest_, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
 			}
 		}
 
-		if (high != fairlyHighPriorityEvents.end())
+		if (high_ != fairlyHighPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(high, returnHandler, args...);
+			auto ret = CallEventOfPriority(high_, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
 			}
 		}
 
-		if (default != defaultPriorityEvents.end())
+		if (default_ != defaultPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(default, returnHandler, args...);
+			auto ret = CallEventOfPriority(default_, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
 			}
 		}
 
-		if (low != fairlyLowPriorityEvents.end())
+		if (low_ != fairlyLowPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(low, returnHandler, args...);
+			auto ret = CallEventOfPriority(low_, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
 			}
 		}
 
-		if (lowest != lowestPriorityEvents.end())
+		if (lowest_ != lowestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(lowest, returnHandler, args...);
+			auto ret = CallEventOfPriority(lowest_, returnHandler, args...);
 			if (!ret)
 			{
 				result = false;
