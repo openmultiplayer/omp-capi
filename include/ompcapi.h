@@ -252,7 +252,7 @@ typedef float (*Player_GetCameraAspectRatio_t)(void* player);
 typedef bool (*Player_GetCameraFrontVector_t)(void* player, float* x, float* y, float* z);
 typedef int (*Player_GetCameraMode_t)(void* player);
 typedef bool (*Player_GetKeys_t)(void* player, int* keys, int* updown, int* leftright);
-typedef void* (*Player_GetSurfingVehicleID_t)(void* player);
+typedef void* (*Player_GetSurfingVehicle_t)(void* player);
 typedef void* (*Player_GetSurfingObject_t)(void* player);
 typedef void* (*Player_GetTargetPlayer_t)(void* player);
 typedef void* (*Player_GetTargetActor_t)(void* player);
@@ -399,6 +399,28 @@ typedef bool (*Event_RemoveHandler_t)(const char* name, int priority, void* call
 typedef bool (*Event_RemoveAllHandlers_t)(const char* name, int priority);
 
 
+// Menu function type definitions
+typedef void* (*Menu_Create_t)(const char* title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id);
+typedef bool (*Menu_Destroy_t)(void* menu);
+typedef void* (*Menu_FromID_t)(int menuid);
+typedef int (*Menu_GetID_t)(void* menu);
+typedef int (*Menu_AddItem_t)(void* menu, uint8_t column, const char* text);
+typedef bool (*Menu_SetColumnHeader_t)(void* menu, uint8_t column, const char* headerTitle);
+typedef bool (*Menu_ShowForPlayer_t)(void* menu, void* player);
+typedef bool (*Menu_HideForPlayer_t)(void* menu, void* player);
+typedef bool (*Menu_Disable_t)(void* menu);
+typedef bool (*Menu_DisableRow_t)(void* menu, uint8_t row);
+typedef bool (*Menu_IsValid_t)(void* menu);
+typedef bool (*Menu_IsDisabled_t)(void* menu);
+typedef bool (*Menu_IsRowDisabled_t)(void* menu, int row);
+typedef int (*Menu_GetColumns_t)(void* menu);
+typedef int (*Menu_GetItems_t)(void* menu, int column);
+typedef bool (*Menu_GetPos_t)(void* menu, float* x, float* y);
+typedef bool (*Menu_GetColumnWidth_t)(void* menu, float* column1Width, float* column2Width);
+typedef bool (*Menu_GetColumnHeader_t)(void* menu, int column, CAPIStringView* header);
+typedef bool (*Menu_GetItem_t)(void* menu, int column, int row, CAPIStringView* item);
+
+
 // GangZone function type definitions
 typedef void* (*GangZone_Create_t)(float minx, float miny, float maxx, float maxy, int* id);
 typedef bool (*GangZone_Destroy_t)(void* gangzone);
@@ -420,28 +442,6 @@ typedef int (*GangZone_GetFlashColorForPlayer_t)(void* player, void* gangzone);
 typedef bool (*GangZone_IsFlashingForPlayer_t)(void* player, void* gangzone);
 typedef bool (*GangZone_GetPos_t)(void* gangzone, float* minx, float* miny, float* maxx, float* maxy);
 typedef bool (*GangZone_UseCheck_t)(void* gangzone, bool enable);
-
-
-// Menu function type definitions
-typedef void* (*Menu_Create_t)(const char* title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id);
-typedef bool (*Menu_Destroy_t)(void* menu);
-typedef void* (*Menu_FromID_t)(int menuid);
-typedef int (*Menu_GetID_t)(void* menu);
-typedef int (*Menu_AddItem_t)(void* menu, uint8_t column, const char* text);
-typedef bool (*Menu_SetColumnHeader_t)(void* menu, uint8_t column, const char* headerTitle);
-typedef bool (*Menu_ShowForPlayer_t)(void* menu, void* player);
-typedef bool (*Menu_HideForPlayer_t)(void* menu, void* player);
-typedef bool (*Menu_Disable_t)(void* menu);
-typedef bool (*Menu_DisableRow_t)(void* menu, uint8_t row);
-typedef bool (*Menu_IsValid_t)(void* menu);
-typedef bool (*Menu_IsDisabled_t)(void* menu);
-typedef bool (*Menu_IsRowDisabled_t)(void* menu, int row);
-typedef int (*Menu_GetColumns_t)(void* menu);
-typedef int (*Menu_GetItems_t)(void* menu, int column);
-typedef bool (*Menu_GetPos_t)(void* menu, float* x, float* y);
-typedef bool (*Menu_GetColumnWidth_t)(void* menu, float* column1Width, float* column2Width);
-typedef bool (*Menu_GetColumnHeader_t)(void* menu, int column, CAPIStringView* header);
-typedef bool (*Menu_GetItem_t)(void* menu, int column, int row, CAPIStringView* item);
 
 
 // Object function type definitions
@@ -1676,7 +1676,7 @@ struct Player_t {
     Player_GetCameraFrontVector_t GetCameraFrontVector;
     Player_GetCameraMode_t GetCameraMode;
     Player_GetKeys_t GetKeys;
-    Player_GetSurfingVehicleID_t GetSurfingVehicleID;
+    Player_GetSurfingVehicle_t GetSurfingVehicle;
     Player_GetSurfingObject_t GetSurfingObject;
     Player_GetTargetPlayer_t GetTargetPlayer;
     Player_GetTargetActor_t GetTargetActor;
@@ -1830,6 +1830,29 @@ struct Event_t {
     Event_RemoveAllHandlers_t RemoveAllHandlers;
 };
 
+// Menu functions
+struct Menu_t {
+    Menu_Create_t Create;
+    Menu_Destroy_t Destroy;
+    Menu_FromID_t FromID;
+    Menu_GetID_t GetID;
+    Menu_AddItem_t AddItem;
+    Menu_SetColumnHeader_t SetColumnHeader;
+    Menu_ShowForPlayer_t ShowForPlayer;
+    Menu_HideForPlayer_t HideForPlayer;
+    Menu_Disable_t Disable;
+    Menu_DisableRow_t DisableRow;
+    Menu_IsValid_t IsValid;
+    Menu_IsDisabled_t IsDisabled;
+    Menu_IsRowDisabled_t IsRowDisabled;
+    Menu_GetColumns_t GetColumns;
+    Menu_GetItems_t GetItems;
+    Menu_GetPos_t GetPos;
+    Menu_GetColumnWidth_t GetColumnWidth;
+    Menu_GetColumnHeader_t GetColumnHeader;
+    Menu_GetItem_t GetItem;
+};
+
 // GangZone functions
 struct GangZone_t {
     GangZone_Create_t Create;
@@ -1852,29 +1875,6 @@ struct GangZone_t {
     GangZone_IsFlashingForPlayer_t IsFlashingForPlayer;
     GangZone_GetPos_t GetPos;
     GangZone_UseCheck_t UseCheck;
-};
-
-// Menu functions
-struct Menu_t {
-    Menu_Create_t Create;
-    Menu_Destroy_t Destroy;
-    Menu_FromID_t FromID;
-    Menu_GetID_t GetID;
-    Menu_AddItem_t AddItem;
-    Menu_SetColumnHeader_t SetColumnHeader;
-    Menu_ShowForPlayer_t ShowForPlayer;
-    Menu_HideForPlayer_t HideForPlayer;
-    Menu_Disable_t Disable;
-    Menu_DisableRow_t DisableRow;
-    Menu_IsValid_t IsValid;
-    Menu_IsDisabled_t IsDisabled;
-    Menu_IsRowDisabled_t IsRowDisabled;
-    Menu_GetColumns_t GetColumns;
-    Menu_GetItems_t GetItems;
-    Menu_GetPos_t GetPos;
-    Menu_GetColumnWidth_t GetColumnWidth;
-    Menu_GetColumnHeader_t GetColumnHeader;
-    Menu_GetItem_t GetItem;
 };
 
 // Object functions
@@ -2222,8 +2222,8 @@ struct OMPAPI_t {
     CustomModel_t CustomModel;
     Dialog_t Dialog;
     Event_t Event;
-    GangZone_t GangZone;
     Menu_t Menu;
+    GangZone_t GangZone;
     Object_t Object;
     PlayerObject_t PlayerObject;
     Pickup_t Pickup;
@@ -2419,7 +2419,7 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Player.GetCameraFrontVector = (Player_GetCameraFrontVector_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetCameraFrontVector");
     ompapi->Player.GetCameraMode = (Player_GetCameraMode_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetCameraMode");
     ompapi->Player.GetKeys = (Player_GetKeys_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetKeys");
-    ompapi->Player.GetSurfingVehicleID = (Player_GetSurfingVehicleID_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetSurfingVehicleID");
+    ompapi->Player.GetSurfingVehicle = (Player_GetSurfingVehicle_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetSurfingVehicle");
     ompapi->Player.GetSurfingObject = (Player_GetSurfingObject_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetSurfingObject");
     ompapi->Player.GetTargetPlayer = (Player_GetTargetPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetTargetPlayer");
     ompapi->Player.GetTargetActor = (Player_GetTargetActor_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetTargetActor");
@@ -2558,6 +2558,27 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Event.RemoveHandler = (Event_RemoveHandler_t)LIBRARY_GET_ADDR(capi_lib, "Event_RemoveHandler");
     ompapi->Event.RemoveAllHandlers = (Event_RemoveAllHandlers_t)LIBRARY_GET_ADDR(capi_lib, "Event_RemoveAllHandlers");
 
+    // Retrieve Menu functions
+    ompapi->Menu.Create = (Menu_Create_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Create");
+    ompapi->Menu.Destroy = (Menu_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Destroy");
+    ompapi->Menu.FromID = (Menu_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_FromID");
+    ompapi->Menu.GetID = (Menu_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetID");
+    ompapi->Menu.AddItem = (Menu_AddItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_AddItem");
+    ompapi->Menu.SetColumnHeader = (Menu_SetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_SetColumnHeader");
+    ompapi->Menu.ShowForPlayer = (Menu_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_ShowForPlayer");
+    ompapi->Menu.HideForPlayer = (Menu_HideForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_HideForPlayer");
+    ompapi->Menu.Disable = (Menu_Disable_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Disable");
+    ompapi->Menu.DisableRow = (Menu_DisableRow_t)LIBRARY_GET_ADDR(capi_lib, "Menu_DisableRow");
+    ompapi->Menu.IsValid = (Menu_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsValid");
+    ompapi->Menu.IsDisabled = (Menu_IsDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsDisabled");
+    ompapi->Menu.IsRowDisabled = (Menu_IsRowDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsRowDisabled");
+    ompapi->Menu.GetColumns = (Menu_GetColumns_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumns");
+    ompapi->Menu.GetItems = (Menu_GetItems_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItems");
+    ompapi->Menu.GetPos = (Menu_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetPos");
+    ompapi->Menu.GetColumnWidth = (Menu_GetColumnWidth_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnWidth");
+    ompapi->Menu.GetColumnHeader = (Menu_GetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnHeader");
+    ompapi->Menu.GetItem = (Menu_GetItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItem");
+
     // Retrieve GangZone functions
     ompapi->GangZone.Create = (GangZone_Create_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Create");
     ompapi->GangZone.Destroy = (GangZone_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Destroy");
@@ -2579,27 +2600,6 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->GangZone.IsFlashingForPlayer = (GangZone_IsFlashingForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_IsFlashingForPlayer");
     ompapi->GangZone.GetPos = (GangZone_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_GetPos");
     ompapi->GangZone.UseCheck = (GangZone_UseCheck_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_UseCheck");
-
-    // Retrieve Menu functions
-    ompapi->Menu.Create = (Menu_Create_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Create");
-    ompapi->Menu.Destroy = (Menu_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Destroy");
-    ompapi->Menu.FromID = (Menu_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_FromID");
-    ompapi->Menu.GetID = (Menu_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetID");
-    ompapi->Menu.AddItem = (Menu_AddItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_AddItem");
-    ompapi->Menu.SetColumnHeader = (Menu_SetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_SetColumnHeader");
-    ompapi->Menu.ShowForPlayer = (Menu_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_ShowForPlayer");
-    ompapi->Menu.HideForPlayer = (Menu_HideForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_HideForPlayer");
-    ompapi->Menu.Disable = (Menu_Disable_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Disable");
-    ompapi->Menu.DisableRow = (Menu_DisableRow_t)LIBRARY_GET_ADDR(capi_lib, "Menu_DisableRow");
-    ompapi->Menu.IsValid = (Menu_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsValid");
-    ompapi->Menu.IsDisabled = (Menu_IsDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsDisabled");
-    ompapi->Menu.IsRowDisabled = (Menu_IsRowDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsRowDisabled");
-    ompapi->Menu.GetColumns = (Menu_GetColumns_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumns");
-    ompapi->Menu.GetItems = (Menu_GetItems_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItems");
-    ompapi->Menu.GetPos = (Menu_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetPos");
-    ompapi->Menu.GetColumnWidth = (Menu_GetColumnWidth_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnWidth");
-    ompapi->Menu.GetColumnHeader = (Menu_GetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnHeader");
-    ompapi->Menu.GetItem = (Menu_GetItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItem");
 
     // Retrieve Object functions
     ompapi->Object.Create = (Object_Create_t)LIBRARY_GET_ADDR(capi_lib, "Object_Create");

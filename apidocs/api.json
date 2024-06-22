@@ -2839,7 +2839,7 @@
     },
     {
       "ret": "void*",
-      "name": "Player_GetSurfingVehicleID",
+      "name": "Player_GetSurfingVehicle",
       "params": [
         {
           "name": "player",

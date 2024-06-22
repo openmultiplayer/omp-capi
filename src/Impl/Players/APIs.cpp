@@ -894,7 +894,7 @@ OMP_CAPI(Player_GetKeys, bool(objectPtr player, int* keys, int* updown, int* lef
 	return true;
 }
 
-OMP_CAPI(Player_GetSurfingVehicleID, objectPtr(objectPtr player))
+OMP_CAPI(Player_GetSurfingVehicle, objectPtr(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	PlayerSurfingData data = player_->getSurfingData();
