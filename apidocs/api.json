@@ -368,7 +368,7 @@
         },
         {
           "name": "skin",
-          "type": "float*"
+          "type": "int*"
         }
       ]
     }
@@ -3749,7 +3749,7 @@
       "params": [
         {
           "name": "uid",
-          "type": "int"
+          "type": "uint64_t"
         },
         {
           "name": "name",
@@ -3830,7 +3830,7 @@
   ],
   "Core": [
     {
-      "ret": "int",
+      "ret": "uint32_t",
       "name": "Core_TickCount",
       "params": []
     },
@@ -5684,7 +5684,7 @@
       ]
     },
     {
-      "ret": "float",
+      "ret": "bool",
       "name": "Object_GetSyncRotation",
       "params": [
         {
@@ -6454,7 +6454,7 @@
       ]
     },
     {
-      "ret": "float",
+      "ret": "bool",
       "name": "PlayerObject_GetSyncRotation",
       "params": [
         {

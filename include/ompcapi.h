@@ -94,7 +94,7 @@ typedef bool (*Actor_IsValid_t)(void* actor);
 typedef bool (*Actor_SetSkin_t)(void* actor, int skin);
 typedef int (*Actor_GetSkin_t)(void* actor);
 typedef bool (*Actor_GetAnimation_t)(void* actor, CAPIStringView* library, CAPIStringView* name, float* delta, bool* loop, bool* lockX, bool* lockY, bool* freeze, int* time);
-typedef bool (*Actor_GetSpawnInfo_t)(void* actor, float* x, float* y, float* z, float* angle, float* skin);
+typedef bool (*Actor_GetSpawnInfo_t)(void* actor, float* x, float* y, float* z, float* angle, int* skin);
 
 
 // Checkpoint function type definitions
@@ -315,7 +315,7 @@ typedef float (*Player_GetTrainSpeed_t)(void* player);
 
 
 // Component function type definitions
-typedef void* (*Component_Create_t)(int uid, const char* name, ComponentVersion version, void* onLoadCB, void* onInitCB, void* onReadyCB, void* onResetCB, void* onFreeCB);
+typedef void* (*Component_Create_t)(uint64_t uid, const char* name, ComponentVersion version, void* onLoadCB, void* onInitCB, void* onReadyCB, void* onResetCB, void* onFreeCB);
 
 
 // Config function type definitions
@@ -326,7 +326,7 @@ typedef int (*Config_GetAsString_t)(const char* cvar, CAPIStringView* output);
 
 
 // Core function type definitions
-typedef int (*Core_TickCount_t)();
+typedef uint32_t (*Core_TickCount_t)();
 typedef int (*Core_MaxPlayers_t)();
 typedef bool (*Core_Log_t)(const char* text);
 typedef bool (*Core_IsAdminTeleportAllowed_t)();
@@ -474,7 +474,7 @@ typedef bool (*Object_GetMovingTargetPos_t)(void* object, float* targetX, float*
 typedef bool (*Object_GetMovingTargetRot_t)(void* object, float* rotationX, float* rotationY, float* rotationZ);
 typedef bool (*Object_GetAttachedData_t)(void* object, int* parentVehicle, int* parentObject, int* parentPlayer);
 typedef bool (*Object_GetAttachedOffset_t)(void* object, float* offsetX, float* offsetY, float* offsetZ, float* rotationX, float* rotationY, float* rotationZ);
-typedef float (*Object_GetSyncRotation_t)(void* object);
+typedef bool (*Object_GetSyncRotation_t)(void* object);
 typedef bool (*Object_IsMaterialSlotUsed_t)(void* object, int materialIndex);
 typedef bool (*Object_GetMaterial_t)(void* object, int materialIndex, int* modelid, CAPIStringView* textureLibrary, CAPIStringView* textureName, int* materialColor);
 typedef bool (*Object_GetMaterialText_t)(void* object, int materialIndex, CAPIStringView* text, int* materialSize, CAPIStringView* fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment);
@@ -507,7 +507,7 @@ typedef bool (*PlayerObject_GetMovingTargetPos_t)(void* player, void* object, fl
 typedef bool (*PlayerObject_GetMovingTargetRot_t)(void* player, void* object, float* rotationX, float* rotationY, float* rotationZ);
 typedef bool (*PlayerObject_GetAttachedData_t)(void* player, void* object, int* parentVehicle, int* parentObject, int* parentPlayer);
 typedef bool (*PlayerObject_GetAttachedOffset_t)(void* player, void* object, float* offsetX, float* offsetY, float* offsetZ, float* rotationX, float* rotationY, float* rotationZ);
-typedef float (*PlayerObject_GetSyncRotation_t)(void* player, void* object);
+typedef bool (*PlayerObject_GetSyncRotation_t)(void* player, void* object);
 typedef bool (*PlayerObject_IsMaterialSlotUsed_t)(void* player, void* object, int materialIndex);
 typedef bool (*PlayerObject_GetMaterial_t)(void* player, void* object, int materialIndex, int* modelid, CAPIStringView* textureLibrary, CAPIStringView* textureName, int* materialColor);
 typedef bool (*PlayerObject_GetMaterialText_t)(void* player, void* object, int materialIndex, CAPIStringView* text, int* materialSize, CAPIStringView* fontFace, int* fontSize, bool* bold, int* fontColor, int* backgroundColor, int* textAlignment);
