@@ -40,7 +40,7 @@ OMP_CAPI(CustomModel_AddSimpleModelTimed, bool(int virtualWorld, int baseid, int
 		return false;
 	}
 
-	bool ret = models->addCustomModel(ModelType::Object, newid, baseid, dff, textureLibrary, virtualWorld, timeOn, timeOff);
+	bool ret = models->addCustomModel(ModelType::Object, newid, baseid, dff, textureLibrary, virtualWorld, uint8_t(timeOn), uint8_t(timeOff));
 	return ret;
 }
 

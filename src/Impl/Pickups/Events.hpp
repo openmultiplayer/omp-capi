@@ -15,7 +15,6 @@ struct PickupEvents : public PickupEventHandler, public Singleton<PickupEvents>
 {
 	void onPlayerPickUpPickup(IPlayer& player, IPickup& pickup) override
 	{
-		auto pickups = ComponentManager::Get()->pickups;
 		if (pickup.getLegacyPlayer() == nullptr)
 		{
 			ComponentManager::Get()->CallEvent("onPlayerPickUpPickup", EventReturnHandler::None, &player, &pickup);

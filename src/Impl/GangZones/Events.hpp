@@ -15,7 +15,6 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 {
 	void onPlayerEnterGangZone(IPlayer& player, IGangZone& zone) override
 	{
-		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
 			ComponentManager::Get()->CallEvent("onPlayerEnterGangZone", EventReturnHandler::None, &player, &zone);
@@ -27,7 +26,6 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 
 	void onPlayerLeaveGangZone(IPlayer& player, IGangZone& zone) override
 	{
-		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
 			ComponentManager::Get()->CallEvent("onPlayerLeaveGangZone", EventReturnHandler::None, &player, &zone);
@@ -39,7 +37,6 @@ struct GangZoneEvents : public GangZoneEventHandler, public Singleton<GangZoneEv
 
 	void onPlayerClickGangZone(IPlayer& player, IGangZone& zone) override
 	{
-		auto gangzones = ComponentManager::Get()->gangzones;
 		if (zone.getLegacyPlayer() == nullptr)
 		{
 			ComponentManager::Get()->CallEvent("onPlayerClickGangZone", EventReturnHandler::None, &player, &zone);

@@ -552,25 +552,25 @@ OMP_CAPI(Player_GetLastShotVectors, bool(objectPtr player, float* origin_x, floa
 
 OMP_CAPI(Player_GetCameraTargetPlayer, objectPtr(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	return player_->getCameraTargetPlayer();
 }
 
 OMP_CAPI(Player_GetCameraTargetActor, objectPtr(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	return player_->getCameraTargetActor();
 }
 
 OMP_CAPI(Player_GetCameraTargetObject, objectPtr(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	return player_->getCameraTargetObject();
 }
 
 OMP_CAPI(Player_GetCameraTargetVehicle, objectPtr(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	return player_->getCameraTargetVehicle();
 }
 

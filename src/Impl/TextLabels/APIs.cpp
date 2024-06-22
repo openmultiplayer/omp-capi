@@ -72,7 +72,8 @@ OMP_CAPI(TextLabel_UpdateText, bool(objectPtr textlabel, uint32_t color, StringC
 OMP_CAPI(TextLabel_IsValid, bool(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
-	if(!textlabels->get(textlabel_->getID())) return false;
+	if (!textlabels->get(textlabel_->getID()))
+		return false;
 	return true;
 }
 
@@ -176,11 +177,11 @@ OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text,
 
 		if (attachedPlayer)
 		{
-			textlabel = labelData->create(text, Colour::FromRGBA(color), { x, y, z }, drawDistance, los, *(IPlayer*)attachedPlayer);
+			textlabel = labelData->create(text, Colour::FromRGBA(color), { x, y, z }, drawDistance, los, *reinterpret_cast<IPlayer*>(attachedPlayer));
 		}
 		else if (attachedVehicle)
 		{
-			textlabel = labelData->create(text, Colour::FromRGBA(color), { x, y, z }, drawDistance, los, *(IVehicle*)attachedVehicle);
+			textlabel = labelData->create(text, Colour::FromRGBA(color), { x, y, z }, drawDistance, los, *reinterpret_cast<IVehicle*>(attachedVehicle));
 		}
 		else
 		{
@@ -239,7 +240,8 @@ OMP_CAPI(PlayerTextLabel_IsValid, bool(objectPtr player, objectPtr textlabel, bo
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
-	if(!playerData->get(textlabel_->getID())) return false;
+	if (!playerData->get(textlabel_->getID()))
+		return false;
 	return true;
 }
 

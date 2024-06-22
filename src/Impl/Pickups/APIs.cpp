@@ -19,7 +19,7 @@ OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z
 			return nullptr;
 		}
 
-		IPickup* pickup = component->create(model, type, { x, y, z }, virtualWorld, false);
+		IPickup* pickup = component->create(model, PickupType(type), { x, y, z }, virtualWorld, false);
 		if (pickup)
 		{
 			component->setLegacyID(id_, pickup->getID());
@@ -45,7 +45,7 @@ OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, 
 			return false;
 		}
 
-		IPickup* pickup = component->create(model, type, { x, y, z }, virtualWorld, true);
+		IPickup* pickup = component->create(model, PickupType(type), { x, y, z }, virtualWorld, true);
 		if (pickup)
 		{
 			component->setLegacyID(id_, pickup->getID());
@@ -102,6 +102,9 @@ OMP_CAPI(Pickup_GetPos, bool(objectPtr pickup, float* x, float* y, float* z))
 {
 	POOL_ENTITY_RET(pickups, IPickup, pickup, p, false);
 	auto pos = p->getPosition();
+	*x = pos.x;
+	*y = pos.y;
+	*z = pos.z;
 	return true;
 }
 
@@ -147,7 +150,7 @@ OMP_CAPI(Pickup_SetModel, bool(objectPtr pickup, int model, bool update))
 OMP_CAPI(Pickup_SetType, bool(objectPtr pickup, int type, bool update))
 {
 	POOL_ENTITY_RET(pickups, IPickup, pickup, p, false);
-	p->setType(type, update);
+	p->setType(PickupType(type), update);
 	return true;
 }
 

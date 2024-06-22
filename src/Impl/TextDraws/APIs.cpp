@@ -394,7 +394,7 @@ OMP_CAPI(PlayerTextDraw_FromID, objectPtr(objectPtr player, int textdrawid))
 OMP_CAPI(PlayerTextDraw_GetID, int(objectPtr player, objectPtr textdraw))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, INVALID_TEXTDRAW);
-	POOL_ENTITY_RET(textdraws, ITextDraw, textdraw, textdraw_, INVALID_TEXTDRAW);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, textdraw_, INVALID_TEXTDRAW);
 	return textdraw_->getID();
 }
 

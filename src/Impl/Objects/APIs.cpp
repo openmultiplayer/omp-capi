@@ -311,10 +311,10 @@ OMP_CAPI(Object_GetAttachedOffset, bool(objectPtr object, float* offsetX, float*
 	return true;
 }
 
-OMP_CAPI(Object_GetSyncRotation, float(objectPtr object))
+OMP_CAPI(Object_GetSyncRotation, bool(objectPtr object))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, 0.0f);
-	float rotation = object_->getAttachmentData().syncRotation;
+	bool rotation = object_->getAttachmentData().syncRotation;
 	return rotation;
 }
 
@@ -711,12 +711,12 @@ OMP_CAPI(PlayerObject_GetAttachedOffset, bool(objectPtr player, objectPtr object
 	return true;
 }
 
-OMP_CAPI(PlayerObject_GetSyncRotation, float(objectPtr player, objectPtr object))
+OMP_CAPI(PlayerObject_GetSyncRotation, bool(objectPtr player, objectPtr object))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, 0.0f);
 
-	float rotation = object_->getAttachmentData().syncRotation;
+	bool rotation = object_->getAttachmentData().syncRotation;
 	return rotation;
 }
 

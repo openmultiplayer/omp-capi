@@ -69,7 +69,7 @@ OMP_CAPI(Actor_GetVirtualWorld, int(objectPtr actor))
 OMP_CAPI(Actor_ApplyAnimation, bool(objectPtr actor, StringCharPtr name, StringCharPtr library, float delta, bool loop, bool lockX, bool lockY, bool freeze, int time))
 {
 	POOL_ENTITY_RET(actors, IActor, actor, actor_, false);
-	const AnimationData animationData(delta, loop, lockX, lockY, freeze, time, library, name);
+	const AnimationData animationData(delta, loop, lockX, lockY, freeze, uint32_t(time), library, name);
 	actor_->applyAnimation(animationData);
 	return true;
 }
@@ -171,7 +171,7 @@ OMP_CAPI(Actor_GetAnimation, bool(objectPtr actor, OutputStringViewPtr library, 
 	*lockX = anim.lockX;
 	*lockY = anim.lockY;
 	*freeze = anim.freeze;
-	*time = anim.time;
+	*time = int(anim.time);
 	return true;
 }
 

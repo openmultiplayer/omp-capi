@@ -236,14 +236,14 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 #define POOL_ENTITY_RET(pool, entity_type, entity, output, failret) \
 	if (!ComponentManager::Get()->pool)                             \
 		return failret;                                             \
-	auto pool = ComponentManager::Get()->pool;                      \
-	ENTITY_CAST_RET(entity_type, entity, output, failret);
+	auto pool = ComponentManager::Get() -> pool;                    \
+	ENTITY_CAST_RET(entity_type, entity, output, failret)
 
 #define POOL_ENTITY(pool, entity_type, entity, output) \
 	if (!ComponentManager::Get()->pool)                \
 		return;                                        \
-	auto pool = ComponentManager::Get()->pool;         \
-	ENTITY_CAST(entity_type, entity, output);
+	auto pool = ComponentManager::Get() -> pool;       \
+	ENTITY_CAST(entity_type, entity, output)
 
 #define PLAYER_POOL_ENTITY_RET(player, pool_type, entity_type, entity, entity_output, failret) \
 	auto playerData = GetPlayerData<pool_type>(player);                                        \
@@ -262,13 +262,13 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	if (output)                                            \
 	{                                                      \
 		output->len = len_;                                \
-		memcpy(output->data, src, len_);                   \
+		memcpy(output->data, src, uint32_t(len_));         \
 	}
 
 #define SET_CAPI_STRING_VIEW(output, str_view)             \
 	if (output)                                            \
 	{                                                      \
-		output->len = str_view.length();                   \
+		output->len = uint32_t(str_view.length());         \
 		output->data = const_cast<char*>(str_view.data()); \
 	}
 

@@ -25,7 +25,7 @@ public:
 	UID getUID() override
 	{
 		return uid_;
-	};
+	}
 
 	Component(UID uid, const Impl::String& name, const ComponentVersion& version)
 		: name_(name)
@@ -109,7 +109,7 @@ public:
 	}
 };
 
-OMP_CAPI(Component_Create, voidPtr(int uid, StringCharPtr name, ComponentVersion version, voidPtr onLoadCB, voidPtr onInitCB, voidPtr onReadyCB, voidPtr onResetCB, voidPtr onFreeCB))
+OMP_CAPI(Component_Create, voidPtr(uint64_t uid, StringCharPtr name, ComponentVersion version, voidPtr onLoadCB, voidPtr onInitCB, voidPtr onReadyCB, voidPtr onResetCB, voidPtr onFreeCB))
 {
 	auto component = new Component(uid, name, version);
 	component->setCallbacks(ComponentOnLoadCallback(onLoadCB), ComponentOnInitCallback(onInitCB), ComponentOnReadyCallback(onReadyCB), ComponentOnResetCallback(onResetCB), ComponentOnFreeCallback(onFreeCB));

@@ -290,7 +290,7 @@ OMP_CAPI(Vehicle_IsTrailerAttached, bool(objectPtr vehicle))
 
 OMP_CAPI(Vehicle_GetTrailer, objectPtr(objectPtr vehicle))
 {
-	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
+	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, nullptr);
 	IVehicle* trailer = vehicle_->getTrailer();
 	if (trailer)
 	{
@@ -624,7 +624,7 @@ OMP_CAPI(Vehicle_IsSirenEnabled, bool(objectPtr vehicle))
 
 OMP_CAPI(Vehicle_GetLastDriver, objectPtr(objectPtr vehicle))
 {
-	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, 0);
+	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, nullptr);
 	int lastDriver = vehicle_->getLastDriverPoolID();
 
 	auto players = ComponentManager::Get()->players;

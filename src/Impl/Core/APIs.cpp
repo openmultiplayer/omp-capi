@@ -10,7 +10,7 @@
 #include <sstream>
 #include <iomanip>
 
-OMP_CAPI(Core_TickCount, int())
+OMP_CAPI(Core_TickCount, uint32_t())
 {
 	auto tick = ComponentManager::Get()->core->getTickCount();
 	return tick;

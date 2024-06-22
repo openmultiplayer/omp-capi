@@ -73,7 +73,7 @@ OMP_CAPI(Player_GetSpawnInfo, bool(objectPtr player, uint8_t* team, int* skin, f
 	if (playerData)
 	{
 		const PlayerClass& data = playerData->getClass();
-		*team = data.team;
+		*team = uint8_t(data.team);
 		*skin = data.skin;
 		*x = data.spawn.x;
 		*y = data.spawn.y;
@@ -105,7 +105,7 @@ OMP_CAPI(Class_GetData, bool(objectPtr classptr, uint8_t* teamid, int* skin, flo
 {
 	POOL_ENTITY_RET(classes, IClass, classptr, class_, false);
 	const PlayerClass& data = class_->getClass();
-	*teamid = data.team;
+	*teamid = uint8_t(data.team);
 	*skin = data.skin;
 	*x = data.spawn.x;
 	*y = data.spawn.y;

@@ -15,7 +15,7 @@ private:
 	ICore* core_ = nullptr;
 
 public:
-	PROVIDE_UID(0x10467DD8D4C56FC6);
+	PROVIDE_UID(0x10467DD8D4C56FC6)
 
 	~CAPIComponent()
 	{

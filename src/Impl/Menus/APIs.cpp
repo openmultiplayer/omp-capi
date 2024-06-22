@@ -13,7 +13,7 @@ OMP_CAPI(Menu_Create, objectPtr(StringCharPtr title, uint32_t columns, float x, 
 	IMenusComponent* component = ComponentManager::Get()->menus;
 	if (component)
 	{
-		IMenu* menu = component->create(title, { x, y }, columns, column1Width, column2Width);
+		IMenu* menu = component->create(title, { x, y }, uint8_t(columns), column1Width, column2Width);
 		if (menu)
 		{
 			*id = menu->getID();
@@ -105,7 +105,8 @@ OMP_CAPI(Player_GetMenu, int(objectPtr player))
 OMP_CAPI(Menu_IsValid, bool(objectPtr menu))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
-	if(!menus->get(menu_->getID())) return false;
+	if (!menus->get(menu_->getID()))
+		return false;
 	return true;
 }
 
@@ -119,7 +120,7 @@ OMP_CAPI(Menu_IsDisabled, bool(objectPtr menu))
 OMP_CAPI(Menu_IsRowDisabled, bool(objectPtr menu, int row))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
-	auto disabled = !menu_->isRowEnabled(row);
+	auto disabled = !menu_->isRowEnabled(MenuRow(row));
 	return disabled;
 }
 
@@ -133,7 +134,7 @@ OMP_CAPI(Menu_GetColumns, int(objectPtr menu))
 OMP_CAPI(Menu_GetItems, int(objectPtr menu, int column))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, 0);
-	auto rows = menu_->getRowCount(column);
+	auto rows = menu_->getRowCount(MenuColumn(column));
 	return rows;
 }
 
@@ -158,7 +159,7 @@ OMP_CAPI(Menu_GetColumnWidth, bool(objectPtr menu, float* column1Width, float* c
 OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, OutputStringViewPtr header))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
-	auto result = menu_->getColumnHeader(column);
+	auto result = menu_->getColumnHeader(MenuColumn(column));
 	SET_CAPI_STRING_VIEW(header, result);
 	return true;
 }
@@ -166,7 +167,7 @@ OMP_CAPI(Menu_GetColumnHeader, bool(objectPtr menu, int column, OutputStringView
 OMP_CAPI(Menu_GetItem, bool(objectPtr menu, int column, int row, OutputStringViewPtr item))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);
-	auto result = menu_->getCell(column, row);
+	auto result = menu_->getCell(MenuColumn(column), MenuRow(row));
 	SET_CAPI_STRING_VIEW(item, result);
 	return true;
 }
