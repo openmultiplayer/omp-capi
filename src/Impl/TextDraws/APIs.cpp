@@ -414,7 +414,7 @@ OMP_CAPI(PlayerTextDraw_IsVisible, bool(objectPtr player, objectPtr textdraw))
 	return td->isShown();
 }
 
-OMP_CAPI(PlayerTextDraw_LetterSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+OMP_CAPI(PlayerTextDraw_SetLetterSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
