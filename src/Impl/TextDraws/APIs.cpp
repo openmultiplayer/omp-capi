@@ -422,7 +422,7 @@ OMP_CAPI(PlayerTextDraw_SetLetterSize, bool(objectPtr player, objectPtr textdraw
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_TextSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+OMP_CAPI(PlayerTextDraw_SetTextSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
