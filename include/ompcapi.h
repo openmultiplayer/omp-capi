@@ -138,7 +138,7 @@ typedef float (*Player_NetStatsPacketLossPercent_t)(void* player);
 typedef int (*Player_GetCustomSkin_t)(void* player);
 typedef int (*Player_GetDialog_t)(void* player);
 typedef bool (*Player_GetDialogData_t)(void* player, int* dialogid, int* style, CAPIStringView* title, CAPIStringView* body, CAPIStringView* button1, CAPIStringView* button2);
-typedef int (*Player_GetMenu_t)(void* player);
+typedef void* (*Player_GetMenu_t)(void* player);
 typedef void* (*Player_GetSurfingPlayerObject_t)(void* player);
 typedef void* (*Player_GetCameraTargetPlayerObject_t)(void* player);
 typedef void* (*Player_FromID_t)(int playerid);
@@ -215,8 +215,8 @@ typedef void* (*Player_GetCameraTargetObject_t)(void* player);
 typedef void* (*Player_GetCameraTargetVehicle_t)(void* player);
 typedef bool (*Player_PutInVehicle_t)(void* player, void* vehicle, int seat);
 typedef bool (*Player_RemoveBuilding_t)(void* player, int model, float x, float y, float z, float radius);
-typedef bool (*Player_GetBuildingsRemoved_t)(void* player);
-typedef bool (*Player_RemoveFromVehicle_t)(void* player);
+typedef int (*Player_GetBuildingsRemoved_t)(void* player);
+typedef bool (*Player_RemoveFromVehicle_t)(void* player, bool force);
 typedef bool (*Player_RemoveMapIcon_t)(void* player, int icon);
 typedef bool (*Player_SetMapIcon_t)(void* player, int iconID, float x, float y, float z, int type, uint32_t color, int style);
 typedef bool (*Player_ResetWeapons_t)(void* player);
@@ -245,7 +245,7 @@ typedef bool (*Player_GetWeaponData_t)(void* player, int slot, int* weaponid, in
 typedef int (*Player_GetWeaponState_t)(void* player);
 typedef bool (*Player_InterpolateCameraPos_t)(void* player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut);
 typedef bool (*Player_InterpolateCameraLookAt_t)(void* player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut);
-typedef int (*Player_IsPlayerAttachedObjectSlotUsed_t)(void* player, int index);
+typedef bool (*Player_IsPlayerAttachedObjectSlotUsed_t)(void* player, int index);
 typedef bool (*Player_AttachCameraToObject_t)(void* player, void* object);
 typedef bool (*Player_AttachCameraToPlayerObject_t)(void* player, void* object);
 typedef float (*Player_GetCameraAspectRatio_t)(void* player);
@@ -399,28 +399,6 @@ typedef bool (*Event_RemoveHandler_t)(const char* name, int priority, void* call
 typedef bool (*Event_RemoveAllHandlers_t)(const char* name, int priority);
 
 
-// Menu function type definitions
-typedef void* (*Menu_Create_t)(const char* title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id);
-typedef bool (*Menu_Destroy_t)(void* menu);
-typedef void* (*Menu_FromID_t)(int menuid);
-typedef int (*Menu_GetID_t)(void* menu);
-typedef int (*Menu_AddItem_t)(void* menu, uint8_t column, const char* text);
-typedef bool (*Menu_SetColumnHeader_t)(void* menu, uint8_t column, const char* headerTitle);
-typedef bool (*Menu_ShowForPlayer_t)(void* menu, void* player);
-typedef bool (*Menu_HideForPlayer_t)(void* menu, void* player);
-typedef bool (*Menu_Disable_t)(void* menu);
-typedef bool (*Menu_DisableRow_t)(void* menu, uint8_t row);
-typedef bool (*Menu_IsValid_t)(void* menu);
-typedef bool (*Menu_IsDisabled_t)(void* menu);
-typedef bool (*Menu_IsRowDisabled_t)(void* menu, int row);
-typedef int (*Menu_GetColumns_t)(void* menu);
-typedef int (*Menu_GetItems_t)(void* menu, int column);
-typedef bool (*Menu_GetPos_t)(void* menu, float* x, float* y);
-typedef bool (*Menu_GetColumnWidth_t)(void* menu, float* column1Width, float* column2Width);
-typedef bool (*Menu_GetColumnHeader_t)(void* menu, int column, CAPIStringView* header);
-typedef bool (*Menu_GetItem_t)(void* menu, int column, int row, CAPIStringView* item);
-
-
 // GangZone function type definitions
 typedef void* (*GangZone_Create_t)(float minx, float miny, float maxx, float maxy, int* id);
 typedef bool (*GangZone_Destroy_t)(void* gangzone);
@@ -442,6 +420,28 @@ typedef int (*GangZone_GetFlashColorForPlayer_t)(void* player, void* gangzone);
 typedef bool (*GangZone_IsFlashingForPlayer_t)(void* player, void* gangzone);
 typedef bool (*GangZone_GetPos_t)(void* gangzone, float* minx, float* miny, float* maxx, float* maxy);
 typedef bool (*GangZone_UseCheck_t)(void* gangzone, bool enable);
+
+
+// Menu function type definitions
+typedef void* (*Menu_Create_t)(const char* title, uint32_t columns, float x, float y, float column1Width, float column2Width, int* id);
+typedef bool (*Menu_Destroy_t)(void* menu);
+typedef void* (*Menu_FromID_t)(int menuid);
+typedef int (*Menu_GetID_t)(void* menu);
+typedef int (*Menu_AddItem_t)(void* menu, uint8_t column, const char* text);
+typedef bool (*Menu_SetColumnHeader_t)(void* menu, uint8_t column, const char* headerTitle);
+typedef bool (*Menu_ShowForPlayer_t)(void* menu, void* player);
+typedef bool (*Menu_HideForPlayer_t)(void* menu, void* player);
+typedef bool (*Menu_Disable_t)(void* menu);
+typedef bool (*Menu_DisableRow_t)(void* menu, uint8_t row);
+typedef bool (*Menu_IsValid_t)(void* menu);
+typedef bool (*Menu_IsDisabled_t)(void* menu);
+typedef bool (*Menu_IsRowDisabled_t)(void* menu, int row);
+typedef int (*Menu_GetColumns_t)(void* menu);
+typedef int (*Menu_GetItems_t)(void* menu, int column);
+typedef bool (*Menu_GetPos_t)(void* menu, float* x, float* y);
+typedef bool (*Menu_GetColumnWidth_t)(void* menu, float* column1Width, float* column2Width);
+typedef bool (*Menu_GetColumnHeader_t)(void* menu, int column, CAPIStringView* header);
+typedef bool (*Menu_GetItem_t)(void* menu, int column, int row, CAPIStringView* item);
 
 
 // Object function type definitions
@@ -602,16 +602,16 @@ typedef void* (*PlayerTextDraw_FromID_t)(void* player, int textdrawid);
 typedef int (*PlayerTextDraw_GetID_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_IsValid_t)(void* player, void* textdraw);
 typedef bool (*PlayerTextDraw_IsVisible_t)(void* player, void* textdraw);
-typedef bool (*PlayerTextDraw_LetterSize_t)(void* player, void* textdraw, float x, float y);
-typedef bool (*PlayerTextDraw_TextSize_t)(void* player, void* textdraw, float x, float y);
-typedef bool (*PlayerTextDraw_Alignment_t)(void* player, void* textdraw, int alignment);
-typedef bool (*PlayerTextDraw_Color_t)(void* player, void* textdraw, uint32_t color);
+typedef bool (*PlayerTextDraw_SetLetterSize_t)(void* player, void* textdraw, float x, float y);
+typedef bool (*PlayerTextDraw_SetTextSize_t)(void* player, void* textdraw, float x, float y);
+typedef bool (*PlayerTextDraw_SetAlignment_t)(void* player, void* textdraw, int alignment);
+typedef bool (*PlayerTextDraw_SetColor_t)(void* player, void* textdraw, uint32_t color);
 typedef bool (*PlayerTextDraw_UseBox_t)(void* player, void* textdraw, bool use);
-typedef bool (*PlayerTextDraw_BoxColor_t)(void* player, void* textdraw, uint32_t color);
+typedef bool (*PlayerTextDraw_SetBoxColor_t)(void* player, void* textdraw, uint32_t color);
 typedef bool (*PlayerTextDraw_SetShadow_t)(void* player, void* textdraw, int size);
 typedef bool (*PlayerTextDraw_SetOutline_t)(void* player, void* textdraw, int size);
-typedef bool (*PlayerTextDraw_BackgroundColor_t)(void* player, void* textdraw, uint32_t color);
-typedef bool (*PlayerTextDraw_Font_t)(void* player, void* textdraw, int font);
+typedef bool (*PlayerTextDraw_SetBackgroundColor_t)(void* player, void* textdraw, uint32_t color);
+typedef bool (*PlayerTextDraw_SetFont_t)(void* player, void* textdraw, int font);
 typedef bool (*PlayerTextDraw_SetProportional_t)(void* player, void* textdraw, bool set);
 typedef bool (*PlayerTextDraw_SetSelectable_t)(void* player, void* textdraw, bool set);
 typedef bool (*PlayerTextDraw_Show_t)(void* player, void* textdraw);
@@ -1830,29 +1830,6 @@ struct Event_t {
     Event_RemoveAllHandlers_t RemoveAllHandlers;
 };
 
-// Menu functions
-struct Menu_t {
-    Menu_Create_t Create;
-    Menu_Destroy_t Destroy;
-    Menu_FromID_t FromID;
-    Menu_GetID_t GetID;
-    Menu_AddItem_t AddItem;
-    Menu_SetColumnHeader_t SetColumnHeader;
-    Menu_ShowForPlayer_t ShowForPlayer;
-    Menu_HideForPlayer_t HideForPlayer;
-    Menu_Disable_t Disable;
-    Menu_DisableRow_t DisableRow;
-    Menu_IsValid_t IsValid;
-    Menu_IsDisabled_t IsDisabled;
-    Menu_IsRowDisabled_t IsRowDisabled;
-    Menu_GetColumns_t GetColumns;
-    Menu_GetItems_t GetItems;
-    Menu_GetPos_t GetPos;
-    Menu_GetColumnWidth_t GetColumnWidth;
-    Menu_GetColumnHeader_t GetColumnHeader;
-    Menu_GetItem_t GetItem;
-};
-
 // GangZone functions
 struct GangZone_t {
     GangZone_Create_t Create;
@@ -1875,6 +1852,29 @@ struct GangZone_t {
     GangZone_IsFlashingForPlayer_t IsFlashingForPlayer;
     GangZone_GetPos_t GetPos;
     GangZone_UseCheck_t UseCheck;
+};
+
+// Menu functions
+struct Menu_t {
+    Menu_Create_t Create;
+    Menu_Destroy_t Destroy;
+    Menu_FromID_t FromID;
+    Menu_GetID_t GetID;
+    Menu_AddItem_t AddItem;
+    Menu_SetColumnHeader_t SetColumnHeader;
+    Menu_ShowForPlayer_t ShowForPlayer;
+    Menu_HideForPlayer_t HideForPlayer;
+    Menu_Disable_t Disable;
+    Menu_DisableRow_t DisableRow;
+    Menu_IsValid_t IsValid;
+    Menu_IsDisabled_t IsDisabled;
+    Menu_IsRowDisabled_t IsRowDisabled;
+    Menu_GetColumns_t GetColumns;
+    Menu_GetItems_t GetItems;
+    Menu_GetPos_t GetPos;
+    Menu_GetColumnWidth_t GetColumnWidth;
+    Menu_GetColumnHeader_t GetColumnHeader;
+    Menu_GetItem_t GetItem;
 };
 
 // Object functions
@@ -2042,16 +2042,16 @@ struct PlayerTextDraw_t {
     PlayerTextDraw_GetID_t GetID;
     PlayerTextDraw_IsValid_t IsValid;
     PlayerTextDraw_IsVisible_t IsVisible;
-    PlayerTextDraw_LetterSize_t LetterSize;
-    PlayerTextDraw_TextSize_t TextSize;
-    PlayerTextDraw_Alignment_t Alignment;
-    PlayerTextDraw_Color_t Color;
+    PlayerTextDraw_SetLetterSize_t SetLetterSize;
+    PlayerTextDraw_SetTextSize_t SetTextSize;
+    PlayerTextDraw_SetAlignment_t SetAlignment;
+    PlayerTextDraw_SetColor_t SetColor;
     PlayerTextDraw_UseBox_t UseBox;
-    PlayerTextDraw_BoxColor_t BoxColor;
+    PlayerTextDraw_SetBoxColor_t SetBoxColor;
     PlayerTextDraw_SetShadow_t SetShadow;
     PlayerTextDraw_SetOutline_t SetOutline;
-    PlayerTextDraw_BackgroundColor_t BackgroundColor;
-    PlayerTextDraw_Font_t Font;
+    PlayerTextDraw_SetBackgroundColor_t SetBackgroundColor;
+    PlayerTextDraw_SetFont_t SetFont;
     PlayerTextDraw_SetProportional_t SetProportional;
     PlayerTextDraw_SetSelectable_t SetSelectable;
     PlayerTextDraw_Show_t Show;
@@ -2222,8 +2222,8 @@ struct OMPAPI_t {
     CustomModel_t CustomModel;
     Dialog_t Dialog;
     Event_t Event;
-    Menu_t Menu;
     GangZone_t GangZone;
+    Menu_t Menu;
     Object_t Object;
     PlayerObject_t PlayerObject;
     Pickup_t Pickup;
@@ -2558,27 +2558,6 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->Event.RemoveHandler = (Event_RemoveHandler_t)LIBRARY_GET_ADDR(capi_lib, "Event_RemoveHandler");
     ompapi->Event.RemoveAllHandlers = (Event_RemoveAllHandlers_t)LIBRARY_GET_ADDR(capi_lib, "Event_RemoveAllHandlers");
 
-    // Retrieve Menu functions
-    ompapi->Menu.Create = (Menu_Create_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Create");
-    ompapi->Menu.Destroy = (Menu_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Destroy");
-    ompapi->Menu.FromID = (Menu_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_FromID");
-    ompapi->Menu.GetID = (Menu_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetID");
-    ompapi->Menu.AddItem = (Menu_AddItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_AddItem");
-    ompapi->Menu.SetColumnHeader = (Menu_SetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_SetColumnHeader");
-    ompapi->Menu.ShowForPlayer = (Menu_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_ShowForPlayer");
-    ompapi->Menu.HideForPlayer = (Menu_HideForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_HideForPlayer");
-    ompapi->Menu.Disable = (Menu_Disable_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Disable");
-    ompapi->Menu.DisableRow = (Menu_DisableRow_t)LIBRARY_GET_ADDR(capi_lib, "Menu_DisableRow");
-    ompapi->Menu.IsValid = (Menu_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsValid");
-    ompapi->Menu.IsDisabled = (Menu_IsDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsDisabled");
-    ompapi->Menu.IsRowDisabled = (Menu_IsRowDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsRowDisabled");
-    ompapi->Menu.GetColumns = (Menu_GetColumns_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumns");
-    ompapi->Menu.GetItems = (Menu_GetItems_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItems");
-    ompapi->Menu.GetPos = (Menu_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetPos");
-    ompapi->Menu.GetColumnWidth = (Menu_GetColumnWidth_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnWidth");
-    ompapi->Menu.GetColumnHeader = (Menu_GetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnHeader");
-    ompapi->Menu.GetItem = (Menu_GetItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItem");
-
     // Retrieve GangZone functions
     ompapi->GangZone.Create = (GangZone_Create_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Create");
     ompapi->GangZone.Destroy = (GangZone_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_Destroy");
@@ -2600,6 +2579,27 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->GangZone.IsFlashingForPlayer = (GangZone_IsFlashingForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_IsFlashingForPlayer");
     ompapi->GangZone.GetPos = (GangZone_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_GetPos");
     ompapi->GangZone.UseCheck = (GangZone_UseCheck_t)LIBRARY_GET_ADDR(capi_lib, "GangZone_UseCheck");
+
+    // Retrieve Menu functions
+    ompapi->Menu.Create = (Menu_Create_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Create");
+    ompapi->Menu.Destroy = (Menu_Destroy_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Destroy");
+    ompapi->Menu.FromID = (Menu_FromID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_FromID");
+    ompapi->Menu.GetID = (Menu_GetID_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetID");
+    ompapi->Menu.AddItem = (Menu_AddItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_AddItem");
+    ompapi->Menu.SetColumnHeader = (Menu_SetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_SetColumnHeader");
+    ompapi->Menu.ShowForPlayer = (Menu_ShowForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_ShowForPlayer");
+    ompapi->Menu.HideForPlayer = (Menu_HideForPlayer_t)LIBRARY_GET_ADDR(capi_lib, "Menu_HideForPlayer");
+    ompapi->Menu.Disable = (Menu_Disable_t)LIBRARY_GET_ADDR(capi_lib, "Menu_Disable");
+    ompapi->Menu.DisableRow = (Menu_DisableRow_t)LIBRARY_GET_ADDR(capi_lib, "Menu_DisableRow");
+    ompapi->Menu.IsValid = (Menu_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsValid");
+    ompapi->Menu.IsDisabled = (Menu_IsDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsDisabled");
+    ompapi->Menu.IsRowDisabled = (Menu_IsRowDisabled_t)LIBRARY_GET_ADDR(capi_lib, "Menu_IsRowDisabled");
+    ompapi->Menu.GetColumns = (Menu_GetColumns_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumns");
+    ompapi->Menu.GetItems = (Menu_GetItems_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItems");
+    ompapi->Menu.GetPos = (Menu_GetPos_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetPos");
+    ompapi->Menu.GetColumnWidth = (Menu_GetColumnWidth_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnWidth");
+    ompapi->Menu.GetColumnHeader = (Menu_GetColumnHeader_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetColumnHeader");
+    ompapi->Menu.GetItem = (Menu_GetItem_t)LIBRARY_GET_ADDR(capi_lib, "Menu_GetItem");
 
     // Retrieve Object functions
     ompapi->Object.Create = (Object_Create_t)LIBRARY_GET_ADDR(capi_lib, "Object_Create");
@@ -2753,16 +2753,16 @@ static void omp_initialize_capi(OMPAPI_t* ompapi) {
     ompapi->PlayerTextDraw.GetID = (PlayerTextDraw_GetID_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_GetID");
     ompapi->PlayerTextDraw.IsValid = (PlayerTextDraw_IsValid_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_IsValid");
     ompapi->PlayerTextDraw.IsVisible = (PlayerTextDraw_IsVisible_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_IsVisible");
-    ompapi->PlayerTextDraw.LetterSize = (PlayerTextDraw_LetterSize_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_LetterSize");
-    ompapi->PlayerTextDraw.TextSize = (PlayerTextDraw_TextSize_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_TextSize");
-    ompapi->PlayerTextDraw.Alignment = (PlayerTextDraw_Alignment_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Alignment");
-    ompapi->PlayerTextDraw.Color = (PlayerTextDraw_Color_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Color");
+    ompapi->PlayerTextDraw.SetLetterSize = (PlayerTextDraw_SetLetterSize_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetLetterSize");
+    ompapi->PlayerTextDraw.SetTextSize = (PlayerTextDraw_SetTextSize_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetTextSize");
+    ompapi->PlayerTextDraw.SetAlignment = (PlayerTextDraw_SetAlignment_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetAlignment");
+    ompapi->PlayerTextDraw.SetColor = (PlayerTextDraw_SetColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetColor");
     ompapi->PlayerTextDraw.UseBox = (PlayerTextDraw_UseBox_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_UseBox");
-    ompapi->PlayerTextDraw.BoxColor = (PlayerTextDraw_BoxColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_BoxColor");
+    ompapi->PlayerTextDraw.SetBoxColor = (PlayerTextDraw_SetBoxColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetBoxColor");
     ompapi->PlayerTextDraw.SetShadow = (PlayerTextDraw_SetShadow_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetShadow");
     ompapi->PlayerTextDraw.SetOutline = (PlayerTextDraw_SetOutline_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetOutline");
-    ompapi->PlayerTextDraw.BackgroundColor = (PlayerTextDraw_BackgroundColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_BackgroundColor");
-    ompapi->PlayerTextDraw.Font = (PlayerTextDraw_Font_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Font");
+    ompapi->PlayerTextDraw.SetBackgroundColor = (PlayerTextDraw_SetBackgroundColor_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetBackgroundColor");
+    ompapi->PlayerTextDraw.SetFont = (PlayerTextDraw_SetFont_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetFont");
     ompapi->PlayerTextDraw.SetProportional = (PlayerTextDraw_SetProportional_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetProportional");
     ompapi->PlayerTextDraw.SetSelectable = (PlayerTextDraw_SetSelectable_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_SetSelectable");
     ompapi->PlayerTextDraw.Show = (PlayerTextDraw_Show_t)LIBRARY_GET_ADDR(capi_lib, "PlayerTextDraw_Show");

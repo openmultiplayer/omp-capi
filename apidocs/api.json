@@ -1050,7 +1050,7 @@
       ]
     },
     {
-      "ret": "int",
+      "ret": "void*",
       "name": "Player_GetMenu",
       "params": [
         {
@@ -2196,7 +2196,7 @@
       ]
     },
     {
-      "ret": "bool",
+      "ret": "int",
       "name": "Player_GetBuildingsRemoved",
       "params": [
         {
@@ -2212,6 +2212,10 @@
         {
           "name": "player",
           "type": "void*"
+        },
+        {
+          "name": "force",
+          "type": "bool"
         }
       ]
     },
@@ -2732,7 +2736,7 @@
       ]
     },
     {
-      "ret": "int",
+      "ret": "bool",
       "name": "Player_IsPlayerAttachedObjectSlotUsed",
       "params": [
         {
@@ -7705,7 +7709,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_LetterSize",
+      "name": "PlayerTextDraw_SetLetterSize",
       "params": [
         {
           "name": "player",
@@ -7727,7 +7731,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_TextSize",
+      "name": "PlayerTextDraw_SetTextSize",
       "params": [
         {
           "name": "player",
@@ -7749,7 +7753,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_Alignment",
+      "name": "PlayerTextDraw_SetAlignment",
       "params": [
         {
           "name": "player",
@@ -7767,7 +7771,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_Color",
+      "name": "PlayerTextDraw_SetColor",
       "params": [
         {
           "name": "player",
@@ -7803,7 +7807,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_BoxColor",
+      "name": "PlayerTextDraw_SetBoxColor",
       "params": [
         {
           "name": "player",
@@ -7857,7 +7861,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_BackgroundColor",
+      "name": "PlayerTextDraw_SetBackgroundColor",
       "params": [
         {
           "name": "player",
@@ -7875,7 +7879,7 @@
     },
     {
       "ret": "bool",
-      "name": "PlayerTextDraw_Font",
+      "name": "PlayerTextDraw_SetFont",
       "params": [
         {
           "name": "player",
