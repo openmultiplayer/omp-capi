@@ -430,7 +430,7 @@ OMP_CAPI(PlayerTextDraw_SetTextSize, bool(objectPtr player, objectPtr textdraw, 
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_Alignment, bool(objectPtr player, objectPtr textdraw, int alignment))
+OMP_CAPI(PlayerTextDraw_SetAlignment, bool(objectPtr player, objectPtr textdraw, int alignment))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -438,7 +438,7 @@ OMP_CAPI(PlayerTextDraw_Alignment, bool(objectPtr player, objectPtr textdraw, in
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_Color, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+OMP_CAPI(PlayerTextDraw_SetColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -454,7 +454,7 @@ OMP_CAPI(PlayerTextDraw_UseBox, bool(objectPtr player, objectPtr textdraw, bool 
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_BoxColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+OMP_CAPI(PlayerTextDraw_SetBoxColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
