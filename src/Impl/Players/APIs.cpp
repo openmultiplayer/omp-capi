@@ -596,7 +596,7 @@ OMP_CAPI(Player_GetBuildingsRemoved, int(objectPtr player))
 	return count;
 }
 
-OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player,bool force))
+OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player, bool force))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->removeFromVehicle(force);
