@@ -414,7 +414,7 @@ OMP_CAPI(PlayerTextDraw_IsVisible, bool(objectPtr player, objectPtr textdraw))
 	return td->isShown();
 }
 
-OMP_CAPI(PlayerTextDraw_LetterSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+OMP_CAPI(PlayerTextDraw_SetLetterSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -422,7 +422,7 @@ OMP_CAPI(PlayerTextDraw_LetterSize, bool(objectPtr player, objectPtr textdraw, f
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_TextSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
+OMP_CAPI(PlayerTextDraw_SetTextSize, bool(objectPtr player, objectPtr textdraw, float x, float y))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -430,7 +430,7 @@ OMP_CAPI(PlayerTextDraw_TextSize, bool(objectPtr player, objectPtr textdraw, flo
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_Alignment, bool(objectPtr player, objectPtr textdraw, int alignment))
+OMP_CAPI(PlayerTextDraw_SetAlignment, bool(objectPtr player, objectPtr textdraw, int alignment))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -438,7 +438,7 @@ OMP_CAPI(PlayerTextDraw_Alignment, bool(objectPtr player, objectPtr textdraw, in
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_Color, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+OMP_CAPI(PlayerTextDraw_SetColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -454,7 +454,7 @@ OMP_CAPI(PlayerTextDraw_UseBox, bool(objectPtr player, objectPtr textdraw, bool 
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_BoxColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+OMP_CAPI(PlayerTextDraw_SetBoxColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -478,7 +478,7 @@ OMP_CAPI(PlayerTextDraw_SetOutline, bool(objectPtr player, objectPtr textdraw, i
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_BackgroundColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
+OMP_CAPI(PlayerTextDraw_SetBackgroundColor, bool(objectPtr player, objectPtr textdraw, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);
@@ -486,7 +486,7 @@ OMP_CAPI(PlayerTextDraw_BackgroundColor, bool(objectPtr player, objectPtr textdr
 	return true;
 }
 
-OMP_CAPI(PlayerTextDraw_Font, bool(objectPtr player, objectPtr textdraw, int font))
+OMP_CAPI(PlayerTextDraw_SetFont, bool(objectPtr player, objectPtr textdraw, int font))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextDrawData, IPlayerTextDraw, textdraw, td, false);

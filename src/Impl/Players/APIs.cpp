@@ -589,17 +589,17 @@ OMP_CAPI(Player_RemoveBuilding, bool(objectPtr player, int model, float x, float
 	return true;
 }
 
-OMP_CAPI(Player_GetBuildingsRemoved, bool(objectPtr player))
+OMP_CAPI(Player_GetBuildingsRemoved, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	bool count = player_->getDefaultObjectsRemoved();
+	int count = player_->getDefaultObjectsRemoved();
 	return count;
 }
 
-OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player))
+OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player,bool force))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	player_->removeFromVehicle(false);
+	player_->removeFromVehicle(force);
 	return true;
 }
 
@@ -836,11 +836,11 @@ OMP_CAPI(Player_InterpolateCameraLookAt, bool(objectPtr player, float from_x, fl
 	return true;
 }
 
-OMP_CAPI(Player_IsPlayerAttachedObjectSlotUsed, int(objectPtr player, int index))
+OMP_CAPI(Player_IsPlayerAttachedObjectSlotUsed, bool(objectPtr player, int index))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	PLAYER_DATA_RET(player_, IPlayerObjectData, data, 0);
-	int ret = data->hasAttachedObject(index);
+	bool ret = data->hasAttachedObject(index);
 	return ret;
 }
 
