@@ -34,7 +34,7 @@ OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z
 	return nullptr;
 }
 
-OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, int virtualWorld))
+OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, int virtualWorld,int *id))
 {
 	IPickupsComponent* component = ComponentManager::Get()->pickups;
 	if (component)
@@ -42,21 +42,22 @@ OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, 
 		int id_ = component->reserveLegacyID();
 		if (id_ == INVALID_PICKUP_ID)
 		{
-			return false;
+			return nullptr;
 		}
 
 		IPickup* pickup = component->create(model, PickupType(type), { x, y, z }, virtualWorld, true);
 		if (pickup)
 		{
 			component->setLegacyID(id_, pickup->getID());
-			return true;
+			*id = id_;
+			return pickup;
 		}
 		else
 		{
 			component->releaseLegacyID(id_);
 		}
 	}
-	return false;
+	return nullptr;
 }
 
 OMP_CAPI(Pickup_Destroy, bool(objectPtr pickup))
