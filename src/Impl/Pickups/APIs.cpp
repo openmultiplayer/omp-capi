@@ -34,7 +34,7 @@ OMP_CAPI(Pickup_Create, objectPtr(int model, int type, float x, float y, float z
 	return nullptr;
 }
 
-OMP_CAPI(Pickup_AddStatic, bool(int model, int type, float x, float y, float z, int virtualWorld,int *id))
+OMP_CAPI(Pickup_AddStatic, objectPtr(int model, int type, float x, float y, float z, int virtualWorld, int* id))
 {
 	IPickupsComponent* component = ComponentManager::Get()->pickups;
 	if (component)
