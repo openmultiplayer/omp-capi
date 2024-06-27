@@ -29,6 +29,7 @@ const entityTypes = [
 const predefinedTypes = `#ifndef OMPCAPI_H
 #define OMPCAPI_H
 
+#include <stdbool.h>
 #include <stdint.h>
 
 #ifndef CAPI_COMPONENT_BUILD
