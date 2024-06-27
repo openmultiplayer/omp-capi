@@ -60,7 +60,7 @@ struct EventArgs_Common
 	void** list;
 };
 
-typedef bool (*EventCallback_Common)(EventArgs_Common* args);
+typedef bool (*EventCallback_Common)(struct EventArgs_Common* args);
 
 // Components
 
@@ -109,7 +109,7 @@ const convertTypeNames = (type) => {
   } else if (type === "voidPtr") {
     return "void*";
   } else if (type === "OutputStringViewPtr") {
-    return "CAPIStringView*";
+    return "struct CAPIStringView*";
   } else {
     return type;
   }
@@ -206,7 +206,7 @@ struct OMPAPI_t {
   );
 
   entries.forEach(([group, funcs], index) => {
-    fs.appendFileSync(filePath, `    ${group}_t ${group};\n`);
+    fs.appendFileSync(filePath, `    struct ${group}_t ${group};\n`);
   });
 
   fs.appendFileSync(filePath, `};\n`);
@@ -214,7 +214,7 @@ struct OMPAPI_t {
   fs.appendFileSync(
     filePath,
     `
-static void omp_initialize_capi(OMPAPI_t* ompapi) {
+static void omp_initialize_capi(struct OMPAPI_t* ompapi) {
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
     void* capi_lib = LIBRARY_OPEN("./components/$CAPI.dll");
 #else
@@ -252,7 +252,7 @@ struct EventArgs_${event.name} {
 ${event.args.map((param) => `        ${param.type}* ${param.name};`).join("\n")}
     } *list;
 };
-typedef bool (*EventCallback_${event.name})(EventArgs_${event.name} args);\n`
+typedef bool (*EventCallback_${event.name})(struct EventArgs_${event.name} args);\n`
       );
     });
   });

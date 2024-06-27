@@ -310,11 +310,11 @@
         },
         {
           "name": "library",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "name",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "delta",
@@ -897,7 +897,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -951,7 +951,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -1033,19 +1033,19 @@
         },
         {
           "name": "title",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "body",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "button1",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "button2",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -1607,7 +1607,7 @@
         },
         {
           "name": "name",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -2495,11 +2495,11 @@
         },
         {
           "name": "lib",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "name",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -2585,7 +2585,7 @@
         },
         {
           "name": "ip",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -3259,7 +3259,7 @@
         },
         {
           "name": "gpci",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -3347,7 +3347,7 @@
         },
         {
           "name": "message",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "time",
@@ -3433,7 +3433,7 @@
         },
         {
           "name": "version",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -3761,7 +3761,7 @@
         },
         {
           "name": "version",
-          "type": "ComponentVersion"
+          "type": "struct ComponentVersion"
         },
         {
           "name": "onLoadCB",
@@ -3827,7 +3827,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     }
@@ -3986,7 +3986,7 @@
       "params": [
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -4005,7 +4005,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -4371,7 +4371,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -4395,11 +4395,11 @@
         },
         {
           "name": "dffPath",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "txdPath",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     }
@@ -5053,7 +5053,7 @@
         },
         {
           "name": "header",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -5075,7 +5075,7 @@
         },
         {
           "name": "item",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     }
@@ -5729,11 +5729,11 @@
         },
         {
           "name": "textureLibrary",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "textureName",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "materialColor",
@@ -5755,7 +5755,7 @@
         },
         {
           "name": "text",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "materialSize",
@@ -5763,7 +5763,7 @@
         },
         {
           "name": "fontFace",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "fontSize",
@@ -6511,11 +6511,11 @@
         },
         {
           "name": "textureLibrary",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "textureName",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "materialColor",
@@ -6541,7 +6541,7 @@
         },
         {
           "name": "text",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "materialSize",
@@ -6549,7 +6549,7 @@
         },
         {
           "name": "fontFace",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         },
         {
           "name": "fontSize",
@@ -7379,7 +7379,7 @@
         },
         {
           "name": "text",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -8083,7 +8083,7 @@
         },
         {
           "name": "text",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -8537,7 +8537,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -8811,7 +8811,7 @@
         },
         {
           "name": "output",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
@@ -10074,7 +10074,7 @@
         },
         {
           "name": "numberPlate",
-          "type": "CAPIStringView*"
+          "type": "struct CAPIStringView*"
         }
       ]
     },
