@@ -438,6 +438,24 @@ OMP_CAPI(PlayerObject_Destroy, bool(objectPtr player, objectPtr object))
 	return true;
 }
 
+OMP_CAPI(PlayerObject_FromID, objectPtr(objectPtr player, int objectid))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	IPlayerObjectData* playerObjects = GetPlayerData<IPlayerObjectData>(player_);
+	if (playerObjects)
+	{
+		return playerObjects->get(objectid);
+	}
+	return nullptr;
+}
+
+OMP_CAPI(PlayerObject_GetID, int(objectPtr player, objectPtr object))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, INVALID_OBJECT_ID);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, INVALID_OBJECT_ID);
+	return object_->getID();
+}
+
 OMP_CAPI(PlayerObject_AttachToVehicle, bool(objectPtr player, objectPtr object, objectPtr vehicle, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);

@@ -5874,6 +5874,34 @@
       ]
     },
     {
+      "ret": "void*",
+      "name": "PlayerObject_FromID",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "objectid",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "ret": "int",
+      "name": "PlayerObject_GetID",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "object",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "ret": "bool",
       "name": "PlayerObject_AttachToVehicle",
       "params": [
