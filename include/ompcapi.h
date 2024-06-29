@@ -16,6 +16,12 @@
 #endif
 #endif
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
+#define OMP_API_EXPORT __declspec(dllexport)
+#else
+#define OMP_API_EXPORT __attribute__((visibility("default")))
+#endif
+
 // Events
 
 enum EventPriorityType
