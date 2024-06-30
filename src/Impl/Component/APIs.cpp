@@ -15,10 +15,8 @@ private:
 	uint64_t uid_;
 	ComponentVersion version_;
 
-	ComponentOnInitCallback onInitCB_;
 	ComponentOnReadyCallback onReadyCB_;
 	ComponentOnResetCallback onResetCB_;
-	ComponentOnLoadCallback onLoadCB_;
 	ComponentOnFreeCallback onFreeCB_;
 
 public:
@@ -32,10 +30,8 @@ public:
 		, uid_(uid)
 		, version_(version)
 	{
-		onInitCB_ = nullptr;
 		onReadyCB_ = nullptr;
 		onResetCB_ = nullptr;
-		onLoadCB_ = nullptr;
 		onFreeCB_ = nullptr;
 	}
 
@@ -56,18 +52,11 @@ public:
 
 	void onLoad(ICore* c) override
 	{
-		if (onLoadCB_)
-		{
-			onLoadCB_(c);
-		}
+		c->logLn(LogLevel::Message, "%s component has been loaded", name_.c_str());
 	}
 
 	void onInit(IComponentList* components) override
 	{
-		if (onInitCB_)
-		{
-			onInitCB_();
-		}
 	}
 
 	void onReady() override
@@ -99,19 +88,17 @@ public:
 		}
 	}
 
-	void setCallbacks(ComponentOnLoadCallback onLoadCB, ComponentOnInitCallback onInitCB, ComponentOnReadyCallback onReadyCB, ComponentOnResetCallback onResetCB, ComponentOnFreeCallback onFreeCB)
+	void setCallbacks(ComponentOnReadyCallback onReadyCB, ComponentOnResetCallback onResetCB, ComponentOnFreeCallback onFreeCB)
 	{
-		onLoadCB_ = onLoadCB;
-		onInitCB_ = onInitCB;
 		onReadyCB_ = onReadyCB;
 		onResetCB_ = onResetCB;
 		onFreeCB_ = onFreeCB;
 	}
 };
 
-OMP_CAPI(Component_Create, voidPtr(uint64_t uid, StringCharPtr name, ComponentVersion version, voidPtr onLoadCB, voidPtr onInitCB, voidPtr onReadyCB, voidPtr onResetCB, voidPtr onFreeCB))
+OMP_CAPI(Component_Create, voidPtr(uint64_t uid, StringCharPtr name, ComponentVersion version, voidPtr onReadyCB, voidPtr onResetCB, voidPtr onFreeCB))
 {
 	auto component = new Component(uid, name, version);
-	component->setCallbacks(ComponentOnLoadCallback(onLoadCB), ComponentOnInitCallback(onInitCB), ComponentOnReadyCallback(onReadyCB), ComponentOnResetCallback(onResetCB), ComponentOnFreeCallback(onFreeCB));
+	component->setCallbacks(ComponentOnReadyCallback(onReadyCB), ComponentOnResetCallback(onResetCB), ComponentOnFreeCallback(onFreeCB));
 	return component;
 }

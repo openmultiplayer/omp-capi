@@ -51,11 +51,9 @@ struct ComponentVersion
 	uint16_t prerel; ///< PRE-RELEASE version
 };
 
-typedef void (*ComponentOnInitCallback)();
 typedef void (*ComponentOnReadyCallback)();
 typedef void (*ComponentOnResetCallback)();
 typedef void (*ComponentOnFreeCallback)();
-typedef void (*ComponentOnLoadCallback)(void* core);
 
 struct CAPIStringView
 {
@@ -322,7 +320,7 @@ typedef float (*Player_GetTrainSpeed_t)(void* player);
 
 
 // Component function type definitions
-typedef void* (*Component_Create_t)(uint64_t uid, const char* name, struct ComponentVersion version, void* onLoadCB, void* onInitCB, void* onReadyCB, void* onResetCB, void* onFreeCB);
+typedef void* (*Component_Create_t)(uint64_t uid, const char* name, struct ComponentVersion version, void* onReadyCB, void* onResetCB, void* onFreeCB);
 
 
 // Config function type definitions

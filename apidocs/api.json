@@ -3764,14 +3764,6 @@
           "type": "ComponentVersion"
         },
         {
-          "name": "onLoadCB",
-          "type": "void*"
-        },
-        {
-          "name": "onInitCB",
-          "type": "void*"
-        },
-        {
           "name": "onReadyCB",
           "type": "void*"
         },

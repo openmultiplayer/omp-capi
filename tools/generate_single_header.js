@@ -79,11 +79,9 @@ struct ComponentVersion
 	uint16_t prerel; ///< PRE-RELEASE version
 };
 
-typedef void (*ComponentOnInitCallback)();
 typedef void (*ComponentOnReadyCallback)();
 typedef void (*ComponentOnResetCallback)();
 typedef void (*ComponentOnFreeCallback)();
-typedef void (*ComponentOnLoadCallback)(void* core);
 
 struct CAPIStringView
 {
