@@ -271,7 +271,7 @@ ${event.args.map((param) => `        ${convertEventArgTypeNames(param.type)}* ${
 };
 typedef bool (*EventCallback_${event.name})(struct EventArgs_${
           event.name
-        } args);\n`
+        }* args);\n`
       );
     });
   });
