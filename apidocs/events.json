@@ -447,12 +447,12 @@
           "type": "void*"
         },
         {
-          "name": "saved",
-          "type": "bool"
-        },
-        {
           "name": "index",
           "type": "int"
+        },
+        {
+          "name": "saved",
+          "type": "bool"
         },
         {
           "name": "model",
