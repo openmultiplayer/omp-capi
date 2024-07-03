@@ -439,7 +439,7 @@
       ]
     },
     {
-      "name": "onPlayerEditAttachedObject",
+      "name": "onPlayerAttachedObjectEdited",
       "badret": "none",
       "args": [
         {
