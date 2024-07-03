@@ -355,7 +355,7 @@
       ]
     },
     {
-      "name": "onPlayerEditObject",
+      "name": "onObjectEdited",
       "badret": "none",
       "args": [
         {
