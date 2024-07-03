@@ -1163,6 +1163,20 @@
       ]
     },
     {
+      "name": "onPlayerScoreChange",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "score",
+          "type": "int"
+        }
+      ]
+    },
+    {
       "name": "onPlayerInteriorChange",
       "badret": "none",
       "args": [

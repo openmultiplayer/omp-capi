@@ -134,6 +134,11 @@ public:
 		ComponentManager::Get()->CallEvent("onPlayerGiveDamage", EventReturnHandler::None, &player, &to, amount, int(weapon), int(part));
 	}
 
+	void onPlayerScoreChange(IPlayer& player, int score) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerScoreChange", EventReturnHandler::None, &player, score);
+	}
+
 	void onPlayerInteriorChange(IPlayer& player, unsigned newInterior, unsigned oldInterior) override
 	{
 		ComponentManager::Get()->CallEvent("onPlayerInteriorChange", EventReturnHandler::None, &player, int(newInterior), int(oldInterior));
