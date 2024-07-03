@@ -111,7 +111,12 @@ public:
 	bool onPlayerShotPlayerObject(IPlayer& player, IPlayerObject& target, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotPlayerObject", EventReturnHandler::StopAtFalse, &player, &target,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	void onPlayerDeath(IPlayer& player, IPlayer* killer, int reason) override

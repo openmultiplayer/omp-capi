@@ -1043,20 +1043,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
