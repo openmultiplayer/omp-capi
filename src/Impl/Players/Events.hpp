@@ -67,7 +67,12 @@ public:
 	bool onPlayerShotMissed(IPlayer& player, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotMissed", EventReturnHandler::StopAtFalse, &player,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	bool onPlayerShotPlayer(IPlayer& player, IPlayer& target, const PlayerBulletData& bulletData) override
