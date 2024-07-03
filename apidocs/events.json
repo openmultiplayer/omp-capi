@@ -133,6 +133,10 @@
       "badret": "true",
       "args": [
         {
+          "name": "player",
+          "type": "void*"
+        },
+        {
           "name": "address",
           "type": "CAPIStringView"
         },
