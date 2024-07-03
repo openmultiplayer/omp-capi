@@ -233,6 +233,20 @@
       ]
     },
     {
+      "name": "onPlayerEnterPlayerGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerLeaveGangZone",
       "badret": "none",
       "args": [
@@ -247,7 +261,35 @@
       ]
     },
     {
+      "name": "onPlayerLeavePlayerGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerClickGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerClickPlayerGangZone",
       "badret": "none",
       "args": [
         {
