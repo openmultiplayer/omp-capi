@@ -139,6 +139,11 @@ public:
 		ComponentManager::Get()->CallEvent("onPlayerScoreChange", EventReturnHandler::None, &player, score);
 	}
 
+	void onPlayerNameChange(IPlayer& player, StringView oldName) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerNameChange", EventReturnHandler::None, &player, CREATE_CAPI_STRING_VIEW(oldName));
+	}
+
 	void onPlayerInteriorChange(IPlayer& player, unsigned newInterior, unsigned oldInterior) override
 	{
 		ComponentManager::Get()->CallEvent("onPlayerInteriorChange", EventReturnHandler::None, &player, int(newInterior), int(oldInterior));
