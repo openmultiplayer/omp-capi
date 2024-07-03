@@ -137,10 +137,6 @@
           "type": "void*"
         },
         {
-          "name": "address",
-          "type": "CAPIStringView"
-        },
-        {
           "name": "password",
           "type": "CAPIStringView"
         },

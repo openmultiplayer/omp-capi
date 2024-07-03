@@ -20,11 +20,6 @@ struct ConsoleEvents : public ConsoleEventHandler, public Singleton<ConsoleEvent
 
 	void onRconLoginAttempt(IPlayer& player, StringView password, bool success) override
 	{
-		PeerNetworkData data = player.getNetworkData();
-		PeerAddress::AddressString addressString;
-		PeerAddress::ToString(data.networkID.address, addressString);
-		StringView addressStringView = StringView(addressString.data(), addressString.length());
-
-		ComponentManager::Get()->CallEvent("onRconLoginAttempt", EventReturnHandler::StopAtTrue, &player, CREATE_CAPI_STRING_VIEW(addressStringView), CREATE_CAPI_STRING_VIEW(password), success);
+		ComponentManager::Get()->CallEvent("onRconLoginAttempt", EventReturnHandler::StopAtTrue, &player, CREATE_CAPI_STRING_VIEW(password), success);
 	}
 };
