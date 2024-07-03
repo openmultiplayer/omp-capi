@@ -44,6 +44,11 @@ public:
 		ComponentManager::Get()->CallEvent("onPlayerDisconnect", EventReturnHandler::None, &player, int(reason));
 	}
 
+	void onPlayerClientInit(IPlayer& player) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerClientInit", EventReturnHandler::None, &player);
+	}
+
 	bool onPlayerRequestSpawn(IPlayer& player) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerRequestSpawn", EventReturnHandler::StopAtFalse, &player);

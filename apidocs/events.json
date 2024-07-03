@@ -735,6 +735,16 @@
       ]
     },
     {
+      "name": "onPlayerClientInit",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerRequestSpawn",
       "badret": "false",
       "args": [
