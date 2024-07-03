@@ -583,6 +583,20 @@
           "type": "void*"
         }
       ]
+    },
+    {
+      "name": "onPlayerPickUpPlayerPickup",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "pickup",
+          "type": "void*"
+        }
+      ]
     }
   ],
   "TextDraw": [

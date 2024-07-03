@@ -21,6 +21,7 @@ struct PickupEvents : public PickupEventHandler, public Singleton<PickupEvents>
 		}
 		else if (auto data = queryExtension<IPlayerPickupData>(player))
 		{
+			ComponentManager::Get()->CallEvent("onPlayerPickUpPlayerPickup", EventReturnHandler::None, &player, &pickup);
 		}
 	}
 };
