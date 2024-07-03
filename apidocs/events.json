@@ -331,7 +331,7 @@
   ],
   "Object": [
     {
-      "name": "onObjectMove",
+      "name": "onObjectMoved",
       "badret": "none",
       "args": [
         {

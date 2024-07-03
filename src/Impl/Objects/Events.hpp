@@ -15,7 +15,7 @@ struct ObjectEvents : public ObjectEventHandler, public Singleton<ObjectEvents>
 {
 	void onMoved(IObject& object) override
 	{
-		ComponentManager::Get()->CallEvent("onObjectMove", EventReturnHandler::None, &object);
+		ComponentManager::Get()->CallEvent("onObjectMoved", EventReturnHandler::None, &object);
 	}
 
 	void onPlayerObjectMoved(IPlayer& player, IPlayerObject& object) override
