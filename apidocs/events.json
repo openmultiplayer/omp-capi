@@ -341,7 +341,7 @@
       ]
     },
     {
-      "name": "onPlayerObjectMove",
+      "name": "onPlayerObjectMoved",
       "badret": "none",
       "args": [
         {

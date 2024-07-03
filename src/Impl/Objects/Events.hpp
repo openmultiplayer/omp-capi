@@ -20,7 +20,7 @@ struct ObjectEvents : public ObjectEventHandler, public Singleton<ObjectEvents>
 
 	void onPlayerObjectMoved(IPlayer& player, IPlayerObject& object) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerObjectMove", EventReturnHandler::None, &player, &object);
+		ComponentManager::Get()->CallEvent("onPlayerObjectMoved", EventReturnHandler::None, &player, &object);
 	}
 
 	void onObjectEdited(IPlayer& player, IObject& object, ObjectEditResponse response, Vector3 offset, Vector3 rotation) override
