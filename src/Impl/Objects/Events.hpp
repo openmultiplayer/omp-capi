@@ -39,7 +39,8 @@ struct ObjectEvents : public ObjectEventHandler, public Singleton<ObjectEvents>
 			&player, index, saved, data.model, data.bone,
 			data.offset.x, data.offset.y, data.offset.z,
 			data.rotation.x, data.rotation.y, data.rotation.z,
-			data.scale.x, data.scale.y, data.scale.z);
+			data.scale.x, data.scale.y, data.scale.z,
+			data.colour1.RGBA(), data.colour2.RGBA());
 	}
 
 	void onObjectSelected(IPlayer& player, IObject& object, int model, Vector3 position) override

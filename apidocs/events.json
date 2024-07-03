@@ -497,6 +497,14 @@
         {
           "name": "scaleZ",
           "type": "float"
+        },
+        {
+          "name": "color1",
+          "type": "int"
+        },
+        {
+          "name": "color2",
+          "type": "int"
         }
       ]
     },
