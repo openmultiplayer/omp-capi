@@ -161,6 +161,10 @@ public:
 
 	bool onPlayerUpdate(IPlayer& player, TimePoint now) override
 	{
-		return ComponentManager::Get()->CallEvent("onPlayerUpdate", EventReturnHandler::StopAtFalse, &player);
+		auto nowMs = std::chrono::time_point_cast<std::chrono::milliseconds>(now);
+		auto value = nowMs.time_since_epoch();
+		long long nowMillis = value.count();
+
+		return ComponentManager::Get()->CallEvent("onPlayerUpdate", EventReturnHandler::StopAtFalse, &player, nowMillis);
 	}
 };
