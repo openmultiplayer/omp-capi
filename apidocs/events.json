@@ -1432,7 +1432,7 @@
         },
         {
           "name": "enterexit",
-          "type": "int"
+          "type": "bool"
         },
         {
           "name": "interiorId",
