@@ -30,7 +30,7 @@ struct ObjectEvents : public ObjectEventHandler, public Singleton<ObjectEvents>
 
 	void onPlayerObjectEdited(IPlayer& player, IPlayerObject& object, ObjectEditResponse response, Vector3 offset, Vector3 rotation) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerEditPlayerObject", EventReturnHandler::None, &player, &object, int(response), offset.x, offset.y, offset.z, rotation.x, rotation.y, rotation.z);
+		ComponentManager::Get()->CallEvent("onPlayerObjectEdited", EventReturnHandler::None, &player, &object, int(response), offset.x, offset.y, offset.z, rotation.x, rotation.y, rotation.z);
 	}
 
 	void onPlayerAttachedObjectEdited(IPlayer& player, int index, bool saved, const ObjectAttachmentSlotData& data) override
