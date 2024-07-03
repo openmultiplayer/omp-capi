@@ -501,7 +501,7 @@
       ]
     },
     {
-      "name": "onPlayerSelectObject",
+      "name": "onObjectSelected",
       "badret": "none",
       "args": [
         {

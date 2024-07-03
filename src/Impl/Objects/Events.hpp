@@ -44,7 +44,7 @@ struct ObjectEvents : public ObjectEventHandler, public Singleton<ObjectEvents>
 
 	void onObjectSelected(IPlayer& player, IObject& object, int model, Vector3 position) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerSelectObject", EventReturnHandler::None, &player, &object, model, position.x, position.y, position.z);
+		ComponentManager::Get()->CallEvent("onObjectSelected", EventReturnHandler::None, &player, &object, model, position.x, position.y, position.z);
 	}
 
 	void onPlayerObjectSelected(IPlayer& player, IPlayerObject& object, int model, Vector3 position) override
