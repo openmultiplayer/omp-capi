@@ -73,7 +73,7 @@ public:
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotMissed", EventReturnHandler::StopAtFalse, &player,
 			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
-			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
 			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
 			int(bulletData.weapon),
 			int(bulletData.hitType),
@@ -84,7 +84,7 @@ public:
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotPlayer", EventReturnHandler::StopAtFalse, &player, &target,
 			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
-			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
 			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
 			int(bulletData.weapon),
 			int(bulletData.hitType),
@@ -95,7 +95,7 @@ public:
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotVehicle", EventReturnHandler::StopAtFalse, &player, &target,
 			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
-			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
 			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
 			int(bulletData.weapon),
 			int(bulletData.hitType),
@@ -106,7 +106,7 @@ public:
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotObject", EventReturnHandler::StopAtFalse, &player, &target,
 			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
-			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
 			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
 			int(bulletData.weapon),
 			int(bulletData.hitType),
@@ -117,7 +117,7 @@ public:
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotPlayerObject", EventReturnHandler::StopAtFalse, &player, &target,
 			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
-			bulletData.hitpos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
 			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
 			int(bulletData.weapon),
 			int(bulletData.hitType),
