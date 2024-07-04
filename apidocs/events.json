@@ -154,7 +154,7 @@
       "args": [
         {
           "name": "elapsed",
-          "type": "int"
+          "type": "long long"
         },
         {
           "name": "now",

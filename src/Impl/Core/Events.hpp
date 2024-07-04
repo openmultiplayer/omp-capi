@@ -17,6 +17,6 @@ struct CoreEvents : public CoreEventHandler, public Singleton<CoreEvents>
 	{
 		long long nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
 
-		ComponentManager::Get()->CallEvent("onTick", EventReturnHandler::None, int(elapsed.count()), nowSeconds);
+		ComponentManager::Get()->CallEvent("onTick", EventReturnHandler::None, elapsed.count(), nowSeconds);
 	}
 };
