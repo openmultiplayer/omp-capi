@@ -1297,7 +1297,7 @@
           "type": "int"
         },
         {
-          "name": "result",
+          "name": "results",
           "type": "int"
         }
       ]
