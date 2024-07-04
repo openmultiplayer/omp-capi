@@ -15,6 +15,8 @@ struct CoreEvents : public CoreEventHandler, public Singleton<CoreEvents>
 {
 	void onTick(Microseconds elapsed, TimePoint now) override
 	{
-		ComponentManager::Get()->CallEvent("onTick", EventReturnHandler::None, int(elapsed.count()));
+		long long nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+
+		ComponentManager::Get()->CallEvent("onTick", EventReturnHandler::None, int(elapsed.count()), nowSeconds);
 	}
 };
