@@ -144,7 +144,7 @@ files.forEach(async (file, index) => {
       const v0 = line.replace("OMP_CAPI(", "");
       const name_full = v0.split(", ")[0];
       const group = name_full.split("_")[0];
-      const name = name_full.split("_")[1];
+      const name = name_full.split("_").slice(1).join("_");
 
       if (APIs[group] === undefined) {
         APIs[group] = [];
