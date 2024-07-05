@@ -8,7 +8,7 @@
 
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Actor_Create, objectPtr(int model, float x, float y, float z, float rot, int* id))
+OMP_CAPI(Actor_Create, objectPtr(int model, float x, float y, float z, float rot))
 {
 	IActorsComponent* component = ComponentManager::Get()->actors;
 	if (component)
@@ -16,7 +16,6 @@ OMP_CAPI(Actor_Create, objectPtr(int model, float x, float y, float z, float rot
 		IActor* actor = component->create(model, { x, y, z }, rot);
 		if (actor)
 		{
-			*id = actor->getID();
 			return actor;
 		}
 	}
