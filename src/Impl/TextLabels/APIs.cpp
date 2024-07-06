@@ -94,6 +94,12 @@ OMP_CAPI(TextLabel_GetText, void(objectPtr textlabel, OutputStringViewPtr output
 	SET_CAPI_STRING_VIEW(output, result);
 }
 
+OMP_CAPI(TextLabel_SetColor, void(objectPtr textlabel, uint32_t color))
+{
+	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
+	textlabel_->setColour(Colour::FromRGBA(color));
+}
+
 OMP_CAPI(TextLabel_GetColor, uint32_t(objectPtr textlabel))
 {
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, 0);
