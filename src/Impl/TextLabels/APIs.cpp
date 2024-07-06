@@ -100,7 +100,7 @@ OMP_CAPI(TextLabel_SetPosition, void(objectPtr textlabel, float x, float y, floa
 	textlabel_->setPosition({ x, y, z });
 }
 
-OMP_CAPI(TextLabel_GetPos, void(objectPtr textlabel, float* x, float* y, float* z))
+OMP_CAPI(TextLabel_GetPosition, void(objectPtr textlabel, float* x, float* y, float* z))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
 	const Vector3& pos = textlabel_->getPosition();
