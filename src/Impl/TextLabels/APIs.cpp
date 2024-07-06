@@ -186,7 +186,7 @@ OMP_CAPI(TextLabel_GetAttachmentData, void(objectPtr textlabel, int* attached_pl
 	Per-Player TextLabel
 */
 
-OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los, int* id))
+OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text, uint32_t color, float x, float y, float z, float drawDistance, objectPtr attachedPlayer, objectPtr attachedVehicle, bool los))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	IPlayerTextLabelData* labelData = queryExtension<IPlayerTextLabelData>(player_);
@@ -209,7 +209,6 @@ OMP_CAPI(PlayerTextLabel_Create, objectPtr(objectPtr player, StringCharPtr text,
 
 		if (textlabel)
 		{
-			*id = textlabel->getID();
 			return textlabel;
 		}
 	}
