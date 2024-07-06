@@ -173,7 +173,7 @@ OMP_CAPI(TextLabel_SetVirtualWorld, void(objectPtr textlabel, int world))
 	textlabel_->setVirtualWorld(world);
 }
 
-OMP_CAPI(TextLabel_GetAttachedData, void(objectPtr textlabel, int* attached_player, int* attached_vehicle))
+OMP_CAPI(TextLabel_GetAttachmentData, void(objectPtr textlabel, int* attached_player, int* attached_vehicle))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
 	const TextLabelAttachmentData& data = textlabel_->getAttachmentData();
