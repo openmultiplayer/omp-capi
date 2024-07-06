@@ -73,7 +73,7 @@ OMP_CAPI(TextLabel_IsValid, bool(objectPtr textlabel))
 	return true;
 }
 
-OMP_CAPI(TextLabel_IsStreamedIn, bool(objectPtr player, objectPtr textlabel))
+OMP_CAPI(TextLabel_IsStreamedIn, bool(objectPtr textlabel, objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	POOL_ENTITY_RET(textlabels, ITextLabel, textlabel, textlabel_, false);
