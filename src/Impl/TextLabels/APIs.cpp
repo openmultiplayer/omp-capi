@@ -81,6 +81,12 @@ OMP_CAPI(TextLabel_IsStreamedInForPlayer, bool(objectPtr textlabel, objectPtr pl
 	return streamed;
 }
 
+OMP_CAPI(TextLabel_SetText, void(objectPtr textlabel, StringCharPtr text))
+{
+	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
+	textlabel_->setText(text);
+}
+
 OMP_CAPI(TextLabel_GetText, void(objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
