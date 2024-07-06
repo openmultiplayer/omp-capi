@@ -65,6 +65,12 @@ OMP_CAPI(TextLabel_AttachToVehicle, void(objectPtr textlabel, objectPtr vehicle,
 	textlabel_->attachToVehicle(*vehicle_, { offsetX, offsetY, offsetZ });
 }
 
+OMP_CAPI(TextLabel_DetachFromVehicle, void(objectPtr textlabel, float offsetX, float offsetY, float offsetZ))
+{
+	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
+	textlabel_->detachFromVehicle({ offsetX, offsetY, offsetZ });
+}
+
 OMP_CAPI(TextLabel_UpdateText, void(objectPtr textlabel, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
