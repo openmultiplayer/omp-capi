@@ -241,12 +241,11 @@ OMP_CAPI(PlayerTextLabel_GetText, void(objectPtr player, objectPtr textlabel, Ou
 	SET_CAPI_STRING_VIEW(output, result);
 }
 
-OMP_CAPI(PlayerTextLabel_GetColor, bool(objectPtr player, objectPtr textlabel, uint32_t* color))
+OMP_CAPI(PlayerTextLabel_GetColor, uint32_t(objectPtr player, objectPtr textlabel))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
-	*color = textlabel_->getColour().RGBA();
-	return true;
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, 0);
+	return textlabel_->getColour().RGBA();
 }
 
 OMP_CAPI(PlayerTextLabel_GetPos, void(objectPtr player, objectPtr textlabel, float* x, float* y, float* z))
