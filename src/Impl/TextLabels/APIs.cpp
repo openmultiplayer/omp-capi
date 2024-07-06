@@ -94,6 +94,12 @@ OMP_CAPI(TextLabel_GetColor, uint32_t(objectPtr textlabel))
 	return textlabel_->getColour().RGBA();
 }
 
+OMP_CAPI(TextLabel_SetPosition, void(objectPtr textlabel, float x, float y, float z))
+{
+	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
+	textlabel_->setPosition({ x, y, z });
+}
+
 OMP_CAPI(TextLabel_GetPos, void(objectPtr textlabel, float* x, float* y, float* z))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
