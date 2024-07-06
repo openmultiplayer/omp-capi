@@ -52,6 +52,12 @@ OMP_CAPI(TextLabel_AttachToPlayer, void(objectPtr textlabel, objectPtr player, f
 	textlabel_->attachToPlayer(*player_, { offsetX, offsetY, offsetZ });
 }
 
+OMP_CAPI(TextLabel_DetachFromPlayer, void(objectPtr textlabel, float offsetX, float offsetY, float offsetZ))
+{
+	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
+	textlabel_->detachFromPlayer({ offsetX, offsetY, offsetZ });
+}
+
 OMP_CAPI(TextLabel_AttachToVehicle, void(objectPtr textlabel, objectPtr vehicle, float offsetX, float offsetY, float offsetZ))
 {
 	POOL_ENTITY(textlabels, ITextLabel, textlabel, textlabel_);
