@@ -37,7 +37,7 @@ OMP_CAPI(All_SendClientMessage, bool(uint32_t color, StringCharPtr text))
 	return true;
 }
 
-OMP_CAPI(Player_SetCameraPos, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetCameraPosition, bool(objectPtr player, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setCameraPosition({ x, y, z });
