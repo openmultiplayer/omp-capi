@@ -1084,7 +1084,7 @@ OMP_CAPI(Player_Spawn, bool(objectPtr player))
 	return true;
 }
 
-OMP_CAPI(Player_GPCI, bool(objectPtr player, OutputStringViewPtr gpci))
+OMP_CAPI(Player_GetSerial, bool(objectPtr player, OutputStringViewPtr gpci))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto result = player_->getSerial();
