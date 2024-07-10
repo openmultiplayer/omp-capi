@@ -332,7 +332,7 @@ OMP_CAPI(Player_GetPing, int(objectPtr player))
 	return ping;
 }
 
-OMP_CAPI(Player_GetWeapon, int(objectPtr player))
+OMP_CAPI(Player_GetArmedWeapon, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int weapon = player_->getArmedWeapon();
