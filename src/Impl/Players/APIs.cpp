@@ -271,7 +271,7 @@ OMP_CAPI(Player_GetDrunkLevel, int(objectPtr player))
 	return level;
 }
 
-OMP_CAPI(Player_GiveWeapon, bool(objectPtr player, int weapon, int ammo))
+OMP_CAPI(Player_GiveWeapon, bool(objectPtr player, uint8_t weapon, uint32_t ammo))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	WeaponSlotData data;
