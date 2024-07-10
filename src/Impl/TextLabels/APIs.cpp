@@ -327,6 +327,14 @@ OMP_CAPI(PlayerTextLabel_GetColor, uint32_t(objectPtr player, objectPtr textlabe
 	return textlabel_->getColour().RGBA();
 }
 
+OMP_CAPI(PlayerTextLabel_SetPosition, void(objectPtr player, objectPtr textlabel, float x, float y, float z))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_);
+
+	textlabel_->setPosition({ x, y, z });
+}
+
 OMP_CAPI(PlayerTextLabel_GetPosition, void(objectPtr player, objectPtr textlabel, float* x, float* y, float* z))
 {
 	POOL_ENTITY(players, IPlayer, player, player_);
