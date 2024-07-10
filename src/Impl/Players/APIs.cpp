@@ -423,16 +423,6 @@ OMP_CAPI(Player_GetAimData, bool(objectPtr player, float* frontVectorX, float* f
 	return true;
 }
 
-OMP_CAPI(Player_GetCameraPos, bool(objectPtr player, float* x, float* y, float* z))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	auto pos = player_->getAimData().camPos;
-	*x = pos.x;
-	*y = pos.y;
-	*z = pos.z;
-	return true;
-}
-
 OMP_CAPI(Player_GetDistanceFromPoint, float(objectPtr player, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
