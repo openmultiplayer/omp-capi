@@ -1045,13 +1045,6 @@ OMP_CAPI(Player_DisableRemoteVehicleCollisions, bool(objectPtr player, bool disa
 	return true;
 }
 
-OMP_CAPI(Player_GetCameraZoom, float(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float cameraZoom = player_->getAimData().camZoom;
-	return cameraZoom;
-}
-
 OMP_CAPI(Player_SelectTextDraw, bool(objectPtr player, uint32_t hoverColour))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
