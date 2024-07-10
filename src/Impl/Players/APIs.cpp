@@ -752,7 +752,7 @@ OMP_CAPI(All_EnableStuntBonus, bool(bool enable))
 	return true;
 }
 
-OMP_CAPI(Player_GetPlayerAmmo, int(objectPtr player))
+OMP_CAPI(Player_GetArmedWeaponAmmo, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int ammo = player_->getArmedWeaponAmmo();
