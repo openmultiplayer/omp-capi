@@ -871,13 +871,6 @@ OMP_CAPI(Player_GetCameraFrontVector, bool(objectPtr player, float* x, float* y,
 	return true;
 }
 
-OMP_CAPI(Player_GetCameraMode, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int cameraMode = player_->getAimData().camMode;
-	return cameraMode;
-}
-
 OMP_CAPI(Player_GetKeys, bool(objectPtr player, int* keys, int* updown, int* leftright))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
