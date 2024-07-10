@@ -1207,6 +1207,13 @@ OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, St
 	return true;
 }
 
+OMP_CAPI(Player_GetClientVersion, int(objectPtr player))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	auto version = player_->getClientVersion();
+	return int(version);
+}
+
 OMP_CAPI(Player_GetClientVersionName, void(objectPtr player, OutputStringViewPtr version))
 {
 	POOL_ENTITY(players, IPlayer, player, player_);
