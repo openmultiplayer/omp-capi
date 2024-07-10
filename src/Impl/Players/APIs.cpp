@@ -107,6 +107,15 @@ OMP_CAPI(Player_SetCameraLookAt, bool(objectPtr player, float x, float y, float 
 	return true;
 }
 
+OMP_CAPI(Player_GetCameraLookAt, void(objectPtr player, float* x, float* y, float* z))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto pos = player_->getCameraLookAt();
+	*x = pos.x;
+	*y = pos.y;
+	*z = pos.z;
+}
+
 OMP_CAPI(Player_SetCameraBehind, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
