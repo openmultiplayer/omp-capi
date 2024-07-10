@@ -826,10 +826,9 @@ OMP_CAPI(Player_GetWeaponSlot, bool(objectPtr player, int slot, uint8_t* weapon,
 		return false;
 	}
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	const WeaponSlotData& weapon = player_->getWeaponSlot(slot);
-	*weapon = weapon.id;
-	*ammo = weapon.ammo;
-	return true;
+	const WeaponSlotData& weaponSlot = player_->getWeaponSlot(slot);
+	*weapon = weaponSlot.id;
+	*ammo = weaponSlot.ammo;
 }
 
 OMP_CAPI(Player_InterpolateCameraPosition, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
