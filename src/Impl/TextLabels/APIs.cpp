@@ -264,6 +264,16 @@ OMP_CAPI(PlayerTextLabel_DetachFromPlayer, void(objectPtr player, objectPtr text
 	textlabel_->detachFromPlayer({ offsetX, offsetY, offsetZ });
 }
 
+OMP_CAPI(PlayerTextLabel_AttachToVehicle, void(objectPtr player, objectPtr textlabel, objectPtr target, float offsetX, float offsetY, float offsetZ))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_);
+
+	ENTITY_CAST(IVehicle, target, target_);
+
+	textlabel_->attachToVehicle(*target_, { offsetX, offsetY, offsetZ });
+}
+
 OMP_CAPI(PlayerTextLabel_UpdateText, void(objectPtr player, objectPtr textlabel, uint32_t color, StringCharPtr text))
 {
 	POOL_ENTITY(players, IPlayer, player, player_);
