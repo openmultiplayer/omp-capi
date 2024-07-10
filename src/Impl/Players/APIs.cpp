@@ -1207,7 +1207,7 @@ OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, St
 	return true;
 }
 
-OMP_CAPI(Player_GetVersion, int(objectPtr player, OutputStringViewPtr version))
+OMP_CAPI(Player_GetClientVersionName, int(objectPtr player, OutputStringViewPtr version))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto versionStr = player_->getClientVersionName();
