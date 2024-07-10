@@ -281,7 +281,7 @@ OMP_CAPI(Player_GiveWeapon, bool(objectPtr player, uint8_t weapon, uint32_t ammo
 	return true;
 }
 
-OMP_CAPI(Player_RemoveWeapon, bool(objectPtr player, int weapon))
+OMP_CAPI(Player_RemoveWeapon, bool(objectPtr player, uint8_t weapon))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->removeWeapon(weapon);
