@@ -93,6 +93,13 @@ OMP_CAPI(Player_SetShopName, bool(objectPtr player, StringCharPtr name))
 	return true;
 }
 
+OMP_CAPI(Player_GetShopName, void(objectPtr player, OutputStringViewPtr name))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto result = player_->getShopName();
+	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), result.length());
+}
+
 OMP_CAPI(Player_GiveMoney, bool(objectPtr player, int amount))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
