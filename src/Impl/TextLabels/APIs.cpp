@@ -289,7 +289,7 @@ OMP_CAPI(PlayerTextLabel_UpdateText, void(objectPtr player, objectPtr textlabel,
 	textlabel_->setColourAndText(Colour::FromRGBA(color), text);
 }
 
-OMP_CAPI(PlayerTextLabel_IsValid, bool(objectPtr player, objectPtr textlabel, bool* valid))
+OMP_CAPI(PlayerTextLabel_IsValid, bool(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
