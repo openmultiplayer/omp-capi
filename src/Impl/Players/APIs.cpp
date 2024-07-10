@@ -819,7 +819,7 @@ OMP_CAPI(Player_GetVehicleSeat, int(objectPtr player))
 	return seat;
 }
 
-OMP_CAPI(Player_GetWeaponSlot, bool(objectPtr player, int slot, int* weaponid, int* ammo))
+OMP_CAPI(Player_GetWeaponSlot, bool(objectPtr player, int slot, uint8_t* weapon, uint32_t* ammo))
 {
 	if (slot < 0 || slot >= MAX_WEAPON_SLOTS)
 	{
