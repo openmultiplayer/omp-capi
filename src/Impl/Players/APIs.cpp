@@ -648,7 +648,7 @@ OMP_CAPI(Player_SetChatBubble, bool(objectPtr player, StringCharPtr text, uint32
 	return true;
 }
 
-OMP_CAPI(Player_SetPosFindZ, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetPositionFindZ, bool(objectPtr player, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setPositionFindZ({ x, y, z });
