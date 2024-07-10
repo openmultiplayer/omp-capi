@@ -832,7 +832,7 @@ OMP_CAPI(Player_GetWeaponData, bool(objectPtr player, int slot, int* weaponid, i
 	return true;
 }
 
-OMP_CAPI(Player_InterpolateCameraPos, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
+OMP_CAPI(Player_InterpolateCameraPosition, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->interpolateCameraPosition({ from_x, from_y, from_z }, { to_x, to_y, to_z }, time, PlayerCameraCutType(cut));
