@@ -376,6 +376,13 @@ OMP_CAPI(PlayerTextLabel_SetLOS, void(objectPtr player, objectPtr textlabel, boo
 	textlabel_->setTestLOS(status);
 }
 
+OMP_CAPI(PlayerTextLabel_SetVirtualWorld, void(objectPtr player, objectPtr textlabel, int world))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_);
+	textlabel_->setVirtualWorld(world);
+}
+
 OMP_CAPI(PlayerTextLabel_GetVirtualWorld, int(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
