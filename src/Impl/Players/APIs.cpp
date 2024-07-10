@@ -827,7 +827,7 @@ OMP_CAPI(Player_GetWeaponSlot, bool(objectPtr player, int slot, uint8_t* weapon,
 	}
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	const WeaponSlotData& weapon = player_->getWeaponSlot(slot);
-	*weaponid = weapon.id;
+	*weapon = weapon.id;
 	*ammo = weapon.ammo;
 	return true;
 }
