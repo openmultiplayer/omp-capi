@@ -861,13 +861,6 @@ OMP_CAPI(Player_AttachCameraToPlayerObject, bool(objectPtr player, objectPtr obj
 	return true;
 }
 
-OMP_CAPI(Player_GetCameraAspectRatio, float(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float ratio = player_->getAimData().aspectRatio;
-	return ratio;
-}
-
 OMP_CAPI(Player_GetCameraFrontVector, bool(objectPtr player, float* x, float* y, float* z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
