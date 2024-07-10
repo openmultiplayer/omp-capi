@@ -262,6 +262,13 @@ OMP_CAPI(PlayerTextLabel_IsValid, bool(objectPtr player, objectPtr textlabel, bo
 	return true;
 }
 
+OMP_CAPI(PlayerTextLabel_SetText, void(objectPtr player, objectPtr textlabel, StringCharPtr text))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_);
+	textlabel_->setText(text);
+}
+
 OMP_CAPI(PlayerTextLabel_GetText, void(objectPtr player, objectPtr textlabel, OutputStringViewPtr output))
 {
 	POOL_ENTITY(players, IPlayer, player, player_);
