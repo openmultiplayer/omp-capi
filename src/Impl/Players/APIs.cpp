@@ -1207,13 +1207,11 @@ OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, St
 	return true;
 }
 
-OMP_CAPI(Player_GetClientVersionName, int(objectPtr player, OutputStringViewPtr version))
+OMP_CAPI(Player_GetClientVersionName, void(objectPtr player, OutputStringViewPtr version))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto versionStr = player_->getClientVersionName();
-	auto len = versionStr.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), len);
-	return len;
+	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), versionStr.length());
 }
 
 OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
