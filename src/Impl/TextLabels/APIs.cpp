@@ -321,7 +321,8 @@ OMP_CAPI(PlayerTextLabel_SetLOS, void(objectPtr player, objectPtr textlabel, boo
 OMP_CAPI(PlayerTextLabel_GetVirtualWorld, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	return player_->getVirtualWorld();
+	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
+	return textlabel_->getVirtualWorld();
 }
 
 OMP_CAPI(PlayerTextLabel_GetAttachedData, void(objectPtr player, objectPtr textlabel, int* attached_player, int* attached_vehicle))
