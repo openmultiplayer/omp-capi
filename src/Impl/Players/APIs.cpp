@@ -454,7 +454,7 @@ OMP_CAPI(Player_GetVirtualWorld, int(objectPtr player))
 	return vw;
 }
 
-OMP_CAPI(Player_IsNPC, bool(objectPtr player))
+OMP_CAPI(Player_IsBot, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	auto bot = player_->isBot();
