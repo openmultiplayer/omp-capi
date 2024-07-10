@@ -823,13 +823,6 @@ OMP_CAPI(Player_GetWeaponData, bool(objectPtr player, int slot, int* weaponid, i
 	return true;
 }
 
-OMP_CAPI(Player_GetWeaponState, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int state = player_->getAimData().weaponState;
-	return state;
-}
-
 OMP_CAPI(Player_InterpolateCameraPos, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
