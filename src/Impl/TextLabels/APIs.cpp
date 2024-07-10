@@ -318,7 +318,7 @@ OMP_CAPI(PlayerTextLabel_SetLOS, void(objectPtr player, objectPtr textlabel, boo
 	textlabel_->setTestLOS(status);
 }
 
-OMP_CAPI(PlayerTextLabel_GetVirtualWorld, int(objectPtr player))
+OMP_CAPI(PlayerTextLabel_GetVirtualWorld, int(objectPtr player, objectPtr textlabel))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	PLAYER_POOL_ENTITY_RET(player_, IPlayerTextLabelData, IPlayerTextLabel, textlabel, textlabel_, false);
