@@ -405,6 +405,24 @@ OMP_CAPI(Player_GetVelocity, bool(objectPtr player, float* x, float* y, float* z
 	return true;
 }
 
+OMP_CAPI(Player_GetAimData, bool(objectPtr player, float* frontVectorX, float* frontVectorY, float* frontVectorZ, float* posX, float* posY, float* posZ, float* aimZ, float* camZoom, float* aspectRatio, int8_t* weaponState, uiint8_t* camMode))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	auto data = player_->getAimData();
+	*frontVectorX = data.camFrontVector.x;
+	*frontVectorY = data.camFrontVector.y;
+	*frontVectorZ = data.camFrontVector.z;
+	*posX = data.camPos.x;
+	*posY = data.camPos.y;
+	*posZ = data.camPos.z;
+	*aimZ = data.aimZ;
+	*camZoom = data.camZoom;
+	*aspectRatio = data.aspectRatio;
+	*weaponState = data.weaponState;
+	*camMode = data.camMode;
+	return true;
+}
+
 OMP_CAPI(Player_GetCameraPos, bool(objectPtr player, float* x, float* y, float* z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
