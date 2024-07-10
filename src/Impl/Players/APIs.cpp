@@ -1203,13 +1203,6 @@ OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
 	return ret;
 }
 
-OMP_CAPI(Player_GetZAim, float(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float z = player_->getAimData().aimZ;
-	return z;
-}
-
 OMP_CAPI(Player_GetSurfingOffsets, bool(objectPtr player, float* offsetX, float* offsetY, float* offsetZ))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
