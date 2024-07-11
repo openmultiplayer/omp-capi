@@ -786,13 +786,6 @@ OMP_CAPI(Player_GetAnimationData, void(objectPtr player, uint16_t* id, uint16_t*
 	*flags = data.flags;
 }
 
-OMP_CAPI(Player_GetAnimationIndex, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int id = player_->getAnimationData().ID;
-	return id;
-}
-
 OMP_CAPI(Player_GetFacingAngle, float(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
