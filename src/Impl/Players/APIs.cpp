@@ -453,7 +453,7 @@ OMP_CAPI(Player_GetDistanceFromPoint, float(objectPtr player, float x, float y, 
 	return distance;
 }
 
-OMP_CAPI(Player_GetInterior, int(objectPtr player))
+OMP_CAPI(Player_GetInterior, unsigned(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int interior = player_->getInterior();
