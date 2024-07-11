@@ -758,7 +758,7 @@ OMP_CAPI(Player_EnableCameraTarget, bool(objectPtr player, bool enable))
 	return true;
 }
 
-OMP_CAPI(Player_EnableStuntBonuses, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_UseStuntBonuses, bool(objectPtr player, bool enable))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->useStuntBonuses(enable);
