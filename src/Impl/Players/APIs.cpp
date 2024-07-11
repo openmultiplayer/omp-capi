@@ -1017,7 +1017,7 @@ OMP_CAPI(Player_SetFacingAngle, bool(objectPtr player, float angle))
 	return true;
 }
 
-OMP_CAPI(Player_SetMarkerForPlayer, bool(objectPtr player, objectPtr other, uint32_t color))
+OMP_CAPI(Player_SetOtherColor, bool(objectPtr player, objectPtr other, uint32_t color))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
