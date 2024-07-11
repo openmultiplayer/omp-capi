@@ -58,7 +58,7 @@ OMP_CAPI(Player_SetInterior, bool(objectPtr player, int interior))
 	return true;
 }
 
-OMP_CAPI(Player_SetWantedLevel, bool(objectPtr player, int level))
+OMP_CAPI(Player_SetWantedLevel, bool(objectPtr player, unsigned int level))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setWantedLevel(level);
