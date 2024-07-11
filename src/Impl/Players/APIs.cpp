@@ -295,6 +295,12 @@ OMP_CAPI(Player_RemoveWeapon, bool(objectPtr player, uint8_t weapon))
 	return true;
 }
 
+OMP_CAPI(Player_SetMoney, void(objectPtr player, int money))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->setMoney(money);
+}
+
 OMP_CAPI(Player_GetMoney, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
