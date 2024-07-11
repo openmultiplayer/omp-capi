@@ -1168,7 +1168,7 @@ OMP_CAPI(Player_BanEx, bool(objectPtr player, StringCharPtr reason))
 	return true;
 }
 
-OMP_CAPI(Player_SendDeathMessage, bool(objectPtr player, objectPtr killer, objectPtr killee, int weapon))
+OMP_CAPI(Player_SendDeathMessage, bool(objectPtr player, objectPtr killee, objectPtr killer, int weapon))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, killee, killee_, false);
