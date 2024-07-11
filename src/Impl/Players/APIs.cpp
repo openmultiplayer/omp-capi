@@ -701,7 +701,7 @@ OMP_CAPI(Player_ShowNameTagForPlayer, bool(objectPtr player, objectPtr other, bo
 	return true;
 }
 
-OMP_CAPI(Player_ToggleControllable, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_SetControllable, bool(objectPtr player, bool enable))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setControllable(enable);
