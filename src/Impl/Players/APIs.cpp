@@ -612,7 +612,7 @@ OMP_CAPI(Player_PutInVehicle, bool(objectPtr player, objectPtr vehicle, int seat
 	return true;
 }
 
-OMP_CAPI(Player_RemoveBuilding, bool(objectPtr player, int model, float x, float y, float z, float radius))
+OMP_CAPI(Player_RemoveDefaultObjects, bool(objectPtr player, int model, float x, float y, float z, float radius))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->removeDefaultObjects(model, { x, y, z }, radius);
