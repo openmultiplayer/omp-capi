@@ -491,7 +491,7 @@ OMP_CAPI(Player_IsBot, bool(objectPtr player))
 	return bot;
 }
 
-OMP_CAPI(Player_IsStreamedIn, bool(objectPtr player, objectPtr other))
+OMP_CAPI(Player_IsStreamedInForPlayer, bool(objectPtr player, objectPtr other))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
