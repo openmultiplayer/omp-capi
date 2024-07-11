@@ -179,7 +179,7 @@ OMP_CAPI(Player_UseWidescreen, bool(objectPtr player, bool enable))
 	return true;
 }
 
-OMP_CAPI(Player_IsWidescreenToggled, bool(objectPtr player))
+OMP_CAPI(Player_HasWidescreen, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	auto enabled = player_->hasWidescreen();
