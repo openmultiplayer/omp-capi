@@ -1025,7 +1025,7 @@ OMP_CAPI(Player_SetOtherColor, bool(objectPtr player, objectPtr other, uint32_t 
 	return true;
 }
 
-OMP_CAPI(Player_GetMarkerForPlayer, bool(objectPtr player, objectPtr other))
+OMP_CAPI(Player_GetOtherColor, bool(objectPtr player, objectPtr other))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
