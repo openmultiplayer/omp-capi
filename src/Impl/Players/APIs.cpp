@@ -778,6 +778,14 @@ OMP_CAPI(Player_GetArmedWeaponAmmo, int(objectPtr player))
 	return ammo;
 }
 
+OMP_CAPI(Player_GetAnimationData, void(objectPtr player, uint16_t* id, uint16_t* flags))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto data = player_->getAnimationData();
+	*id = data.ID;
+	*flags = data.flags;
+}
+
 OMP_CAPI(Player_GetAnimationIndex, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
