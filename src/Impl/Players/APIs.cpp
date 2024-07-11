@@ -1172,15 +1172,8 @@ OMP_CAPI(Player_SendDeathMessage, bool(objectPtr player, objectPtr killee, objec
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, killee, killee_, false);
-	if (killee_)
-	{
-		ENTITY_CAST_RET(IPlayer, killer, killer_, false);
-		player_->sendDeathMessage(*killee_, killer_, weapon);
-	}
-	else
-	{
-		player_->sendEmptyDeathMessage();
-	}
+	ENTITY_CAST_RET(IPlayer, killer, killer_, false);
+	player_->sendDeathMessage(*killee_, killer_, weapon);
 	return true;
 }
 
