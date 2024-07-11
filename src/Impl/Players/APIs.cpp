@@ -383,7 +383,7 @@ OMP_CAPI(Player_ForceClassSelection, bool(objectPtr player))
 	return true;
 }
 
-OMP_CAPI(Player_GetWantedLevel, int(objectPtr player))
+OMP_CAPI(Player_GetWantedLevel, unsigned(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto wanted = player_->getWantedLevel();
