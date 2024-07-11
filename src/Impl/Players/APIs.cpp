@@ -708,7 +708,7 @@ OMP_CAPI(Player_SetControllable, bool(objectPtr player, bool enable))
 	return true;
 }
 
-OMP_CAPI(Player_ToggleSpectating, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_SetSpectating, bool(objectPtr player, bool enable))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setSpectating(enable);
