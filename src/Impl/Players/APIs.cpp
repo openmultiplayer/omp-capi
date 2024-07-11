@@ -804,7 +804,7 @@ OMP_CAPI(Player_GetIp, int(objectPtr player, OutputStringViewPtr ip))
 	return 0;
 }
 
-OMP_CAPI(Player_GetSpecialAction, int(objectPtr player))
+OMP_CAPI(Player_GetAction, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int action = player_->getAction();
