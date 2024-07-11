@@ -561,7 +561,7 @@ OMP_CAPI(Player_GetWorldBounds, bool(objectPtr player, float* xmax, float* xmin,
 	return true;
 }
 
-OMP_CAPI(Player_ClearAnimations, bool(objectPtr player, int syncType))
+OMP_CAPI(Player_ClearTasks, bool(objectPtr player, int syncType))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->clearTasks(PlayerAnimationSyncType(syncType));
