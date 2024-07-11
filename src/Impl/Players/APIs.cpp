@@ -51,7 +51,7 @@ OMP_CAPI(Player_SetDrunkLevel, bool(objectPtr player, int level))
 	return true;
 }
 
-OMP_CAPI(Player_SetInterior, bool(objectPtr player, int interior))
+OMP_CAPI(Player_SetInterior, bool(objectPtr player, unsigned interior))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setInterior(interior);
