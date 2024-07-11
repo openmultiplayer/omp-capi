@@ -727,7 +727,7 @@ OMP_CAPI(Player_SetSpectating, bool(objectPtr player, bool enable))
 	return true;
 }
 
-OMP_CAPI(Player_ApplyAnimation, bool(objectPtr player, StringCharPtr animlib, StringCharPtr animname, float delta, bool loop, bool lockX, bool lockY, bool freeze, uint32_t time, int sync))
+OMP_CAPI(Player_ApplyAnimation, bool(objectPtr player, float delta, bool loop, bool lockX, bool lockY, bool freeze, uint32_t time, StringCharPtr animlib, StringCharPtr animname, int sync))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	AnimationData animationData(delta, loop, lockX, lockY, freeze, time, animlib, animname);
