@@ -1122,13 +1122,8 @@ OMP_CAPI(Player_Kick, bool(objectPtr player))
 
 OMP_CAPI(Player_SendGameText, bool(objectPtr player, StringCharPtr text, int time, int style))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	if (strlen(text) > 1)
-	{
-		return false;
-	}
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->sendGameText(text, Milliseconds(time), style);
-	return true;
 }
 
 OMP_CAPI(Player_HideGameText, bool(objectPtr player, int style))
