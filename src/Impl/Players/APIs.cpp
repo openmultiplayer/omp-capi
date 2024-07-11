@@ -1025,18 +1025,13 @@ OMP_CAPI(Player_SetOtherColor, bool(objectPtr player, objectPtr other, uint32_t 
 	return true;
 }
 
-OMP_CAPI(Player_GetMarkerForPlayer, uint32_t(objectPtr player, objectPtr other))
+OMP_CAPI(Player_GetMarkerForPlayer, bool(objectPtr player, objectPtr other))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	ENTITY_CAST_RET(IPlayer, other, other_, 0);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	ENTITY_CAST_RET(IPlayer, other, other_, false);
 	Colour color;
 	bool hasPlayerSpecificColor = player_->getOtherColour(*other_, color);
-	if (!hasPlayerSpecificColor)
-	{
-		color = other_->getColour();
-	}
-	uint32_t rgba = color.RGBA();
-	return rgba;
+	return hasPlayerSpecificColor;
 }
 
 OMP_CAPI(Player_AllowTeleport, bool(objectPtr player, bool allow))
