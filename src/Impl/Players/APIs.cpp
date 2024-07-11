@@ -639,7 +639,7 @@ OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player, bool force))
 	return true;
 }
 
-OMP_CAPI(Player_RemoveMapIcon, bool(objectPtr player, int icon))
+OMP_CAPI(Player_UnsetMapIcon, bool(objectPtr player, int icon))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->unsetMapIcon(icon);
