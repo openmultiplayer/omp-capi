@@ -1370,14 +1370,6 @@ OMP_CAPI(Player_IsPlayerUsingOfficialClient, bool(objectPtr player))
 	return ret;
 }
 
-OMP_CAPI(Player_GetAnimationFlags, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	PlayerAnimationData data = player_->getAnimationData();
-	int flags = data.flags;
-	return flags;
-}
-
 OMP_CAPI(Player_IsInDriveByMode, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
