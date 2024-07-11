@@ -150,7 +150,7 @@ OMP_CAPI(Player_PlayAudio, bool(objectPtr player, StringCharPtr url, bool usePos
 	return true;
 }
 
-OMP_CAPI(Player_StopAudioStream, bool(objectPtr player))
+OMP_CAPI(Player_StopAudio, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->stopAudio();
