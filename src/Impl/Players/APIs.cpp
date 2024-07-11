@@ -500,6 +500,12 @@ OMP_CAPI(Player_PlaySound, bool(objectPtr player, uint32_t sound, float x, float
 	return true;
 }
 
+OMP_CAPI(Player_LastPlayedSound, uint32_t(objectPtr player))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	return player_->lastPlayedSound();
+}
+
 OMP_CAPI(Player_SpectatePlayer, bool(objectPtr player, objectPtr target, int mode))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
