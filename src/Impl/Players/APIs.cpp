@@ -368,7 +368,7 @@ OMP_CAPI(Player_GetTime, bool(objectPtr player, int* hour, int* minute))
 	return true;
 }
 
-OMP_CAPI(Player_ToggleClock, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_UseClock, bool(objectPtr player, bool enable))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->useClock(enable);
