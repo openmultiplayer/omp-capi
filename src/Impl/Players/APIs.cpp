@@ -493,7 +493,7 @@ OMP_CAPI(Player_IsStreamedIn, bool(objectPtr player, objectPtr other))
 	return streamed;
 }
 
-OMP_CAPI(Player_PlayGameSound, bool(objectPtr player, int sound, float x, float y, float z))
+OMP_CAPI(Player_PlayGameSound, bool(objectPtr player, uint32_t sound, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->playSound(sound, { x, y, z });
