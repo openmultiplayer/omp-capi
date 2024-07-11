@@ -691,7 +691,7 @@ OMP_CAPI(Player_SetSkillLevel, bool(objectPtr player, uint8_t weapon, int level)
 	return true;
 }
 
-OMP_CAPI(Player_SetAction, bool(objectPtr player, uint32_t action))
+OMP_CAPI(Player_SetAction, bool(objectPtr player, int action))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->setAction(PlayerSpecialAction(action));
