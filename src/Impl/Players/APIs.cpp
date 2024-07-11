@@ -543,13 +543,6 @@ OMP_CAPI(Player_SetWorldBounds, bool(objectPtr player, float xMax, float xMin, f
 	return true;
 }
 
-OMP_CAPI(Player_ClearWorldBounds, bool(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	player_->setWorldBounds(Vector4(MAX_WORLD_BOUNDS, MIN_WORLD_BOUNDS, MAX_WORLD_BOUNDS, MIN_WORLD_BOUNDS));
-	return true;
-}
-
 OMP_CAPI(Player_GetWorldBounds, bool(objectPtr player, float* xmax, float* xmin, float* ymax, float* ymin))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
