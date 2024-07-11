@@ -965,8 +965,7 @@ OMP_CAPI(Player_PlayCrimeReport, bool(objectPtr player, objectPtr suspect, int c
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, suspect, suspect_, false);
-	bool ret = bool(player_->playerCrimeReport(*suspect_, crime));
-	return ret;
+	return player_->playerCrimeReport(*suspect_, crime);
 }
 
 OMP_CAPI(Player_RemoveAttachedObject, bool(objectPtr player, int index))
