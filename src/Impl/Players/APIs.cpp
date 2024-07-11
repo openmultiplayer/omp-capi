@@ -1310,7 +1310,7 @@ OMP_CAPI(Player_IsSpawned, bool(objectPtr player))
 	return spawned;
 }
 
-OMP_CAPI(Player_IsControllable, bool(objectPtr player))
+OMP_CAPI(Player_GetControllable, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	bool controllable = bool(player_->getControllable());
