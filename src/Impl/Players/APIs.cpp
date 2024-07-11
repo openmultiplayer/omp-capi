@@ -143,7 +143,7 @@ OMP_CAPI(All_CreateExplosion, bool(float x, float y, float z, int type, float ra
 	return true;
 }
 
-OMP_CAPI(Player_PlayAudio, bool(objectPtr player, StringCharPtr url, float x, float y, float z, float distance, bool usePos))
+OMP_CAPI(Player_PlayAudio, bool(objectPtr player, StringCharPtr url, bool usePos, float x, float y, float z, float distance))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	player_->playAudio(url, usePos, { x, y, z }, distance);
