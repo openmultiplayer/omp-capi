@@ -705,7 +705,7 @@ OMP_CAPI(Player_SetSpecialAction, bool(objectPtr player, uint32_t action))
 	return true;
 }
 
-OMP_CAPI(Player_ShowNameTagForPlayer, bool(objectPtr player, objectPtr other, bool enable))
+OMP_CAPI(Player_ToggleOtherNameTag, bool(objectPtr player, objectPtr other, bool enable))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
