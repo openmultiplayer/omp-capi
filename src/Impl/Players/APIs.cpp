@@ -1190,7 +1190,7 @@ OMP_CAPI(Player_SendEmptyDeathMessage, void(objectPtr player))
 	player_->sendEmptyDeathMessage();
 }
 
-OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, StringCharPtr message))
+OMP_CAPI(Player_SendChatMessage, bool(objectPtr player, objectPtr sender, StringCharPtr message))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, sender, sender_, false);
