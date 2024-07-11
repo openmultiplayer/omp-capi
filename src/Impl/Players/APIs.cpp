@@ -1177,6 +1177,12 @@ OMP_CAPI(Player_SendDeathMessage, bool(objectPtr player, objectPtr killee, objec
 	return true;
 }
 
+OMP_CAPI(Player_SendEmptyDeathMessage, void(objectPtr player))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->sendEmptyDeathMessage();
+}
+
 OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, StringCharPtr message))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
