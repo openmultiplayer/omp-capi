@@ -777,10 +777,6 @@ OMP_CAPI(Player_GetVehicleSeat, int(objectPtr player))
 
 OMP_CAPI(Player_GetWeaponSlot, void(objectPtr player, int slot, uint8_t* weapon, uint32_t* ammo))
 {
-	if (slot < 0 || slot >= MAX_WEAPON_SLOTS)
-	{
-		return;
-	}
 	POOL_ENTITY(players, IPlayer, player, player_);
 	const WeaponSlotData& weaponSlot = player_->getWeaponSlot(slot);
 	*weapon = weaponSlot.id;
