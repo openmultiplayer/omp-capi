@@ -8,154 +8,87 @@
 
 #include "../ComponentManager.hpp"
 
-OMP_CAPI(Checkpoint_Set, bool(objectPtr player, float x, float y, float z, float radius))
+OMP_CAPI(Checkpoint_SetPosition, void(objectPtr checkpoint, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		ICheckpointData& cp = playerCheckpointData->getCheckpoint();
-		cp.setPosition({ x, y, z });
-		cp.setRadius(radius);
-		cp.enable();
-		return true;
-	}
-	return false;
+	ENTITY_CAST(ICheckpointData, checkpoint, checkpoint_);
+	checkpoint_.setPosition({ x, y, z });
 }
 
-OMP_CAPI(Checkpoint_Disable, bool(objectPtr player))
+OMP_CAPI(Checkpoint_SetRadius, void(objectPtr checkpoint, float radius))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		ICheckpointData& cp = playerCheckpointData->getCheckpoint();
-		cp.disable();
-		return true;
-	}
-	return false;
+	ENTITY_CAST(ICheckpointData, checkpoint, checkpoint_);
+	checkpoint_->setRadius(radius);
 }
 
-OMP_CAPI(Checkpoint_IsPlayerIn, bool(objectPtr player))
+OMP_CAPI(Checkpoint_Enable, void(objectPtr checkpoint))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		ICheckpointData& cp = playerCheckpointData->getCheckpoint();
-		if (cp.isEnabled())
-		{
-			bool isIn = cp.isPlayerInside();
-			return isIn;
-		}
-	}
-	return false;
+	ENTITY_CAST(ICheckpointData, checkpoint, checkpoint_);
+	checkpoint_->enable();
 }
 
-OMP_CAPI(Checkpoint_IsActive, bool(objectPtr player))
+OMP_CAPI(Checkpoint_Disable, void(objectPtr checkpoint))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerData)
-	{
-		bool active = playerData->getCheckpoint().isEnabled();
-		return active;
-	}
-	return false;
+	ENTITY_CAST(ICheckpointData, checkpoint, checkpoint_);
+	checkpoint_->disable();
 }
 
-OMP_CAPI(Checkpoint_Get, bool(objectPtr player, float* x, float* y, float* z, float* radius))
+OMP_CAPI(Checkpoint_IsEnabled, bool(objectPtr checkpoint))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerData)
-	{
-		const ICheckpointData& data = playerData->getCheckpoint();
-		*x = data.getPosition().x;
-		*y = data.getPosition().y;
-		*z = data.getPosition().z;
-		*radius = data.getRadius();
-		return true;
-	}
-	return false;
+	ENTITY_CAST_RET(ICheckpointData, checkpoint, checkpoint_, false);
+	return checkpoint_->isEnabled();
 }
 
-OMP_CAPI(RaceCheckpoint_Set, bool(objectPtr player, int type, float x, float y, float z, float nextX, float nextY, float nextZ, float radius))
+OMP_CAPI(Checkpoint_IsPlayerInside, bool(objectPtr checkpoint))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
-		if (type >= 0 && type <= 8)
-		{
-			cp.setType(RaceCheckpointType(type));
-			cp.setPosition({ x, y, z });
-			cp.setNextPosition({ nextX, nextY, nextZ });
-			cp.setRadius(radius);
-			cp.enable();
-			return true;
-		}
-	}
-	return false;
+	ENTITY_CAST_RET(ICheckpointData, checkpoint, checkpoint_, false);
+	return checkpoint_->isPlayerInside();
 }
 
-OMP_CAPI(RaceCheckpoint_Disable, bool(objectPtr player))
+
+OMP_CAPI(RaceCheckpoint_SetType, void(objectPtr cp, int type))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
-		cp.disable();
-		return true;
-	}
-	return false;
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_->setType(RaceCheckpointType(type));
 }
 
-OMP_CAPI(RaceCheckpoint_IsPlayerIn, bool(objectPtr player))
+OMP_CAPI(RaceCheckpoint_SetPosition, void(objectPtr cp, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerCheckpointData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerCheckpointData)
-	{
-		IRaceCheckpointData& cp = playerCheckpointData->getRaceCheckpoint();
-		if (cp.getType() != RaceCheckpointType::RACE_NONE && cp.isEnabled())
-		{
-			bool isIn = cp.isPlayerInside();
-			return isIn;
-		}
-	}
-	return false;
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_.setPosition({ x, y, z });
 }
 
-OMP_CAPI(RaceCheckpoint_IsActive, bool(objectPtr player))
+OMP_CAPI(RaceCheckpoint_SetNextPosition, void(objectPtr cp, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerData)
-	{
-		bool active = playerData->getCheckpoint().isEnabled();
-		return active;
-	}
-	return false;
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_.setNextPosition({ x, y, z });
 }
 
-OMP_CAPI(RaceCheckpoint_Get, bool(objectPtr player, float* x, float* y, float* z, float* nextX, float* nextY, float* nextZ, float* radius))
+OMP_CAPI(RaceCheckpoint_SetRadius, void(objectPtr cp, float radius))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
-	if (playerData)
-	{
-		const IRaceCheckpointData& data = playerData->getRaceCheckpoint();
-		*x = data.getPosition().x;
-		*y = data.getPosition().y;
-		*z = data.getPosition().z;
-		*nextX = data.getNextPosition().x;
-		*nextY = data.getNextPosition().y;
-		*nextZ = data.getNextPosition().z;
-		*radius = data.getRadius();
-		return true;
-	}
-	return false;
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_->setRadius(radius);
+}
+
+OMP_CAPI(RaceCheckpoint_Enable, void(objectPtr cp))
+{
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_->enable();
+}
+
+OMP_CAPI(RaceCheckpoint_Disable, void(objectPtr cp))
+{
+	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
+	cp_->disable();
+}
+
+OMP_CAPI(RaceCheckpoint_IsEnabled, bool(objectPtr cp))
+{
+	ENTITY_CAST_RET(IRaceCheckpointData, cp, cp_, false);
+	return cp_->isEnabled();
+}
+
+OMP_CAPI(RaceCheckpoint_IsPlayerInside, bool(objectPtr cp))
+{
+	ENTITY_CAST_RET(IRaceCheckpointData, cp, cp_, false);
+	return cp_->isPlayerInside();
 }
