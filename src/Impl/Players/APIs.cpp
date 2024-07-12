@@ -30,10 +30,9 @@ OMP_CAPI(Player_SendClientMessage, void(objectPtr player, uint32_t color, String
 	player_->sendClientMessage(Colour::FromRGBA(color), text);
 }
 
-OMP_CAPI(All_SendClientMessage, bool(uint32_t color, StringCharPtr text))
+OMP_CAPI(All_SendClientMessage, void(uint32_t color, StringCharPtr text))
 {
 	ComponentManager::Get()->players->sendClientMessageToAll(Colour::FromRGBA(color), text);
-	return true;
 }
 
 OMP_CAPI(Player_SetCameraPosition, void(objectPtr player, float x, float y, float z))
@@ -125,10 +124,9 @@ OMP_CAPI(Player_CreateExplosion, void(objectPtr player, float x, float y, float 
 	player_->createExplosion({ x, y, z }, type, radius);
 }
 
-OMP_CAPI(All_CreateExplosion, bool(float x, float y, float z, int type, float radius))
+OMP_CAPI(All_CreateExplosion, void(float x, float y, float z, int type, float radius))
 {
 	ComponentManager::Get()->players->createExplosionForAll({ x, y, z }, type, radius);
-	return true;
 }
 
 OMP_CAPI(Player_PlayAudio, void(objectPtr player, StringCharPtr url, bool usePos, float x, float y, float z, float distance))
@@ -143,19 +141,18 @@ OMP_CAPI(Player_StopAudio, void(objectPtr player))
 	player_->stopAudio();
 }
 
-OMP_CAPI(All_SendDeathMessage, bool(objectPtr killer, objectPtr killee, int weapon))
+OMP_CAPI(All_SendDeathMessage, void(objectPtr killer, objectPtr killee, int weapon))
 {
 	if (killee)
 	{
-		POOL_ENTITY_RET(players, IPlayer, killer, killer_, false);
-		ENTITY_CAST_RET(IPlayer, killee, killee_, false);
+		POOL_ENTITY(players, IPlayer, killer, killer_);
+		ENTITY_CAST(IPlayer, killee, killee_,);
 		ComponentManager::Get()->players->sendDeathMessageToAll(killer_, *killee_, weapon);
 	}
 	else
 	{
 		ComponentManager::Get()->players->sendEmptyDeathMessageToAll();
 	}
-	return true;
 }
 
 OMP_CAPI(Player_UseWidescreen, void(objectPtr player, bool enable))
@@ -401,9 +398,9 @@ OMP_CAPI(Player_GetVelocity, void(objectPtr player, float* x, float* y, float* z
 	*z = velocity.z;
 }
 
-OMP_CAPI(Player_GetAimData, bool(objectPtr player, float* frontVectorX, float* frontVectorY, float* frontVectorZ, float* posX, float* posY, float* posZ, float* aimZ, float* camZoom, float* aspectRatio, int8_t* weaponState, uint8_t* camMode))
+OMP_CAPI(Player_GetAimData, void(objectPtr player, float* frontVectorX, float* frontVectorY, float* frontVectorZ, float* posX, float* posY, float* posZ, float* aimZ, float* camZoom, float* aspectRatio, int8_t* weaponState, uint8_t* camMode))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto data = player_->getAimData();
 	*frontVectorX = data.camFrontVector.x;
 	*frontVectorY = data.camFrontVector.y;
@@ -416,7 +413,6 @@ OMP_CAPI(Player_GetAimData, bool(objectPtr player, float* frontVectorX, float* f
 	*aspectRatio = data.aspectRatio;
 	*weaponState = data.weaponState;
 	*camMode = data.camMode;
-	return true;
 }
 
 OMP_CAPI(Player_GetDistanceFromPoint, float(objectPtr player, float x, float y, float z))
@@ -440,14 +436,13 @@ OMP_CAPI(Player_SetPosition, void(objectPtr player, float x, float y, float z))
 	player_->setPosition({ x, y, z });
 }
 
-OMP_CAPI(Player_GetPos, bool(objectPtr player, float* x, float* y, float* z))
+OMP_CAPI(Player_GetPosition, void(objectPtr player, float* x, float* y, float* z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto pos = player_->getPosition();
 	*x = pos.x;
 	*y = pos.y;
 	*z = pos.z;
-	return true;
 }
 
 OMP_CAPI(Player_GetVirtualWorld, int(objectPtr player))
@@ -491,12 +486,11 @@ OMP_CAPI(Player_SpectatePlayer, void(objectPtr player, objectPtr target, int mod
 	player_->spectatePlayer(*target_, PlayerSpectateMode(mode));
 }
 
-OMP_CAPI(Player_SpectateVehicle, bool(objectPtr player, objectPtr target, int mode))
+OMP_CAPI(Player_SpectateVehicle, void(objectPtr player, objectPtr target, int mode))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	POOL_ENTITY_RET(vehicles, IVehicle, target, target_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	POOL_ENTITY(vehicles, IVehicle, target, target_);
 	player_->spectateVehicle(*target_, PlayerSpectateMode(mode));
-	return true;
 }
 
 OMP_CAPI(Player_SetVirtualWorld, void(objectPtr player, int vw))
@@ -528,22 +522,26 @@ OMP_CAPI(Player_ClearTasks, void(objectPtr player, int syncType))
 	player_->clearTasks(PlayerAnimationSyncType(syncType));
 }
 
-OMP_CAPI(Player_GetLastShotVectors, bool(objectPtr player, float* origin_x, float* origin_y, float* origin_z, float* hit_x, float* hit_y, float* hit_z))
+OMP_CAPI(Player_GetBulletData, void(objectPtr player, float* originX, float* originY, float* originZ, float* hitX, float* hitY, float* hitZ, float* offsetX, float* offsetY, float* offsetZ, uint8_t* weapon, int* hitType, uint16_t* hitID))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	PlayerBulletData data = player_->getBulletData();
-	auto origin = data.origin;
-	auto hitPos = data.hitPos;
 
-	*origin_x = origin.x;
-	*origin_y = origin.y;
-	*origin_z = origin.z;
+	*originX = data.origin.x;
+	*originY = data.origin.y;
+	*originZ = data.origin.z;
 
-	*hit_x = hitPos.x;
-	*hit_y = hitPos.y;
-	*hit_z = hitPos.z;
+	*hitX = data.hitPos.x;
+	*hitY = data.hitPos.y;
+	*hitZ = data.hitPos.z;
 
-	return true;
+	*offsetX = data.offset.x;
+	*offsetY = data.offset.y;
+	*offsetZ = data.offset.z;
+
+	*weapon = data.weapon;
+	*hitType = data.hitType;
+	*hitID = data.hitID;
 }
 
 OMP_CAPI(Player_GetCameraTargetPlayer, objectPtr(objectPtr player))
@@ -570,12 +568,11 @@ OMP_CAPI(Player_GetCameraTargetVehicle, objectPtr(objectPtr player))
 	return player_->getCameraTargetVehicle();
 }
 
-OMP_CAPI(Player_PutInVehicle, bool(objectPtr player, objectPtr vehicle, int seat))
+OMP_CAPI(Player_PutInVehicle, void(objectPtr player, objectPtr vehicle, int seat))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	POOL_ENTITY(vehicles, IVehicle, vehicle, vehicle_);
 	vehicle_->putPlayer(*player_, seat);
-	return true;
 }
 
 OMP_CAPI(Player_RemoveDefaultObjects, void(objectPtr player, unsigned model, float x, float y, float z, float radius))
@@ -614,14 +611,13 @@ OMP_CAPI(Player_ResetWeapons, void(objectPtr player))
 	player_->resetWeapons();
 }
 
-OMP_CAPI(Player_SetWeaponAmmo, bool(objectPtr player, uint8_t id, uint32_t ammo))
+OMP_CAPI(Player_SetWeaponAmmo, void(objectPtr player, uint8_t id, uint32_t ammo))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	WeaponSlotData data;
 	data.id = id;
 	data.ammo = ammo;
 	player_->setWeaponAmmo(data);
-	return true;
 }
 
 OMP_CAPI(Player_SetArmedWeapon, void(objectPtr player, uint32_t weapon))
@@ -680,12 +676,11 @@ OMP_CAPI(Player_ApplyAnimation, void(objectPtr player, float delta, bool loop, b
 	player_->applyAnimation(animationData, PlayerAnimationSyncType(sync));
 }
 
-OMP_CAPI(Player_GetAnimationName, bool(int index, OutputStringViewPtr lib, OutputStringViewPtr name))
+OMP_CAPI(Player_GetAnimationName, void(int index, OutputStringViewPtr lib, OutputStringViewPtr name))
 {
 	Pair<StringView, StringView> anim = splitAnimationNames(index);
 	SET_CAPI_STRING_VIEW(lib, anim.first);
 	SET_CAPI_STRING_VIEW(name, anim.second);
-	return true;
 }
 
 OMP_CAPI(Player_EditAttachedObject, void(objectPtr player, int index))
@@ -707,10 +702,9 @@ OMP_CAPI(Player_UseStuntBonuses, void(objectPtr player, bool enable))
 	player_->useStuntBonuses(enable);
 }
 
-OMP_CAPI(All_EnableStuntBonus, bool(bool enable))
+OMP_CAPI(All_EnableStuntBonus, void(bool enable))
 {
 	ComponentManager::Get()->core->useStuntBonuses(enable);
-	return true;
 }
 
 OMP_CAPI(Player_GetArmedWeaponAmmo, int(objectPtr player))
@@ -810,12 +804,11 @@ OMP_CAPI(Player_AttachCameraToObject, void(objectPtr player, objectPtr object))
 	player_->attachCameraToObject(*object_);
 }
 
-OMP_CAPI(Player_AttachCameraToPlayerObject, bool(objectPtr player, objectPtr object))
+OMP_CAPI(Player_AttachCameraToPlayerObject, void(objectPtr player, objectPtr object))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerObjectData, IPlayerObject, object, object_);
 	player_->attachCameraToObject(*object_);
-	return true;
 }
 
 OMP_CAPI(Player_GetKeyData, void(objectPtr player, uint32_t* keys, int16_t* updown, int16_t* leftright))
@@ -1108,20 +1101,15 @@ OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
 	return ret;
 }
 
-OMP_CAPI(Player_GetSurfingOffsets, bool(objectPtr player, float* offsetX, float* offsetY, float* offsetZ))
+OMP_CAPI(Player_GetSurfingData, void(objectPtr player, int* type, int* id, float* offsetX, float* offsetY, float* offsetZ))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_,);
 	const PlayerSurfingData& data = player_->getSurfingData();
-	*offsetX = 0.0f;
-	*offsetY = 0.0f;
-	*offsetZ = 0.0f;
-	if (data.type != PlayerSurfingData::Type::None)
-	{
-		*offsetX = data.offset.x;
-		*offsetY = data.offset.y;
-		*offsetZ = data.offset.z;
-	}
-	return true;
+	*type = data.type;
+	*id = data.ID;
+	*offsetX = data.offset.x;
+	*offsetY = data.offset.y;
+	*offsetZ = data.offset.z;
 }
 
 OMP_CAPI(Player_GetRotationQuat, void(objectPtr player, float* x, float* y, float* z, float* w))
