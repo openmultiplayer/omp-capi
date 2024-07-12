@@ -266,6 +266,11 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	if (entity_output == nullptr)                                    \
 	return failret
 
+#define PLAYER_DATA(player, entity_type, entity_output) \
+	auto entity_output = GetPlayerData<entity_type>(player);         \
+	if (entity_output == nullptr)                                    \
+	return
+
 #define COPY_STRING_TO_CAPI_STRING_VIEW(output, src, len_) \
 	if (output)                                            \
 	{                                                      \
