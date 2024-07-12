@@ -176,46 +176,6 @@ OMP_CAPI(Object_IsMoving, bool(objectPtr object))
 	return moving;
 }
 
-OMP_CAPI(Object_BeginEditing, bool(objectPtr player, objectPtr object))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerObjectData* data = queryExtension<IPlayerObjectData>(player_);
-	if (!data)
-	{
-		return false;
-	}
-
-	POOL_ENTITY_RET(objects, IObject, object, object_, false);
-	data->beginEditing(*object_);
-	return true;
-}
-
-OMP_CAPI(Object_BeginSelecting, bool(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerObjectData* data = queryExtension<IPlayerObjectData>(player_);
-	if (!data)
-	{
-		return false;
-	}
-
-	data->beginSelecting();
-	return true;
-}
-
-OMP_CAPI(Object_EndEditing, bool(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerObjectData* data = queryExtension<IPlayerObjectData>(player_);
-	if (!data)
-	{
-		return false;
-	}
-
-	data->endEditing();
-	return true;
-}
-
 OMP_CAPI(Object_SetMaterial, bool(objectPtr object, int materialIndex, int modelId, StringCharPtr textureLibrary, StringCharPtr textureName, uint32_t materialColor))
 {
 	POOL_ENTITY_RET(objects, IObject, object, object_, false);
@@ -613,20 +573,6 @@ OMP_CAPI(PlayerObject_IsMoving, bool(objectPtr player, objectPtr object))
 
 	bool moving = object_->isMoving();
 	return moving;
-}
-
-OMP_CAPI(PlayerObject_BeginEditing, bool(objectPtr player, objectPtr object))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerObjectData* data = queryExtension<IPlayerObjectData>(player_);
-	if (!data)
-	{
-		return false;
-	}
-
-	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
-	data->beginEditing(*object_);
-	return true;
 }
 
 OMP_CAPI(PlayerObject_SetMaterial, bool(objectPtr player, objectPtr object, int materialIndex, int modelId, StringCharPtr textureLibrary, StringCharPtr textureName, uint32_t materialColor))
