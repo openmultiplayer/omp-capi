@@ -11,7 +11,7 @@
 OMP_CAPI(Checkpoint_SetPosition, void(objectPtr checkpoint, float x, float y, float z))
 {
 	ENTITY_CAST(ICheckpointData, checkpoint, checkpoint_);
-	checkpoint_.setPosition({ x, y, z });
+	checkpoint_->setPosition({ x, y, z });
 }
 
 OMP_CAPI(Checkpoint_SetRadius, void(objectPtr checkpoint, float radius))
@@ -54,13 +54,13 @@ OMP_CAPI(RaceCheckpoint_SetType, void(objectPtr cp, int type))
 OMP_CAPI(RaceCheckpoint_SetPosition, void(objectPtr cp, float x, float y, float z))
 {
 	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
-	cp_.setPosition({ x, y, z });
+	cp_->setPosition({ x, y, z });
 }
 
 OMP_CAPI(RaceCheckpoint_SetNextPosition, void(objectPtr cp, float x, float y, float z))
 {
 	ENTITY_CAST(IRaceCheckpointData, cp, cp_);
-	cp_.setNextPosition({ x, y, z });
+	cp_->setNextPosition({ x, y, z });
 }
 
 OMP_CAPI(RaceCheckpoint_SetRadius, void(objectPtr cp, float radius))

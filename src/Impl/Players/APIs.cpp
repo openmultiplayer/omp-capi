@@ -146,7 +146,7 @@ OMP_CAPI(All_SendDeathMessage, void(objectPtr killer, objectPtr killee, int weap
 	if (killee)
 	{
 		POOL_ENTITY(players, IPlayer, killer, killer_);
-		ENTITY_CAST(IPlayer, killee, killee_,);
+		ENTITY_CAST(IPlayer, killee, killee_);
 		ComponentManager::Get()->players->sendDeathMessageToAll(killer_, *killee_, weapon);
 	}
 	else
@@ -1103,9 +1103,9 @@ OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
 
 OMP_CAPI(Player_GetSurfingData, void(objectPtr player, int* type, int* id, float* offsetX, float* offsetY, float* offsetZ))
 {
-	POOL_ENTITY(players, IPlayer, player, player_,);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	const PlayerSurfingData& data = player_->getSurfingData();
-	*type = data.type;
+	*type = int(data.type);
 	*id = data.ID;
 	*offsetX = data.offset.x;
 	*offsetY = data.offset.y;
@@ -1325,7 +1325,7 @@ OMP_CAPI(Player_GetCheckpoint, objectPtr(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	PLAYER_DATA_RET(player_, IPlayerCheckpointData, data, nullptr);
-	const ICheckpointData& cp = data->getCheckpoint();
+	ICheckpointData& cp = data->getCheckpoint();
 	return &cp;
 }
 
@@ -1334,6 +1334,6 @@ OMP_CAPI(Player_GetRaceCheckpoint, objectPtr(objectPtr player))
 	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
 	PLAYER_DATA_RET(player_, IPlayerCheckpointData, data, nullptr);
 	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
-	const IRaceCheckpointData& cp = playerData->getRaceCheckpoint();
+	IRaceCheckpointData& cp = playerData->getRaceCheckpoint();
 	return &cp;
 }
