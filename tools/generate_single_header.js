@@ -63,7 +63,7 @@ enum EventPriorityType
 
 struct EventArgs_Common
 {
-	uint8_t size;
+	int size;
 	void** list;
 };
 
@@ -262,7 +262,7 @@ const generateEvents = (events_) => {
         filePath,
         `
 struct EventArgs_${event.name} {
-    uint8_t size;
+    int size;
     struct {
 ${event.args.map((param) => `        ${convertEventArgTypeNames(param.type)}* ${param.name};`).join("\n")}
     } *list;

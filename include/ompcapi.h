@@ -35,7 +35,7 @@ enum EventPriorityType
 
 struct EventArgs_Common
 {
-	uint8_t size;
+	int size;
 	void** list;
 };
 
@@ -774,7 +774,7 @@ typedef int (*Vehicle_CountOccupants_t)(void* vehicle);
 
 // Actor event type and arguments definitions
 struct EventArgs_onPlayerGiveDamageActor {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** actor;
@@ -786,7 +786,7 @@ struct EventArgs_onPlayerGiveDamageActor {
 typedef bool (*EventCallback_onPlayerGiveDamageActor)(struct EventArgs_onPlayerGiveDamageActor args);
 
 struct EventArgs_onActorStreamIn {
-    uint8_t size;
+    int size;
     struct {
         void** actor;
         void** forPlayer;
@@ -795,7 +795,7 @@ struct EventArgs_onActorStreamIn {
 typedef bool (*EventCallback_onActorStreamIn)(struct EventArgs_onActorStreamIn args);
 
 struct EventArgs_onActorStreamOut {
-    uint8_t size;
+    int size;
     struct {
         void** actor;
         void** forPlayer;
@@ -806,7 +806,7 @@ typedef bool (*EventCallback_onActorStreamOut)(struct EventArgs_onActorStreamOut
 
 // Checkpoint event type and arguments definitions
 struct EventArgs_onPlayerEnterCheckpoint {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -814,7 +814,7 @@ struct EventArgs_onPlayerEnterCheckpoint {
 typedef bool (*EventCallback_onPlayerEnterCheckpoint)(struct EventArgs_onPlayerEnterCheckpoint args);
 
 struct EventArgs_onPlayerLeaveCheckpoint {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -822,7 +822,7 @@ struct EventArgs_onPlayerLeaveCheckpoint {
 typedef bool (*EventCallback_onPlayerLeaveCheckpoint)(struct EventArgs_onPlayerLeaveCheckpoint args);
 
 struct EventArgs_onPlayerEnterRaceCheckpoint {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -830,7 +830,7 @@ struct EventArgs_onPlayerEnterRaceCheckpoint {
 typedef bool (*EventCallback_onPlayerEnterRaceCheckpoint)(struct EventArgs_onPlayerEnterRaceCheckpoint args);
 
 struct EventArgs_onPlayerLeaveRaceCheckpoint {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -840,7 +840,7 @@ typedef bool (*EventCallback_onPlayerLeaveRaceCheckpoint)(struct EventArgs_onPla
 
 // Class event type and arguments definitions
 struct EventArgs_onPlayerRequestClass {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* classId;
@@ -851,7 +851,7 @@ typedef bool (*EventCallback_onPlayerRequestClass)(struct EventArgs_onPlayerRequ
 
 // Console event type and arguments definitions
 struct EventArgs_onConsoleText {
-    uint8_t size;
+    int size;
     struct {
         struct CAPIStringView** command;
         struct CAPIStringView** parameters;
@@ -860,7 +860,7 @@ struct EventArgs_onConsoleText {
 typedef bool (*EventCallback_onConsoleText)(struct EventArgs_onConsoleText args);
 
 struct EventArgs_onRconLoginAttempt {
-    uint8_t size;
+    int size;
     struct {
         struct CAPIStringView** address;
         struct CAPIStringView** password;
@@ -872,7 +872,7 @@ typedef bool (*EventCallback_onRconLoginAttempt)(struct EventArgs_onRconLoginAtt
 
 // Core event type and arguments definitions
 struct EventArgs_onTick {
-    uint8_t size;
+    int size;
     struct {
         int* elapsed;
     } *list;
@@ -882,7 +882,7 @@ typedef bool (*EventCallback_onTick)(struct EventArgs_onTick args);
 
 // CustomModel event type and arguments definitions
 struct EventArgs_onPlayerFinishedDownloading {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* vw;
@@ -891,7 +891,7 @@ struct EventArgs_onPlayerFinishedDownloading {
 typedef bool (*EventCallback_onPlayerFinishedDownloading)(struct EventArgs_onPlayerFinishedDownloading args);
 
 struct EventArgs_onPlayerRequestDownload {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* type;
@@ -903,7 +903,7 @@ typedef bool (*EventCallback_onPlayerRequestDownload)(struct EventArgs_onPlayerR
 
 // Dialog event type and arguments definitions
 struct EventArgs_onDialogResponse {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* dialogId;
@@ -917,7 +917,7 @@ typedef bool (*EventCallback_onDialogResponse)(struct EventArgs_onDialogResponse
 
 // GangZone event type and arguments definitions
 struct EventArgs_onPlayerEnterGangZone {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** zone;
@@ -926,7 +926,7 @@ struct EventArgs_onPlayerEnterGangZone {
 typedef bool (*EventCallback_onPlayerEnterGangZone)(struct EventArgs_onPlayerEnterGangZone args);
 
 struct EventArgs_onPlayerLeaveGangZone {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** zone;
@@ -935,7 +935,7 @@ struct EventArgs_onPlayerLeaveGangZone {
 typedef bool (*EventCallback_onPlayerLeaveGangZone)(struct EventArgs_onPlayerLeaveGangZone args);
 
 struct EventArgs_onPlayerClickGangZone {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** zone;
@@ -946,7 +946,7 @@ typedef bool (*EventCallback_onPlayerClickGangZone)(struct EventArgs_onPlayerCli
 
 // Menu event type and arguments definitions
 struct EventArgs_onPlayerSelectedMenuRow {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* row;
@@ -955,7 +955,7 @@ struct EventArgs_onPlayerSelectedMenuRow {
 typedef bool (*EventCallback_onPlayerSelectedMenuRow)(struct EventArgs_onPlayerSelectedMenuRow args);
 
 struct EventArgs_onPlayerExitedMenu {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -965,7 +965,7 @@ typedef bool (*EventCallback_onPlayerExitedMenu)(struct EventArgs_onPlayerExited
 
 // Object event type and arguments definitions
 struct EventArgs_onObjectMove {
-    uint8_t size;
+    int size;
     struct {
         void** object;
     } *list;
@@ -973,7 +973,7 @@ struct EventArgs_onObjectMove {
 typedef bool (*EventCallback_onObjectMove)(struct EventArgs_onObjectMove args);
 
 struct EventArgs_onPlayerObjectMove {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** object;
@@ -982,7 +982,7 @@ struct EventArgs_onPlayerObjectMove {
 typedef bool (*EventCallback_onPlayerObjectMove)(struct EventArgs_onPlayerObjectMove args);
 
 struct EventArgs_onPlayerEditObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** object;
@@ -998,7 +998,7 @@ struct EventArgs_onPlayerEditObject {
 typedef bool (*EventCallback_onPlayerEditObject)(struct EventArgs_onPlayerEditObject args);
 
 struct EventArgs_onPlayerEditPlayerObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** object;
@@ -1014,7 +1014,7 @@ struct EventArgs_onPlayerEditPlayerObject {
 typedef bool (*EventCallback_onPlayerEditPlayerObject)(struct EventArgs_onPlayerEditPlayerObject args);
 
 struct EventArgs_onPlayerEditAttachedObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         bool* saved;
@@ -1035,7 +1035,7 @@ struct EventArgs_onPlayerEditAttachedObject {
 typedef bool (*EventCallback_onPlayerEditAttachedObject)(struct EventArgs_onPlayerEditAttachedObject args);
 
 struct EventArgs_onPlayerSelectObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** object;
@@ -1048,7 +1048,7 @@ struct EventArgs_onPlayerSelectObject {
 typedef bool (*EventCallback_onPlayerSelectObject)(struct EventArgs_onPlayerSelectObject args);
 
 struct EventArgs_onPlayerSelectPlayerObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** object;
@@ -1063,7 +1063,7 @@ typedef bool (*EventCallback_onPlayerSelectPlayerObject)(struct EventArgs_onPlay
 
 // Pickup event type and arguments definitions
 struct EventArgs_onPlayerPickUpPickup {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** pickup;
@@ -1074,7 +1074,7 @@ typedef bool (*EventCallback_onPlayerPickUpPickup)(struct EventArgs_onPlayerPick
 
 // TextDraw event type and arguments definitions
 struct EventArgs_onPlayerCancelTextDrawSelection {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1082,7 +1082,7 @@ struct EventArgs_onPlayerCancelTextDrawSelection {
 typedef bool (*EventCallback_onPlayerCancelTextDrawSelection)(struct EventArgs_onPlayerCancelTextDrawSelection args);
 
 struct EventArgs_onPlayerCancelPlayerTextDrawSelection {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1090,7 +1090,7 @@ struct EventArgs_onPlayerCancelPlayerTextDrawSelection {
 typedef bool (*EventCallback_onPlayerCancelPlayerTextDrawSelection)(struct EventArgs_onPlayerCancelPlayerTextDrawSelection args);
 
 struct EventArgs_onPlayerClickTextDraw {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** textdraw;
@@ -1099,7 +1099,7 @@ struct EventArgs_onPlayerClickTextDraw {
 typedef bool (*EventCallback_onPlayerClickTextDraw)(struct EventArgs_onPlayerClickTextDraw args);
 
 struct EventArgs_onPlayerClickPlayerTextDraw {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** textdraw;
@@ -1110,7 +1110,7 @@ typedef bool (*EventCallback_onPlayerClickPlayerTextDraw)(struct EventArgs_onPla
 
 // Player event type and arguments definitions
 struct EventArgs_onPlayerConnect {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1118,7 +1118,7 @@ struct EventArgs_onPlayerConnect {
 typedef bool (*EventCallback_onPlayerConnect)(struct EventArgs_onPlayerConnect args);
 
 struct EventArgs_onPlayerSpawn {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1126,7 +1126,7 @@ struct EventArgs_onPlayerSpawn {
 typedef bool (*EventCallback_onPlayerSpawn)(struct EventArgs_onPlayerSpawn args);
 
 struct EventArgs_onPlayerCommandText {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         struct CAPIStringView** command;
@@ -1135,7 +1135,7 @@ struct EventArgs_onPlayerCommandText {
 typedef bool (*EventCallback_onPlayerCommandText)(struct EventArgs_onPlayerCommandText args);
 
 struct EventArgs_onPlayerKeyStateChange {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* newKeys;
@@ -1145,7 +1145,7 @@ struct EventArgs_onPlayerKeyStateChange {
 typedef bool (*EventCallback_onPlayerKeyStateChange)(struct EventArgs_onPlayerKeyStateChange args);
 
 struct EventArgs_onIncomingConnection {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         struct CAPIStringView** ipAddress;
@@ -1155,7 +1155,7 @@ struct EventArgs_onIncomingConnection {
 typedef bool (*EventCallback_onIncomingConnection)(struct EventArgs_onIncomingConnection args);
 
 struct EventArgs_onPlayerDisconnect {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* reason;
@@ -1164,7 +1164,7 @@ struct EventArgs_onPlayerDisconnect {
 typedef bool (*EventCallback_onPlayerDisconnect)(struct EventArgs_onPlayerDisconnect args);
 
 struct EventArgs_onPlayerRequestSpawn {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1172,7 +1172,7 @@ struct EventArgs_onPlayerRequestSpawn {
 typedef bool (*EventCallback_onPlayerRequestSpawn)(struct EventArgs_onPlayerRequestSpawn args);
 
 struct EventArgs_onPlayerStreamIn {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** forPlayer;
@@ -1181,7 +1181,7 @@ struct EventArgs_onPlayerStreamIn {
 typedef bool (*EventCallback_onPlayerStreamIn)(struct EventArgs_onPlayerStreamIn args);
 
 struct EventArgs_onPlayerStreamOut {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** forPlayer;
@@ -1190,7 +1190,7 @@ struct EventArgs_onPlayerStreamOut {
 typedef bool (*EventCallback_onPlayerStreamOut)(struct EventArgs_onPlayerStreamOut args);
 
 struct EventArgs_onPlayerText {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         struct CAPIStringView** text;
@@ -1199,7 +1199,7 @@ struct EventArgs_onPlayerText {
 typedef bool (*EventCallback_onPlayerText)(struct EventArgs_onPlayerText args);
 
 struct EventArgs_onPlayerShotMissed {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* weapon;
@@ -1211,7 +1211,7 @@ struct EventArgs_onPlayerShotMissed {
 typedef bool (*EventCallback_onPlayerShotMissed)(struct EventArgs_onPlayerShotMissed args);
 
 struct EventArgs_onPlayerShotPlayer {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** target;
@@ -1224,7 +1224,7 @@ struct EventArgs_onPlayerShotPlayer {
 typedef bool (*EventCallback_onPlayerShotPlayer)(struct EventArgs_onPlayerShotPlayer args);
 
 struct EventArgs_onPlayerShotVehicle {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** target;
@@ -1237,7 +1237,7 @@ struct EventArgs_onPlayerShotVehicle {
 typedef bool (*EventCallback_onPlayerShotVehicle)(struct EventArgs_onPlayerShotVehicle args);
 
 struct EventArgs_onPlayerShotObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** target;
@@ -1250,7 +1250,7 @@ struct EventArgs_onPlayerShotObject {
 typedef bool (*EventCallback_onPlayerShotObject)(struct EventArgs_onPlayerShotObject args);
 
 struct EventArgs_onPlayerShotPlayerObject {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** target;
@@ -1263,7 +1263,7 @@ struct EventArgs_onPlayerShotPlayerObject {
 typedef bool (*EventCallback_onPlayerShotPlayerObject)(struct EventArgs_onPlayerShotPlayerObject args);
 
 struct EventArgs_onPlayerDeath {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** killer;
@@ -1273,7 +1273,7 @@ struct EventArgs_onPlayerDeath {
 typedef bool (*EventCallback_onPlayerDeath)(struct EventArgs_onPlayerDeath args);
 
 struct EventArgs_onPlayerTakeDamage {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** from;
@@ -1285,7 +1285,7 @@ struct EventArgs_onPlayerTakeDamage {
 typedef bool (*EventCallback_onPlayerTakeDamage)(struct EventArgs_onPlayerTakeDamage args);
 
 struct EventArgs_onPlayerGiveDamage {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** to;
@@ -1297,7 +1297,7 @@ struct EventArgs_onPlayerGiveDamage {
 typedef bool (*EventCallback_onPlayerGiveDamage)(struct EventArgs_onPlayerGiveDamage args);
 
 struct EventArgs_onPlayerInteriorChange {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* newInterior;
@@ -1307,7 +1307,7 @@ struct EventArgs_onPlayerInteriorChange {
 typedef bool (*EventCallback_onPlayerInteriorChange)(struct EventArgs_onPlayerInteriorChange args);
 
 struct EventArgs_onPlayerStateChange {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* newState;
@@ -1317,7 +1317,7 @@ struct EventArgs_onPlayerStateChange {
 typedef bool (*EventCallback_onPlayerStateChange)(struct EventArgs_onPlayerStateChange args);
 
 struct EventArgs_onPlayerClickMap {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         float* x;
@@ -1328,7 +1328,7 @@ struct EventArgs_onPlayerClickMap {
 typedef bool (*EventCallback_onPlayerClickMap)(struct EventArgs_onPlayerClickMap args);
 
 struct EventArgs_onPlayerClickPlayer {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** clicked;
@@ -1338,7 +1338,7 @@ struct EventArgs_onPlayerClickPlayer {
 typedef bool (*EventCallback_onPlayerClickPlayer)(struct EventArgs_onPlayerClickPlayer args);
 
 struct EventArgs_onClientCheckResponse {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* actionType;
@@ -1349,7 +1349,7 @@ struct EventArgs_onClientCheckResponse {
 typedef bool (*EventCallback_onClientCheckResponse)(struct EventArgs_onClientCheckResponse args);
 
 struct EventArgs_onPlayerUpdate {
-    uint8_t size;
+    int size;
     struct {
         void** player;
     } *list;
@@ -1359,7 +1359,7 @@ typedef bool (*EventCallback_onPlayerUpdate)(struct EventArgs_onPlayerUpdate arg
 
 // Vehicle event type and arguments definitions
 struct EventArgs_onVehicleStreamIn {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
         void** player;
@@ -1368,7 +1368,7 @@ struct EventArgs_onVehicleStreamIn {
 typedef bool (*EventCallback_onVehicleStreamIn)(struct EventArgs_onVehicleStreamIn args);
 
 struct EventArgs_onVehicleStreamOut {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
         void** player;
@@ -1377,7 +1377,7 @@ struct EventArgs_onVehicleStreamOut {
 typedef bool (*EventCallback_onVehicleStreamOut)(struct EventArgs_onVehicleStreamOut args);
 
 struct EventArgs_onVehicleDeath {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
         void** player;
@@ -1386,7 +1386,7 @@ struct EventArgs_onVehicleDeath {
 typedef bool (*EventCallback_onVehicleDeath)(struct EventArgs_onVehicleDeath args);
 
 struct EventArgs_onPlayerEnterVehicle {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
@@ -1396,7 +1396,7 @@ struct EventArgs_onPlayerEnterVehicle {
 typedef bool (*EventCallback_onPlayerEnterVehicle)(struct EventArgs_onPlayerEnterVehicle args);
 
 struct EventArgs_onPlayerExitVehicle {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
@@ -1405,7 +1405,7 @@ struct EventArgs_onPlayerExitVehicle {
 typedef bool (*EventCallback_onPlayerExitVehicle)(struct EventArgs_onPlayerExitVehicle args);
 
 struct EventArgs_onVehicleDamageStatusUpdate {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
         void** player;
@@ -1414,7 +1414,7 @@ struct EventArgs_onVehicleDamageStatusUpdate {
 typedef bool (*EventCallback_onVehicleDamageStatusUpdate)(struct EventArgs_onVehicleDamageStatusUpdate args);
 
 struct EventArgs_onVehiclePaintJob {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
@@ -1424,7 +1424,7 @@ struct EventArgs_onVehiclePaintJob {
 typedef bool (*EventCallback_onVehiclePaintJob)(struct EventArgs_onVehiclePaintJob args);
 
 struct EventArgs_onVehicleMod {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
@@ -1434,7 +1434,7 @@ struct EventArgs_onVehicleMod {
 typedef bool (*EventCallback_onVehicleMod)(struct EventArgs_onVehicleMod args);
 
 struct EventArgs_onVehicleRespray {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
@@ -1445,7 +1445,7 @@ struct EventArgs_onVehicleRespray {
 typedef bool (*EventCallback_onVehicleRespray)(struct EventArgs_onVehicleRespray args);
 
 struct EventArgs_onEnterExitModShop {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         int* enterexit;
@@ -1455,7 +1455,7 @@ struct EventArgs_onEnterExitModShop {
 typedef bool (*EventCallback_onEnterExitModShop)(struct EventArgs_onEnterExitModShop args);
 
 struct EventArgs_onVehicleSpawn {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
     } *list;
@@ -1463,7 +1463,7 @@ struct EventArgs_onVehicleSpawn {
 typedef bool (*EventCallback_onVehicleSpawn)(struct EventArgs_onVehicleSpawn args);
 
 struct EventArgs_onUnoccupiedVehicleUpdate {
-    uint8_t size;
+    int size;
     struct {
         void** vehicle;
         void** player;
@@ -1479,7 +1479,7 @@ struct EventArgs_onUnoccupiedVehicleUpdate {
 typedef bool (*EventCallback_onUnoccupiedVehicleUpdate)(struct EventArgs_onUnoccupiedVehicleUpdate args);
 
 struct EventArgs_onTrailerUpdate {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** trailer;
@@ -1488,7 +1488,7 @@ struct EventArgs_onTrailerUpdate {
 typedef bool (*EventCallback_onTrailerUpdate)(struct EventArgs_onTrailerUpdate args);
 
 struct EventArgs_onVehicleSirenStateChange {
-    uint8_t size;
+    int size;
     struct {
         void** player;
         void** vehicle;
