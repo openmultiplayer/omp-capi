@@ -124,7 +124,7 @@ const convertFunctionArgTypeNames = (type) => {
 
 const convertEventArgTypeNames = (type) => {
   if (type === "CAPIStringView") {
-    return "struct CAPIStringView*";
+    return "struct CAPIStringView";
   } else {
     return type;
   }

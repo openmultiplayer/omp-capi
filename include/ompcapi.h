@@ -853,8 +853,8 @@ typedef bool (*EventCallback_onPlayerRequestClass)(struct EventArgs_onPlayerRequ
 struct EventArgs_onConsoleText {
     int size;
     struct {
-        struct CAPIStringView** command;
-        struct CAPIStringView** parameters;
+        struct CAPIStringView* command;
+        struct CAPIStringView* parameters;
     } *list;
 };
 typedef bool (*EventCallback_onConsoleText)(struct EventArgs_onConsoleText args);
@@ -862,8 +862,8 @@ typedef bool (*EventCallback_onConsoleText)(struct EventArgs_onConsoleText args)
 struct EventArgs_onRconLoginAttempt {
     int size;
     struct {
-        struct CAPIStringView** address;
-        struct CAPIStringView** password;
+        struct CAPIStringView* address;
+        struct CAPIStringView* password;
         bool* success;
     } *list;
 };
@@ -909,7 +909,7 @@ struct EventArgs_onDialogResponse {
         int* dialogId;
         int* response;
         int* listItem;
-        struct CAPIStringView** inputText;
+        struct CAPIStringView* inputText;
     } *list;
 };
 typedef bool (*EventCallback_onDialogResponse)(struct EventArgs_onDialogResponse args);
@@ -1129,7 +1129,7 @@ struct EventArgs_onPlayerCommandText {
     int size;
     struct {
         void** player;
-        struct CAPIStringView** command;
+        struct CAPIStringView* command;
     } *list;
 };
 typedef bool (*EventCallback_onPlayerCommandText)(struct EventArgs_onPlayerCommandText args);
@@ -1148,7 +1148,7 @@ struct EventArgs_onIncomingConnection {
     int size;
     struct {
         void** player;
-        struct CAPIStringView** ipAddress;
+        struct CAPIStringView* ipAddress;
         int* port;
     } *list;
 };
@@ -1193,7 +1193,7 @@ struct EventArgs_onPlayerText {
     int size;
     struct {
         void** player;
-        struct CAPIStringView** text;
+        struct CAPIStringView* text;
     } *list;
 };
 typedef bool (*EventCallback_onPlayerText)(struct EventArgs_onPlayerText args);
