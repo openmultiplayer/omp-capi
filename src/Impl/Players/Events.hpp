@@ -44,6 +44,11 @@ public:
 		ComponentManager::Get()->CallEvent("onPlayerDisconnect", EventReturnHandler::None, &player, int(reason));
 	}
 
+	void onPlayerClientInit(IPlayer& player) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerClientInit", EventReturnHandler::None, &player);
+	}
+
 	bool onPlayerRequestSpawn(IPlayer& player) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerRequestSpawn", EventReturnHandler::StopAtFalse, &player);
@@ -67,31 +72,56 @@ public:
 	bool onPlayerShotMissed(IPlayer& player, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotMissed", EventReturnHandler::StopAtFalse, &player,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	bool onPlayerShotPlayer(IPlayer& player, IPlayer& target, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotPlayer", EventReturnHandler::StopAtFalse, &player, &target,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	bool onPlayerShotVehicle(IPlayer& player, IVehicle& target, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotVehicle", EventReturnHandler::StopAtFalse, &player, &target,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	bool onPlayerShotObject(IPlayer& player, IObject& target, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotObject", EventReturnHandler::StopAtFalse, &player, &target,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	bool onPlayerShotPlayerObject(IPlayer& player, IPlayerObject& target, const PlayerBulletData& bulletData) override
 	{
 		return ComponentManager::Get()->CallEvent("onPlayerShotPlayerObject", EventReturnHandler::StopAtFalse, &player, &target,
-			int(bulletData.weapon), bulletData.offset.x, bulletData.offset.y, bulletData.offset.z);
+			bulletData.origin.x, bulletData.origin.y, bulletData.origin.z,
+			bulletData.hitPos.x, bulletData.hitPos.y, bulletData.hitPos.z,
+			bulletData.offset.x, bulletData.offset.y, bulletData.offset.z,
+			int(bulletData.weapon),
+			int(bulletData.hitType),
+			int(bulletData.hitID));
 	}
 
 	void onPlayerDeath(IPlayer& player, IPlayer* killer, int reason) override
@@ -107,6 +137,16 @@ public:
 	void onPlayerGiveDamage(IPlayer& player, IPlayer& to, float amount, unsigned weapon, BodyPart part) override
 	{
 		ComponentManager::Get()->CallEvent("onPlayerGiveDamage", EventReturnHandler::None, &player, &to, amount, int(weapon), int(part));
+	}
+
+	void onPlayerScoreChange(IPlayer& player, int score) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerScoreChange", EventReturnHandler::None, &player, score);
+	}
+
+	void onPlayerNameChange(IPlayer& player, StringView oldName) override
+	{
+		ComponentManager::Get()->CallEvent("onPlayerNameChange", EventReturnHandler::None, &player, CREATE_CAPI_STRING_VIEW(oldName));
 	}
 
 	void onPlayerInteriorChange(IPlayer& player, unsigned newInterior, unsigned oldInterior) override
@@ -136,6 +176,8 @@ public:
 
 	bool onPlayerUpdate(IPlayer& player, TimePoint now) override
 	{
-		return ComponentManager::Get()->CallEvent("onPlayerUpdate", EventReturnHandler::StopAtFalse, &player);
+		long long nowSeconds = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+
+		return ComponentManager::Get()->CallEvent("onPlayerUpdate", EventReturnHandler::StopAtFalse, &player, nowSeconds);
 	}
 };

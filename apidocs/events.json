@@ -133,8 +133,8 @@
       "badret": "true",
       "args": [
         {
-          "name": "address",
-          "type": "CAPIStringView"
+          "name": "player",
+          "type": "void*"
         },
         {
           "name": "password",
@@ -154,7 +154,11 @@
       "args": [
         {
           "name": "elapsed",
-          "type": "int"
+          "type": "long long"
+        },
+        {
+          "name": "now",
+          "type": "long long"
         }
       ]
     }
@@ -167,10 +171,6 @@
         {
           "name": "player",
           "type": "void*"
-        },
-        {
-          "name": "vw",
-          "type": "int"
         }
       ]
     },
@@ -237,6 +237,20 @@
       ]
     },
     {
+      "name": "onPlayerEnterPlayerGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerLeaveGangZone",
       "badret": "none",
       "args": [
@@ -251,7 +265,35 @@
       ]
     },
     {
+      "name": "onPlayerLeavePlayerGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerClickGangZone",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "zone",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerClickPlayerGangZone",
       "badret": "none",
       "args": [
         {
@@ -293,7 +335,7 @@
   ],
   "Object": [
     {
-      "name": "onObjectMove",
+      "name": "onObjectMoved",
       "badret": "none",
       "args": [
         {
@@ -303,21 +345,7 @@
       ]
     },
     {
-      "name": "onPlayerObjectMove",
-      "badret": "none",
-      "args": [
-        {
-          "name": "player",
-          "type": "void*"
-        },
-        {
-          "name": "object",
-          "type": "void*"
-        }
-      ]
-    },
-    {
-      "name": "onPlayerEditObject",
+      "name": "onPlayerObjectMoved",
       "badret": "none",
       "args": [
         {
@@ -327,39 +355,11 @@
         {
           "name": "object",
           "type": "void*"
-        },
-        {
-          "name": "response",
-          "type": "int"
-        },
-        {
-          "name": "offsetX",
-          "type": "float"
-        },
-        {
-          "name": "offsetY",
-          "type": "float"
-        },
-        {
-          "name": "offsetZ",
-          "type": "float"
-        },
-        {
-          "name": "rotationX",
-          "type": "float"
-        },
-        {
-          "name": "rotationY",
-          "type": "float"
-        },
-        {
-          "name": "rotationZ",
-          "type": "float"
         }
       ]
     },
     {
-      "name": "onPlayerEditPlayerObject",
+      "name": "onObjectEdited",
       "badret": "none",
       "args": [
         {
@@ -401,7 +401,7 @@
       ]
     },
     {
-      "name": "onPlayerEditAttachedObject",
+      "name": "onPlayerObjectEdited",
       "badret": "none",
       "args": [
         {
@@ -409,12 +409,54 @@
           "type": "void*"
         },
         {
-          "name": "saved",
-          "type": "bool"
+          "name": "object",
+          "type": "void*"
+        },
+        {
+          "name": "response",
+          "type": "int"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
+          "name": "rotationX",
+          "type": "float"
+        },
+        {
+          "name": "rotationY",
+          "type": "float"
+        },
+        {
+          "name": "rotationZ",
+          "type": "float"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerAttachedObjectEdited",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
         },
         {
           "name": "index",
           "type": "int"
+        },
+        {
+          "name": "saved",
+          "type": "bool"
         },
         {
           "name": "model",
@@ -459,11 +501,19 @@
         {
           "name": "scaleZ",
           "type": "float"
+        },
+        {
+          "name": "color1",
+          "type": "int"
+        },
+        {
+          "name": "color2",
+          "type": "int"
         }
       ]
     },
     {
-      "name": "onPlayerSelectObject",
+      "name": "onObjectSelected",
       "badret": "none",
       "args": [
         {
@@ -493,7 +543,7 @@
       ]
     },
     {
-      "name": "onPlayerSelectPlayerObject",
+      "name": "onPlayerObjectSelected",
       "badret": "none",
       "args": [
         {
@@ -526,6 +576,20 @@
   "Pickup": [
     {
       "name": "onPlayerPickUpPickup",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "pickup",
+          "type": "void*"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerPickUpPlayerPickup",
       "badret": "none",
       "args": [
         {
@@ -675,6 +739,16 @@
       ]
     },
     {
+      "name": "onPlayerClientInit",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
+    },
+    {
       "name": "onPlayerRequestSpawn",
       "badret": "false",
       "args": [
@@ -735,20 +809,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
@@ -765,20 +871,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
@@ -795,20 +933,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
@@ -825,20 +995,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
@@ -855,20 +1057,52 @@
           "type": "void*"
         },
         {
+          "name": "originX",
+          "type": "float"
+        },
+        {
+          "name": "originY",
+          "type": "float"
+        },
+        {
+          "name": "originZ",
+          "type": "float"
+        },
+        {
+          "name": "hitPosX",
+          "type": "float"
+        },
+        {
+          "name": "hitPosY",
+          "type": "float"
+        },
+        {
+          "name": "hitPosZ",
+          "type": "float"
+        },
+        {
+          "name": "offsetX",
+          "type": "float"
+        },
+        {
+          "name": "offsetY",
+          "type": "float"
+        },
+        {
+          "name": "offsetZ",
+          "type": "float"
+        },
+        {
           "name": "weapon",
           "type": "int"
         },
         {
-          "name": "x",
-          "type": "float"
+          "name": "hitType",
+          "type": "int"
         },
         {
-          "name": "y",
-          "type": "float"
-        },
-        {
-          "name": "z",
-          "type": "float"
+          "name": "hitID",
+          "type": "int"
         }
       ]
     },
@@ -939,6 +1173,34 @@
         {
           "name": "bodypart",
           "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerScoreChange",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "score",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "onPlayerNameChange",
+      "badret": "none",
+      "args": [
+        {
+          "name": "player",
+          "type": "void*"
+        },
+        {
+          "name": "oldName",
+          "type": "CAPIStringView"
         }
       ]
     },
@@ -1035,7 +1297,7 @@
           "type": "int"
         },
         {
-          "name": "result",
+          "name": "results",
           "type": "int"
         }
       ]
@@ -1047,6 +1309,10 @@
         {
           "name": "player",
           "type": "void*"
+        },
+        {
+          "name": "now",
+          "type": "long long"
         }
       ]
     }
@@ -1208,7 +1474,7 @@
         },
         {
           "name": "enterexit",
-          "type": "int"
+          "type": "bool"
         },
         {
           "name": "interiorId",

@@ -15,7 +15,7 @@ struct CustomModelsEvents : public PlayerModelsEventHandler, public Singleton<Cu
 {
 	virtual void onPlayerFinishedDownloading(IPlayer& player) override
 	{
-		ComponentManager::Get()->CallEvent("onPlayerFinishedDownloading", EventReturnHandler::None, &player, player.getVirtualWorld());
+		ComponentManager::Get()->CallEvent("onPlayerFinishedDownloading", EventReturnHandler::None, &player);
 	}
 
 	virtual bool onPlayerRequestDownload(IPlayer& player, ModelDownloadType type, uint32_t checksum) override
