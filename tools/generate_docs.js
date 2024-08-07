@@ -17,7 +17,7 @@ const convertTypeNames = (type) => {
   } else if (type === "voidPtr") {
     return "void*";
   } else if (type === "OutputStringViewPtr") {
-    return "CAPIStringView*";
+    return "struct CAPIStringView*";
   } else {
     return type;
   }

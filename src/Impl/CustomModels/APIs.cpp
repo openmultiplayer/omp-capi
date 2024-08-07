@@ -44,34 +44,6 @@ OMP_CAPI(CustomModel_AddSimpleModelTimed, bool(int virtualWorld, int baseid, int
 	return ret;
 }
 
-OMP_CAPI(Player_GetCustomSkin, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	IPlayerCustomModelsData* data = queryExtension<IPlayerCustomModelsData>(player_);
-	if (!data)
-	{
-		return 0;
-	}
-	auto skin = data->getCustomSkin();
-	return skin;
-}
-
-OMP_CAPI(CustomModel_RedirectDownload, bool(objectPtr player, StringCharPtr url))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	IPlayerCustomModelsData* data = queryExtension<IPlayerCustomModelsData>(player_);
-	if (!data)
-	{
-		return false;
-	}
-	if (!data->sendDownloadUrl(url))
-	{
-		ComponentManager::Get()->core->logLn(LogLevel::Warning, "This native can be used only within OnPlayerRequestDownload callback.");
-		return false;
-	}
-	return true;
-}
-
 OMP_CAPI(CustomModel_FindModelFileNameFromCRC, int(int crc, OutputStringViewPtr output))
 {
 	auto models = ComponentManager::Get()->models;

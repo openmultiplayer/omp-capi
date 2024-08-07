@@ -90,21 +90,6 @@ OMP_CAPI(Menu_DisableRow, bool(objectPtr menu, uint8_t row))
 	return true;
 }
 
-OMP_CAPI(Player_GetMenu, objectPtr(objectPtr player))
-{
-	IMenusComponent* component = ComponentManager::Get()->menus;
-	if (component)
-	{
-		POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
-		IPlayerMenuData* menuData = queryExtension<IPlayerMenuData>(player_);
-		if (menuData)
-		{
-			return component->get(menuData->getMenuID());
-		}
-	}
-	return nullptr;
-}
-
 OMP_CAPI(Menu_IsValid, bool(objectPtr menu))
 {
 	POOL_ENTITY_RET(menus, IMenu, menu, menu_, false);

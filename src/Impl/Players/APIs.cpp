@@ -24,52 +24,45 @@ OMP_CAPI(Player_GetID, int(objectPtr player))
 	return player_->getID();
 }
 
-OMP_CAPI(Player_SendClientMessage, bool(objectPtr player, uint32_t color, StringCharPtr text))
+OMP_CAPI(Player_SendClientMessage, void(objectPtr player, uint32_t color, StringCharPtr text))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->sendClientMessage(Colour::FromRGBA(color), text);
-	return true;
 }
 
-OMP_CAPI(All_SendClientMessage, bool(uint32_t color, StringCharPtr text))
+OMP_CAPI(All_SendClientMessage, void(uint32_t color, StringCharPtr text))
 {
 	ComponentManager::Get()->players->sendClientMessageToAll(Colour::FromRGBA(color), text);
-	return true;
 }
 
-OMP_CAPI(Player_SetCameraPos, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetCameraPosition, void(objectPtr player, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setCameraPosition({ x, y, z });
-	return true;
 }
 
-OMP_CAPI(Player_SetDrunkLevel, bool(objectPtr player, int level))
+OMP_CAPI(Player_SetDrunkLevel, void(objectPtr player, int level))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setDrunkLevel(level);
-	return true;
 }
 
-OMP_CAPI(Player_SetInterior, bool(objectPtr player, int interior))
+OMP_CAPI(Player_SetInterior, void(objectPtr player, unsigned interior))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setInterior(interior);
-	return true;
 }
 
-OMP_CAPI(Player_SetWantedLevel, bool(objectPtr player, int level))
+OMP_CAPI(Player_SetWantedLevel, void(objectPtr player, unsigned int level))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setWantedLevel(level);
-	return true;
 }
 
-OMP_CAPI(Player_SetWeather, bool(objectPtr player, int weather))
+OMP_CAPI(Player_SetWeather, void(objectPtr player, int weather))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setWeather(weather);
-	return true;
 }
 
 OMP_CAPI(Player_GetWeather, int(objectPtr player))
@@ -79,102 +72,106 @@ OMP_CAPI(Player_GetWeather, int(objectPtr player))
 	return weather;
 }
 
-OMP_CAPI(Player_SetSkin, bool(objectPtr player, int skin))
+OMP_CAPI(Player_SetSkin, void(objectPtr player, int skin))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setSkin(skin);
-	return true;
 }
 
-OMP_CAPI(Player_SetShopName, bool(objectPtr player, StringCharPtr name))
+OMP_CAPI(Player_SetShopName, void(objectPtr player, StringCharPtr name))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setShopName(name);
-	return true;
 }
 
-OMP_CAPI(Player_GiveMoney, bool(objectPtr player, int amount))
+OMP_CAPI(Player_GetShopName, void(objectPtr player, OutputStringViewPtr name))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto result = player_->getShopName();
+	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), result.length());
+}
+
+OMP_CAPI(Player_GiveMoney, void(objectPtr player, int amount))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->giveMoney(amount);
-	return true;
 }
 
-OMP_CAPI(Player_SetCameraLookAt, bool(objectPtr player, float x, float y, float z, int cutType))
+OMP_CAPI(Player_SetCameraLookAt, void(objectPtr player, float x, float y, float z, int cutType))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setCameraLookAt({ x, y, z }, cutType);
-	return true;
 }
 
-OMP_CAPI(Player_SetCameraBehind, bool(objectPtr player))
+OMP_CAPI(Player_GetCameraLookAt, void(objectPtr player, float* x, float* y, float* z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto pos = player_->getCameraLookAt();
+	*x = pos.x;
+	*y = pos.y;
+	*z = pos.z;
+}
+
+OMP_CAPI(Player_SetCameraBehind, void(objectPtr player))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setCameraBehind();
-	return true;
 }
 
-OMP_CAPI(Player_CreateExplosion, bool(objectPtr player, float x, float y, float z, int type, float radius))
+OMP_CAPI(Player_CreateExplosion, void(objectPtr player, float x, float y, float z, int type, float radius))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->createExplosion({ x, y, z }, type, radius);
-	return true;
 }
 
-OMP_CAPI(All_CreateExplosion, bool(float x, float y, float z, int type, float radius))
+OMP_CAPI(All_CreateExplosion, void(float x, float y, float z, int type, float radius))
 {
 	ComponentManager::Get()->players->createExplosionForAll({ x, y, z }, type, radius);
-	return true;
 }
 
-OMP_CAPI(Player_PlayAudioStream, bool(objectPtr player, StringCharPtr url, float x, float y, float z, float distance, bool usePos))
+OMP_CAPI(Player_PlayAudio, void(objectPtr player, StringCharPtr url, bool usePos, float x, float y, float z, float distance))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->playAudio(url, usePos, { x, y, z }, distance);
-	return true;
 }
 
-OMP_CAPI(Player_StopAudioStream, bool(objectPtr player))
+OMP_CAPI(Player_StopAudio, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->stopAudio();
-	return true;
 }
 
-OMP_CAPI(All_SendDeathMessage, bool(objectPtr killer, objectPtr killee, int weapon))
+OMP_CAPI(All_SendDeathMessage, void(objectPtr killer, objectPtr killee, int weapon))
 {
 	if (killee)
 	{
-		POOL_ENTITY_RET(players, IPlayer, killer, killer_, false);
-		ENTITY_CAST_RET(IPlayer, killee, killee_, false);
+		POOL_ENTITY(players, IPlayer, killer, killer_);
+		ENTITY_CAST(IPlayer, killee, killee_);
 		ComponentManager::Get()->players->sendDeathMessageToAll(killer_, *killee_, weapon);
 	}
 	else
 	{
 		ComponentManager::Get()->players->sendEmptyDeathMessageToAll();
 	}
-	return true;
 }
 
-OMP_CAPI(Player_ToggleWidescreen, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_UseWidescreen, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->useWidescreen(enable);
-	return true;
 }
 
-OMP_CAPI(Player_IsWidescreenToggled, bool(objectPtr player))
+OMP_CAPI(Player_HasWidescreen, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	auto enabled = player_->hasWidescreen();
 	return enabled;
 }
 
-OMP_CAPI(Player_SetHealth, bool(objectPtr player, float health))
+OMP_CAPI(Player_SetHealth, void(objectPtr player, float health))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setHealth(health);
-	return true;
 }
 
 OMP_CAPI(Player_GetHealth, float(objectPtr player))
@@ -184,11 +181,10 @@ OMP_CAPI(Player_GetHealth, float(objectPtr player))
 	return health;
 }
 
-OMP_CAPI(Player_SetArmor, bool(objectPtr player, float armor))
+OMP_CAPI(Player_SetArmor, void(objectPtr player, float armor))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setArmour(armor);
-	return true;
 }
 
 OMP_CAPI(Player_GetArmor, float(objectPtr player))
@@ -198,11 +194,10 @@ OMP_CAPI(Player_GetArmor, float(objectPtr player))
 	return armor;
 }
 
-OMP_CAPI(Player_SetTeam, bool(objectPtr player, int team))
+OMP_CAPI(Player_SetTeam, void(objectPtr player, int team))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setTeam(team);
-	return true;
 }
 
 OMP_CAPI(Player_GetTeam, int(objectPtr player))
@@ -212,11 +207,10 @@ OMP_CAPI(Player_GetTeam, int(objectPtr player))
 	return team;
 }
 
-OMP_CAPI(Player_SetScore, bool(objectPtr player, int score))
+OMP_CAPI(Player_SetScore, void(objectPtr player, int score))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setScore(score);
-	return true;
 }
 
 OMP_CAPI(Player_GetScore, int(objectPtr player))
@@ -233,11 +227,10 @@ OMP_CAPI(Player_GetSkin, int(objectPtr player))
 	return skin;
 }
 
-OMP_CAPI(Player_SetColor, bool(objectPtr player, uint32_t color))
+OMP_CAPI(Player_SetColor, void(objectPtr player, uint32_t color))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setColour(Colour::FromRGBA(color));
-	return true;
 }
 
 OMP_CAPI(Player_GetColor, uint32_t(objectPtr player))
@@ -262,21 +255,25 @@ OMP_CAPI(Player_GetDrunkLevel, int(objectPtr player))
 	return level;
 }
 
-OMP_CAPI(Player_GiveWeapon, bool(objectPtr player, int weapon, int ammo))
+OMP_CAPI(Player_GiveWeapon, void(objectPtr player, uint8_t weapon, uint32_t ammo))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	WeaponSlotData data;
 	data.id = weapon;
 	data.ammo = ammo;
 	player_->giveWeapon(data);
-	return true;
 }
 
-OMP_CAPI(Player_RemoveWeapon, bool(objectPtr player, int weapon))
+OMP_CAPI(Player_RemoveWeapon, void(objectPtr player, uint8_t weapon))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->removeWeapon(weapon);
-	return true;
+}
+
+OMP_CAPI(Player_SetMoney, void(objectPtr player, int money))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->setMoney(money);
 }
 
 OMP_CAPI(Player_GetMoney, int(objectPtr player))
@@ -286,11 +283,10 @@ OMP_CAPI(Player_GetMoney, int(objectPtr player))
 	return money;
 }
 
-OMP_CAPI(Player_ResetMoney, bool(objectPtr player))
+OMP_CAPI(Player_ResetMoney, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->resetMoney();
-	return true;
 }
 
 OMP_CAPI(Player_SetName, int(objectPtr player, StringCharPtr name))
@@ -300,13 +296,11 @@ OMP_CAPI(Player_SetName, int(objectPtr player, StringCharPtr name))
 	return status;
 }
 
-OMP_CAPI(Player_GetName, int(objectPtr player, OutputStringViewPtr name))
+OMP_CAPI(Player_GetName, void(objectPtr player, OutputStringViewPtr name))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto result = player_->getName();
-	int len = result.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), len);
-	return len;
+	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), result.length());
 }
 
 OMP_CAPI(Player_GetState, int(objectPtr player))
@@ -323,34 +317,37 @@ OMP_CAPI(Player_GetPing, int(objectPtr player))
 	return ping;
 }
 
-OMP_CAPI(Player_GetWeapon, int(objectPtr player))
+OMP_CAPI(Player_GetArmedWeapon, uint32_t(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int weapon = player_->getArmedWeapon();
+	uint32_t weapon = player_->getArmedWeapon();
 	return weapon;
 }
 
-OMP_CAPI(Player_SetTime, bool(objectPtr player, int hour, int minute))
+OMP_CAPI(Player_SetTime, void(objectPtr player, int hour, int minute))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setTime(std::chrono::hours(hour), std::chrono::minutes(minute));
-	return true;
 }
 
-OMP_CAPI(Player_GetTime, bool(objectPtr player, int* hour, int* minute))
+OMP_CAPI(Player_GetTime, void(objectPtr player, int* hour, int* minute))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto data = player_->getTime();
 	*hour = data.first.count();
 	*minute = data.second.count();
-	return true;
 }
 
-OMP_CAPI(Player_ToggleClock, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_SetWorldTime, void(objectPtr player, int time))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->setWorldTime(std::chrono::hours(time));
+}
+
+OMP_CAPI(Player_UseClock, void(objectPtr player, bool enable))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->useClock(enable);
-	return true;
 }
 
 OMP_CAPI(Player_HasClock, bool(objectPtr player))
@@ -360,25 +357,23 @@ OMP_CAPI(Player_HasClock, bool(objectPtr player))
 	return enable;
 }
 
-OMP_CAPI(Player_ForceClassSelection, bool(objectPtr player))
+OMP_CAPI(Player_ForceClassSelection, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->forceClassSelection();
-	return true;
 }
 
-OMP_CAPI(Player_GetWantedLevel, int(objectPtr player))
+OMP_CAPI(Player_GetWantedLevel, unsigned(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto wanted = player_->getWantedLevel();
 	return wanted;
 }
 
-OMP_CAPI(Player_SetFightingStyle, bool(objectPtr player, int style))
+OMP_CAPI(Player_SetFightingStyle, void(objectPtr player, int style))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setFightingStyle(PlayerFightingStyle(style));
-	return true;
 }
 
 OMP_CAPI(Player_GetFightingStyle, int(objectPtr player))
@@ -388,31 +383,36 @@ OMP_CAPI(Player_GetFightingStyle, int(objectPtr player))
 	return style;
 }
 
-OMP_CAPI(Player_SetVelocity, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetVelocity, void(objectPtr player, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setVelocity({ x, y, z });
-	return true;
 }
 
-OMP_CAPI(Player_GetVelocity, bool(objectPtr player, float* x, float* y, float* z))
+OMP_CAPI(Player_GetVelocity, void(objectPtr player, float* x, float* y, float* z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto velocity = player_->getVelocity();
 	*x = velocity.x;
 	*y = velocity.y;
 	*z = velocity.z;
-	return true;
 }
 
-OMP_CAPI(Player_GetCameraPos, bool(objectPtr player, float* x, float* y, float* z))
+OMP_CAPI(Player_GetAimData, void(objectPtr player, float* frontVectorX, float* frontVectorY, float* frontVectorZ, float* posX, float* posY, float* posZ, float* aimZ, float* camZoom, float* aspectRatio, int8_t* weaponState, uint8_t* camMode))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	auto pos = player_->getAimData().camPos;
-	*x = pos.x;
-	*y = pos.y;
-	*z = pos.z;
-	return true;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto data = player_->getAimData();
+	*frontVectorX = data.camFrontVector.x;
+	*frontVectorY = data.camFrontVector.y;
+	*frontVectorZ = data.camFrontVector.z;
+	*posX = data.camPos.x;
+	*posY = data.camPos.y;
+	*posZ = data.camPos.z;
+	*aimZ = data.aimZ;
+	*camZoom = data.camZoom;
+	*aspectRatio = data.aspectRatio;
+	*weaponState = data.weaponState;
+	*camMode = data.camMode;
 }
 
 OMP_CAPI(Player_GetDistanceFromPoint, float(objectPtr player, float x, float y, float z))
@@ -423,28 +423,26 @@ OMP_CAPI(Player_GetDistanceFromPoint, float(objectPtr player, float x, float y, 
 	return distance;
 }
 
-OMP_CAPI(Player_GetInterior, int(objectPtr player))
+OMP_CAPI(Player_GetInterior, unsigned(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int interior = player_->getInterior();
+	unsigned interior = player_->getInterior();
 	return interior;
 }
 
-OMP_CAPI(Player_SetPos, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetPosition, void(objectPtr player, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setPosition({ x, y, z });
-	return true;
 }
 
-OMP_CAPI(Player_GetPos, bool(objectPtr player, float* x, float* y, float* z))
+OMP_CAPI(Player_GetPosition, void(objectPtr player, float* x, float* y, float* z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto pos = player_->getPosition();
 	*x = pos.x;
 	*y = pos.y;
 	*z = pos.z;
-	return true;
 }
 
 OMP_CAPI(Player_GetVirtualWorld, int(objectPtr player))
@@ -454,14 +452,14 @@ OMP_CAPI(Player_GetVirtualWorld, int(objectPtr player))
 	return vw;
 }
 
-OMP_CAPI(Player_IsNPC, bool(objectPtr player))
+OMP_CAPI(Player_IsBot, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	auto bot = player_->isBot();
 	return bot;
 }
 
-OMP_CAPI(Player_IsStreamedIn, bool(objectPtr player, objectPtr other))
+OMP_CAPI(Player_IsStreamedInForPlayer, bool(objectPtr player, objectPtr other))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
@@ -469,85 +467,81 @@ OMP_CAPI(Player_IsStreamedIn, bool(objectPtr player, objectPtr other))
 	return streamed;
 }
 
-OMP_CAPI(Player_PlayGameSound, bool(objectPtr player, int sound, float x, float y, float z))
+OMP_CAPI(Player_PlaySound, void(objectPtr player, uint32_t sound, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->playSound(sound, { x, y, z });
-	return true;
 }
 
-OMP_CAPI(Player_SpectatePlayer, bool(objectPtr player, objectPtr target, int mode))
+OMP_CAPI(Player_LastPlayedSound, uint32_t(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	ENTITY_CAST_RET(IPlayer, target, target_, false);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	return player_->lastPlayedSound();
+}
+
+OMP_CAPI(Player_SpectatePlayer, void(objectPtr player, objectPtr target, int mode))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	ENTITY_CAST(IPlayer, target, target_);
 	player_->spectatePlayer(*target_, PlayerSpectateMode(mode));
-	return true;
 }
 
-OMP_CAPI(Player_SpectateVehicle, bool(objectPtr player, objectPtr target, int mode))
+OMP_CAPI(Player_SpectateVehicle, void(objectPtr player, objectPtr target, int mode))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	POOL_ENTITY_RET(vehicles, IVehicle, target, target_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	POOL_ENTITY(vehicles, IVehicle, target, target_);
 	player_->spectateVehicle(*target_, PlayerSpectateMode(mode));
-	return true;
 }
 
-OMP_CAPI(Player_SetVirtualWorld, bool(objectPtr player, int vw))
+OMP_CAPI(Player_SetVirtualWorld, void(objectPtr player, int vw))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setVirtualWorld(vw);
-	return true;
 }
 
-OMP_CAPI(Player_SetWorldBounds, bool(objectPtr player, float xMax, float xMin, float yMax, float yMin))
+OMP_CAPI(Player_SetWorldBounds, void(objectPtr player, float xMax, float xMin, float yMax, float yMin))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	Vector4 coords = { xMax, xMin, yMax, yMin };
 	player_->setWorldBounds(coords);
-	return true;
 }
 
-OMP_CAPI(Player_ClearWorldBounds, bool(objectPtr player))
+OMP_CAPI(Player_GetWorldBounds, void(objectPtr player, float* xmax, float* xmin, float* ymax, float* ymin))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	player_->setWorldBounds(Vector4(MAX_WORLD_BOUNDS, MIN_WORLD_BOUNDS, MAX_WORLD_BOUNDS, MIN_WORLD_BOUNDS));
-	return true;
-}
-
-OMP_CAPI(Player_GetWorldBounds, bool(objectPtr player, float* xmax, float* xmin, float* ymax, float* ymin))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto bounds = player_->getWorldBounds();
 	*xmax = bounds.x;
 	*xmin = bounds.y;
 	*ymax = bounds.z;
 	*ymin = bounds.w;
-	return true;
 }
 
-OMP_CAPI(Player_ClearAnimations, bool(objectPtr player, int syncType))
+OMP_CAPI(Player_ClearTasks, void(objectPtr player, int syncType))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->clearTasks(PlayerAnimationSyncType(syncType));
-	return true;
 }
 
-OMP_CAPI(Player_GetLastShotVectors, bool(objectPtr player, float* origin_x, float* origin_y, float* origin_z, float* hit_x, float* hit_y, float* hit_z))
+OMP_CAPI(Player_GetBulletData, void(objectPtr player, float* originX, float* originY, float* originZ, float* hitX, float* hitY, float* hitZ, float* offsetX, float* offsetY, float* offsetZ, uint8_t* weapon, int* hitType, uint16_t* hitID))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	PlayerBulletData data = player_->getBulletData();
-	auto origin = data.origin;
-	auto hitPos = data.hitPos;
 
-	*origin_x = origin.x;
-	*origin_y = origin.y;
-	*origin_z = origin.z;
+	*originX = data.origin.x;
+	*originY = data.origin.y;
+	*originZ = data.origin.z;
 
-	*hit_x = hitPos.x;
-	*hit_y = hitPos.y;
-	*hit_z = hitPos.z;
+	*hitX = data.hitPos.x;
+	*hitY = data.hitPos.y;
+	*hitZ = data.hitPos.z;
 
-	return true;
+	*offsetX = data.offset.x;
+	*offsetY = data.offset.y;
+	*offsetZ = data.offset.z;
+
+	*weapon = data.weapon;
+	*hitType = data.hitType;
+	*hitID = data.hitID;
 }
 
 OMP_CAPI(Player_GetCameraTargetPlayer, objectPtr(objectPtr player))
@@ -574,179 +568,158 @@ OMP_CAPI(Player_GetCameraTargetVehicle, objectPtr(objectPtr player))
 	return player_->getCameraTargetVehicle();
 }
 
-OMP_CAPI(Player_PutInVehicle, bool(objectPtr player, objectPtr vehicle, int seat))
+OMP_CAPI(Player_PutInVehicle, void(objectPtr player, objectPtr vehicle, int seat))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	POOL_ENTITY_RET(vehicles, IVehicle, vehicle, vehicle_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	POOL_ENTITY(vehicles, IVehicle, vehicle, vehicle_);
 	vehicle_->putPlayer(*player_, seat);
-	return true;
 }
 
-OMP_CAPI(Player_RemoveBuilding, bool(objectPtr player, int model, float x, float y, float z, float radius))
+OMP_CAPI(Player_RemoveDefaultObjects, void(objectPtr player, unsigned model, float x, float y, float z, float radius))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->removeDefaultObjects(model, { x, y, z }, radius);
-	return true;
 }
 
-OMP_CAPI(Player_GetBuildingsRemoved, int(objectPtr player))
+OMP_CAPI(Player_GetDefaultObjectsRemoved, int(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	int count = player_->getDefaultObjectsRemoved();
-	return count;
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	return player_->getDefaultObjectsRemoved();
 }
 
-OMP_CAPI(Player_RemoveFromVehicle, bool(objectPtr player, bool force))
+OMP_CAPI(Player_RemoveFromVehicle, void(objectPtr player, bool force))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->removeFromVehicle(force);
-	return true;
 }
 
-OMP_CAPI(Player_RemoveMapIcon, bool(objectPtr player, int icon))
+OMP_CAPI(Player_UnsetMapIcon, void(objectPtr player, int icon))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->unsetMapIcon(icon);
-	return true;
 }
 
-OMP_CAPI(Player_SetMapIcon, bool(objectPtr player, int iconID, float x, float y, float z, int type, uint32_t color, int style))
+OMP_CAPI(Player_SetMapIcon, void(objectPtr player, int iconID, float x, float y, float z, int type, uint32_t color, int style))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setMapIcon(iconID, { x, y, z }, type, Colour::FromRGBA(color), MapIconStyle(style));
-	return true;
 }
 
-OMP_CAPI(Player_ResetWeapons, bool(objectPtr player))
+OMP_CAPI(Player_ResetWeapons, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->resetWeapons();
-	return true;
 }
 
-OMP_CAPI(Player_SetAmmo, bool(objectPtr player, uint8_t id, uint32_t ammo))
+OMP_CAPI(Player_SetWeaponAmmo, void(objectPtr player, uint8_t id, uint32_t ammo))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	WeaponSlotData data;
 	data.id = id;
 	data.ammo = ammo;
 	player_->setWeaponAmmo(data);
-	return true;
 }
 
-OMP_CAPI(Player_SetArmedWeapon, bool(objectPtr player, uint8_t weapon))
+OMP_CAPI(Player_SetArmedWeapon, void(objectPtr player, uint32_t weapon))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setArmedWeapon(weapon);
-	return true;
 }
 
-OMP_CAPI(Player_SetChatBubble, bool(objectPtr player, StringCharPtr text, uint32_t color, float drawdistance, int expiretime))
+OMP_CAPI(Player_SetChatBubble, void(objectPtr player, StringCharPtr text, uint32_t color, float drawdistance, int expiretime))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setChatBubble(text, Colour::FromRGBA(color), drawdistance, std::chrono::milliseconds(expiretime));
-	return true;
 }
 
-OMP_CAPI(Player_SetPosFindZ, bool(objectPtr player, float x, float y, float z))
+OMP_CAPI(Player_SetPositionFindZ, void(objectPtr player, float x, float y, float z))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setPositionFindZ({ x, y, z });
-	return true;
 }
 
-OMP_CAPI(Player_SetSkillLevel, bool(objectPtr player, uint8_t weapon, int level))
+OMP_CAPI(Player_SetSkillLevel, void(objectPtr player, uint8_t weapon, int level))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setSkillLevel(PlayerWeaponSkill(weapon), level);
-	return true;
 }
 
-OMP_CAPI(Player_SetSpecialAction, bool(objectPtr player, uint32_t action))
+OMP_CAPI(Player_SetAction, void(objectPtr player, int action))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setAction(PlayerSpecialAction(action));
-	return true;
 }
 
-OMP_CAPI(Player_ShowNameTagForPlayer, bool(objectPtr player, objectPtr other, bool enable))
+OMP_CAPI(Player_ToggleOtherNameTag, void(objectPtr player, objectPtr other, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	ENTITY_CAST_RET(IPlayer, other, other_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	ENTITY_CAST(IPlayer, other, other_);
 	player_->toggleOtherNameTag(*other_, enable);
-	return true;
 }
 
-OMP_CAPI(Player_ToggleControllable, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_SetControllable, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setControllable(enable);
-	return true;
 }
 
-OMP_CAPI(Player_ToggleSpectating, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_SetSpectating, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setSpectating(enable);
-	return true;
 }
 
-OMP_CAPI(Player_ApplyAnimation, bool(objectPtr player, StringCharPtr animlib, StringCharPtr animname, float delta, bool loop, bool lockX, bool lockY, bool freeze, uint32_t time, int sync))
+OMP_CAPI(Player_ApplyAnimation, void(objectPtr player, float delta, bool loop, bool lockX, bool lockY, bool freeze, uint32_t time, StringCharPtr animlib, StringCharPtr animname, int sync))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	AnimationData animationData(delta, loop, lockX, lockY, freeze, time, animlib, animname);
 	player_->applyAnimation(animationData, PlayerAnimationSyncType(sync));
-	return true;
 }
 
-OMP_CAPI(Player_GetAnimationName, bool(int index, OutputStringViewPtr lib, OutputStringViewPtr name))
+OMP_CAPI(Player_GetAnimationName, void(int index, OutputStringViewPtr lib, OutputStringViewPtr name))
 {
 	Pair<StringView, StringView> anim = splitAnimationNames(index);
 	SET_CAPI_STRING_VIEW(lib, anim.first);
 	SET_CAPI_STRING_VIEW(name, anim.second);
-	return true;
 }
 
-OMP_CAPI(Player_EditAttachedObject, bool(objectPtr player, int index))
+OMP_CAPI(Player_EditAttachedObject, void(objectPtr player, int index))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerObjectData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
 	data->editAttachedObject(index);
-	return true;
 }
 
-OMP_CAPI(Player_EnableCameraTarget, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_UseCameraTargetting, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->useCameraTargeting(enable);
-	return true;
 }
 
-OMP_CAPI(Player_EnableStuntBonus, bool(objectPtr player, bool enable))
+OMP_CAPI(Player_UseStuntBonuses, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->useStuntBonuses(enable);
-	return true;
 }
 
-OMP_CAPI(All_EnableStuntBonus, bool(bool enable))
+OMP_CAPI(All_EnableStuntBonus, void(bool enable))
 {
 	ComponentManager::Get()->core->useStuntBonuses(enable);
-	return true;
 }
 
-OMP_CAPI(Player_GetPlayerAmmo, int(objectPtr player))
+OMP_CAPI(Player_GetArmedWeaponAmmo, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int ammo = player_->getArmedWeaponAmmo();
 	return ammo;
 }
 
-OMP_CAPI(Player_GetAnimationIndex, int(objectPtr player))
+OMP_CAPI(Player_GetAnimationData, void(objectPtr player, uint16_t* id, uint16_t* flags))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int id = player_->getAnimationData().ID;
-	return id;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto data = player_->getAnimationData();
+	*id = data.ID;
+	*flags = data.flags;
 }
 
 OMP_CAPI(Player_GetFacingAngle, float(objectPtr player))
@@ -757,9 +730,9 @@ OMP_CAPI(Player_GetFacingAngle, float(objectPtr player))
 	return angle;
 }
 
-OMP_CAPI(Player_GetIp, int(objectPtr player, OutputStringViewPtr ip))
+OMP_CAPI(Player_GetIp, void(objectPtr player, OutputStringViewPtr ip))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	PeerNetworkData data = player_->getNetworkData();
 	if (!data.networkID.address.ipv6)
 	{
@@ -768,130 +741,83 @@ OMP_CAPI(Player_GetIp, int(objectPtr player, OutputStringViewPtr ip))
 		{
 			auto len = addressString.length();
 			COPY_STRING_TO_CAPI_STRING_VIEW(ip, addressString.data(), len);
-			return len;
+			return;
 		}
 	}
-	return 0;
+	return;
 }
 
-OMP_CAPI(Player_GetSpecialAction, int(objectPtr player))
+OMP_CAPI(Player_GetAction, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	int action = player_->getAction();
 	return action;
 }
 
-OMP_CAPI(Player_GetVehicleID, int(objectPtr player))
+OMP_CAPI(Player_GetVehicle, objectPtr(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, INVALID_VEHICLE_ID);
-	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, INVALID_VEHICLE_ID);
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, nullptr);
 	IVehicle* vehicle = data->getVehicle();
-	int id = 0;
-	if (vehicle)
-	{
-		id = vehicle->getID();
-	}
-	return id;
+	return vehicle;
 }
 
 OMP_CAPI(Player_GetVehicleSeat, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, 0);
-	int seat = data->getSeat();
-	return seat;
+	return data->getSeat();
 }
 
-OMP_CAPI(Player_GetWeaponData, bool(objectPtr player, int slot, int* weaponid, int* ammo))
+OMP_CAPI(Player_GetWeaponSlot, void(objectPtr player, int slot, uint8_t* weapon, uint32_t* ammo))
 {
-	if (slot < 0 || slot >= MAX_WEAPON_SLOTS)
-	{
-		return false;
-	}
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	const WeaponSlotData& weapon = player_->getWeaponSlot(slot);
-	*weaponid = weapon.id;
-	*ammo = weapon.ammo;
-	return true;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	const WeaponSlotData& weaponSlot = player_->getWeaponSlot(slot);
+	*weapon = weaponSlot.id;
+	*ammo = weaponSlot.ammo;
 }
 
-OMP_CAPI(Player_GetWeaponState, int(objectPtr player))
+OMP_CAPI(Player_InterpolateCameraPosition, void(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int state = player_->getAimData().weaponState;
-	return state;
-}
-
-OMP_CAPI(Player_InterpolateCameraPos, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->interpolateCameraPosition({ from_x, from_y, from_z }, { to_x, to_y, to_z }, time, PlayerCameraCutType(cut));
-	return true;
 }
 
-OMP_CAPI(Player_InterpolateCameraLookAt, bool(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
+OMP_CAPI(Player_InterpolateCameraLookAt, void(objectPtr player, float from_x, float from_y, float from_z, float to_x, float to_y, float to_z, int time, int cut))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->interpolateCameraLookAt({ from_x, from_y, from_z }, { to_x, to_y, to_z }, time, PlayerCameraCutType(cut));
+}
+
+OMP_CAPI(Player_HasAttachedObject, bool(objectPtr player, int index))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	player_->interpolateCameraLookAt({ from_x, from_y, from_z }, { to_x, to_y, to_z }, time, PlayerCameraCutType(cut));
-	return true;
-}
-
-OMP_CAPI(Player_IsPlayerAttachedObjectSlotUsed, bool(objectPtr player, int index))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	PLAYER_DATA_RET(player_, IPlayerObjectData, data, 0);
+	PLAYER_DATA_RET(player_, IPlayerObjectData, data, false);
 	bool ret = data->hasAttachedObject(index);
 	return ret;
 }
 
-OMP_CAPI(Player_AttachCameraToObject, bool(objectPtr player, objectPtr object))
+OMP_CAPI(Player_AttachCameraToObject, void(objectPtr player, objectPtr object))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	POOL_ENTITY_RET(objects, IObject, object, object_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	POOL_ENTITY(objects, IObject, object, object_);
 	player_->attachCameraToObject(*object_);
-	return true;
 }
 
-OMP_CAPI(Player_AttachCameraToPlayerObject, bool(objectPtr player, objectPtr object))
+OMP_CAPI(Player_AttachCameraToPlayerObject, void(objectPtr player, objectPtr object))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_POOL_ENTITY_RET(player_, IPlayerObjectData, IPlayerObject, object, object_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_POOL_ENTITY(player_, IPlayerObjectData, IPlayerObject, object, object_);
 	player_->attachCameraToObject(*object_);
-	return true;
 }
 
-OMP_CAPI(Player_GetCameraAspectRatio, float(objectPtr player))
+OMP_CAPI(Player_GetKeyData, void(objectPtr player, uint32_t* keys, int16_t* updown, int16_t* leftright))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float ratio = player_->getAimData().aspectRatio;
-	return ratio;
-}
-
-OMP_CAPI(Player_GetCameraFrontVector, bool(objectPtr player, float* x, float* y, float* z))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	auto vector = player_->getAimData().camFrontVector;
-	*x = vector.x;
-	*y = vector.y;
-	*z = vector.z;
-	return true;
-}
-
-OMP_CAPI(Player_GetCameraMode, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int cameraMode = player_->getAimData().camMode;
-	return cameraMode;
-}
-
-OMP_CAPI(Player_GetKeys, bool(objectPtr player, int* keys, int* updown, int* leftright))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	const PlayerKeyData& keyData = player_->getKeyData();
 	*keys = keyData.keys;
 	*updown = keyData.upDown;
 	*leftright = keyData.leftRight;
-	return true;
 }
 
 OMP_CAPI(Player_GetSurfingVehicle, objectPtr(objectPtr player))
@@ -937,25 +863,6 @@ OMP_CAPI(Player_GetTargetActor, objectPtr(objectPtr player))
 	return player_->getTargetActor();
 }
 
-OMP_CAPI(Player_IsInVehicle, bool(objectPtr player, objectPtr targetVehicle))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, false);
-	POOL_ENTITY_RET(vehicles, IVehicle, targetVehicle, targetVehicle_, false);
-	IVehicle* vehicle = data->getVehicle();
-	bool ret = bool(vehicle == targetVehicle_);
-	return ret;
-}
-
-OMP_CAPI(Player_IsInAnyVehicle, bool(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, false);
-	IVehicle* vehicle = data->getVehicle();
-	bool ret = bool(vehicle != nullptr);
-	return ret;
-}
-
 OMP_CAPI(Player_IsInRangeOfPoint, bool(objectPtr player, float range, float x, float y, float z))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
@@ -967,22 +874,20 @@ OMP_CAPI(Player_PlayCrimeReport, bool(objectPtr player, objectPtr suspect, int c
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, suspect, suspect_, false);
-	bool ret = bool(player_->playerCrimeReport(*suspect_, crime));
-	return ret;
+	return player_->playerCrimeReport(*suspect_, crime);
 }
 
-OMP_CAPI(Player_RemoveAttachedObject, bool(objectPtr player, int index))
+OMP_CAPI(Player_RemoveAttachedObject, void(objectPtr player, int index))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerObjectData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
 	data->removeAttachedObject(index);
-	return true;
 }
 
-OMP_CAPI(Player_SetAttachedObject, bool(objectPtr player, int index, int modelid, int bone, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ, float scaleX, float scaleY, float scaleZ, uint32_t materialcolor1, uint32_t materialcolor2))
+OMP_CAPI(Player_SetAttachedObject, void(objectPtr player, int index, int modelid, int bone, float offsetX, float offsetY, float offsetZ, float rotationX, float rotationY, float rotationZ, float scaleX, float scaleY, float scaleZ, uint32_t materialcolor1, uint32_t materialcolor2))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerObjectData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
 	ObjectAttachmentSlotData attachment;
 	attachment.model = modelid;
 	attachment.bone = bone;
@@ -992,13 +897,12 @@ OMP_CAPI(Player_SetAttachedObject, bool(objectPtr player, int index, int modelid
 	attachment.colour1 = Colour::FromARGB(materialcolor1);
 	attachment.colour2 = Colour::FromARGB(materialcolor2);
 	data->setAttachedObject(index, attachment);
-	return true;
 }
 
-OMP_CAPI(Player_GetAttachedObject, bool(objectPtr player, int index, int* modelid, int* bone, float* offsetX, float* offsetY, float* offsetZ, float* rotationX, float* rotationY, float* rotationZ, float* scaleX, float* scaleY, float* scaleZ, int* materialcolor1, int* materialcolor2))
+OMP_CAPI(Player_GetAttachedObject, void(objectPtr player, int index, int* modelid, int* bone, float* offsetX, float* offsetY, float* offsetZ, float* rotationX, float* rotationY, float* rotationZ, float* scaleX, float* scaleY, float* scaleZ, uint32_t* materialcolor1, uint32_t* materialcolor2))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerObjectData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
 	ObjectAttachmentSlotData attachment = data->getAttachedObject(index);
 	*modelid = attachment.model;
 	*bone = attachment.bone;
@@ -1013,137 +917,106 @@ OMP_CAPI(Player_GetAttachedObject, bool(objectPtr player, int index, int* modeli
 	*scaleZ = attachment.scale.z;
 	*materialcolor1 = attachment.colour1.ARGB();
 	*materialcolor2 = attachment.colour2.ARGB();
-	return true;
 }
 
-OMP_CAPI(Player_SetFacingAngle, bool(objectPtr player, float angle))
+OMP_CAPI(Player_SetFacingAngle, void(objectPtr player, float angle))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	Vector3 rotation = player_->getRotation().ToEuler();
 	rotation.z = angle;
 	player_->setRotation(rotation);
-	return true;
 }
 
-OMP_CAPI(Player_SetMarkerForPlayer, bool(objectPtr player, objectPtr other, uint32_t color))
+OMP_CAPI(Player_SetOtherColor, void(objectPtr player, objectPtr other, uint32_t color))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	ENTITY_CAST(IPlayer, other, other_);
+	player_->setOtherColour(*other_, Colour::FromRGBA(color));
+}
+
+OMP_CAPI(Player_GetOtherColor, bool(objectPtr player, objectPtr other))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	ENTITY_CAST_RET(IPlayer, other, other_, false);
-	player_->setOtherColour(*other_, Colour::FromRGBA(color));
-	return true;
-}
-
-OMP_CAPI(Player_GetMarkerForPlayer, uint32_t(objectPtr player, objectPtr other))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	ENTITY_CAST_RET(IPlayer, other, other_, 0);
 	Colour color;
 	bool hasPlayerSpecificColor = player_->getOtherColour(*other_, color);
-	if (!hasPlayerSpecificColor)
-	{
-		color = other_->getColour();
-	}
-	uint32_t rgba = color.RGBA();
-	return rgba;
+	return hasPlayerSpecificColor;
 }
 
-OMP_CAPI(Player_AllowTeleport, bool(objectPtr player, bool allow))
+OMP_CAPI(Player_AllowTeleport, void(objectPtr player, bool allow))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->allowTeleport(allow);
-	return true;
 }
 
 OMP_CAPI(Player_IsTeleportAllowed, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	bool allowed = bool(player_->isTeleportAllowed());
-	return allowed;
+	return player_->isTeleportAllowed();
 }
 
-OMP_CAPI(Player_DisableRemoteVehicleCollisions, bool(objectPtr player, bool disable))
+OMP_CAPI(Player_SetRemoteVehicleCollisions, void(objectPtr player, bool enable))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	player_->setRemoteVehicleCollisions(!disable);
-	return true;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->setRemoteVehicleCollisions(enable);
 }
 
-OMP_CAPI(Player_GetCameraZoom, float(objectPtr player))
+OMP_CAPI(Player_BeginTextDrawSelection, void(objectPtr player, uint32_t hoverColour))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float cameraZoom = player_->getAimData().camZoom;
-	return cameraZoom;
-}
-
-OMP_CAPI(Player_SelectTextDraw, bool(objectPtr player, uint32_t hoverColour))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerTextDrawData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerTextDrawData, data);
 	data->beginSelection(Colour::FromRGBA(hoverColour));
-	return true;
 }
 
-OMP_CAPI(Player_CancelSelectTextDraw, bool(objectPtr player))
+OMP_CAPI(Player_EndTextDrawSelection, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerTextDrawData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerTextDrawData, data);
 	data->endSelection();
-	return true;
 }
 
-OMP_CAPI(Player_SendClientCheck, bool(objectPtr player, int actionType, int address, int offset, int count))
+OMP_CAPI(Player_SendClientCheck, void(objectPtr player, int actionType, int address, int offset, int count))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->sendClientCheck(actionType, address, offset, count);
-	return true;
 }
 
-OMP_CAPI(Player_Spawn, bool(objectPtr player))
+OMP_CAPI(Player_Spawn, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->spawn();
-	return true;
 }
 
-OMP_CAPI(Player_GPCI, bool(objectPtr player, OutputStringViewPtr gpci))
+OMP_CAPI(Player_GetSerial, void(objectPtr player, OutputStringViewPtr serial))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto result = player_->getSerial();
-	SET_CAPI_STRING_VIEW(gpci, result);
-	return true;
+	SET_CAPI_STRING_VIEW(serial, result);
 }
 
-OMP_CAPI(Player_IsAdmin, bool(objectPtr player))
+OMP_CAPI(Player_HasConsoleAccess, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_DATA_RET(player_, IPlayerConsoleData, data, false);
-	bool access = data->hasConsoleAccess();
-	return access;
+	return data->hasConsoleAccess();
 }
 
-OMP_CAPI(Player_Kick, bool(objectPtr player))
+OMP_CAPI(Player_Kick, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->kick();
-	return true;
 }
 
-OMP_CAPI(Player_ShowGameText, bool(objectPtr player, StringCharPtr text, int time, int style))
+OMP_CAPI(Player_SendGameText, void(objectPtr player, StringCharPtr text, int time, int style))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	if (strlen(text) > 1)
-	{
-		return false;
-	}
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->sendGameText(text, Milliseconds(time), style);
-	return true;
 }
 
-OMP_CAPI(Player_HideGameText, bool(objectPtr player, int style))
+OMP_CAPI(Player_HideGameText, void(objectPtr player, int style))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->hideGameText(style);
-	return true;
 }
 
 OMP_CAPI(Player_HasGameText, bool(objectPtr player, int style))
@@ -1169,51 +1042,51 @@ OMP_CAPI(Player_GetGameText, bool(objectPtr player, int style, OutputStringViewP
 	return false;
 }
 
-OMP_CAPI(Player_Ban, bool(objectPtr player))
+OMP_CAPI(Player_Ban, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->ban();
-	return true;
 }
 
-OMP_CAPI(Player_BanEx, bool(objectPtr player, StringCharPtr reason))
+OMP_CAPI(Player_BanEx, void(objectPtr player, StringCharPtr reason))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->ban(reason);
-	return true;
 }
 
-OMP_CAPI(Player_SendDeathMessage, bool(objectPtr player, objectPtr killer, objectPtr killee, int weapon))
+OMP_CAPI(Player_SendDeathMessage, void(objectPtr player, objectPtr killee, objectPtr killer, int weapon))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	ENTITY_CAST_RET(IPlayer, killee, killee_, false);
-	if (killee_)
-	{
-		ENTITY_CAST_RET(IPlayer, killer, killer_, false);
-		player_->sendDeathMessage(*killee_, killer_, weapon);
-	}
-	else
-	{
-		player_->sendEmptyDeathMessage();
-	}
-	return true;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	ENTITY_CAST(IPlayer, killee, killee_);
+	ENTITY_CAST(IPlayer, killer, killer_);
+	player_->sendDeathMessage(*killee_, killer_, weapon);
 }
 
-OMP_CAPI(Player_SendMessageToPlayer, bool(objectPtr player, objectPtr sender, StringCharPtr message))
+OMP_CAPI(Player_SendEmptyDeathMessage, void(objectPtr player))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	ENTITY_CAST_RET(IPlayer, sender, sender_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	player_->sendEmptyDeathMessage();
+}
+
+OMP_CAPI(Player_SendChatMessage, void(objectPtr player, objectPtr sender, StringCharPtr message))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	ENTITY_CAST(IPlayer, sender, sender_);
 	player_->sendChatMessage(*sender_, message);
-	return true;
 }
 
-OMP_CAPI(Player_GetVersion, int(objectPtr player, OutputStringViewPtr version))
+OMP_CAPI(Player_GetClientVersion, int(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	auto version = player_->getClientVersion();
+	return int(version);
+}
+
+OMP_CAPI(Player_GetClientVersionName, void(objectPtr player, OutputStringViewPtr version))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
 	auto versionStr = player_->getClientVersionName();
-	auto len = versionStr.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), len);
-	return len;
+	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), versionStr.length());
 }
 
 OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
@@ -1228,32 +1101,20 @@ OMP_CAPI(Player_GetSkillLevel, int(objectPtr player, int skill))
 	return ret;
 }
 
-OMP_CAPI(Player_GetZAim, float(objectPtr player))
+OMP_CAPI(Player_GetSurfingData, void(objectPtr player, int* type, int* id, float* offsetX, float* offsetY, float* offsetZ))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0.0f);
-	float z = player_->getAimData().aimZ;
-	return z;
-}
-
-OMP_CAPI(Player_GetSurfingOffsets, bool(objectPtr player, float* offsetX, float* offsetY, float* offsetZ))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	const PlayerSurfingData& data = player_->getSurfingData();
-	*offsetX = 0.0f;
-	*offsetY = 0.0f;
-	*offsetZ = 0.0f;
-	if (data.type != PlayerSurfingData::Type::None)
-	{
-		*offsetX = data.offset.x;
-		*offsetY = data.offset.y;
-		*offsetZ = data.offset.z;
-	}
-	return true;
+	*type = int(data.type);
+	*id = data.ID;
+	*offsetX = data.offset.x;
+	*offsetY = data.offset.y;
+	*offsetZ = data.offset.z;
 }
 
-OMP_CAPI(Player_GetRotationQuat, bool(objectPtr player, float* x, float* y, float* z, float* w))
+OMP_CAPI(Player_GetRotationQuat, void(objectPtr player, float* x, float* y, float* z, float* w))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	glm::quat rotQuat = player_->getRotation().q;
 
 	// In samp or YSF, GetPlayerRotationQuat declaration is like this:
@@ -1265,21 +1126,15 @@ OMP_CAPI(Player_GetRotationQuat, bool(objectPtr player, float* x, float* y, floa
 	*y = rotQuat.x;
 	*z = rotQuat.y;
 	*w = rotQuat.z;
-	return true;
 }
 
-OMP_CAPI(Player_GetPlayerSpectateID, int(objectPtr player))
+OMP_CAPI(Player_GetSpectateData, void(objectPtr player, bool* spectating, int* spectateID, int* type))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int spectateId = player_->getSpectateData().spectateID;
-	return spectateId;
-}
-
-OMP_CAPI(Player_GetSpectateType, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	int spectateType = int(player_->getSpectateData().type);
-	return spectateType;
+	POOL_ENTITY(players, IPlayer, player, player_);
+	auto data = player_->getSpectateData();
+	*spectating = data.spectating;
+	*spectateID = data.spectateID;
+	*type = data.type;
 }
 
 OMP_CAPI(Player_GetRawIp, uint32_t(objectPtr player))
@@ -1289,11 +1144,10 @@ OMP_CAPI(Player_GetRawIp, uint32_t(objectPtr player))
 	return ip;
 }
 
-OMP_CAPI(Player_SetGravity, bool(objectPtr player, float gravity))
+OMP_CAPI(Player_SetGravity, void(objectPtr player, float gravity))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->setGravity(gravity);
-	return true;
 }
 
 OMP_CAPI(Player_GetGravity, float(objectPtr player))
@@ -1303,12 +1157,11 @@ OMP_CAPI(Player_GetGravity, float(objectPtr player))
 	return gravity;
 }
 
-OMP_CAPI(Player_SetAdmin, bool(objectPtr player, bool set))
+OMP_CAPI(Player_SetConsoleAccessibility, void(objectPtr player, bool set))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	PLAYER_DATA_RET(player_, IPlayerConsoleData, data, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerConsoleData, data);
 	data->setConsoleAccessibility(set);
-	return true;
 }
 
 OMP_CAPI(Player_IsSpawned, bool(objectPtr player))
@@ -1332,39 +1185,36 @@ OMP_CAPI(Player_IsSpawned, bool(objectPtr player))
 	return spawned;
 }
 
-OMP_CAPI(Player_IsControllable, bool(objectPtr player))
+OMP_CAPI(Player_GetControllable, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	bool controllable = bool(player_->getControllable());
 	return controllable;
 }
 
-OMP_CAPI(Player_IsCameraTargetEnabled, bool(objectPtr player))
+OMP_CAPI(Player_HasCameraTargetting, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	bool enabled = bool(player_->hasCameraTargeting());
 	return enabled;
 }
 
-OMP_CAPI(Player_ToggleGhostMode, bool(objectPtr player, bool toggle))
+OMP_CAPI(Player_ToggleGhostMode, void(objectPtr player, bool toggle))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->toggleGhostMode(toggle);
-	return true;
 }
 
-OMP_CAPI(Player_GetGhostMode, bool(objectPtr player))
+OMP_CAPI(Player_IsGhostModeEnabled, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	bool enabled = bool(player_->isGhostModeEnabled());
-	return enabled;
+	return player_->isGhostModeEnabled();
 }
 
-OMP_CAPI(Player_AllowWeapons, bool(objectPtr player, bool allow))
+OMP_CAPI(Player_AllowWeapons, void(objectPtr player, bool allow))
 {
-	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	POOL_ENTITY(players, IPlayer, player, player_);
 	player_->allowWeapons(allow);
-	return true;
 }
 
 OMP_CAPI(Player_AreWeaponsAllowed, bool(objectPtr player))
@@ -1377,24 +1227,14 @@ OMP_CAPI(Player_AreWeaponsAllowed, bool(objectPtr player))
 OMP_CAPI(Player_IsPlayerUsingOfficialClient, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
-	bool ret = bool(player_->isUsingOfficialClient());
-	return ret;
-}
-
-OMP_CAPI(Player_GetAnimationFlags, int(objectPtr player))
-{
-	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
-	PlayerAnimationData data = player_->getAnimationData();
-	int flags = data.flags;
-	return flags;
+	return player_->isUsingOfficialClient();
 }
 
 OMP_CAPI(Player_IsInDriveByMode, bool(objectPtr player))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
 	PLAYER_DATA_RET(player_, IPlayerVehicleData, data, false);
-	bool driveby = bool(data->isInDriveByMode());
-	return driveby;
+	return data->isInDriveByMode();
 }
 
 OMP_CAPI(Player_IsCuffed, bool(objectPtr player))
@@ -1414,4 +1254,86 @@ OMP_CAPI(Player_IsCuffed, bool(objectPtr player))
 		}
 	}
 	return cuffed;
+}
+
+OMP_CAPI(Player_GetCustomSkin, uint32_t(objectPtr player))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
+	PLAYER_DATA_RET(player_, IPlayerCustomModelsData, data, 0);
+	return data->getCustomSkin();
+}
+
+OMP_CAPI(Player_GetMenu, objectPtr(objectPtr player))
+{
+	IMenusComponent* component = ComponentManager::Get()->menus;
+	if (component)
+	{
+		POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+		IPlayerMenuData* menuData = queryExtension<IPlayerMenuData>(player_);
+		if (menuData)
+		{
+			return component->get(menuData->getMenuID());
+		}
+	}
+	return nullptr;
+}
+
+OMP_CAPI(Player_BeginEditingObject, void(objectPtr player, objectPtr object))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
+	POOL_ENTITY(objects, IObject, object, object_);
+	data->beginEditing(*object_);
+}
+
+OMP_CAPI(Player_BeginEditingPlayerObject, void(objectPtr player, objectPtr object))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
+	PLAYER_POOL_ENTITY(player_, IPlayerObjectData, IPlayerObject, object, object_);
+	data->beginEditing(*object_);
+}
+
+OMP_CAPI(Player_BeginSelectingObject, void(objectPtr player))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
+	data->beginSelecting();
+}
+
+OMP_CAPI(Player_EndEditingObject, void(objectPtr player))
+{
+	POOL_ENTITY(players, IPlayer, player, player_);
+	PLAYER_DATA(player_, IPlayerObjectData, data);
+	data->endEditing();
+}
+
+OMP_CAPI(Player_RedirectDownload, bool(objectPtr player, StringCharPtr url))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, false);
+	PLAYER_DATA_RET(player_, IPlayerCustomModelsData, data, false);
+
+	if (!data->sendDownloadUrl(url))
+	{
+		ComponentManager::Get()->core->logLn(LogLevel::Warning, "This function can be used only within OnPlayerRequestDownload event.");
+		return false;
+	}
+	return true;
+}
+
+OMP_CAPI(Player_GetCheckpoint, objectPtr(objectPtr player))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	PLAYER_DATA_RET(player_, IPlayerCheckpointData, data, nullptr);
+	ICheckpointData& cp = data->getCheckpoint();
+	return &cp;
+}
+
+OMP_CAPI(Player_GetRaceCheckpoint, objectPtr(objectPtr player))
+{
+	POOL_ENTITY_RET(players, IPlayer, player, player_, nullptr);
+	PLAYER_DATA_RET(player_, IPlayerCheckpointData, data, nullptr);
+	IPlayerCheckpointData* playerData = queryExtension<IPlayerCheckpointData>(player_);
+	IRaceCheckpointData& cp = playerData->getRaceCheckpoint();
+	return &cp;
 }

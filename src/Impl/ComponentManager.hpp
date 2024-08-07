@@ -253,10 +253,23 @@ inline PlayerDataType* GetPlayerData(IPlayer* player)
 	if (entity_output == nullptr)                                                              \
 		return failret;
 
+#define PLAYER_POOL_ENTITY(player, pool_type, entity_type, entity, entity_output) \
+	auto playerData = GetPlayerData<pool_type>(player);                                        \
+	if (playerData == nullptr)                                                                 \
+		return;                                                                        \
+	entity_type* entity_output = reinterpret_cast<entity_type*>(entity);                       \
+	if (entity_output == nullptr)                                                              \
+		return;
+
 #define PLAYER_DATA_RET(player, entity_type, entity_output, failret) \
 	auto entity_output = GetPlayerData<entity_type>(player);         \
 	if (entity_output == nullptr)                                    \
 	return failret
+
+#define PLAYER_DATA(player, entity_type, entity_output) \
+	auto entity_output = GetPlayerData<entity_type>(player);         \
+	if (entity_output == nullptr)                                    \
+	return
 
 #define COPY_STRING_TO_CAPI_STRING_VIEW(output, src, len_) \
 	if (output)                                            \
