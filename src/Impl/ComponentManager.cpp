@@ -87,6 +87,8 @@ void ComponentManager::Init(ICore* c, IComponentList* clist)
 	menus = GetComponent<IMenusComponent>();
 	textdraws = GetComponent<ITextDrawsComponent>();
 	gangzones = GetComponent<IGangZonesComponent>();
+	checkpoints = GetComponent<ICheckpointsComponent>();
+	dialogs = GetComponent<IDialogsComponent>();
 }
 
 void ComponentManager::InitializeEvents()
