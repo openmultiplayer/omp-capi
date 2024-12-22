@@ -97,7 +97,7 @@ public:
 		auto low_ = fairlyLowPriorityEvents.find(name);
 		auto lowest_ = lowestPriorityEvents.find(name);
 
-		bool result = true;
+		bool result = returnHandler != EventReturnHandler::StopAtTrue;
 
 		if (highest_ != highestPriorityEvents.end())
 		{
@@ -198,11 +198,8 @@ private:
 						return true;
 					}
 					break;
-				case EventReturnHandler::None:
-				default:
-					result = ret;
-					break;
 				}
+				result = ret;
 			}
 		}
 
