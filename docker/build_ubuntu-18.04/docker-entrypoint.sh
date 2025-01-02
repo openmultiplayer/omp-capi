@@ -5,8 +5,6 @@ cmake \
     -S . \
     -B build \
     -G Ninja \
-    -DCMAKE_C_FLAGS=-m32 \
-    -DCMAKE_CXX_FLAGS=-m32 \
     -DCMAKE_BUILD_TYPE=$config \
 &&
 cmake \

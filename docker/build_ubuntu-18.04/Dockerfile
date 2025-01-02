@@ -22,8 +22,7 @@ RUN \
         libstdc++6:i386 \
         libc6:i386 \
     && \
-    useradd -m user && \
-    su user -c 'pip3 install --user -v "conan==1.57.0"'
+    useradd -m user
 
 USER user
 
