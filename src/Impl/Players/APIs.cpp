@@ -305,7 +305,7 @@ OMP_CAPI(Player_GetName, int(objectPtr player, OutputStringViewPtr name))
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto result = player_->getName();
 	int len = result.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(name, result.data(), len);
+	SET_CAPI_STRING_VIEW(name, result);
 	return len;
 }
 
@@ -1161,7 +1161,7 @@ OMP_CAPI(Player_GetGameText, bool(objectPtr player, int style, OutputStringViewP
 	StringView ms;
 	if (player_->getGameText(style, ms, mt, mr))
 	{
-		COPY_STRING_TO_CAPI_STRING_VIEW(message, ms.data(), ms.size());
+		SET_CAPI_STRING_VIEW(message, ms);
 		*time = int(mt.count());
 		*remaining = int(mr.count());
 		return true;
@@ -1211,8 +1211,7 @@ OMP_CAPI(Player_GetVersion, int(objectPtr player, OutputStringViewPtr version))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto versionStr = player_->getClientVersionName();
-	auto len = versionStr.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(version, versionStr.data(), len);
+	SET_CAPI_STRING_VIEW(version, versionStr);
 	return len;
 }
 

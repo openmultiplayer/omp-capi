@@ -81,8 +81,7 @@ OMP_CAPI(CustomModel_FindModelFileNameFromCRC, int(int crc, OutputStringViewPtr 
 	}
 
 	auto result = models->getModelNameFromChecksum(crc);
-	auto len = result.length();
-	COPY_STRING_TO_CAPI_STRING_VIEW(output, result.data(), len);
+	SET_CAPI_STRING_VIEW(output, result);
 	return true;
 }
 
@@ -111,8 +110,8 @@ OMP_CAPI(CustomModel_GetPath, bool(int modelId, OutputStringViewPtr dffPath, Out
 
 	auto status = models->getCustomModelPath(modelId, dffPathSV, txdPathSV);
 
-	COPY_STRING_TO_CAPI_STRING_VIEW(dffPath, dffPathSV.data(), dffPathSV.length());
-	COPY_STRING_TO_CAPI_STRING_VIEW(txdPath, txdPathSV.data(), txdPathSV.length());
+	SET_CAPI_STRING_VIEW(dffPath, dffPathSV);
+	SET_CAPI_STRING_VIEW(txdPath, txdPathSV);
 
 	return status;
 }
