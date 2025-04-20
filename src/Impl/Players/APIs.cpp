@@ -1211,6 +1211,7 @@ OMP_CAPI(Player_GetVersion, int(objectPtr player, OutputStringViewPtr version))
 {
 	POOL_ENTITY_RET(players, IPlayer, player, player_, 0);
 	auto versionStr = player_->getClientVersionName();
+	auto len = versionStr.length();
 	SET_CAPI_STRING_VIEW(version, versionStr);
 	return len;
 }
