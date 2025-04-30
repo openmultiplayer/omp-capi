@@ -5,6 +5,10 @@
 && config=Release \
 || config="$CONFIG"
 
+[[ -z "$TARGET_BUILD_ARCH" ]] \
+&& target_build_arch=x64 \
+|| target_build_arch="$TARGET_BUILD_ARCH"
+
 docker build \
     -t omp-capi/build:ubuntu-18.04 \
     build_ubuntu-18.04/ \
@@ -25,4 +29,5 @@ docker run \
     -v $PWD/..:/code \
     -v $PWD/build:/code/build \
     -e CONFIG=${config} \
+    -e TARGET_BUILD_ARCH=${target_build_arch} \
     omp-capi/build:ubuntu-18.04
