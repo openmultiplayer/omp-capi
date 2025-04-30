@@ -54,9 +54,15 @@ if (NOT TARGET_BUILD_ARCH)
             endif ()
         endif ()
     endif ()
+else()
+    if (TARGET_BUILD_ARCH STREQUAL "x86" AND NOT MSVC_CXX_ARCHITECTURE_ID)
+        set(CMAKE_C_FLAGS "-m32 ${CMAKE_C_FLAGS}")
+        set(CMAKE_CXX_FLAGS "-m32 ${CMAKE_CXX_FLAGS}")
+        set(CMAKE_SIZEOF_VOID_P 4)
+    endif()
 endif()
 
-message("${TARGET_BUILD_ARCH}")
+message(TARGET_BUILD_ARCH = "${TARGET_BUILD_ARCH}")
 
 add_subdirectory(sdk)
 
