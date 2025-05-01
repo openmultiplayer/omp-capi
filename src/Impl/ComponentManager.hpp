@@ -97,51 +97,31 @@ public:
 		auto low_ = fairlyLowPriorityEvents.find(name);
 		auto lowest_ = lowestPriorityEvents.find(name);
 
-		bool result = returnHandler != EventReturnHandler::StopAtTrue;
+		bool result;
 
 		if (highest_ != highestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(highest_, returnHandler, args...);
-			if (!ret)
-			{
-				result = false;
-			}
+			result = CallEventOfPriority(highest_, returnHandler, args...);
 		}
 
 		if (high_ != fairlyHighPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(high_, returnHandler, args...);
-			if (!ret)
-			{
-				result = false;
-			}
+			result = CallEventOfPriority(high_, returnHandler, args...);
 		}
 
 		if (default_ != defaultPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(default_, returnHandler, args...);
-			if (!ret)
-			{
-				result = false;
-			}
+			result = CallEventOfPriority(default_, returnHandler, args...);
 		}
 
 		if (low_ != fairlyLowPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(low_, returnHandler, args...);
-			if (!ret)
-			{
-				result = false;
-			}
+			result = CallEventOfPriority(low_, returnHandler, args...);
 		}
 
 		if (lowest_ != lowestPriorityEvents.end())
 		{
-			auto ret = CallEventOfPriority(lowest_, returnHandler, args...);
-			if (!ret)
-			{
-				result = false;
-			}
+			result = CallEventOfPriority(lowest_, returnHandler, args...);
 		}
 
 		return result;
