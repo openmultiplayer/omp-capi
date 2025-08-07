@@ -317,6 +317,7 @@ typedef int (*Player_GetSirenState_t)(void* player);
 typedef int (*Player_GetLandingGearState_t)(void* player);
 typedef uint32_t (*Player_GetHydraReactorAngle_t)(void* player);
 typedef float (*Player_GetTrainSpeed_t)(void* player);
+typedef bool (*Player_IsPlayerUsingOmp_t)(void* player);
 
 
 // Component function type definitions
@@ -1743,6 +1744,7 @@ struct Player_t {
     Player_GetLandingGearState_t GetLandingGearState;
     Player_GetHydraReactorAngle_t GetHydraReactorAngle;
     Player_GetTrainSpeed_t GetTrainSpeed;
+    Player_IsPlayerUsingOmp_t IsPlayerUsingOmp;
 };
 
 // Component functions
@@ -2488,6 +2490,7 @@ static void omp_initialize_capi(struct OMPAPI_t* ompapi) {
     ompapi->Player.GetLandingGearState = (Player_GetLandingGearState_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetLandingGearState");
     ompapi->Player.GetHydraReactorAngle = (Player_GetHydraReactorAngle_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetHydraReactorAngle");
     ompapi->Player.GetTrainSpeed = (Player_GetTrainSpeed_t)LIBRARY_GET_ADDR(capi_lib, "Player_GetTrainSpeed");
+    ompapi->Player.IsPlayerUsingOmp = (Player_IsPlayerUsingOmp_t)LIBRARY_GET_ADDR(capi_lib, "Player_IsPlayerUsingOmp");
 
     // Retrieve Component functions
     ompapi->Component.Create = (Component_Create_t)LIBRARY_GET_ADDR(capi_lib, "Component_Create");

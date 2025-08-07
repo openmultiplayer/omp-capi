@@ -3744,6 +3744,16 @@
           "type": "void*"
         }
       ]
+    },
+    {
+      "ret": "bool",
+      "name": "Player_IsPlayerUsingOmp",
+      "params": [
+        {
+          "name": "player",
+          "type": "void*"
+        }
+      ]
     }
   ],
   "Component": [
